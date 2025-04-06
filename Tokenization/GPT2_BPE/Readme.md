@@ -1,3 +1,3 @@
 Contains the base class BPETokenizer
 
-Noqte: Not completed yet.
+Note: Not completed yet.
