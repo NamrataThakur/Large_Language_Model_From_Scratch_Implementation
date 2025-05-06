@@ -25,8 +25,8 @@ class GPT2_PreTrain:
         self.model.eval()
 
         with torch.no_grad():
-            train_loss = self.metrics.loss_loader(self.train_loader, self.eval_batchSize)
-            test_loss = self.metrics.loss_loader(self.val_loader, self.eval_batchSize)
+            train_loss = self.metrics.loss_loader(self.train_loader, self.eval_batchSize,classify=False)
+            test_loss = self.metrics.loss_loader(self.val_loader, self.eval_batchSize,classify=False)
 
         self.model.train()
 
@@ -54,7 +54,7 @@ class GPT2_PreTrain:
 
                 if global_step % self.eval_freq == 0:
 
-                    train_loss, test_loss = self.evaluate_model(self)
+                    train_loss, test_loss = self.evaluate_model()
                     train_losses.append(train_loss)
                     test_losses.append(test_loss)
                     print(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Test Loss: {test_loss:.3f}')
