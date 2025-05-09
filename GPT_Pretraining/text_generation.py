@@ -90,3 +90,25 @@ class Text_Generation:
         gen_output = self.tokenID_to_text(idx)
         gen_output = gen_output.replace('\n', '')
         return gen_output
+    
+
+    def classify_text(self, input_text, max_length, pad_token_id=50256):
+        '''
+        max_length: Can be the max sequence length of the training dataset or a custom number too for inference.
+        '''
+        
+        self.model.eval()
+
+        input_encoded = self.tokenizer.encode(input_text, allowed_special='all')
+
+        input_encoded = input_encoded[:min(self.context_size, max_length)]
+        input_encoded += [pad_token_id] * (max_length - len(input_encoded))
+
+        input_tensor = torch.tensor(input_encoded,dtype=torch.long, device=self.device).unsqueeze(0)
+
+        with torch.no_grad():
+            output_logit = self.model(input_tensor)[:, -1, :]
+
+        class_prediction = torch.argmax(output_logit, dim = -1).item()
+
+        return class_prediction
