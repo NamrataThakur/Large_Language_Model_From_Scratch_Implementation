@@ -1,0 +1,9 @@
+#torch==2.4.0             # install torch separately using pytorch's website
+jupyterlab>=4.0          
+tiktoken==0.7.0         
+matplotlib==3.9.2        
+#tensorflow      # tensorflow doesnt have native windows support beyond 10.2. 
+tqdm==4.66.6            
+numpy==1.24.3       
+pandas==2.2.3            
+psutil==5.9.0           
