@@ -1,6 +1,6 @@
 import torch
-from text_generation import Text_Generation
-from metrics import Metrics
+from .text_generation import Text_Generation
+from .metrics import Metrics
 
 class GPT2_PreTrain:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, eval_batchSize, eval_freq, 

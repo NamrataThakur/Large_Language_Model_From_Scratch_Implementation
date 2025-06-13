@@ -1,0 +1,10 @@
+[2025-06-12 11:31:56,682.682] Namespace(experiment_name='dummy_Exp', base_modelName='gpt2_124M', data_path='the-verdict.txt', training_type='pre-train', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2', tokenizer='tiktoken', seed=123, batch_size=4, train_split=0.7, val_split=0.2)
+[2025-06-12 11:31:57,004.004] Configuration of the gpt2_124M base model loaded..!
+[2025-06-12 11:31:57,004.004] Extention detected for the training file is "txt".
+[2025-06-12 11:31:57,004.004] Total characters present in the training file: 20479
+[2025-06-12 11:31:57,004.004] Training, Validation and Test Data created from the training file. Train data: 14335, Val Data: 4095, Test Data: 2049
+[2025-06-12 11:31:57,021.021] Val data size: 1000 and model context length : 1024
+[2025-06-12 11:31:57,021.021] Not enough tokens for the validation loader. Try to lower the `GPT_CONFIG_124M['context_length']` or increase the `val_split`
+[2025-06-12 11:31:57,021.021] ---------------------------------------------------------
+[2025-06-12 11:31:57,021.021] Loading the dataset class for pre-training...
+[2025-06-12 11:31:57,027.027] Error in loading file and creating dataloader:: num_samples should be a positive integer value, but got num_samples=0

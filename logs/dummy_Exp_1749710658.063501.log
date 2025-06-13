@@ -1,0 +1,19 @@
+[2025-06-12 12:14:18,063.063] Namespace(experiment_name='dummy_Exp', base_modelName='gpt2_124M', data_path='the-verdict.txt', training_type='pre-train', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2', tokenizer='tiktoken', seed=123, batch_size=1, train_split=0.5, val_split=0.25)
+[2025-06-12 12:14:18,514.514] Configuration of the gpt2_124M base model loaded..!
+[2025-06-12 12:14:18,514.514] Extention detected for the training file is "txt".
+[2025-06-12 12:14:18,514.514] Total characters present in the training file: 20479
+[2025-06-12 12:14:18,530.530] Training, Validation and Test Data created from the training file. Train data: 10239, Val Data: 5119, Test Data: 5121
+[2025-06-12 12:14:18,542.542] Train data tokens: 2528, Val data tokens: 1339, Test data tokens: 1280 and model context length : 1024
+[2025-06-12 12:14:18,546.546] ---------------------------------------------------------
+[2025-06-12 12:14:18,546.546] Loading the dataset class for pre-training...
+[2025-06-12 12:14:18,560.560] ************** TRAIN DATALOADER ****************************
+[2025-06-12 12:14:18,560.560] Length of Train Dataloader (number of batches): 2
+[2025-06-12 12:14:18,563.563] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-12 12:14:18,563.563] ************** VAL DATALOADER ****************************
+[2025-06-12 12:14:18,563.563] Length of Val Dataloader (number of batches): 1
+[2025-06-12 12:14:18,563.563] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-12 12:14:18,563.563] ************** TEST DATALOADER ****************************
+[2025-06-12 12:14:18,563.563] Length of Test Dataloader (number of batches): 1
+[2025-06-12 12:14:18,563.563] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-12 12:14:18,563.563] Dataloaders created successfully for pre-training task..!
+[2025-06-12 12:14:18,563.563] ---------------------------------------------------------
