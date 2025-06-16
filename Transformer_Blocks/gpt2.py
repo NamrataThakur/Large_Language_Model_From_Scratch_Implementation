@@ -1,7 +1,7 @@
 import torch 
 import torch.nn as nn
-from transformer import TransformerBlock
-from layernorm import LayerNormalization
+from .transformer import TransformerBlock
+from .layernorm import LayerNormalization
 
 class GPT2(nn.Module):
     def __init__(self, config):

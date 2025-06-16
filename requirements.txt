@@ -10,3 +10,4 @@ psutil==5.9.0
 imblearn
 imbalanced-learn
 tensorboardX==2.6.4
+typing_extensions<4.6.0
