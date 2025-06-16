@@ -1,5 +1,8 @@
+import os
+os.pardir
+
 import torch
-from metrics import Metrics
+from gpt_Pretraining.metrics import Metrics
 
 class GPT2_ClassificationFineTune:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,

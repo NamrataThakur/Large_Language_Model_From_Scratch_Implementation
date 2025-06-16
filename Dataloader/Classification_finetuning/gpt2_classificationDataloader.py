@@ -1,6 +1,6 @@
 from torch.utils.data import DataLoader
 import tiktoken
-from gpt2_classficationDataset import GPTCustomSFTDataset
+from .gpt2_classficationDataset import GPTCustomSFTDataset
 
 #Create the custom dataloader function that will call the GPTCustomSFTDataset class to create the dataset from the given text:
 def GPTCustomSFTDataloader(file_path,last_token_id = None, max_seq_length = None, batch_size=8,

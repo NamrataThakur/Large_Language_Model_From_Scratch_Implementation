@@ -1,11 +1,16 @@
 import torch
 import torch.nn as nn
-import sys
-sys.path.insert(0, 'D:\LLM_Deeplearning.ai\SEBASTIAN_RASCHKA\LLMs-from-scratch-main\LLMs-from-scratch-main\ch03\Attention_Implementation')
-from causal_multi_head_attention import MultiHead_Attention
-from feedforward import FeedForwardBlock
-from gelu import GELU
-from layernorm import LayerNormalization
+
+#import sys
+#sys.path.insert(0, r'D:\LLM_Deeplearning.ai\SEBASTIAN_RASCHKA\Large_Language_Model_From_Scratch_Implementation\attention_implementation')
+
+import os
+os.pardir
+
+from attention_implementation.causal_multi_head_attention import MultiHead_Attention
+from .feedforward import FeedForwardBlock
+from .gelu import GELU
+from .layernorm import LayerNormalization
 
 class TransformerBlock(nn.Module):
     def __init__(self,config):
@@ -62,3 +67,6 @@ if __name__ == '__main__':
 
     print("Input shape:", x.shape)
     print("Output shape:", output.shape)
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print('Device Available: ', device)
