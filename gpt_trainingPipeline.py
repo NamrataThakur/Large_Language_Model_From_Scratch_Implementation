@@ -16,11 +16,12 @@ import numpy as np
 import zipfile
 from pathlib import Path
 import pandas as pd
-#from imblearn.over_sampling import SMOTE, ADASYN
+from imblearn.over_sampling import SMOTE, ADASYN
 import math
 from tensorboardX import SummaryWriter
 import configparser
 warnings.filterwarnings("ignore")
+
 
 #os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
@@ -42,7 +43,7 @@ from gpt_Pretraining.metrics import Metrics
 from gpt_Pretraining.gpt2_pretrain import GPT2_PreTrain
 
 #Load the classification (supervised) finetuning class
-# from gpt_ClassificationFT.gpt2_classificationFT import GPT2_ClassificationFineTune
+from gpt_ClassificationFT.gpt2_classificationFT import GPT2_ClassificationFineTune
 
 #Load the class for model config
 from gpt_ClassificationFT.gpt2_model_config import GPT2_ModelConfig
@@ -163,6 +164,13 @@ if __name__ == '__main__':
         help=('percentage of the data to be considered for validation')
     )
 
+    parser.add_argument(
+        '--context_length',
+        type=int,
+        default=1024,
+        help=('context length of the attention block to be considered.')
+    )
+
     args = parser.parse_args()
 
     try:
@@ -199,7 +207,7 @@ if __name__ == '__main__':
     #Load the model config:
     try:
         m_config = GPT2_ModelConfig()
-        gpt2_config = m_config.load_model_config(model_name=args.base_modelName, context_length=1024)
+        gpt2_config = m_config.load_model_config(model_name=args.base_modelName, context_length=args.context_length)
         logger.info(f'Configuration of the {args.base_modelName} base model loaded..!')
 
     except Exception as e:
