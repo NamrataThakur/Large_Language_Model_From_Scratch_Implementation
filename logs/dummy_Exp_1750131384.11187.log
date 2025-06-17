@@ -1,0 +1,21 @@
+[2025-06-17 09:06:24,127.127] Namespace(experiment_name='dummy_Exp', base_modelName='gpt2_124M', data_path='the-verdict.txt', training_type='pre-train', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2', tokenizer='tiktoken', seed=123, batch_size=1, train_split=0.5, val_split=0.25, context_length=1024)
+[2025-06-17 09:06:25,244.244] Configuration of the gpt2_124M base model loaded..!
+[2025-06-17 09:06:25,244.244] Extention detected for the training file is "txt".
+[2025-06-17 09:06:25,244.244] Total characters present in the training file: 20479
+[2025-06-17 09:06:25,244.244] Training, Validation and Test Data created from the training file. Train data: 10239, Val Data: 5119, Test Data: 5121
+[2025-06-17 09:06:25,274.274] Train data tokens: 2528, Val data tokens: 1339, Test data tokens: 1280 and model context length : 1024
+[2025-06-17 09:06:25,286.286] ---------------------------------------------------------
+[2025-06-17 09:06:25,286.286] Loading the dataset class for pre-training...
+[2025-06-17 09:06:25,326.326] ************** TRAIN DATALOADER ****************************
+[2025-06-17 09:06:25,327.327] Length of Train Dataloader (number of batches): 2
+[2025-06-17 09:06:25,329.329] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-17 09:06:25,329.329] ************** VAL DATALOADER ****************************
+[2025-06-17 09:06:25,329.329] Length of Val Dataloader (number of batches): 1
+[2025-06-17 09:06:25,330.330] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-17 09:06:25,330.330] ************** TEST DATALOADER ****************************
+[2025-06-17 09:06:25,330.330] Length of Test Dataloader (number of batches): 1
+[2025-06-17 09:06:25,332.332] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-17 09:06:25,333.333] Dataloaders created successfully for pre-training task..!
+[2025-06-17 09:06:25,333.333] ---------------------------------------------------------
+[2025-06-17 09:06:25,333.333] Loading the weights of the base model : gpt2_124M..!
+[2025-06-17 09:06:34,886.886] Model weights loaded successfully..!

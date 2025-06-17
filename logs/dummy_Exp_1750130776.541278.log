@@ -1,0 +1,21 @@
+[2025-06-17 08:56:16,541.541] Namespace(experiment_name='dummy_Exp', base_modelName='gpt2_124M', data_path='the-verdict.txt', training_type='pre-train', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2', tokenizer='tiktoken', seed=123, batch_size=1, train_split=0.5, val_split=0.25, context_length=1024)
+[2025-06-17 08:56:17,796.796] Configuration of the gpt2_124M base model loaded..!
+[2025-06-17 08:56:17,796.796] Extention detected for the training file is "txt".
+[2025-06-17 08:56:17,811.811] Total characters present in the training file: 20479
+[2025-06-17 08:56:17,843.843] Training, Validation and Test Data created from the training file. Train data: 10239, Val Data: 5119, Test Data: 5121
+[2025-06-17 08:56:17,850.850] Train data tokens: 2528, Val data tokens: 1339, Test data tokens: 1280 and model context length : 1024
+[2025-06-17 08:56:17,854.854] ---------------------------------------------------------
+[2025-06-17 08:56:17,854.854] Loading the dataset class for pre-training...
+[2025-06-17 08:56:17,863.863] ************** TRAIN DATALOADER ****************************
+[2025-06-17 08:56:17,864.864] Length of Train Dataloader (number of batches): 2
+[2025-06-17 08:56:17,884.884] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-17 08:56:17,884.884] ************** VAL DATALOADER ****************************
+[2025-06-17 08:56:17,884.884] Length of Val Dataloader (number of batches): 1
+[2025-06-17 08:56:17,885.885] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-17 08:56:17,885.885] ************** TEST DATALOADER ****************************
+[2025-06-17 08:56:17,885.885] Length of Test Dataloader (number of batches): 1
+[2025-06-17 08:56:17,885.885] torch.Size([1, 1024]), torch.Size([1, 1024])
+[2025-06-17 08:56:17,885.885] Dataloaders created successfully for pre-training task..!
+[2025-06-17 08:56:17,885.885] ---------------------------------------------------------
+[2025-06-17 08:56:17,885.885] Loading the weights of the base model : gpt2_124M..!
+[2025-06-17 08:58:11,683.683] Error in loading model weights : 'MultiHead_Attention' object has no attribute 'out_projection'

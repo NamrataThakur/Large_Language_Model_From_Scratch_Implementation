@@ -113,11 +113,11 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
-        '--pre-save-model',
+        '--pre_save_model',
         type=str,
         default=None,
         help=('name of the pre-saved model that will be loaded for further tasks. '
-                        'Options: None (if None, then either load weights of base gpt2 model if load_weights=True' \
+                        'Options: None (if None, then load weights of base gpt2 model if load_weights=True' \
                                 ' Or name of the previously trained model)')
     )
 
@@ -171,6 +171,28 @@ if __name__ == '__main__':
         help=('context length of the attention block to be considered.')
     )
 
+    parser.add_argument(
+        '--max_new_tokens',
+        type=int,
+        default=100,
+        help=('Maximum number of tokens generated')
+    )
+
+    parser.add_argument(
+        '--temp',
+        type=int,
+        default=2,
+        help=('Temperature for generation. Options: 0 - 2, Closer to 0, more deterministic generation, closer to 2, more creative generation.')
+    )
+
+    parser.add_argument(
+        '--top_k',
+        type=int,
+        default=3,
+        help=('Top k tokens considered for next token prediction. Options: None (It will consider all the tokens in the final generation)')
+    )
+
+
     args = parser.parse_args()
 
     try:
@@ -179,6 +201,7 @@ if __name__ == '__main__':
 
         DATA_FOLDER = config["PATHS"]["DATA_FOLDER"]
         LOG_FOLDER = config["PATHS"]["LOG_FOLDER"]
+        MODEL_ROOT_FOLDER = config['PATHS']['MODEL_ROOT_FOLDER']
 
         #Add the logging functionality:
         if not os.path.exists(LOG_FOLDER):
@@ -200,6 +223,7 @@ if __name__ == '__main__':
     except Exception as e:
         print("Exception while reading config file : ", e)
 
+    #Load the tokenizer:
     tokenizer = args.tokenizer
     if tokenizer == 'tiktoken':
         tokenizer = tiktoken.get_encoding("gpt2")
@@ -208,6 +232,7 @@ if __name__ == '__main__':
     try:
         m_config = GPT2_ModelConfig()
         gpt2_config = m_config.load_model_config(model_name=args.base_modelName, context_length=args.context_length)
+        gpt2_baseInst = GPT2(gpt2_config)
         logger.info(f'Configuration of the {args.base_modelName} base model loaded..!')
 
     except Exception as e:
@@ -216,10 +241,12 @@ if __name__ == '__main__':
     #Load the data and dataloader:
     try:
 
+        #Read the data:
         data_path = os.path.join(DATA_FOLDER,args.data_path)
         extension = data_path.split('.')[-1]
         logger.info(f'Extention detected for the training file is "{extension}".')
 
+        #Basic Data Preprocessing:
         if extension == 'txt':
             with open(data_path, 'r', encoding='utf-8') as file:
                 data = file.read()
@@ -263,6 +290,7 @@ if __name__ == '__main__':
             print("TO DO FOR ZIP FORMAT")
 
 
+        #Prepare the dataloaders:
         if args.training_type == 'pre-train':
             logger.info('---------------------------------------------------------')
             logger.info("Loading the dataset class for pre-training...")
@@ -315,6 +343,67 @@ if __name__ == '__main__':
             logger.info("Loading the dataset class for instruction fine-tuning task...")
         else:
             logger.info("Loading the class for preference fine-tuning task...")
+
+
+        #Load the model weights:
+        if args.load_weights:
+
+            #Check if model root folder is present, else create it:
+            if not os.path.exists(MODEL_ROOT_FOLDER):
+                os.mkdir(MODEL_ROOT_FOLDER)
+
+            if args.pre_save_model is None:
+
+                try:
+                    logger.info(f'Loading the weights of the base model : {args.base_modelName}..!')
+
+                    # Using the function "download_and_load_gpt2" as is given in the book "Build LLM From Scratch":
+                    modelSize = args.base_modelName.split('_')[-1]
+                    modelDir= args.base_modelName.split('_')[0]
+
+                    model_path = os.path.join(MODEL_ROOT_FOLDER,modelDir)
+                    print(model_path)
+                    logger.info(f'Model present in the path: {model_path}')
+
+                    settings, params = download_and_load_gpt2(model_size=modelSize, models_dir=model_path)
+                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                    print('Device Available: ', device)
+
+                    #Load the weights from OpenAI GPT2 to our instance:
+                    gpt2_loadedWeights(gpt2_baseInst, params)
+                    gpt2_baseInst.to(device)
+
+                    logger.info('Model weights loaded successfully..!')
+
+                    #Generate a text to check if loading is successful:
+                    generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
+                    output_text = generate.text_generation(input_text = "Once upon a time,", max_new_tokens=args.max_new_tokens, 
+                                                           temp=args.temp, top_k= args.top_k, eos_id = None)
+                    logger.info(f'Generating a text :: \n{output_text}')
+                
+                except Exception as e:
+                    logger.error(f'Error in loading model weights : {e}')
+
+            else:
+                try:
+                    logger.info(f'Loading the weights of the base model : {args.pre_save_model}..!')
+                    model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
+                    print(model_path)
+                    logger.info(f'Model present in the path: {model_path}')
+                
+                except Exception as e:
+                    logger.error(f'Error in loading model weights : {e}')
+
+        else:
+            logger.info(f'Loading the model with random weights for training..!')
+
+        
+
+
+
+
+
+        
     
     except Exception as e:
         logger.error(f'Error in loading file and creating dataloader:: {e}')
