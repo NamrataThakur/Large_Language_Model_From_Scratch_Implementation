@@ -71,7 +71,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--experiment_name',
         type=str,
-        default='dummy_Exp',
+        default='SFT_Exp',
         help=('name of the experiment and its corresponding log file')
     )
 
@@ -85,14 +85,14 @@ if __name__ == '__main__':
     parser.add_argument(
         '--data_path',
         type=str,
-        default='the-verdict.txt',
+        default='sms_spam_collection.zip',
         help=('The name of the training data file. This file is present under the folder "data". Extension accepted: .txt, .csv, .tsv, .zip ')
     )
 
     parser.add_argument(
         '--training_type',
         type=str,
-        default='pre-train',
+        default='SFT',
         help=("the pipeline to be run for what Type of training. "
                 "Options: pre-train, SFT (supervised classfication fine-tune)," \
                            " IFT (instruction fine-tune), PFT (preference fine-tune)")
@@ -146,21 +146,21 @@ if __name__ == '__main__':
     parser.add_argument(
         '--batch_size',
         type=int,
-        default=1,
+        default=8,
         help=('batch_size per gpu')
     )
 
     parser.add_argument(
         '--train_split',
         type=float,
-        default=0.50,
+        default=0.70,
         help=('percentage of the data to be considered for training')
     )
 
     parser.add_argument(
         '--val_split',
         type=float,
-        default=0.25,
+        default=0.10,
         help=('percentage of the data to be considered for validation')
     )
 
@@ -191,6 +191,14 @@ if __name__ == '__main__':
         default=3,
         help=('Top k tokens considered for next token prediction. Options: None (It will consider all the tokens in the final generation)')
     )
+
+    parser.add_argument(
+        "--trainable_layers",
+        type=str,
+        default="last_block",
+        help=("Which layers to train. Options: 'all', 'last_block', 'last_two_blocks', 'lora', 'lora_alternative'.")
+    )
+
 
 
     args = parser.parse_args()
@@ -278,6 +286,7 @@ if __name__ == '__main__':
                         "Try to lower the `GPT_CONFIG_124M['context_length']` or "
                         "decrease the `val_split`")
 
+        
         elif extension == 'csv':
             data = pd.read_csv(data_path)
             print('Total records present in the training file: ', data.shape)
@@ -285,11 +294,54 @@ if __name__ == '__main__':
 
             #Create the train.csv, val.csv, test.csv
 
+        
         else:
-            #TO DO for ZIP Format
-            print("TO DO FOR ZIP FORMAT")
+            
+            print("Unzipping the file")
+            logging.info('Unzipping the file')
+            extracted_path =os.path.join(DATA_FOLDER,args.data_path.split('.')[0])
 
+            with zipfile.ZipFile(data_path, "r") as zip_ref:
+                zip_ref.extractall(extracted_path)
 
+            fileName = [f for root,dir,file in os.walk(extracted_path) for f in file if f.lower() != 'readme']
+            fileName = fileName[0].replace('.File','.tsv')
+
+            # Add .tsv file extension
+            data_file_path = Path(extracted_path) / (fileName+'.tsv')
+
+            if not os.path.exists(data_file_path):
+            
+                original_file_path = Path(extracted_path) / fileName
+                os.rename(original_file_path, data_file_path)
+                print(f"File unzipped and saved as {data_file_path}")
+            
+            logger.info(f"File unzipped and saved at: {data_file_path}")
+
+            data = pd.read_csv(data_file_path, sep='\t', header = None, names=['Label', 'Text'])
+            logger.info(f'Total records present in the training file: {data.shape}')
+
+            #Balancing Strategies:
+            #Detect the minority class and the corresponding record count:
+            class_count = data['Label'].value_counts().array.tolist()
+            class_name = data['Label'].value_counts().index
+            min_count = min(class_count)
+            minority_name = class_name[class_count.index(min_count)]
+
+            #Prepare the minority and majority class dataset:
+            min_df = data[data['Label'] == minority_name]
+            max_df = data[data['Label'] != minority_name].sample(min_count, random_state=123)
+            balanced_df = pd.concat([max_df,min_df], ignore_index=True)
+            balanced_df['Label'] = balanced_df['Label'].map({'spam':1, 'ham': 0}) #Create a custom part for this --> TO DO
+
+            logger.info(f'After balancing : {balanced_df.shape}')
+
+            #Create the train, val, test files:
+            train_df, val_df, test_df = dataset_split(data=balanced_df, train_split=args.train_split, val_split=args.val_split, 
+                                                        classify=True)
+            logger.info(f'Training, Validation and Test Data created from the training file. Train data: {train_df.shape}, Val Data: {val_df.shape}, Test Data: {test_df.shape}')
+
+        
         #Prepare the dataloaders:
         if args.training_type == 'pre-train':
             logger.info('---------------------------------------------------------')
@@ -338,64 +390,104 @@ if __name__ == '__main__':
             logger.info('---------------------------------------------------------')
 
         elif args.training_type == 'SFT':
+            logger.info('---------------------------------------------------------')
             logger.info("Loading the dataset class for supervised classification fine-tuning task...")
+            train_dataLoader = GPTCustomSFTDataloader(train_df, batch_size = args.batch_size,
+                                                   tokenizer = args.tokenizer,
+                                                    shuffle=True, drop_last=True,num_workers=0)
+            
+            #Print the dataloader contents to confirm correct format:
+            logger.info('************** TRAIN DATALOADER ****************************')
+            logger.info(f'Length of Train Dataloader (number of batches): {len(train_dataLoader)}')
+            for x,y in train_dataLoader:
+                logger.info(f'{x.shape}, {y.shape}')
+                break
+            train_max_length = x.shape[1]
+
+            val_dataLoader = GPTCustomSFTDataloader(val_df, batch_size = args.batch_size, max_seq_length = train_max_length,
+                                                   tokenizer = args.tokenizer,
+                                                    shuffle=True, drop_last=True,num_workers=0)
+            
+            test_dataLoader = GPTCustomSFTDataloader(test_df, batch_size = args.batch_size,  max_seq_length = train_max_length,
+                                                   tokenizer = args.tokenizer,
+                                                    shuffle=True, drop_last=True,num_workers=0)
+            
+            logger.info('************** VAL DATALOADER ****************************')
+            logger.info(f'Length of Val Dataloader (number of batches): {len(val_dataLoader)}')
+            for x,y in val_dataLoader:
+                logger.info(f'{x.shape}, {y.shape}')
+                break
+            
+            logger.info('************** TEST DATALOADER ****************************')
+            logger.info(f'Length of Test Dataloader (number of batches): {len(test_dataLoader)}')
+            for x,y in test_dataLoader:
+                logger.info(f'{x.shape}, {y.shape}')
+                break
+                
+                
+            logger.info('Dataloaders created successfully for classification fine-tuning task..!')
+            logger.info('---------------------------------------------------------')
+
+
         elif args.training_type == 'IFT':
             logger.info("Loading the dataset class for instruction fine-tuning task...")
         else:
             logger.info("Loading the class for preference fine-tuning task...")
 
+    except Exception as e:
+        logger.error(f'Error in loading file and creating dataloader:: {e}')
 
-        #Load the model weights:
-        if args.load_weights:
+    #Load the model weights:
+    if args.load_weights:
 
-            #Check if model root folder is present, else create it:
-            if not os.path.exists(MODEL_ROOT_FOLDER):
-                os.mkdir(MODEL_ROOT_FOLDER)
+        #Check if model root folder is present, else create it:
+        if not os.path.exists(MODEL_ROOT_FOLDER):
+            os.mkdir(MODEL_ROOT_FOLDER)
 
-            if args.pre_save_model is None:
+        if args.pre_save_model is None:
 
-                try:
-                    logger.info(f'Loading the weights of the base model : {args.base_modelName}..!')
+            try:
+                logger.info(f'Loading the weights of the base model : {args.base_modelName}..!')
 
-                    # Using the function "download_and_load_gpt2" as is given in the book "Build LLM From Scratch":
-                    modelSize = args.base_modelName.split('_')[-1]
-                    modelDir= args.base_modelName.split('_')[0]
+                # Using the function "download_and_load_gpt2" as is given in the book "Build LLM From Scratch":
+                modelSize = args.base_modelName.split('_')[-1]
+                modelDir= args.base_modelName.split('_')[0]
 
-                    model_path = os.path.join(MODEL_ROOT_FOLDER,modelDir)
-                    print(model_path)
-                    logger.info(f'Model present in the path: {model_path}')
+                model_path = os.path.join(MODEL_ROOT_FOLDER,modelDir)
+                print(model_path)
+                logger.info(f'Model present in the path: {model_path}')
 
-                    settings, params = download_and_load_gpt2(model_size=modelSize, models_dir=model_path)
-                    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                    print('Device Available: ', device)
+                settings, params = download_and_load_gpt2(model_size=modelSize, models_dir=model_path)
+                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+                print('Device Available: ', device)
 
-                    #Load the weights from OpenAI GPT2 to our instance:
-                    gpt2_loadedWeights(gpt2_baseInst, params)
-                    gpt2_baseInst.to(device)
+                #Load the weights from OpenAI GPT2 to our instance:
+                gpt2_loadedWeights(gpt2_baseInst, params)
+                gpt2_baseInst.to(device)
 
-                    logger.info('Model weights loaded successfully..!')
+                logger.info('Model weights loaded successfully..!')
 
-                    #Generate a text to check if loading is successful:
-                    generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
-                    output_text = generate.text_generation(input_text = "Once upon a time,", max_new_tokens=args.max_new_tokens, 
-                                                           temp=args.temp, top_k= args.top_k, eos_id = None)
-                    logger.info(f'Generating a text :: \n{output_text}')
-                
-                except Exception as e:
-                    logger.error(f'Error in loading model weights : {e}')
-
-            else:
-                try:
-                    logger.info(f'Loading the weights of the base model : {args.pre_save_model}..!')
-                    model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
-                    print(model_path)
-                    logger.info(f'Model present in the path: {model_path}')
-                
-                except Exception as e:
-                    logger.error(f'Error in loading model weights : {e}')
+                #Generate a text to check if loading is successful:
+                generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
+                output_text = generate.text_generation(input_text = "Once upon a time,", max_new_tokens=args.max_new_tokens, 
+                                                        temp=args.temp, top_k= args.top_k, eos_id = None)
+                logger.info(f'Generating a text :: \n{output_text}')
+            
+            except Exception as e:
+                logger.error(f'Error in loading model weights : {e}')
 
         else:
-            logger.info(f'Loading the model with random weights for training..!')
+            try:
+                logger.info(f'Loading the weights of the base model : {args.pre_save_model}..!')
+                model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
+                print(model_path)
+                logger.info(f'Model present in the path: {model_path}')
+            
+            except Exception as e:
+                logger.error(f'Error in loading model weights : {e}')
+
+    else:
+        logger.info(f'Loading the model with random weights for training..!')
 
         
 
@@ -405,5 +497,4 @@ if __name__ == '__main__':
 
         
     
-    except Exception as e:
-        logger.error(f'Error in loading file and creating dataloader:: {e}')
+    

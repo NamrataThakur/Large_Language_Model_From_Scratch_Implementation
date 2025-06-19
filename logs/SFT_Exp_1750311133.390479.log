@@ -1,0 +1,26 @@
+[2025-06-19 11:02:13,390.390] Namespace(experiment_name='SFT_Exp', base_modelName='gpt2_124M', data_path='sms_spam_collection.zip', training_type='SFT', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.7, val_split=0.1, context_length=1024, max_new_tokens=100, temp=2, top_k=3, trainable_layers='last_block')
+[2025-06-19 11:02:15,205.205] Configuration of the gpt2_124M base model loaded..!
+[2025-06-19 11:02:15,205.205] Extention detected for the training file is "zip".
+[2025-06-19 11:02:15,205.205] Unzipping the file
+[2025-06-19 11:02:15,205.205] File unzipped and saved at: data\sms_spam_collection\SMSSpamCollection.tsv
+[2025-06-19 11:02:15,241.241] Total records present in the training file: (5572, 2)
+[2025-06-19 11:02:15,254.254] After balancing : (1494, 2)
+[2025-06-19 11:02:15,259.259] Training, Validation and Test Data created from the training file. Train data: (1045, 2), Val Data: (149, 2), Test Data: (300, 2)
+[2025-06-19 11:02:15,259.259] ---------------------------------------------------------
+[2025-06-19 11:02:15,260.260] Loading the dataset class for supervised classification fine-tuning task...
+[2025-06-19 11:02:15,312.312] ************** TRAIN DATALOADER ****************************
+[2025-06-19 11:02:15,312.312] Length of Train Dataloader (number of batches): 130
+[2025-06-19 11:02:15,312.312] torch.Size([8, 120]), torch.Size([8])
+[2025-06-19 11:02:15,353.353] ************** VAL DATALOADER ****************************
+[2025-06-19 11:02:15,353.353] Length of Val Dataloader (number of batches): 18
+[2025-06-19 11:02:15,355.355] torch.Size([8, 120]), torch.Size([8])
+[2025-06-19 11:02:15,355.355] ************** TEST DATALOADER ****************************
+[2025-06-19 11:02:15,355.355] Length of Test Dataloader (number of batches): 37
+[2025-06-19 11:02:15,359.359] torch.Size([8, 120]), torch.Size([8])
+[2025-06-19 11:02:15,360.360] Dataloaders created successfully for classification fine-tuning task..!
+[2025-06-19 11:02:15,360.360] ---------------------------------------------------------
+[2025-06-19 11:02:15,360.360] Loading the weights of the base model : gpt2_124M..!
+[2025-06-19 11:02:15,360.360] Model present in the path: model/gpt2
+[2025-06-19 11:02:27,412.412] Model weights loaded successfully..!
+[2025-06-19 11:02:32,328.328] Generating a text :: 
+Once upon a time, the two were friends, the two of which were in a relationship that lasted a few months. The first time, she told me, she had to go to the hospital because of the pain she was going through. The second time she told me she felt so bad about her situation that it took a while before she was able to get back to work."She told me she was so upset that she couldn't go home," she said. She was so upset that she was going back

@@ -8,7 +8,8 @@ class GPTCustomSFTDataset(Dataset):
         super().__init__()
 
         #Read the data:
-        self.data = pd.read_csv(text)
+        #self.data = pd.read_csv(text)
+        self.data = text
 
         #Get the encoded data:
         self.encoded_data = [tokenizer.encode(row, allowed_special='all') 
