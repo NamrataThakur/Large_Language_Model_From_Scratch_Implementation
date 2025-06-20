@@ -1,0 +1,30 @@
+[2025-06-20 10:37:31,101.101] Namespace(experiment_name='SFT_Exp_ALL', base_modelName='gpt2_124M', data_path='sms_spam_collection.zip', training_type='SFT', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.7, val_split=0.1, context_length=1024, max_new_tokens=100, temp=2, top_k=3, trainable_layers='last_block', num_epochs=5, max_training_length='longest_training_example')
+[2025-06-20 10:37:32,347.347] Configuration of the gpt2_124M base model loaded..!
+[2025-06-20 10:37:32,347.347] Extention detected for the training file is "zip".
+[2025-06-20 10:37:32,347.347] Unzipping the file
+[2025-06-20 10:37:32,385.385] File unzipped and saved at: data\sms_spam_collection\SMSSpamCollection.tsv
+[2025-06-20 10:37:32,422.422] Total records present in the training file: (5572, 2)
+[2025-06-20 10:37:32,433.433] After balancing : (1494, 2)
+[2025-06-20 10:37:32,437.437] Training, Validation and Test Data created from the training file. Train data: (1045, 2), Val Data: (149, 2), Test Data: (300, 2)
+[2025-06-20 10:37:32,438.438] ---------------------------------------------------------
+[2025-06-20 10:37:32,438.438] Loading the dataset class for supervised classification fine-tuning task...
+[2025-06-20 10:37:32,468.468] ************** TRAIN DATALOADER ****************************
+[2025-06-20 10:37:32,469.469] Length of Train Dataloader (number of batches): 130
+[2025-06-20 10:37:32,500.500] torch.Size([8, 120]), torch.Size([8])
+[2025-06-20 10:37:32,519.519] ************** VAL DATALOADER ****************************
+[2025-06-20 10:37:32,519.519] Length of Val Dataloader (number of batches): 18
+[2025-06-20 10:37:32,519.519] torch.Size([8, 120]), torch.Size([8])
+[2025-06-20 10:37:32,519.519] ************** TEST DATALOADER ****************************
+[2025-06-20 10:37:32,519.519] Length of Test Dataloader (number of batches): 37
+[2025-06-20 10:37:32,522.522] torch.Size([8, 120]), torch.Size([8])
+[2025-06-20 10:37:32,522.522] Dataloaders created successfully for classification fine-tuning task..!
+[2025-06-20 10:37:32,522.522] ---------------------------------------------------------
+[2025-06-20 10:37:32,522.522] Loading the weights of the base model : gpt2_124M..!
+[2025-06-20 10:37:32,524.524] Model present in the path: model/gpt2
+[2025-06-20 10:37:41,706.706] Model weights loaded successfully..!
+[2025-06-20 10:37:49,119.119] Generating a text :: 
+Once upon a time, I would say that the only thing that was missing from my life was a sense of humor and an ability to laugh.I had never been a comedian, and I had always been a comedian, but I was always a little nervous. I was just trying to make it through my first few weeks of college and I didn't know if it was going to last.But then, after a year of being a comedian I started getting into it, so it wasn't long before I
+[2025-06-20 10:37:49,119.119] Training the full model as no paramater efficient mechanisms are given..!
+[2025-06-20 10:37:49,119.119] Training Stage : Frozen the original paramters of the model..!
+[2025-06-20 10:37:49,119.119] Training Stage : Unfreezing the weights of last block of the model for fine-tuning..!
+[2025-06-20 10:37:50,408.408] Error in fine-tuning stage : 'torch.device' object has no attribute 'upper'

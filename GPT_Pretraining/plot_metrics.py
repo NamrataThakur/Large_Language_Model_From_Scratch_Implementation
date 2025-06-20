@@ -1,5 +1,13 @@
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
+from datetime import datetime
+import configparser
+import os
+
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+PLOTS_FOLDER = config["PATHS"]["PLOTS_FOLDER"]
 
 class Plots:
 
@@ -27,6 +35,7 @@ class Plots:
         ax2.set_xlabel("Samples seen")
 
         fig.tight_layout()  # Adjust layout to make room
-        plt.savefig(f"{label}_samples_epochs_{type}.pdf")
+        plot_save_path = os.path.join(PLOTS_FOLDER,f"{label}_samples_epochs_{type}_{str(datetime.now().timestamp())}.pdf")
+        plt.savefig(plot_save_path)
         plt.show()
 

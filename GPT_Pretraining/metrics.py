@@ -36,7 +36,7 @@ class Metrics:
         ce_loss = torch.nn.functional.cross_entropy(output_logits.flatten(0,1), target_batch.flatten())
         return ce_loss
 
-
+    @torch.no_grad()  # Disable gradient tracking for efficiency
     def accuracy_loader(self, dataloader, num_batches=None):
 
         correct_pred, num_samples = 0, 0

@@ -71,7 +71,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--experiment_name',
         type=str,
-        default='SFT_Exp',
+        default='SFT_Exp_ALL',
         help=('name of the experiment and its corresponding log file')
     )
 
@@ -124,7 +124,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--model_name',
         type=str,
-        default='gpt2',
+        default='gpt2_SFT_Spam',
         help=('name of the trained model to be saved. ')
     )
 
@@ -196,12 +196,27 @@ if __name__ == '__main__':
         "--trainable_layers",
         type=str,
         default="last_block",
-        help=("Which layers to train. Options: 'all', 'last_block', 'last_two_blocks', 'lora', 'lora_alternative'.")
+        help=("Which layers to train. Options: 'all', 'last_block', 'last_two_blocks'.")
     )
 
+    parser.add_argument(
+        "--num_epochs",
+        type=int,
+        default=5,
+        help=("Number of training epochs.")
+    )
+
+    parser.add_argument(
+        "--max_training_length",
+        type=str,
+        default="longest_training_example",
+        help=("The context length of the data inputs. Options: longest_training_example, model_context_size or custom integer.")
+    )
+    
 
 
     args = parser.parse_args()
+    torch.manual_seed(args.seed)
 
     try:
         config = configparser.ConfigParser()
@@ -241,10 +256,12 @@ if __name__ == '__main__':
         m_config = GPT2_ModelConfig()
         gpt2_config = m_config.load_model_config(model_name=args.base_modelName, context_length=args.context_length)
         gpt2_baseInst = GPT2(gpt2_config)
+        gpt2_baseInst.eval()
         logger.info(f'Configuration of the {args.base_modelName} base model loaded..!')
 
     except Exception as e:
         logger.error(f"Error in loading the model config class {e}")
+        raise Exception(f"Error in loading the model config class {e}")
 
     #Load the data and dataloader:
     try:
@@ -273,16 +290,25 @@ if __name__ == '__main__':
                     logger.error("Not enough tokens for the training loader. "
                         "Try to lower the `GPT_CONFIG_124M['context_length']` or "
                         "increase the `train_split`")
+                    raise ValueError("Not enough tokens for the training loader. "
+                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                        "increase the `train_split`")
                     
                 if len(tokenizer.encode(val_df))  < gpt2_config["context_length"]:
                     logger.info(f'Val data tokens: {len(tokenizer.encode(val_df))} and model context length : {gpt2_config["context_length"]}')
                     logger.error("Not enough tokens for the validation loader. "
                         "Try to lower the `GPT_CONFIG_124M['context_length']` or "
                         "increase the `val_split`")
+                    raise ValueError("Not enough tokens for the validation loader. "
+                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                        "increase the `val_split`")
                     
                 if len(tokenizer.encode(test_df))  < gpt2_config["context_length"]:
                     logger.info(f'Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
                     logger.error("Not enough tokens for the validation loader. "
+                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                        "decrease the `val_split`")
+                    raise ValueError("Not enough tokens for the validation loader. "
                         "Try to lower the `GPT_CONFIG_124M['context_length']` or "
                         "decrease the `val_split`")
 
@@ -392,17 +418,43 @@ if __name__ == '__main__':
         elif args.training_type == 'SFT':
             logger.info('---------------------------------------------------------')
             logger.info("Loading the dataset class for supervised classification fine-tuning task...")
-            train_dataLoader = GPTCustomSFTDataloader(train_df, batch_size = args.batch_size,
-                                                   tokenizer = args.tokenizer,
-                                                    shuffle=True, drop_last=True,num_workers=0)
+            train_dataLoader = None
+
+            if args.max_training_length == "longest_training_example":
+
+                train_dataLoader = GPTCustomSFTDataloader(train_df, batch_size = args.batch_size, max_seq_length = None,
+                                                    tokenizer = args.tokenizer,shuffle=True, drop_last=True,num_workers=0)
+                
+                #Print the dataloader contents to confirm correct format:
+                logger.info('************** TRAIN DATALOADER ****************************')
+                logger.info(f'Length of Train Dataloader (number of batches): {len(train_dataLoader)}')
+                for x,y in train_dataLoader:
+                    logger.info(f'{x.shape}, {y.shape}')
+                    break
+                train_max_length = x.shape[1]
             
-            #Print the dataloader contents to confirm correct format:
-            logger.info('************** TRAIN DATALOADER ****************************')
-            logger.info(f'Length of Train Dataloader (number of batches): {len(train_dataLoader)}')
-            for x,y in train_dataLoader:
-                logger.info(f'{x.shape}, {y.shape}')
-                break
-            train_max_length = x.shape[1]
+            elif args.max_training_length == 'model_context_length':
+                train_max_length = gpt2_config['context_length']
+
+            else:
+                train_max_length = int(args.max_training_length)
+                
+
+            assert train_max_length <= gpt2_config['context_length'], (
+                                    f"Max training sequence ({args.max_training_length}) cannot be more"
+                                    f" than base model context length of {gpt2_config['context_length']}" 
+                                    )
+            
+            if train_dataLoader is None:
+                train_dataLoader = GPTCustomSFTDataloader(train_df, batch_size = args.batch_size,max_seq_length = train_max_length,
+                                                    tokenizer = args.tokenizer,shuffle=True, drop_last=True,num_workers=0)
+                
+                #Print the dataloader contents to confirm correct format:
+                logger.info('************** TRAIN DATALOADER ****************************')
+                logger.info(f'Length of Train Dataloader (number of batches): {len(train_dataLoader)}')
+                for x,y in train_dataLoader:
+                    logger.info(f'{x.shape}, {y.shape}')
+                    break
 
             val_dataLoader = GPTCustomSFTDataloader(val_df, batch_size = args.batch_size, max_seq_length = train_max_length,
                                                    tokenizer = args.tokenizer,
@@ -436,6 +488,7 @@ if __name__ == '__main__':
 
     except Exception as e:
         logger.error(f'Error in loading file and creating dataloader:: {e}')
+        raise Exception(f'Error in loading file and creating dataloader:: {e}')
 
     #Load the model weights:
     if args.load_weights:
@@ -458,37 +511,174 @@ if __name__ == '__main__':
                 logger.info(f'Model present in the path: {model_path}')
 
                 settings, params = download_and_load_gpt2(model_size=modelSize, models_dir=model_path)
-                device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-                print('Device Available: ', device)
 
                 #Load the weights from OpenAI GPT2 to our instance:
                 gpt2_loadedWeights(gpt2_baseInst, params)
-                gpt2_baseInst.to(device)
+                #gpt2_baseInst.to(device)
 
                 logger.info('Model weights loaded successfully..!')
 
                 #Generate a text to check if loading is successful:
-                generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
+                generate = Text_Generation(model=gpt2_baseInst, device='cpu', tokenizer_model='gpt2')
                 output_text = generate.text_generation(input_text = "Once upon a time,", max_new_tokens=args.max_new_tokens, 
                                                         temp=args.temp, top_k= args.top_k, eos_id = None)
                 logger.info(f'Generating a text :: \n{output_text}')
             
             except Exception as e:
                 logger.error(f'Error in loading model weights : {e}')
+                raise Exception(f'Error in loading model weights : {e}')
 
         else:
             try:
-                logger.info(f'Loading the weights of the base model : {args.pre_save_model}..!')
+                logger.info(f'Loading the weights of the model : {args.pre_save_model}..!')
                 model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
                 print(model_path)
                 logger.info(f'Model present in the path: {model_path}')
             
             except Exception as e:
                 logger.error(f'Error in loading model weights : {e}')
+                raise Exception(f'Error in loading model weights : {e}')
 
     else:
         logger.info(f'Loading the model with random weights for training..!')
 
+    if args.training_type == 'SFT':
+        if args.peft_type is None:
+
+            try:
+                logger.info(f'Training the full model as no paramater efficient mechanisms are given..!')
+
+                for params in gpt2_baseInst.parameters():
+                    params.requires_grad = False
+                
+                logger.info(f'Training Stage : Frozen the original paramters of the model..!')
+
+                if args.trainable_layers == "last_block" or args.trainable_layers == "last_two_blocks":
+                    logger.info(f'Training Stage : Unfreezing the weights of last block of the model for fine-tuning..!')
+
+                    torch.manual_seed(args.seed)
+
+                    in_features = gpt2_config['embedding_dimension']
+                    out_features = len(train_df['Label'].value_counts().index.tolist())
+
+                    #Unfreeze the final layer normalization block parameters for fine-tuning:
+                    for params in gpt2_baseInst.final_layerNorm.parameters():
+                        params.requires_grad = True
+
+                    #Unfreeze the last transformer block parameters for fine-tuning:
+                    for params in gpt2_baseInst.transformer_block[-1].parameters():
+                        params.requires_grad = True
+
+                    
+                    if args.trainable_layers == "last_two_blocks":
+                        logger.info(f'Training Stage : Unfreezing the weights of second to last block of the model too for fine-tuning..!')
+                        
+                        #Unfreeze the seond to last transformer block parameters for fine-tuning:
+                        for params in gpt2_baseInst.transformer_block[-2].parameters():
+                            params.requires_grad = True
+
+                elif args.trainable_layers == "all":
+                    for params in gpt2_baseInst.parameters():
+                        params.requires_grad = False
+                    
+                    logger.info(f'Training Stage : Unfreezing all layer weights for fine-tuning..!')
+            
+            except Exception as e:
+                logger.error(f'Error in weight unfreezing stage : {e}')
+                raise Exception(f'Error in weight unfreezing stage : {e}')
+
+        elif args.peft_type == 'lora':
+            logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+        else:
+            logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+
+
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print('Device Available: ', device)
+
+        try:
+            gpt2_baseInst.to(device)
+            logger.info(f'Training Stage : Model sent to {device} for fine-tuning..!')
+
+            
+            start_time = time.time()
+            torch.manual_seed(args.seed)
+
+            logger.info(f'Training Stage : Fine-tuning of the model started ..!')
+
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=5e-5, weight_decay=0.1)
+
+            epochs = args.num_epochs
+
+            gpt2_trainer = GPT2_ClassificationFineTune(model=gpt2_baseInst, 
+                                optimizer=optimizer,
+                                train_dataLoader=train_dataLoader,
+                                test_dataLoader=val_dataLoader,
+                                num_epochs=epochs,
+                                eval_batchSize=5, 
+                                eval_freq=50,
+                                device=device)
+
+            train_losses, test_losses, train_accuracy, val_accuracy, num_samples = gpt2_trainer.train()
+
+            end_time = time.time()
+            execution_time_minutes = (end_time - start_time) / 60
+            print(f"Training completed in {execution_time_minutes:.2f} minutes.")
+            logger.info(f"Training completed in {execution_time_minutes:.2f} minutes.")
+
+            #Save the SFT Model:
+            save_model_name = args.model_name + '.pth'
+
+            save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
+            torch.save(gpt2_baseInst.state_dict(), save_model_path)
+            logger.info(f"SFT Fine-Tuned model saved in {save_model_path}..!")
+        
+        except Exception as e:
+            logger.error(f'Error in fine-tuning stage : {e}')
+            raise Exception(f'Error in fine-tuning stage : {e}')
+
+        try:
+            logger.info(f'Saving the plots of the metrics tracked ..!')
+            x = torch.linspace(0, epochs, len(train_losses))
+            samples = torch.linspace(0, num_samples, len(train_losses))
+            plt = Plots(samples, x, train_losses, test_losses, label = 'Loss')
+            plt.plots('Loss', 'SFT_FineTune')
+
+            x = torch.linspace(0, epochs, len(train_accuracy))
+            samples = torch.linspace(0, num_samples, len(train_accuracy))
+            plt = Plots(samples, x,train_accuracy, val_accuracy, label = 'Accuracy')
+            plt.plots('Accuracy', 'SFT_FineTune')
+
+        
+            metrics = Metrics(gpt2_baseInst, device)
+
+            torch.manual_seed(args.seed)
+            train_accuracy = metrics.accuracy_loader(train_dataLoader, num_batches=10)
+            val_accuracy = metrics.accuracy_loader(val_dataLoader, num_batches=10)
+            test_accuracy = metrics.accuracy_loader(test_dataLoader, num_batches=10)
+
+            print(f'Supervised Fine-Tuned Model for {epochs} epochs:')
+            print(f"Training accuracy: {train_accuracy*100:.2f}%")
+            print(f"Validation accuracy: {val_accuracy*100:.2f}%")
+            print(f"Test accuracy: {test_accuracy*100:.2f}%")
+
+            logger.info(f"Training accuracy: {train_accuracy*100:.2f}%")
+            logger.info(f"Validation accuracy: {val_accuracy*100:.2f}%")
+            logger.info(f"Test accuracy: {test_accuracy*100:.2f}%")
+
+        except Exception as e:
+            logger.error(f'Error in model evaluation stage : {e}')
+            raise Exception(f'Error in model evaluation stage : {e}')
+
+
+
+
+                
+
+
+
+
+                
         
 
 

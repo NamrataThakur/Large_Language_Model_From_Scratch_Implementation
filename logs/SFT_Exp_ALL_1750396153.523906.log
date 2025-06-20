@@ -1,0 +1,36 @@
+[2025-06-20 10:39:13,523.523] Namespace(experiment_name='SFT_Exp_ALL', base_modelName='gpt2_124M', data_path='sms_spam_collection.zip', training_type='SFT', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.7, val_split=0.1, context_length=1024, max_new_tokens=100, temp=2, top_k=3, trainable_layers='last_block', num_epochs=5, max_training_length='longest_training_example')
+[2025-06-20 10:39:14,684.684] Configuration of the gpt2_124M base model loaded..!
+[2025-06-20 10:39:14,684.684] Extention detected for the training file is "zip".
+[2025-06-20 10:39:14,684.684] Unzipping the file
+[2025-06-20 10:39:14,702.702] File unzipped and saved at: data\sms_spam_collection\SMSSpamCollection.tsv
+[2025-06-20 10:39:14,725.725] Total records present in the training file: (5572, 2)
+[2025-06-20 10:39:14,729.729] After balancing : (1494, 2)
+[2025-06-20 10:39:14,733.733] Training, Validation and Test Data created from the training file. Train data: (1045, 2), Val Data: (149, 2), Test Data: (300, 2)
+[2025-06-20 10:39:14,733.733] ---------------------------------------------------------
+[2025-06-20 10:39:14,733.733] Loading the dataset class for supervised classification fine-tuning task...
+[2025-06-20 10:39:14,772.772] ************** TRAIN DATALOADER ****************************
+[2025-06-20 10:39:14,772.772] Length of Train Dataloader (number of batches): 130
+[2025-06-20 10:39:14,774.774] torch.Size([8, 120]), torch.Size([8])
+[2025-06-20 10:39:14,792.792] ************** VAL DATALOADER ****************************
+[2025-06-20 10:39:14,792.792] Length of Val Dataloader (number of batches): 18
+[2025-06-20 10:39:14,792.792] torch.Size([8, 120]), torch.Size([8])
+[2025-06-20 10:39:14,792.792] ************** TEST DATALOADER ****************************
+[2025-06-20 10:39:14,792.792] Length of Test Dataloader (number of batches): 37
+[2025-06-20 10:39:14,792.792] torch.Size([8, 120]), torch.Size([8])
+[2025-06-20 10:39:14,792.792] Dataloaders created successfully for classification fine-tuning task..!
+[2025-06-20 10:39:14,792.792] ---------------------------------------------------------
+[2025-06-20 10:39:14,792.792] Loading the weights of the base model : gpt2_124M..!
+[2025-06-20 10:39:14,792.792] Model present in the path: model/gpt2
+[2025-06-20 10:39:22,893.893] Model weights loaded successfully..!
+[2025-06-20 10:39:29,441.441] Generating a text :: 
+Once upon a time, I would say that the only thing that was missing from my life was a sense of humor and an ability to laugh.I had never been a comedian, and I had always been a comedian, but I was always a little nervous. I was just trying to make it through my first few weeks of college and I didn't know if it was going to last.But then, after a year of being a comedian I started getting into it, so it wasn't long before I
+[2025-06-20 10:39:29,441.441] Training the full model as no paramater efficient mechanisms are given..!
+[2025-06-20 10:39:29,441.441] Training Stage : Frozen the original paramters of the model..!
+[2025-06-20 10:39:29,441.441] Training Stage : Unfreezing the weights of last block of the model for fine-tuning..!
+[2025-06-20 10:39:30,686.686] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-06-20 10:39:30,782.782] Training Stage : Fine-tuning of the model started ..!
+[2025-06-20 10:44:03,354.354] Training completed in 4.54 minutes.
+[2025-06-20 10:44:03,354.354] Saving the plots of the metrics tracked ..!
+[2025-06-20 10:44:23,233.233] Training accuracy: 96.25%
+[2025-06-20 10:44:23,233.233] Validation accuracy: 98.75%
+[2025-06-20 10:44:23,233.233] Test accuracy: 96.25%
