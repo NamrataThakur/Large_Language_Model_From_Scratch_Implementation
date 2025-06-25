@@ -1,7 +1,7 @@
 #Instruction Fine-Tune params:
 
 ignore_index=-100
-num_epochs=5
+num_epochs=2
 trainable_layers=None
 top_k=5
 temp=1

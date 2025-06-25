@@ -19,6 +19,7 @@ import pandas as pd
 from imblearn.over_sampling import SMOTE, ADASYN
 import math
 from tensorboardX import SummaryWriter
+import json
 import configparser
 warnings.filterwarnings("ignore")
 
@@ -71,7 +72,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--experiment_name',
         type=str,
-        default='SFT_Exp_ALL',
+        default='dummy_Exp',
         help=('name of the experiment and its corresponding log file')
     )
 
@@ -86,7 +87,7 @@ if __name__ == '__main__':
         '--data_path',
         type=str,
         default='sms_spam_collection.zip',
-        help=('The name of the training data file. This file is present under the folder "data". Extension accepted: .txt, .csv, .tsv, .zip ')
+        help=('The name of the training data file. This file is present under the folder "data". Extension accepted: .txt, .csv, .tsv, .zip, .json ')
     )
 
     parser.add_argument(
@@ -124,7 +125,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--model_name',
         type=str,
-        default='gpt2_SFT_Spam',
+        default='gpt2',
         help=('name of the trained model to be saved. ')
     )
 
@@ -181,7 +182,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--temp',
         type=int,
-        default=2,
+        default=0,
         help=('Temperature for generation. Options: 0 - 2, Closer to 0, more deterministic generation, closer to 2, more creative generation.')
     )
 
@@ -195,8 +196,8 @@ if __name__ == '__main__':
     parser.add_argument(
         "--trainable_layers",
         type=str,
-        default="last_block",
-        help=("Which layers to train. Options: 'all', 'last_block', 'last_two_blocks'.")
+        default="None",
+        help=("Which layers to train. Used for SFT (primarily). Options: 'all', 'last_block', 'last_two_blocks', 'None'.")
     )
 
     parser.add_argument(
@@ -211,6 +212,29 @@ if __name__ == '__main__':
         type=str,
         default="longest_training_example",
         help=("The context length of the data inputs. Options: longest_training_example, model_context_size or custom integer.")
+    )
+
+    parser.add_argument(
+        "--prompt_style",
+        type=str,
+        default="alpaca",
+        help=("The prompty style used for instruction fine-tune and preference fine-tune process. Options: alpaca, phi3")
+    )
+
+    parser.add_argument(
+        "--ignore_index",
+        type=int,
+        default=-100,
+        help=("The value used for masking the padding tokens in the input and target tensors so that those indices are not used during loss calc. "
+                                            "Options: -100 (preferred), " \
+                                            "custom integer (not recommended)")
+    )
+
+    parser.add_argument(
+        "--mask_instruction",
+        type=bool,
+        default=False,
+        help=("Whether to mask the instruction tokens or not in the target tensor. Used for IFT, PFT. Options: True , False")
     )
     
 
@@ -278,39 +302,39 @@ if __name__ == '__main__':
                 print('Total characters present in the training file: ', len(data))
                 logger.info(f'Total characters present in the training file: {len(data)}')
 
-                #Create the train, val, test files:
-                train_df, val_df, test_df = dataset_split(data=data, train_split=args.train_split, val_split=args.val_split, 
-                                                          classify=False)
-                logger.info(f'Training, Validation and Test Data created from the training file. Train data: {len(train_df)}, Val Data: {len(val_df)}, Test Data: {len(test_df)}')
-                logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))}, Val data tokens: {len(tokenizer.encode(val_df))}, Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
+            #Create the train, val, test files:
+            train_df, val_df, test_df = dataset_split(data=data, train_split=args.train_split, val_split=args.val_split, 
+                                                        classify=False)
+            logger.info(f'Training, Validation and Test Data created from the training file. Train data: {len(train_df)}, Val Data: {len(val_df)}, Test Data: {len(test_df)}')
+            logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))}, Val data tokens: {len(tokenizer.encode(val_df))}, Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
 
-                # Sanity check
-                if len(tokenizer.encode(train_df))  < gpt2_config["context_length"]:
-                    logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))} and model context length : {gpt2_config["context_length"]}')
-                    logger.error("Not enough tokens for the training loader. "
-                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                        "increase the `train_split`")
-                    raise ValueError("Not enough tokens for the training loader. "
-                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                        "increase the `train_split`")
-                    
-                if len(tokenizer.encode(val_df))  < gpt2_config["context_length"]:
-                    logger.info(f'Val data tokens: {len(tokenizer.encode(val_df))} and model context length : {gpt2_config["context_length"]}')
-                    logger.error("Not enough tokens for the validation loader. "
-                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                        "increase the `val_split`")
-                    raise ValueError("Not enough tokens for the validation loader. "
-                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                        "increase the `val_split`")
-                    
-                if len(tokenizer.encode(test_df))  < gpt2_config["context_length"]:
-                    logger.info(f'Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
-                    logger.error("Not enough tokens for the validation loader. "
-                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                        "decrease the `val_split`")
-                    raise ValueError("Not enough tokens for the validation loader. "
-                        "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                        "decrease the `val_split`")
+            # Sanity check
+            if len(tokenizer.encode(train_df))  < gpt2_config["context_length"]:
+                logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))} and model context length : {gpt2_config["context_length"]}')
+                logger.error("Not enough tokens for the training loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `train_split`")
+                raise ValueError("Not enough tokens for the training loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `train_split`")
+                
+            if len(tokenizer.encode(val_df))  < gpt2_config["context_length"]:
+                logger.info(f'Val data tokens: {len(tokenizer.encode(val_df))} and model context length : {gpt2_config["context_length"]}')
+                logger.error("Not enough tokens for the validation loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `val_split`")
+                raise ValueError("Not enough tokens for the validation loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `val_split`")
+                
+            if len(tokenizer.encode(test_df))  < gpt2_config["context_length"]:
+                logger.info(f'Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
+                logger.error("Not enough tokens for the test loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "decrease the `val_split`")
+                raise ValueError("Not enough tokens for the test loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "decrease the `val_split`")
 
         
         elif extension == 'csv':
@@ -321,7 +345,7 @@ if __name__ == '__main__':
             #Create the train.csv, val.csv, test.csv
 
         
-        else:
+        elif extension == 'zip':
             
             print("Unzipping the file")
             logging.info('Unzipping the file')
@@ -366,6 +390,51 @@ if __name__ == '__main__':
             train_df, val_df, test_df = dataset_split(data=balanced_df, train_split=args.train_split, val_split=args.val_split, 
                                                         classify=True)
             logger.info(f'Training, Validation and Test Data created from the training file. Train data: {train_df.shape}, Val Data: {val_df.shape}, Test Data: {test_df.shape}')
+        
+        else:
+
+            print('Reading for .json files..!')
+            logger.info('Reading for .json files..!')
+            with open(data_path, 'r', encoding='utf-8') as file:
+                data = json.read()
+            
+            logger.info("Number of entries :", len(data))
+            logger.info('Example of data for Instruct Fine-Tune :: \n',data[1000])
+
+            #Create the train, val, test files:
+            train_df, val_df, test_df = dataset_split(data=data, train_split=args.train_split, val_split=args.val_split, 
+                                                        classify=False)
+            
+            logger.info(f'Training, Validation and Test Data created from the training file. Train data: {len(train_df)}, Val Data: {len(val_df)}, Test Data: {len(test_df)}')
+            logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))}, Val data tokens: {len(tokenizer.encode(val_df))}, Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
+            
+            # Sanity check
+            if len(tokenizer.encode(train_df))  < gpt2_config["context_length"]:
+                logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))} and model context length : {gpt2_config["context_length"]}')
+                logger.error("Not enough tokens for the training loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `train_split`")
+                raise ValueError("Not enough tokens for the training loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `train_split`")
+                
+            if len(tokenizer.encode(val_df))  < gpt2_config["context_length"]:
+                logger.info(f'Val data tokens: {len(tokenizer.encode(val_df))} and model context length : {gpt2_config["context_length"]}')
+                logger.error("Not enough tokens for the validation loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `val_split`")
+                raise ValueError("Not enough tokens for the validation loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "increase the `val_split`")
+                
+            if len(tokenizer.encode(test_df))  < gpt2_config["context_length"]:
+                logger.info(f'Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
+                logger.error("Not enough tokens for the test loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "decrease the `val_split`")
+                raise ValueError("Not enough tokens for the test loader. "
+                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
+                    "decrease the `val_split`")
 
         
         #Prepare the dataloaders:
@@ -483,6 +552,75 @@ if __name__ == '__main__':
 
         elif args.training_type == 'IFT':
             logger.info("Loading the dataset class for instruction fine-tuning task...")
+
+            if args.max_training_length == "longest_training_example":
+                max_seq_length = None
+            
+            elif args.max_training_length == 'model_context_length':
+                max_seq_length = gpt2_config['context_length']
+
+            else:
+                max_seq_length = int(args.max_training_length)
+
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            print('Device Available: ', device)
+
+            train_dataLoader = GPTCustomInstructDataloader(train_df, device=device, max_seq_length=max_seq_length, batch_size=args.batch_size,
+                                                           tokenizer = args.tokenizer,prompt_style=args.prompt_style,  ignore_index = args.ignore_index, 
+                                                           shuffle=True, drop_last=True,num_workers=0, mask_instruction = args.mask_instruction
+                                                           )
+            
+
+            val_dataLoader = GPTCustomInstructDataloader(val_df, device=device, max_seq_length=max_seq_length, batch_size=args.batch_size,
+                                                           tokenizer = args.tokenizer,prompt_style=args.prompt_style, ignore_index = args.ignore_index, 
+                                                           shuffle=True, drop_last=True,num_workers=0, mask_instruction = args.mask_instruction
+                                                           )
+            
+
+            test_dataLoader = GPTCustomInstructDataloader(test_df, device=device, max_seq_length=max_seq_length, batch_size=args.batch_size,
+                                                           tokenizer = args.tokenizer,prompt_style=args.prompt_style, ignore_index = args.ignore_index, 
+                                                           shuffle=True, drop_last=True,num_workers=0, mask_instruction = args.mask_instruction
+                                                           )
+            
+
+            #Print the dataloader contents to confirm correct format:
+            logger.info('************** TRAIN DATALOADER ****************************')
+            logger.info(f'Length of Train Dataloader (number of batches): {len(train_dataLoader)}')
+
+            i=0
+            for x,y in train_dataLoader:
+                logger.info(f'{x.shape}, {y.shape}')
+                if i > 3:
+                    break
+                else:
+                    i = i + 1
+                
+
+            logger.info('************** VAL DATALOADER ****************************')
+            logger.info(f'Length of Val Dataloader (number of batches): {len(val_dataLoader)}')
+            i=0
+            for x,y in val_dataLoader:
+                logger.info(f'{x.shape}, {y.shape}')
+                if i > 3:
+                    break
+                else:
+                    i = i + 1
+
+            logger.info('************** TEST DATALOADER ****************************')
+            logger.info(f'Length of Test Dataloader (number of batches): {len(test_dataLoader)}')
+            i=0
+            for x,y in test_dataLoader:
+                logger.info(f'{x.shape}, {y.shape}')
+                if i > 3:
+                    break
+                else:
+                    i = i + 1
+                
+                
+            logger.info('Dataloaders created successfully for pre-training task..!')
+            logger.info('---------------------------------------------------------')
+
+
         else:
             logger.info("Loading the class for preference fine-tuning task...")
 
@@ -617,7 +755,8 @@ if __name__ == '__main__':
                                 num_epochs=epochs,
                                 eval_batchSize=5, 
                                 eval_freq=50,
-                                device=device)
+                                device=device,
+                                log_path=logging_path)
 
             train_losses, test_losses, train_accuracy, val_accuracy, num_samples = gpt2_trainer.train()
 
@@ -669,7 +808,10 @@ if __name__ == '__main__':
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
             raise Exception(f'Error in model evaluation stage : {e}')
+        
+    elif args.training_type == 'IFT':
 
+        logger.info(f'Instruction Fine-tuning the base model: {args.base_modelName} ..!')
 
 
 

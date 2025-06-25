@@ -7,18 +7,20 @@ from functools import partial
 
 
 #Create the custom dataloader function that will call the GPTCustomInstructionDataset class to create the dataset from the given text:
-def GPTCustomInstructDataloader(data_file, device, pad_token = None, max_seq_length = None, batch_size=8, prompt_style = 'alpaca', 
-                        shuffle=True, drop_last=True,num_workers=0, mask_instruction = False):
+def GPTCustomInstructDataloader(data_file, device, pad_token = None, max_seq_length = None, batch_size=8, prompt_style = 'alpaca', tokenizer = 'tiktoken', 
+                                ignore_index = -100, 
+                                shuffle=True, drop_last=True,num_workers=0, mask_instruction = False):
     
     #Initializer the tokenizer
-    tokenizer = tiktoken.get_encoding('gpt2')
+    if tokenizer == 'tiktoken':
+        tokenizer = tiktoken.get_encoding("gpt2")
 
     #Get the last token id of the tokenizer selected:
     if pad_token is None:
         pad_token = tokenizer.encode('<|endoftext|>', allowed_special='all')[0]
 
     torch.manual_seed(123)
-    c_collate_instruct = partial(custom_collate_instruct, device=device, pad_token = pad_token, 
+    c_collate_instruct = partial(custom_collate_instruct, device=device, pad_token = pad_token, ignore_index = ignore_index, 
                                  max_seq_length=max_seq_length, mask_instruction=mask_instruction )
 
     #Create the dataset with the tokenizer and the input file:
@@ -51,8 +53,9 @@ def custom_collate_instruct(batch, pad_token = 50256, ignore_index = -100, devic
         if idx.numel() > 1:
             targets[idx[1:]] = ignore_index
 
+        #Target is already inputs shifted by 1, so we need to reduce the instruction_length by 1 too:
         if mask_instruction:
-            targets[:instruction_length] = ignore_index
+            targets[:instruction_length - 1] = ignore_index
 
         if max_seq_length is not None:
             inputs = inputs[:max_seq_length]
