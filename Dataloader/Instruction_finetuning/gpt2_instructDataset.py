@@ -1,6 +1,6 @@
 import torch
 from torch.utils.data import Dataset, DataLoader
-from gpt2_instructDataFormat import format_input_response
+from .gpt2_instructDataFormat import format_input_response
 
 class GPTCustomInstructionDataset(Dataset):
     def __init__(self, input_data, tokenizer, prompt_style):

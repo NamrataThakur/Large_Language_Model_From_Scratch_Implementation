@@ -1,7 +1,7 @@
 from torch.utils.data import DataLoader
 import tiktoken
 import torch
-from gpt2_instructDataset import GPTCustomInstructionDataset
+from .gpt2_instructDataset import GPTCustomInstructionDataset
 from functools import partial
 
 
@@ -18,7 +18,8 @@ def GPTCustomInstructDataloader(data_file, device, pad_token = None, max_seq_len
         pad_token = tokenizer.encode('<|endoftext|>', allowed_special='all')[0]
 
     torch.manual_seed(123)
-    c_collate_instruct = partial(custom_collate_instruct, device=device, max_seq_length=max_seq_length, mask_instruction=mask_instruction )
+    c_collate_instruct = partial(custom_collate_instruct, device=device, pad_token = pad_token, 
+                                 max_seq_length=max_seq_length, mask_instruction=mask_instruction )
 
     #Create the dataset with the tokenizer and the input file:
     dataset = GPTCustomInstructionDataset(input_data = data_file, tokenizer=tokenizer, prompt_style=prompt_style)

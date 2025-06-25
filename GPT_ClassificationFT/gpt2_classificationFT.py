@@ -6,7 +6,7 @@ from gpt_Pretraining.metrics import Metrics
 
 class GPT2_ClassificationFineTune:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,
-                 num_epochs, eval_batchSize, eval_freq):
+                 num_epochs, eval_batchSize, eval_freq, log_path):
 
         self.model = model
         self.optimizer = optimizer
@@ -17,6 +17,7 @@ class GPT2_ClassificationFineTune:
         self.eval_batchSize = eval_batchSize
         self.eval_freq = eval_freq
 
+        self.log_path = log_path
         self.metrics = Metrics(self.model, self.device)
 
     def evaluate_model(self):
@@ -38,6 +39,9 @@ class GPT2_ClassificationFineTune:
 
         num_samples, global_step = 0, -1
 
+        #Open the log file present in the log_path:
+        
+
         for ep in range(self.num_epochs):
 
             self.model.train()
@@ -57,6 +61,8 @@ class GPT2_ClassificationFineTune:
                     train_losses.append(train_loss)
                     test_losses.append(test_loss)
                     print(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Test Loss: {test_loss:.3f}')
+
+                    #Append/Write the logs in the log file:
                     
             #Calculate avergae accuracy for each epoch:
             train_accu = self.metrics.accuracy_loader(self.train_loader)
@@ -66,6 +72,8 @@ class GPT2_ClassificationFineTune:
 
             train_accuracy.append(train_accu)
             val_accuracy.append(val_accu)
+
+        #Close the log file:
             
         return train_losses, test_losses, train_accuracy, val_accuracy, num_samples
 
