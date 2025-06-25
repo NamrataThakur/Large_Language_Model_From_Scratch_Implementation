@@ -1,4 +1,6 @@
 #Instruction Fine-Tune params:
+#If you have to any any variable with None value, then skip that variable in the script below. 
+#The Default value will be used in that case. Else None will go as 'None' and error will rise in the code.
 
 ignore_index=-100
 num_epochs=2
@@ -20,9 +22,7 @@ python gpt_trainingPipeline.py \
   --base_modelName 'gpt2_355M' \
   --data_path 'instruction-data-NT.json' \
   --training_type 'IFT' \
-  --peft_type $peft_type \
   --load_weights $load_weights \
-  --pre_save_model $pre_save_model \
   --model_name 'gpt2_355M_instruct_FineTuned' \
   --tokenizer 'tiktoken' \
   --seed $seed \
@@ -33,7 +33,6 @@ python gpt_trainingPipeline.py \
   --max_new_tokens $max_new_tokens \
   --temp $temp \
   --top_k $top_k \
-  --trainable_layers $trainable_layers \
   --num_epochs $num_epochs \
   --max_training_length 'longest_training_example' \
   --prompt_style 'alpaca' \

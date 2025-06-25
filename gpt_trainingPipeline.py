@@ -396,46 +396,17 @@ if __name__ == '__main__':
             print('Reading for .json files..!')
             logger.info('Reading for .json files..!')
             with open(data_path, 'r', encoding='utf-8') as file:
-                data = json.read()
+                data = json.load(file)
             
-            logger.info("Number of entries :", len(data))
-            logger.info('Example of data for Instruct Fine-Tune :: \n',data[1000])
+            logger.info(f"Number of entries : {len(data)}. ")
+            logger.info(f"Example of data for Instruct Fine-Tune :: \n {data[1000]}")
 
             #Create the train, val, test files:
             train_df, val_df, test_df = dataset_split(data=data, train_split=args.train_split, val_split=args.val_split, 
                                                         classify=False)
-            
             logger.info(f'Training, Validation and Test Data created from the training file. Train data: {len(train_df)}, Val Data: {len(val_df)}, Test Data: {len(test_df)}')
-            logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))}, Val data tokens: {len(tokenizer.encode(val_df))}, Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
-            
-            # Sanity check
-            if len(tokenizer.encode(train_df))  < gpt2_config["context_length"]:
-                logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))} and model context length : {gpt2_config["context_length"]}')
-                logger.error("Not enough tokens for the training loader. "
-                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                    "increase the `train_split`")
-                raise ValueError("Not enough tokens for the training loader. "
-                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                    "increase the `train_split`")
-                
-            if len(tokenizer.encode(val_df))  < gpt2_config["context_length"]:
-                logger.info(f'Val data tokens: {len(tokenizer.encode(val_df))} and model context length : {gpt2_config["context_length"]}')
-                logger.error("Not enough tokens for the validation loader. "
-                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                    "increase the `val_split`")
-                raise ValueError("Not enough tokens for the validation loader. "
-                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                    "increase the `val_split`")
-                
-            if len(tokenizer.encode(test_df))  < gpt2_config["context_length"]:
-                logger.info(f'Test data tokens: {len(tokenizer.encode(test_df))} and model context length : {gpt2_config["context_length"]}')
-                logger.error("Not enough tokens for the test loader. "
-                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                    "decrease the `val_split`")
-                raise ValueError("Not enough tokens for the test loader. "
-                    "Try to lower the `GPT_CONFIG_124M['context_length']` or "
-                    "decrease the `val_split`")
-
+            # logger.info(f'Train data tokens: {len(tokenizer.encode(train_df))}, Val data tokens: {len(tokenizer.encode(val_df))}, Test data tokens: {len(tokenizer.encode(test_df))} '
+            #             f'and model context length : {gpt2_config["context_length"]}')
         
         #Prepare the dataloaders:
         if args.training_type == 'pre-train':
@@ -617,7 +588,7 @@ if __name__ == '__main__':
                     i = i + 1
                 
                 
-            logger.info('Dataloaders created successfully for pre-training task..!')
+            logger.info('Dataloaders created successfully for fine-tuning task..!')
             logger.info('---------------------------------------------------------')
 
 
