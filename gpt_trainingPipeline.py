@@ -587,7 +587,6 @@ if __name__ == '__main__':
                 else:
                     i = i + 1
                 
-                
             logger.info('Dataloaders created successfully for fine-tuning task..!')
             logger.info('---------------------------------------------------------')
 
@@ -783,6 +782,83 @@ if __name__ == '__main__':
     elif args.training_type == 'IFT':
 
         logger.info(f'Instruction Fine-tuning the base model: {args.base_modelName} ..!')
+
+        if args.peft_type is None:
+
+            logger.info(f'Training the full model as no paramater efficient mechanisms are given..!')
+
+        elif args.peft_type == 'lora':
+            logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+        else:
+            logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!') 
+
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print('Device Available: ', device)
+
+        try:
+            gpt2_baseInst.to(device)
+            logger.info(f'Training Stage : Model sent to {device} for fine-tuning..!')
+
+            i, start_context = format_input_response(val_df[0], prompt_style = args.prompt_style, inference=True) 
+
+            start_time = time.time()
+            torch.manual_seed(args.seed)
+
+            logger.info(f'Training Stage : Fine-tuning of the model started ..!')
+
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=0.00005, weight_decay=0.1)
+
+            epochs = args.num_epochs
+
+            gpt2_trainer = GPT2_PreTrain(model=gpt2_baseInst, 
+                                optimizer=optimizer,
+                                train_dataLoader=train_dataLoader,
+                                test_dataLoader=val_dataLoader,
+                                num_epochs=epochs,
+                                eval_batchSize=5, 
+                                eval_freq=5,
+                                device=device,
+                                start_context=start_context,
+                                max_new_tokens=args.max_new_tokens,
+                                log_path=logging_path)
+
+            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(args.temp, args.top_k,  eos_id = None)
+
+            end_time = time.time()
+            execution_time_minutes = (end_time - start_time) / 60
+            print(f"Training completed in {execution_time_minutes:.2f} minutes.")
+            logger.info(f"Training completed in {execution_time_minutes:.2f} minutes.")
+
+            #Save the IFT Model:
+            save_model_name = args.model_name + '.pth'
+
+            save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
+            torch.save(gpt2_baseInst.state_dict(), save_model_path)
+            logger.info(f"Instruction Fine-Tuned (IFT) model saved in {save_model_path}..!")
+        
+        except Exception as e:
+            logger.error(f'Error in fine-tuning stage : {e}')
+            raise Exception(f'Error in fine-tuning stage : {e}')
+        
+
+        try:
+            logger.info(f'Saving the plots of the metrics tracked ..!')
+            epochs_tensor = torch.linspace(0, epochs, len(train_losses))
+            plt = Plots(track_tokens_seen, epochs_tensor, train_losses, test_losses)
+            plt.plots('Loss', 'instruct_FineTune')
+
+            logger.info(f'Saving the model response for the test dataset ..!')
+            generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
+            test_data_response = save_model_response(test_df, generate) #Send temp, max_new_token, eos_id
+
+            response_save_path = os.path.join(DATA_FOLDER, args.model_name+'_testdata_response.json')
+            with open(response_save_path, "w") as file:
+                json.dump(test_data_response, file, indent=4)
+
+        except Exception as e:
+            logger.error(f'Error in model evaluation stage : {e}')
+            raise Exception(f'Error in model evaluation stage : {e}')
+        
 
 
 

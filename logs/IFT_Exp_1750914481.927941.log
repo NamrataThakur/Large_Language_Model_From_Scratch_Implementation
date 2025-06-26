@@ -1,0 +1,134 @@
+[2025-06-26 10:38:01,927.927] Namespace(experiment_name='IFT_Exp', base_modelName='gpt2_355M', data_path='instruction-data-NT.json', training_type='IFT', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2_355M_instruct_FineTuned', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.85, val_split=0.05, context_length=1024, max_new_tokens=100, temp=1, top_k=5, trainable_layers='None', num_epochs=2, max_training_length='longest_training_example', prompt_style='alpaca', ignore_index=-100, mask_instruction=True)
+[2025-06-26 10:38:05,719.719] Configuration of the gpt2_355M base model loaded..!
+[2025-06-26 10:38:05,719.719] Extention detected for the training file is "json".
+[2025-06-26 10:38:05,727.727] Reading for .json files..!
+[2025-06-26 10:38:05,727.727] Number of entries : 1100. 
+[2025-06-26 10:38:05,727.727] Example of data for Instruct Fine-Tune :: 
+ {'instruction': 'Name three forms of water.', 'input': '', 'output': 'The three forms of water are solid (ice), liquid (water), and gas (steam).'}
+[2025-06-26 10:38:05,735.735] Training, Validation and Test Data created from the training file. Train data: 935, Val Data: 55, Test Data: 110
+[2025-06-26 10:38:05,735.735] Loading the dataset class for instruction fine-tuning task...
+[2025-06-26 10:38:06,945.945] ************** TRAIN DATALOADER ****************************
+[2025-06-26 10:38:06,945.945] Length of Train Dataloader (number of batches): 116
+[2025-06-26 10:38:07,572.572] torch.Size([8, 62]), torch.Size([8, 62])
+[2025-06-26 10:38:07,573.573] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-06-26 10:38:07,581.581] torch.Size([8, 74]), torch.Size([8, 74])
+[2025-06-26 10:38:07,581.581] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-06-26 10:38:07,590.590] torch.Size([8, 66]), torch.Size([8, 66])
+[2025-06-26 10:38:07,590.590] ************** VAL DATALOADER ****************************
+[2025-06-26 10:38:07,590.590] Length of Val Dataloader (number of batches): 6
+[2025-06-26 10:38:07,590.590] torch.Size([8, 63]), torch.Size([8, 63])
+[2025-06-26 10:38:07,598.598] torch.Size([8, 84]), torch.Size([8, 84])
+[2025-06-26 10:38:07,605.605] torch.Size([8, 59]), torch.Size([8, 59])
+[2025-06-26 10:38:07,610.610] torch.Size([8, 70]), torch.Size([8, 70])
+[2025-06-26 10:38:07,614.614] torch.Size([8, 67]), torch.Size([8, 67])
+[2025-06-26 10:38:07,614.614] ************** TEST DATALOADER ****************************
+[2025-06-26 10:38:07,614.614] Length of Test Dataloader (number of batches): 13
+[2025-06-26 10:38:07,614.614] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-06-26 10:38:07,624.624] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-06-26 10:38:07,624.624] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-06-26 10:38:07,631.631] torch.Size([8, 65]), torch.Size([8, 65])
+[2025-06-26 10:38:07,631.631] torch.Size([8, 73]), torch.Size([8, 73])
+[2025-06-26 10:38:07,631.631] Dataloaders created successfully for fine-tuning task..!
+[2025-06-26 10:38:07,631.631] ---------------------------------------------------------
+[2025-06-26 10:38:07,631.631] Loading the weights of the base model : gpt2_355M..!
+[2025-06-26 10:38:07,631.631] Model present in the path: model/gpt2
+[2025-06-26 10:38:18,955.955] Model weights loaded successfully..!
+[2025-06-26 10:38:48,252.252] Generating a text :: 
+Once upon a time, there were two things in the world. One was the earth, and another was the sun. The earth was the center of the universe, and the sun was its center. The moon was a reflection of the sun, but its light could not reach the earth, and it remained a shadow on the horizon. The sun, however, could not be seen from outside because its light could not reach it. The earth, then, was an invisible sphere, and the sun and moon, as the center
+[2025-06-26 10:38:48,252.252] Instruction Fine-tuning the base model: gpt2_355M ..!
+[2025-06-26 10:38:48,252.252] Training the full model as no paramater efficient mechanisms are given..!
+[2025-06-26 10:38:49,357.357] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-06-26 10:38:49,382.382] Training Stage : Fine-tuning of the model started ..!
+[2025-06-26 11:14:28,899.899] Training completed in 35.66 minutes.
+[2025-06-26 11:14:33,175.175] Instruction Fine-Tuned (IFT) model saved in model/gpt2_355M_instruct_FineTuned.pth..!
+[2025-06-26 11:14:33,176.176] Saving the plots of the metrics tracked ..!
+[2025-06-26 11:14:39,726.726] Saving the model response for the test dataset ..!
+t Loss: 0.840
+Total Tokens seen till now: 9080
+Epoch No: 1, Step: 000020, Train Loss: 0.658, Test Loss: 0.792
+Total Tokens seen till now: 12056
+Epoch No: 1, Step: 000025, Train Loss: 0.680, Test Loss: 0.806
+Total Tokens seen till now: 14736
+Epoch No: 1, Step: 000030, Train Loss: 0.735, Test Loss: 0.762
+Total Tokens seen till now: 17432
+Epoch No: 1, Step: 000035, Train Loss: 0.741, Test Loss: 0.749
+Total Tokens seen till now: 20304
+Epoch No: 1, Step: 000040, Train Loss: 0.617, Test Loss: 0.875
+Total Tokens seen till now: 23032
+Epoch No: 1, Step: 000045, Train Loss: 0.677, Test Loss: 0.731
+Total Tokens seen till now: 26272
+Epoch No: 1, Step: 000050, Train Loss: 0.590, Test Loss: 0.827
+Total Tokens seen till now: 29104
+Epoch No: 1, Step: 000055, Train Loss: 0.564, Test Loss: 0.732
+Total Tokens seen till now: 31944
+Epoch No: 1, Step: 000060, Train Loss: 0.592, Test Loss: 0.774
+Total Tokens seen till now: 34688
+Epoch No: 1, Step: 000065, Train Loss: 0.631, Test Loss: 0.837
+Total Tokens seen till now: 37336
+Epoch No: 1, Step: 000070, Train Loss: 0.475, Test Loss: 0.791
+Total Tokens seen till now: 40232
+Epoch No: 1, Step: 000075, Train Loss: 0.522, Test Loss: 0.825
+Total Tokens seen till now: 42928
+Epoch No: 1, Step: 000080, Train Loss: 0.617, Test Loss: 0.894
+Total Tokens seen till now: 45568
+Epoch No: 1, Step: 000085, Train Loss: 0.525, Test Loss: 0.682
+Total Tokens seen till now: 48256
+Epoch No: 1, Step: 000090, Train Loss: 0.428, Test Loss: 0.713
+Total Tokens seen till now: 51112
+Epoch No: 1, Step: 000095, Train Loss: 0.424, Test Loss: 0.835
+Total Tokens seen till now: 54168
+Epoch No: 1, Step: 000100, Train Loss: 0.494, Test Loss: 0.603
+Total Tokens seen till now: 57152
+Epoch No: 1, Step: 000105, Train Loss: 0.345, Test Loss: 0.696
+Total Tokens seen till now: 60072
+Epoch No: 1, Step: 000110, Train Loss: 0.411, Test Loss: 0.745
+Total Tokens seen till now: 62904
+Epoch No: 1, Step: 000115, Train Loss: 0.276, Test Loss: 0.681
+Total Tokens seen till now: 65760
+Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is as fast as a cheetah.<|endoftext|>A new study by a team of scientists at Harvard Medical School has identified an enzyme that helps to regulate cell growth, repair damaged tissues, and maintain cellular balance.The enzyme is called mitogen-activated protein kinase, or MAPK. It's a type of protein that is activated by light, heat, and pressure.MAPK helps to maintain cell growth, repair damage,Epoch No: 2, Step: 000120, Train Loss: 0.421, Test Loss: 0.648
+Total Tokens seen till now: 68408
+Epoch No: 2, Step: 000125, Train Loss: 0.299, Test Loss: 0.676
+Total Tokens seen till now: 71024
+Epoch No: 2, Step: 000130, Train Loss: 0.318, Test Loss: 0.806
+Total Tokens seen till now: 73760
+Epoch No: 2, Step: 000135, Train Loss: 0.322, Test Loss: 0.733
+Total Tokens seen till now: 76440
+Epoch No: 2, Step: 000140, Train Loss: 0.287, Test Loss: 0.710
+Total Tokens seen till now: 79208
+Epoch No: 2, Step: 000145, Train Loss: 0.280, Test Loss: 0.691
+Total Tokens seen till now: 81944
+Epoch No: 2, Step: 000150, Train Loss: 0.234, Test Loss: 0.663
+Total Tokens seen till now: 84728
+Epoch No: 2, Step: 000155, Train Loss: 0.344, Test Loss: 0.705
+Total Tokens seen till now: 87840
+Epoch No: 2, Step: 000160, Train Loss: 0.299, Test Loss: 0.837
+Total Tokens seen till now: 90896
+Epoch No: 2, Step: 000165, Train Loss: 0.233, Test Loss: 0.740
+Total Tokens seen till now: 93912
+Epoch No: 2, Step: 000170, Train Loss: 0.199, Test Loss: 0.792
+Total Tokens seen till now: 97024
+Epoch No: 2, Step: 000175, Train Loss: 0.178, Test Loss: 0.764
+Total Tokens seen till now: 99944
+Epoch No: 2, Step: 000180, Train Loss: 0.247, Test Loss: 0.799
+Total Tokens seen till now: 102704
+Epoch No: 2, Step: 000185, Train Loss: 0.251, Test Loss: 0.747
+Total Tokens seen till now: 105512
+Epoch No: 2, Step: 000190, Train Loss: 0.280, Test Loss: 0.745
+Total Tokens seen till now: 108192
+Epoch No: 2, Step: 000195, Train Loss: 0.273, Test Loss: 0.690
+Total Tokens seen till now: 110816
+Epoch No: 2, Step: 000200, Train Loss: 0.171, Test Loss: 0.719
+Total Tokens seen till now: 113696
+Epoch No: 2, Step: 000205, Train Loss: 0.246, Test Loss: 0.648
+Total Tokens seen till now: 116216
+Epoch No: 2, Step: 000210, Train Loss: 0.246, Test Loss: 0.714
+Total Tokens seen till now: 119048
+Epoch No: 2, Step: 000215, Train Loss: 0.130, Test Loss: 0.809
+Total Tokens seen till now: 122104
+Epoch No: 2, Step: 000220, Train Loss: 0.154, Test Loss: 0.768
+Total Tokens seen till now: 125016
+Epoch No: 2, Step: 000225, Train Loss: 0.134, Test Loss: 0.842
+Total Tokens seen till now: 127976
+Epoch No: 2, Step: 000230, Train Loss: 0.226, Test Loss: 0.761
+Total Tokens seen till now: 130760
+Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is as fast as an ox.<|endoftext|>The UESPWiki – Your source for The Elder Scrolls since 1995The Elder ScrollsThe Elder Scrolls (or ES) are a fictional region of Tamriel, located in the region of Cyrodiil.The region's capital, Riften, lies in the center of the world. It is the largest city on Tamriel.The Empire of Tamriel

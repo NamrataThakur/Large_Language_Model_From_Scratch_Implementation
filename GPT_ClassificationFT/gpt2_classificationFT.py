@@ -40,7 +40,7 @@ class GPT2_ClassificationFineTune:
         num_samples, global_step = 0, -1
 
         #Open the log file present in the log_path:
-        
+        log_file = open(self.log_path, "a")
 
         for ep in range(self.num_epochs):
 
@@ -62,7 +62,8 @@ class GPT2_ClassificationFineTune:
                     test_losses.append(test_loss)
                     print(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Test Loss: {test_loss:.3f}')
 
-                    #Append/Write the logs in the log file:
+                    #Write the epoch wise metrics in the log file:
+                    log_file.write(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Test Loss: {test_loss:.3f}\n')
                     
             #Calculate avergae accuracy for each epoch:
             train_accu = self.metrics.accuracy_loader(self.train_loader)
@@ -70,10 +71,15 @@ class GPT2_ClassificationFineTune:
             print(f"Training accuracy: {train_accu*100:.2f}%")
             print(f"Validation accuracy: {val_accu*100:.2f}%")
 
+            #Write the epoch wise metrics in the log file:
+            log_file.write(f"Training accuracy: {train_accu*100:.2f}%")
+            log_file.write(f"Validation accuracy: {val_accu*100:.2f}%")
+
             train_accuracy.append(train_accu)
             val_accuracy.append(val_accu)
 
         #Close the log file:
+        log_file.close()
             
         return train_losses, test_losses, train_accuracy, val_accuracy, num_samples
 

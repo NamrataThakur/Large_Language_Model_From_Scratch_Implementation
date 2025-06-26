@@ -20,7 +20,7 @@ def GPTCustomInstructDataloader(data_file, device, pad_token = None, max_seq_len
         pad_token = tokenizer.encode('<|endoftext|>', allowed_special='all')[0]
 
     torch.manual_seed(123)
-    c_collate_instruct = partial(custom_collate_instruct, device=device, pad_token = pad_token, ignore_index = ignore_index, 
+    c_collate_instruct = partial(custom_collate_instruct, device=device, ignore_index = ignore_index, 
                                  max_seq_length=max_seq_length, mask_instruction=mask_instruction )
 
     #Create the dataset with the tokenizer and the input file:
