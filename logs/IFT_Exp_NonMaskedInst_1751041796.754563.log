@@ -1,0 +1,139 @@
+[2025-06-27 21:59:56,754.754] Namespace(experiment_name='IFT_Exp_NonMaskedInst', base_modelName='gpt2_355M', data_path='instruction-data-NT.json', training_type='IFT', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2_355M_nonMaskedInstruct_FineTuned', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.85, val_split=0.05, context_length=1024, max_new_tokens=256, temp=0.0, dropout_rate=0.1, top_k=None, trainable_layers=None, num_epochs=2, max_training_length='longest_training_example', prompt_style='alpaca', ignore_index=-100, mask_instruction=False)
+[2025-06-27 21:59:59,654.654] Configuration of the gpt2_355M base model loaded..!
+[2025-06-27 21:59:59,661.661] Extention detected for the training file is "json".
+[2025-06-27 21:59:59,662.662] Reading for .json files..!
+[2025-06-27 21:59:59,691.691] Number of entries : 1100. 
+[2025-06-27 21:59:59,691.691] Example of data for Instruct Fine-Tune :: 
+ {'instruction': 'Name three forms of water.', 'input': '', 'output': 'The three forms of water are solid (ice), liquid (water), and gas (steam).'}
+[2025-06-27 21:59:59,716.716] Training, Validation and Test Data created from the training file. Train data: 935, Val Data: 55, Test Data: 110
+[2025-06-27 21:59:59,716.716] Loading the dataset class for instruction fine-tuning task...
+[2025-06-27 22:00:00,867.867] ************** TRAIN DATALOADER ****************************
+[2025-06-27 22:00:00,867.867] Length of Train Dataloader (number of batches): 116
+[2025-06-27 22:00:00,948.948] torch.Size([8, 62]), torch.Size([8, 62])
+[2025-06-27 22:00:00,949.949] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-06-27 22:00:00,950.950] torch.Size([8, 74]), torch.Size([8, 74])
+[2025-06-27 22:00:00,951.951] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-06-27 22:00:00,952.952] torch.Size([8, 66]), torch.Size([8, 66])
+[2025-06-27 22:00:00,952.952] ************** VAL DATALOADER ****************************
+[2025-06-27 22:00:00,952.952] Length of Val Dataloader (number of batches): 6
+[2025-06-27 22:00:00,952.952] torch.Size([8, 63]), torch.Size([8, 63])
+[2025-06-27 22:00:00,954.954] torch.Size([8, 84]), torch.Size([8, 84])
+[2025-06-27 22:00:00,955.955] torch.Size([8, 59]), torch.Size([8, 59])
+[2025-06-27 22:00:00,956.956] torch.Size([8, 70]), torch.Size([8, 70])
+[2025-06-27 22:00:00,957.957] torch.Size([8, 67]), torch.Size([8, 67])
+[2025-06-27 22:00:00,957.957] ************** TEST DATALOADER ****************************
+[2025-06-27 22:00:00,957.957] Length of Test Dataloader (number of batches): 13
+[2025-06-27 22:00:00,957.957] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-06-27 22:00:00,958.958] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-06-27 22:00:00,959.959] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-06-27 22:00:00,959.959] torch.Size([8, 65]), torch.Size([8, 65])
+[2025-06-27 22:00:00,960.960] torch.Size([8, 73]), torch.Size([8, 73])
+[2025-06-27 22:00:00,960.960] Dataloaders created successfully for fine-tuning task..!
+[2025-06-27 22:00:00,960.960] ---------------------------------------------------------
+[2025-06-27 22:00:00,960.960] Loading the weights of the base model : gpt2_355M..!
+[2025-06-27 22:00:00,962.962] Model present in the path: model/gpt2
+[2025-06-27 22:00:09,532.532] Model weights loaded successfully..!
+[2025-06-27 22:02:00,995.995] Generating a text :: 
+Once upon a time, there was a man who lived in a village called Krakow. He was a very good man, and he was very kind to his children. One day, he was walking along the road, and he saw a woman walking by. He asked her if she was his daughter. She said yes, and she said that she was his daughter. He asked her if she was his wife. She said yes, and she said that she was his wife. He asked her if she was his son. She said yes, and she said that she was his son. He asked her if she was his daughter. She said yes, and she said that she was his daughter. He asked her if she was his wife. She said yes, and she said that she was his wife. He asked her if she was his son. She said yes, and she said that she was his son. He asked her if she was his daughter. She said yes, and she said that she was his daughter. He asked her if she was his wife. She said yes, and she said that she was his wife. He asked her if she was his son. She said yes, and she said that she was his son. He asked her if she was his daughter. She
+[2025-06-27 22:02:00,995.995] Instruction Fine-tuning the base model: gpt2_355M ..!
+[2025-06-27 22:02:00,996.996] Training the full model as no paramater efficient mechanisms are given..!
+[2025-06-27 22:02:01,604.604] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-06-27 22:02:01,634.634] Training Stage : Fine-tuning of the model started ..!
+[2025-06-27 22:45:00,264.264] Training completed in 42.98 minutes.
+[2025-06-27 22:45:10,145.145] Instruction Fine-Tuned (IFT) model saved in model/gpt2_355M_nonMaskedInstruct_FineTuned.pth..!
+[2025-06-27 22:45:10,145.145] Saving the plots of the metrics tracked ..!
+[2025-06-27 22:45:27,006.006] Saving the model response for the test dataset ..!
+.949
+Total Tokens seen till now: 9080
+Epoch No: 1, Step: 000020, Train Loss: 0.809, Test Loss: 0.832
+Total Tokens seen till now: 12056
+Epoch No: 1, Step: 000025, Train Loss: 0.770, Test Loss: 0.851
+Total Tokens seen till now: 14736
+Epoch No: 1, Step: 000030, Train Loss: 0.736, Test Loss: 0.791
+Total Tokens seen till now: 17432
+Epoch No: 1, Step: 000035, Train Loss: 0.759, Test Loss: 0.745
+Total Tokens seen till now: 20304
+Epoch No: 1, Step: 000040, Train Loss: 0.683, Test Loss: 0.801
+Total Tokens seen till now: 23032
+Epoch No: 1, Step: 000045, Train Loss: 0.791, Test Loss: 0.720
+Total Tokens seen till now: 26272
+Epoch No: 1, Step: 000050, Train Loss: 0.734, Test Loss: 0.741
+Total Tokens seen till now: 29104
+Epoch No: 1, Step: 000055, Train Loss: 0.636, Test Loss: 0.721
+Total Tokens seen till now: 31944
+Epoch No: 1, Step: 000060, Train Loss: 0.692, Test Loss: 0.719
+Total Tokens seen till now: 34688
+Epoch No: 1, Step: 000065, Train Loss: 0.680, Test Loss: 0.753
+Total Tokens seen till now: 37336
+Epoch No: 1, Step: 000070, Train Loss: 0.578, Test Loss: 0.721
+Total Tokens seen till now: 40232
+Epoch No: 1, Step: 000075, Train Loss: 0.579, Test Loss: 0.746
+Total Tokens seen till now: 42928
+Epoch No: 1, Step: 000080, Train Loss: 0.700, Test Loss: 0.746
+Total Tokens seen till now: 45568
+Epoch No: 1, Step: 000085, Train Loss: 0.615, Test Loss: 0.646
+Total Tokens seen till now: 48256
+Epoch No: 1, Step: 000090, Train Loss: 0.568, Test Loss: 0.654
+Total Tokens seen till now: 51112
+Epoch No: 1, Step: 000095, Train Loss: 0.658, Test Loss: 0.736
+Total Tokens seen till now: 54168
+Epoch No: 1, Step: 000100, Train Loss: 0.582, Test Loss: 0.626
+Total Tokens seen till now: 57152
+Epoch No: 1, Step: 000105, Train Loss: 0.459, Test Loss: 0.654
+Total Tokens seen till now: 60072
+Epoch No: 1, Step: 000110, Train Loss: 0.553, Test Loss: 0.697
+Total Tokens seen till now: 62904
+Epoch No: 1, Step: 000115, Train Loss: 0.477, Test Loss: 0.651
+Total Tokens seen till now: 65760
+Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is very fast.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The cat is very lazy.### Response:The cat is as lazy as a mouse.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The cat is lazy.### Response:The cat is as lazy as a mouse.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Input: What is the chemical formula for carbon dioxide?### Response:The chemical formula for carbon dioxide is CO2.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the chemical formula for nitrogen?### Response:The chemical formula for nitrogen is N.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completesEpoch No: 2, Step: 000120, Train Loss: 0.543, Test Loss: 0.658
+Total Tokens seen till now: 68408
+Epoch No: 2, Step: 000125, Train Loss: 0.509, Test Loss: 0.650
+Total Tokens seen till now: 71024
+Epoch No: 2, Step: 000130, Train Loss: 0.503, Test Loss: 0.684
+Total Tokens seen till now: 73760
+Epoch No: 2, Step: 000135, Train Loss: 0.514, Test Loss: 0.703
+Total Tokens seen till now: 76440
+Epoch No: 2, Step: 000140, Train Loss: 0.509, Test Loss: 0.713
+Total Tokens seen till now: 79208
+Epoch No: 2, Step: 000145, Train Loss: 0.517, Test Loss: 0.678
+Total Tokens seen till now: 81944
+Epoch No: 2, Step: 000150, Train Loss: 0.423, Test Loss: 0.659
+Total Tokens seen till now: 84728
+Epoch No: 2, Step: 000155, Train Loss: 0.490, Test Loss: 0.653
+Total Tokens seen till now: 87840
+Epoch No: 2, Step: 000160, Train Loss: 0.496, Test Loss: 0.682
+Total Tokens seen till now: 90896
+Epoch No: 2, Step: 000165, Train Loss: 0.396, Test Loss: 0.679
+Total Tokens seen till now: 93912
+Epoch No: 2, Step: 000170, Train Loss: 0.481, Test Loss: 0.698
+Total Tokens seen till now: 97024
+Epoch No: 2, Step: 000175, Train Loss: 0.451, Test Loss: 0.715
+Total Tokens seen till now: 99944
+Epoch No: 2, Step: 000180, Train Loss: 0.437, Test Loss: 0.724
+Total Tokens seen till now: 102704
+Epoch No: 2, Step: 000185, Train Loss: 0.437, Test Loss: 0.703
+Total Tokens seen till now: 105512
+Epoch No: 2, Step: 000190, Train Loss: 0.433, Test Loss: 0.671
+Total Tokens seen till now: 108192
+Epoch No: 2, Step: 000195, Train Loss: 0.447, Test Loss: 0.650
+Total Tokens seen till now: 110816
+Epoch No: 2, Step: 000200, Train Loss: 0.402, Test Loss: 0.638
+Total Tokens seen till now: 113696
+Epoch No: 2, Step: 000205, Train Loss: 0.433, Test Loss: 0.635
+Total Tokens seen till now: 116216
+Epoch No: 2, Step: 000210, Train Loss: 0.400, Test Loss: 0.679
+Total Tokens seen till now: 119048
+Epoch No: 2, Step: 000215, Train Loss: 0.346, Test Loss: 0.659
+Total Tokens seen till now: 122104
+Epoch No: 2, Step: 000220, Train Loss: 0.376, Test Loss: 0.632
+Total Tokens seen till now: 125016
+Epoch No: 2, Step: 000225, Train Loss: 0.372, Test Loss: 0.679
+Total Tokens seen till now: 127976
+Epoch No: 2, Step: 000230, Train Loss: 0.417, Test Loss: 0.681
+Total Tokens seen till now: 130760
+Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is as fast as a cheetah.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the chemical formula for carbon dioxide?### Response:The chemical formula for carbon dioxide is CO2.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the chemical formula for carbon dioxide?### Response:The chemical formula for carbon dioxide is CO2.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the chemical formula for sodium chloride?### Response:The chemical formula for sodium chloride is NaCl.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the chemical formula for sodium chloride?### Response:The chemical formula for sodium chloride is NaCl.<|endoftext|>The following is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the chemical
+
+
+
+
+

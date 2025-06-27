@@ -181,22 +181,29 @@ if __name__ == '__main__':
 
     parser.add_argument(
         '--temp',
-        type=int,
-        default=0,
+        type=float,
+        default=0.0,
         help=('Temperature for generation. Options: 0 - 2, Closer to 0, more deterministic generation, closer to 2, more creative generation.')
+    )
+
+    parser.add_argument(
+        '--dropout_rate',
+        type=float,
+        default=0.0,
+        help=('Dropout rate value.')
     )
 
     parser.add_argument(
         '--top_k',
         type=int,
-        default=3,
+        default=None,
         help=('Top k tokens considered for next token prediction. Options: None (It will consider all the tokens in the final generation)')
     )
 
     parser.add_argument(
         "--trainable_layers",
         type=str,
-        default="None",
+        default=None,
         help=("Which layers to train. Used for SFT (primarily). Options: 'all', 'last_block', 'last_two_blocks', 'None'.")
     )
 
@@ -205,6 +212,13 @@ if __name__ == '__main__':
         type=int,
         default=5,
         help=("Number of training epochs.")
+    )
+
+    parser.add_argument(
+        "--eos_id",
+        type=int,
+        default=50256,
+        help=("Token id for end of string.")
     )
 
     parser.add_argument(
@@ -278,7 +292,8 @@ if __name__ == '__main__':
     #Load the model config:
     try:
         m_config = GPT2_ModelConfig()
-        gpt2_config = m_config.load_model_config(model_name=args.base_modelName, context_length=args.context_length)
+        gpt2_config = m_config.load_model_config(model_name=args.base_modelName, drop_rate=args.dropout_rate,
+                                                 context_length=args.context_length)
         gpt2_baseInst = GPT2(gpt2_config)
         gpt2_baseInst.eval()
         logger.info(f'Configuration of the {args.base_modelName} base model loaded..!')
@@ -629,7 +644,7 @@ if __name__ == '__main__':
                 #Generate a text to check if loading is successful:
                 generate = Text_Generation(model=gpt2_baseInst, device='cpu', tokenizer_model='gpt2')
                 output_text = generate.text_generation(input_text = "Once upon a time,", max_new_tokens=args.max_new_tokens, 
-                                                        temp=args.temp, top_k= args.top_k, eos_id = None)
+                                                        temp=args.temp, top_k= args.top_k, eos_id = args.eos_id)
                 logger.info(f'Generating a text :: \n{output_text}')
             
             except Exception as e:
@@ -822,7 +837,7 @@ if __name__ == '__main__':
                                 max_new_tokens=args.max_new_tokens,
                                 log_path=logging_path)
 
-            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(args.temp, args.top_k,  eos_id = None)
+            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(args.temp, args.top_k,  eos_id = args.eos_id)
 
             end_time = time.time()
             execution_time_minutes = (end_time - start_time) / 60

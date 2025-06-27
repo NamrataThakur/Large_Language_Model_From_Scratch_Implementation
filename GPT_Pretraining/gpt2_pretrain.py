@@ -73,8 +73,9 @@ class GPT2_PreTrain:
             gen_output = self.generation.text_generation(self.start_context, self.max_new_tokens, temp, top_k, eos_id)
             print(gen_output)
             log_file.write(gen_output)
-
+            
         #Close the log file:
+        log_file.write('\n\n\n\n\n\n')
         log_file.close()
         return train_losses, test_losses, track_tokens_seen
 
