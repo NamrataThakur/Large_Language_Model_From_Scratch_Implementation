@@ -41,6 +41,7 @@ class GPT2_ClassificationFineTune:
 
         #Open the log file present in the log_path:
         log_file = open(self.log_path, "a")
+        log_file.write('\n\n\n\n\n\n')
 
         for ep in range(self.num_epochs):
 

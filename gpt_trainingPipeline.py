@@ -766,12 +766,12 @@ if __name__ == '__main__':
             x = torch.linspace(0, epochs, len(train_losses))
             samples = torch.linspace(0, num_samples, len(train_losses))
             plt = Plots(samples, x, train_losses, test_losses, label = 'Loss')
-            plt.plots('Loss', 'SFT_FineTune')
+            plt.plots('Loss', args.experiment_name)
 
             x = torch.linspace(0, epochs, len(train_accuracy))
             samples = torch.linspace(0, num_samples, len(train_accuracy))
             plt = Plots(samples, x,train_accuracy, val_accuracy, label = 'Accuracy')
-            plt.plots('Accuracy', 'SFT_FineTune')
+            plt.plots('Accuracy', args.experiment_name)
 
         
             metrics = Metrics(gpt2_baseInst, device)
@@ -837,7 +837,8 @@ if __name__ == '__main__':
                                 max_new_tokens=args.max_new_tokens,
                                 log_path=logging_path)
 
-            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(args.temp, args.top_k,  eos_id = args.eos_id)
+            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(args.temp, args.top_k,  
+                                                                              eos_id = args.eos_id)
 
             end_time = time.time()
             execution_time_minutes = (end_time - start_time) / 60
@@ -860,15 +861,19 @@ if __name__ == '__main__':
             logger.info(f'Saving the plots of the metrics tracked ..!')
             epochs_tensor = torch.linspace(0, epochs, len(train_losses))
             plt = Plots(track_tokens_seen, epochs_tensor, train_losses, test_losses)
-            plt.plots('Loss', 'instruct_FineTune')
+            plt.plots('Loss', args.experiment_name)
 
             logger.info(f'Saving the model response for the test dataset ..!')
             generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
-            test_data_response = save_model_response(test_df, generate) #Send temp, max_new_token, eos_id
+            test_data_response = save_model_response(test_df, generate, 
+                                                     args.temp, args.top_k, args.eos_id, 
+                                                     args.max_new_tokens) 
 
             response_save_path = os.path.join(DATA_FOLDER, args.model_name+'_testdata_response.json')
             with open(response_save_path, "w") as file:
                 json.dump(test_data_response, file, indent=4)
+            
+            logger.info(f'Model response for the test dataset saved in {response_save_path}..!')
 
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')

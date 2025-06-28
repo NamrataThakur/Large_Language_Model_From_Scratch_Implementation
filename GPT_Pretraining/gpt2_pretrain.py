@@ -42,6 +42,7 @@ class GPT2_PreTrain:
 
         #Open the log file from the path given:
         log_file = open(self.log_path, "a")
+        log_file.write('\n\n\n\n\n\n')
 
         for ep in range(self.num_epochs):
 
@@ -75,7 +76,6 @@ class GPT2_PreTrain:
             log_file.write(gen_output)
             
         #Close the log file:
-        log_file.write('\n\n\n\n\n\n')
         log_file.close()
         return train_losses, test_losses, track_tokens_seen
 

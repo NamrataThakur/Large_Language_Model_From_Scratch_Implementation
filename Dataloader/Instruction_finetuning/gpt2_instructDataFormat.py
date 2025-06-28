@@ -1,11 +1,12 @@
 import torch
 
-def save_model_response(data, generate):
+def save_model_response(data, generate, max_new_tokens = 256, temp = 0.0, top_k=None, eos_id = 50256):
     torch.manual_seed(123)
 
     for i, row in enumerate(data):
         _, input_text = format_input_response(row, inference=True)
-        model_output = generate.text_generation(input_text = input_text, max_new_tokens=256, temp=0.0,top_k= None, eos_id=50256)
+        model_output = generate.text_generation(input_text = input_text, max_new_tokens=max_new_tokens, 
+                                                temp=temp, top_k= top_k, eos_id = eos_id)
         model_response = model_output[len(input_text):].replace("### Response:", "").replace('Response:', '').strip()
         data[i]['model_response'] = model_response
 
