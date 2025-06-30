@@ -3,7 +3,7 @@
 #The Default value will be used in that case. Else None will go as 'None' and error will rise in the code.
 
 ignore_index=-100
-num_epochs=4
+num_epochs=3
 trainable_layers=None
 #top_k=5
 temp=0.0
@@ -17,7 +17,7 @@ pre_save_model=None
 load_weights=True
 peft_type=None
 mask_instruction=False
-dropout_rate=0.1
+dropout_rate=0.0
 eos_id=50256
 python gpt_trainingPipeline.py \
   --experiment_name 'IFT_Exp_NonMaskedInst_v2' \

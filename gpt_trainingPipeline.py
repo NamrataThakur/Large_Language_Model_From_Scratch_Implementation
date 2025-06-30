@@ -251,6 +251,26 @@ if __name__ == '__main__':
         help=("Whether to mask the instruction tokens or not in the target tensor. Used for IFT, PFT. Options: True , False")
     )
     
+    parser.add_argument(
+        "--warmup_steps",
+        type=int,
+        default=20,
+        help=("Number of iterations (step) for LR to warmup.")
+    )
+
+    parser.add_argument(
+        "--initial_lr",
+        type=float,
+        default=3e-05,
+        help=("Intial LR value to start the warmup from.")
+    )
+
+    parser.add_argument(
+        "--min_lr",
+        type=float,
+        default=1e-6,
+        help=("Minimum LR value to achieve using cosine annealing (decay.)")
+    )
 
 
     args = parser.parse_args()
@@ -741,7 +761,7 @@ if __name__ == '__main__':
                                 eval_batchSize=5, 
                                 eval_freq=50,
                                 device=device,
-                                log_path=logging_path)
+                                log_path=logger) #Pass the logger object instead of logging path)
 
             train_losses, test_losses, train_accuracy, val_accuracy, num_samples = gpt2_trainer.train()
 
@@ -835,9 +855,13 @@ if __name__ == '__main__':
                                 device=device,
                                 start_context=start_context,
                                 max_new_tokens=args.max_new_tokens,
-                                log_path=logging_path)
+                                log_path=logger,                        #Pass the logger object instead of logging path
+                                warmup_steps=args.warmup_steps,
+                                initial_lr=args.initial_lr,
+                                min_lr=args.min_lr
+                                ) 
 
-            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(args.temp, args.top_k,  
+            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(temp=args.temp, top_k=args.top_k,  
                                                                               eos_id = args.eos_id)
 
             end_time = time.time()
@@ -865,9 +889,9 @@ if __name__ == '__main__':
 
             logger.info(f'Saving the model response for the test dataset ..!')
             generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
-            test_data_response = save_model_response(test_df, generate, 
-                                                     args.temp, args.top_k, args.eos_id, 
-                                                     args.max_new_tokens) 
+            test_data_response = save_model_response(data = test_df, generate = generate, 
+                                                     temp = args.temp, top_k = args.top_k, eos_id = args.eos_id, 
+                                                     max_new_tokens = args.max_new_tokens) 
 
             response_save_path = os.path.join(DATA_FOLDER, args.model_name+'_testdata_response.json')
             with open(response_save_path, "w") as file:
