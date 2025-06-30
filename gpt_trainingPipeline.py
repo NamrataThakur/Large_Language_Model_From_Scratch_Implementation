@@ -693,16 +693,21 @@ if __name__ == '__main__':
 
                 for params in gpt2_baseInst.parameters():
                     params.requires_grad = False
-                
+
                 logger.info(f'Training Stage : Frozen the original paramters of the model..!')
+
+                in_features = gpt2_config['embedding_dimension']
+                out_features = len(train_df['Label'].value_counts().index.tolist())
+
+                #Add the classification layer:
+                gpt2_baseInst.final_projection = torch.nn.Linear(in_features=in_features, out_features= out_features)
+                
+                logger.info(f'Training Stage : Added the NEW classification head..!')
 
                 if args.trainable_layers == "last_block" or args.trainable_layers == "last_two_blocks":
                     logger.info(f'Training Stage : Unfreezing the weights of last block of the model for fine-tuning..!')
 
                     torch.manual_seed(args.seed)
-
-                    in_features = gpt2_config['embedding_dimension']
-                    out_features = len(train_df['Label'].value_counts().index.tolist())
 
                     #Unfreeze the final layer normalization block parameters for fine-tuning:
                     for params in gpt2_baseInst.final_layerNorm.parameters():
@@ -825,7 +830,7 @@ if __name__ == '__main__':
             test_df['Pred_Label'] = pred_label_list
             test_df.to_csv(response_save_path, index=None)
             logger.info(f'Model response for the test dataset saved in {response_save_path}..!')
-            
+
 
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
