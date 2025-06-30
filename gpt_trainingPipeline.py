@@ -753,6 +753,10 @@ if __name__ == '__main__':
 
             epochs = args.num_epochs
 
+            #Save the SFT Model:
+            save_model_name = args.model_name + '.pth'
+            save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
+
             gpt2_trainer = GPT2_ClassificationFineTune(model=gpt2_baseInst, 
                                 optimizer=optimizer,
                                 train_dataLoader=train_dataLoader,
@@ -761,20 +765,19 @@ if __name__ == '__main__':
                                 eval_batchSize=5, 
                                 eval_freq=50,
                                 device=device,
-                                log_path=logger) #Pass the logger object instead of logging path)
+                                log_path=logger,     #Pass the logger object instead of logging path
+                                warmup_steps=args.warmup_steps,
+                                initial_lr=args.initial_lr,
+                                min_lr=args.min_lr) 
 
-            train_losses, test_losses, train_accuracy, val_accuracy, num_samples = gpt2_trainer.train()
+            train_losses, test_losses, train_accuracy, val_accuracy, num_samples, track_lr = gpt2_trainer.train(save_model_path)
 
             end_time = time.time()
             execution_time_minutes = (end_time - start_time) / 60
             print(f"Training completed in {execution_time_minutes:.2f} minutes.")
             logger.info(f"Training completed in {execution_time_minutes:.2f} minutes.")
 
-            #Save the SFT Model:
-            save_model_name = args.model_name + '.pth'
-
-            save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
-            torch.save(gpt2_baseInst.state_dict(), save_model_path)
+            #torch.save(gpt2_baseInst.state_dict(), save_model_path)
             logger.info(f"SFT Fine-Tuned model saved in {save_model_path}..!")
         
         except Exception as e:
@@ -809,6 +812,20 @@ if __name__ == '__main__':
             logger.info(f"Training accuracy: {train_accuracy*100:.2f}%")
             logger.info(f"Validation accuracy: {val_accuracy*100:.2f}%")
             logger.info(f"Test accuracy: {test_accuracy*100:.2f}%")
+
+
+            logger.info(f'Saving the model response for the test dataset ..!')
+            response_save_path = os.path.join(DATA_FOLDER, args.model_name+'_testdata_response.csv')
+            pred_label_list = []
+            generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
+            for text in test_df['Text'].values:
+                pred_label = generate.classify_text(text, max_length=train_max_length)
+                pred_label_list.append(pred_label)
+
+            test_df['Pred_Label'] = pred_label_list
+            test_df.to_csv(response_save_path, index=None)
+            logger.info(f'Model response for the test dataset saved in {response_save_path}..!')
+            
 
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
@@ -845,6 +862,10 @@ if __name__ == '__main__':
 
             epochs = args.num_epochs
 
+            #IFT Model Save Path:
+            save_model_name = args.model_name + '.pth'
+            save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
+
             gpt2_trainer = GPT2_PreTrain(model=gpt2_baseInst, 
                                 optimizer=optimizer,
                                 train_dataLoader=train_dataLoader,
@@ -861,20 +882,16 @@ if __name__ == '__main__':
                                 min_lr=args.min_lr
                                 ) 
 
-            train_losses, test_losses, track_tokens_seen = gpt2_trainer.train(temp=args.temp, top_k=args.top_k,  
+            train_losses, test_losses, track_tokens_seen, track_lr = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, top_k=args.top_k,  
                                                                               eos_id = args.eos_id)
 
             end_time = time.time()
             execution_time_minutes = (end_time - start_time) / 60
             print(f"Training completed in {execution_time_minutes:.2f} minutes.")
             logger.info(f"Training completed in {execution_time_minutes:.2f} minutes.")
-
-            #Save the IFT Model:
-            save_model_name = args.model_name + '.pth'
-
-            save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
-            torch.save(gpt2_baseInst.state_dict(), save_model_path)
-            logger.info(f"Instruction Fine-Tuned (IFT) model saved in {save_model_path}..!")
+       
+            #torch.save(gpt2_baseInst.state_dict(), save_model_path)
+            logger.info(f"BEST Instruction Fine-Tuned (IFT) model saved in {save_model_path}..!")
         
         except Exception as e:
             logger.error(f'Error in fine-tuning stage : {e}')
