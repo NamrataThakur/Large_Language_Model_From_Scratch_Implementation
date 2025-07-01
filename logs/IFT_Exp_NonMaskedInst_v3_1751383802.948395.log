@@ -1,0 +1,252 @@
+[2025-07-01 21:00:02,948.948] Namespace(experiment_name='IFT_Exp_NonMaskedInst_v3', base_modelName='gpt2_355M', data_path='instruction-data-NT.json', training_type='IFT', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2_355M_nonMaskedInstruct_FineTuned_v3', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.85, val_split=0.05, context_length=1024, max_new_tokens=256, temp=0.0, dropout_rate=0.0, top_k=None, trainable_layers=None, num_epochs=2, eos_id=50256, max_training_length='longest_training_example', prompt_style='alpaca', ignore_index=-100, mask_instruction=False, use_warmup=True, use_gradient_clip=True, warmup_steps=20, initial_lr=1e-05, min_lr=1e-05)
+[2025-07-01 21:00:06,692.692] Configuration of the gpt2_355M base model loaded..!
+[2025-07-01 21:00:06,692.692] Extention detected for the training file is "json".
+[2025-07-01 21:00:06,692.692] Reading for .json files..!
+[2025-07-01 21:00:06,715.715] Number of entries : 1100. 
+[2025-07-01 21:00:06,715.715] Example of data for Instruct Fine-Tune :: 
+ {'instruction': 'Name three forms of water.', 'input': '', 'output': 'The three forms of water are solid (ice), liquid (water), and gas (steam).'}
+[2025-07-01 21:00:06,735.735] Training, Validation and Test Data created from the training file. Train data: 935, Val Data: 55, Test Data: 110
+[2025-07-01 21:00:06,735.735] Loading the dataset class for instruction fine-tuning task...
+[2025-07-01 21:00:08,027.027] ************** TRAIN DATALOADER ****************************
+[2025-07-01 21:00:08,027.027] Length of Train Dataloader (number of batches): 116
+[2025-07-01 21:00:08,636.636] torch.Size([8, 62]), torch.Size([8, 62])
+[2025-07-01 21:00:08,636.636] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-07-01 21:00:08,652.652] torch.Size([8, 74]), torch.Size([8, 74])
+[2025-07-01 21:00:08,652.652] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-07-01 21:00:08,652.652] torch.Size([8, 66]), torch.Size([8, 66])
+[2025-07-01 21:00:08,652.652] ************** VAL DATALOADER ****************************
+[2025-07-01 21:00:08,652.652] Length of Val Dataloader (number of batches): 6
+[2025-07-01 21:00:08,652.652] torch.Size([8, 63]), torch.Size([8, 63])
+[2025-07-01 21:00:08,668.668] torch.Size([8, 84]), torch.Size([8, 84])
+[2025-07-01 21:00:08,668.668] torch.Size([8, 59]), torch.Size([8, 59])
+[2025-07-01 21:00:08,668.668] torch.Size([8, 70]), torch.Size([8, 70])
+[2025-07-01 21:00:08,668.668] torch.Size([8, 67]), torch.Size([8, 67])
+[2025-07-01 21:00:08,668.668] ************** TEST DATALOADER ****************************
+[2025-07-01 21:00:08,668.668] Length of Test Dataloader (number of batches): 13
+[2025-07-01 21:00:08,684.684] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-07-01 21:00:08,684.684] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-07-01 21:00:08,684.684] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-07-01 21:00:08,684.684] torch.Size([8, 65]), torch.Size([8, 65])
+[2025-07-01 21:00:08,684.684] torch.Size([8, 73]), torch.Size([8, 73])
+[2025-07-01 21:00:08,684.684] Dataloaders created successfully for fine-tuning task..!
+[2025-07-01 21:00:08,684.684] ---------------------------------------------------------
+[2025-07-01 21:00:08,700.700] Loading the weights of the base model : gpt2_355M..!
+[2025-07-01 21:00:08,700.700] Model present in the path: model/gpt2
+[2025-07-01 21:00:25,679.679] Model weights loaded successfully..!
+[2025-07-01 21:02:16,474.474] Generating a text :: 
+Once upon a time, there was a man who lived in a village called Krakow. He was a very good man, and he was very kind to his children. One day, he was walking along the road, and he saw a woman walking by. He asked her if she was his daughter. She said yes, and she said that she was his daughter. He asked her if she was his wife. She said yes, and she said that she was his wife. He asked her if she was his son. She said yes, and she said that she was his son. He asked her if she was his daughter. She said yes, and she said that she was his daughter. He asked her if she was his wife. She said yes, and she said that she was his wife. He asked her if she was his son. She said yes, and she said that she was his son. He asked her if she was his daughter. She said yes, and she said that she was his daughter. He asked her if she was his wife. She said yes, and she said that she was his wife. He asked her if she was his son. She said yes, and she said that she was his son. He asked her if she was his daughter. She
+[2025-07-01 21:02:16,474.474] Instruction Fine-tuning the base model: gpt2_355M ..!
+[2025-07-01 21:02:16,474.474] Training the full model as no paramater efficient mechanisms are given..!
+[2025-07-01 21:02:17,700.700] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-07-01 21:02:17,976.976] Training Stage : Fine-tuning of the model started ..!
+[2025-07-01 21:02:33,834.834] Maximum Learning Rate : 5e-05.
+[2025-07-01 21:02:33,834.834] Total training steps : 232.
+[2025-07-01 21:02:33,834.834] Learning Rate Increment By : 2.0000000000000003e-06.
+[2025-07-01 21:02:47,865.865] Epoch No: 1, Step: 000000, Train Loss: 3.641, Val Loss: 3.697
+
+[2025-07-01 21:02:47,865.865] Total Tokens seen till now: 496
+
+[2025-07-01 21:03:03,758.758] BEST model SAVED on iteration 000000 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:03:42,893.893] Epoch No: 1, Step: 000005, Train Loss: 2.083, Val Loss: 2.126
+
+[2025-07-01 21:03:42,893.893] Total Tokens seen till now: 3368
+
+[2025-07-01 21:04:05,900.900] BEST model SAVED on iteration 000005 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:04:49,438.438] Epoch No: 1, Step: 000010, Train Loss: 1.119, Val Loss: 1.132
+
+[2025-07-01 21:04:49,438.438] Total Tokens seen till now: 6168
+
+[2025-07-01 21:05:08,445.445] BEST model SAVED on iteration 000010 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:05:58,770.770] Epoch No: 1, Step: 000015, Train Loss: 0.904, Val Loss: 0.992
+
+[2025-07-01 21:05:58,770.770] Total Tokens seen till now: 9080
+
+[2025-07-01 21:06:31,329.329] BEST model SAVED on iteration 000015 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:07:22,013.013] Epoch No: 1, Step: 000020, Train Loss: 0.857, Val Loss: 0.887
+
+[2025-07-01 21:07:22,013.013] Total Tokens seen till now: 12056
+
+[2025-07-01 21:07:42,046.046] BEST model SAVED on iteration 000020 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:08:25,916.916] Epoch No: 1, Step: 000025, Train Loss: 0.818, Val Loss: 0.909
+
+[2025-07-01 21:08:25,916.916] Total Tokens seen till now: 14736
+
+[2025-07-01 21:09:18,802.802] Epoch No: 1, Step: 000030, Train Loss: 0.796, Val Loss: 0.869
+
+[2025-07-01 21:09:18,802.802] Total Tokens seen till now: 17432
+
+[2025-07-01 21:09:51,089.089] BEST model SAVED on iteration 000030 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:10:33,712.712] Epoch No: 1, Step: 000035, Train Loss: 0.826, Val Loss: 0.808
+
+[2025-07-01 21:10:33,712.712] Total Tokens seen till now: 20304
+
+[2025-07-01 21:11:05,605.605] BEST model SAVED on iteration 000035 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:11:57,160.160] Epoch No: 1, Step: 000040, Train Loss: 0.742, Val Loss: 0.839
+
+[2025-07-01 21:11:57,160.160] Total Tokens seen till now: 23032
+
+[2025-07-01 21:12:46,032.032] Epoch No: 1, Step: 000045, Train Loss: 0.839, Val Loss: 0.768
+
+[2025-07-01 21:12:46,032.032] Total Tokens seen till now: 26272
+
+[2025-07-01 21:13:04,627.627] BEST model SAVED on iteration 000045 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:13:54,072.072] Epoch No: 1, Step: 000050, Train Loss: 0.802, Val Loss: 0.778
+
+[2025-07-01 21:13:54,072.072] Total Tokens seen till now: 29104
+
+[2025-07-01 21:14:40,638.638] Epoch No: 1, Step: 000055, Train Loss: 0.683, Val Loss: 0.762
+
+[2025-07-01 21:14:40,638.638] Total Tokens seen till now: 31944
+
+[2025-07-01 21:14:59,497.497] BEST model SAVED on iteration 000055 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:15:49,180.180] Epoch No: 1, Step: 000060, Train Loss: 0.755, Val Loss: 0.765
+
+[2025-07-01 21:15:49,180.180] Total Tokens seen till now: 34688
+
+[2025-07-01 21:16:28,862.862] Epoch No: 1, Step: 000065, Train Loss: 0.748, Val Loss: 0.800
+
+[2025-07-01 21:16:28,862.862] Total Tokens seen till now: 37336
+
+[2025-07-01 21:17:22,173.173] Epoch No: 1, Step: 000070, Train Loss: 0.632, Val Loss: 0.758
+
+[2025-07-01 21:17:22,173.173] Total Tokens seen till now: 40232
+
+[2025-07-01 21:17:41,923.923] BEST model SAVED on iteration 000070 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:18:25,112.112] Epoch No: 1, Step: 000075, Train Loss: 0.636, Val Loss: 0.800
+
+[2025-07-01 21:18:25,112.112] Total Tokens seen till now: 42928
+
+[2025-07-01 21:19:08,557.557] Epoch No: 1, Step: 000080, Train Loss: 0.771, Val Loss: 0.782
+
+[2025-07-01 21:19:08,557.557] Total Tokens seen till now: 45568
+
+[2025-07-01 21:19:52,011.011] Epoch No: 1, Step: 000085, Train Loss: 0.720, Val Loss: 0.699
+
+[2025-07-01 21:19:52,011.011] Total Tokens seen till now: 48256
+
+[2025-07-01 21:20:29,825.825] BEST model SAVED on iteration 000085 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:21:17,968.968] Epoch No: 1, Step: 000090, Train Loss: 0.638, Val Loss: 0.707
+
+[2025-07-01 21:21:17,968.968] Total Tokens seen till now: 51112
+
+[2025-07-01 21:22:05,115.115] Epoch No: 1, Step: 000095, Train Loss: 0.719, Val Loss: 0.774
+
+[2025-07-01 21:22:05,115.115] Total Tokens seen till now: 54168
+
+[2025-07-01 21:23:07,308.308] Epoch No: 1, Step: 000100, Train Loss: 0.653, Val Loss: 0.666
+
+[2025-07-01 21:23:07,308.308] Total Tokens seen till now: 57152
+
+[2025-07-01 21:23:24,901.901] BEST model SAVED on iteration 000100 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:24:13,099.099] Epoch No: 1, Step: 000105, Train Loss: 0.540, Val Loss: 0.701
+
+[2025-07-01 21:24:13,099.099] Total Tokens seen till now: 60072
+
+[2025-07-01 21:24:57,264.264] Epoch No: 1, Step: 000110, Train Loss: 0.635, Val Loss: 0.742
+
+[2025-07-01 21:24:57,264.264] Total Tokens seen till now: 62904
+
+[2025-07-01 21:26:44,904.904] Epoch No: 1, Step: 000115, Train Loss: 0.553, Val Loss: 0.687
+
+[2025-07-01 21:26:44,904.904] Total Tokens seen till now: 65760
+
+[2025-07-01 21:26:46,139.139] Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is very fast.
+[2025-07-01 21:27:35,388.388] Epoch No: 2, Step: 000120, Train Loss: 0.656, Val Loss: 0.686
+
+[2025-07-01 21:27:35,388.388] Total Tokens seen till now: 68408
+
+[2025-07-01 21:28:18,368.368] Epoch No: 2, Step: 000125, Train Loss: 0.601, Val Loss: 0.674
+
+[2025-07-01 21:28:18,368.368] Total Tokens seen till now: 71024
+
+[2025-07-01 21:29:01,181.181] Epoch No: 2, Step: 000130, Train Loss: 0.606, Val Loss: 0.703
+
+[2025-07-01 21:29:01,181.181] Total Tokens seen till now: 73760
+
+[2025-07-01 21:29:40,534.534] Epoch No: 2, Step: 000135, Train Loss: 0.608, Val Loss: 0.735
+
+[2025-07-01 21:29:40,534.534] Total Tokens seen till now: 76440
+
+[2025-07-01 21:30:24,408.408] Epoch No: 2, Step: 000140, Train Loss: 0.613, Val Loss: 0.743
+
+[2025-07-01 21:30:24,408.408] Total Tokens seen till now: 79208
+
+[2025-07-01 21:31:09,446.446] Epoch No: 2, Step: 000145, Train Loss: 0.640, Val Loss: 0.707
+
+[2025-07-01 21:31:09,446.446] Total Tokens seen till now: 81944
+
+[2025-07-01 21:31:49,172.172] Epoch No: 2, Step: 000150, Train Loss: 0.502, Val Loss: 0.700
+
+[2025-07-01 21:31:49,172.172] Total Tokens seen till now: 84728
+
+[2025-07-01 21:32:38,090.090] Epoch No: 2, Step: 000155, Train Loss: 0.606, Val Loss: 0.691
+
+[2025-07-01 21:32:38,090.090] Total Tokens seen till now: 87840
+
+[2025-07-01 21:33:34,320.320] Epoch No: 2, Step: 000160, Train Loss: 0.605, Val Loss: 0.712
+
+[2025-07-01 21:33:34,320.320] Total Tokens seen till now: 90896
+
+[2025-07-01 21:34:20,797.797] Epoch No: 2, Step: 000165, Train Loss: 0.512, Val Loss: 0.700
+
+[2025-07-01 21:34:20,797.797] Total Tokens seen till now: 93912
+
+[2025-07-01 21:35:11,371.371] Epoch No: 2, Step: 000170, Train Loss: 0.616, Val Loss: 0.714
+
+[2025-07-01 21:35:11,371.371] Total Tokens seen till now: 97024
+
+[2025-07-01 21:36:07,926.926] Epoch No: 2, Step: 000175, Train Loss: 0.560, Val Loss: 0.719
+
+[2025-07-01 21:36:07,926.926] Total Tokens seen till now: 99944
+
+[2025-07-01 21:36:51,807.807] Epoch No: 2, Step: 000180, Train Loss: 0.524, Val Loss: 0.741
+
+[2025-07-01 21:36:51,807.807] Total Tokens seen till now: 102704
+
+[2025-07-01 21:37:32,833.833] Epoch No: 2, Step: 000185, Train Loss: 0.588, Val Loss: 0.712
+
+[2025-07-01 21:37:32,833.833] Total Tokens seen till now: 105512
+
+[2025-07-01 21:38:15,898.898] Epoch No: 2, Step: 000190, Train Loss: 0.553, Val Loss: 0.696
+
+[2025-07-01 21:38:15,898.898] Total Tokens seen till now: 108192
+
+[2025-07-01 21:38:56,710.710] Epoch No: 2, Step: 000195, Train Loss: 0.570, Val Loss: 0.675
+
+[2025-07-01 21:38:56,710.710] Total Tokens seen till now: 110816
+
+[2025-07-01 21:39:53,344.344] Epoch No: 2, Step: 000200, Train Loss: 0.526, Val Loss: 0.670
+
+[2025-07-01 21:39:53,344.344] Total Tokens seen till now: 113696
+
+[2025-07-01 21:40:35,133.133] Epoch No: 2, Step: 000205, Train Loss: 0.587, Val Loss: 0.677
+
+[2025-07-01 21:40:35,133.133] Total Tokens seen till now: 116216
+
+[2025-07-01 21:41:27,503.503] Epoch No: 2, Step: 000210, Train Loss: 0.545, Val Loss: 0.718
+
+[2025-07-01 21:41:27,503.503] Total Tokens seen till now: 119048
+
+[2025-07-01 21:42:13,727.727] Epoch No: 2, Step: 000215, Train Loss: 0.490, Val Loss: 0.695
+
+[2025-07-01 21:42:13,727.727] Total Tokens seen till now: 122104
+
+[2025-07-01 21:43:06,758.758] Epoch No: 2, Step: 000220, Train Loss: 0.543, Val Loss: 0.659
+
+[2025-07-01 21:43:06,758.758] Total Tokens seen till now: 125016
+
+[2025-07-01 21:43:19,837.837] BEST model SAVED on iteration 000220 to model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..! 
+[2025-07-01 21:44:10,530.530] Epoch No: 2, Step: 000225, Train Loss: 0.545, Val Loss: 0.705
+
+[2025-07-01 21:44:10,530.530] Total Tokens seen till now: 127976
+
+[2025-07-01 21:44:52,897.897] Epoch No: 2, Step: 000230, Train Loss: 0.577, Val Loss: 0.726
+
+[2025-07-01 21:44:52,897.897] Total Tokens seen till now: 130760
+
+[2025-07-01 21:45:01,972.972] Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is very fast.
+[2025-07-01 21:45:01,988.988] Training completed in 42.74 minutes.
+[2025-07-01 21:45:01,988.988] BEST Instruction Fine-Tuned (IFT) model saved in model/gpt2_355M_nonMaskedInstruct_FineTuned_v3.pth..!
+[2025-07-01 21:45:01,988.988] Saving the plots of the metrics tracked ..!
+[2025-07-01 21:57:47,890.890] Saving the model response for the test dataset ..!
+[2025-07-01 21:59:45,013.013] Model response for the test dataset saved in data/gpt2_355M_nonMaskedInstruct_FineTuned_v3_testdata_response.json..!

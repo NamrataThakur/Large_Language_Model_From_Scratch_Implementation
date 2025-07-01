@@ -5,7 +5,7 @@ from .metrics import Metrics
 
 class GPT2_PreTrain:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, eval_batchSize, eval_freq, 
-                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr):
+                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip):
 
         self.model = model
         self.optimizer = optimizer
@@ -21,6 +21,8 @@ class GPT2_PreTrain:
         self.warmup_steps = warmup_steps
         self.initial_lr = initial_lr
         self.min_lr = min_lr
+        self.use_warmup = use_warmup
+        self.use_gradient_clip = use_gradient_clip
 
         self.generation = Text_Generation(self.model, self.device, 'gpt2')
         self.metrics = Metrics(self.model, self.device)
@@ -43,21 +45,25 @@ class GPT2_PreTrain:
         train_losses, test_losses, track_tokens_seen, track_lr  = [], [], [], []
 
         tokens_seen, global_step = 0, -1
-
-        #Open the log file from the path given:
-        # log_file = open(self.log_path, "a")
-        # log_file.write('\n\n\n\n\n\n')
         
         #Get the maximum learning rate as given while defining the optimizer:
         max_lr = self.optimizer.param_groups[0]['lr']
+        print('Maximum Learning Rate : ', max_lr)
+        self.logger.info(f'Maximum Learning Rate : {max_lr}.')
 
         #Calculate the total training steps, that will be used for cosine annealing:
         total_training_steps = len(self.train_loader) * self.num_epochs
+        print('Total training steps : ', total_training_steps)
+        self.logger.info(f'Total training steps : {total_training_steps}.')
 
-        #Calculate the learning rate increament during the warmup period:
-        lr_increment = (max_lr - self.initial_lr) / self.warmup_steps
+        if self.use_warmup:
+            #Calculate the learning rate increment during the warmup period:
+            lr_increment = (max_lr - self.initial_lr) / self.warmup_steps
+            print('Learning Rate Increment By : ', lr_increment)
+            self.logger.info(f'Learning Rate Increment By : {lr_increment}.')
 
-        min_loss = -1
+        min_loss = 10
+        print('Initial Loss: ', min_loss)
 
         for ep in range(self.num_epochs):
 
@@ -68,31 +74,33 @@ class GPT2_PreTrain:
                 self.optimizer.zero_grad() # Reset loss gradients from previous batch iteration
                 global_step += 1
 
-                #Check if the training is still within the warmup stage:
-                if global_step < self.warmup_steps:
+                if self.use_warmup:
+                    #Check if the training is still within the warmup stage:
+                    if global_step < self.warmup_steps:
 
-                    #Apply linear warmup:
-                    lr = self.initial_lr + global_step * lr_increment
+                        #Apply linear warmup:
+                        lr = self.initial_lr + global_step * lr_increment
 
-                else:
+                    else:
 
-                    #Training has gone past the warmup period, so apply cosine annealing to bring the learning rate down:
-                    total_steps_rem =((global_step - self.warmup_steps) / (total_training_steps - self.warmup_steps) )
-                    lr = self.min_lr + (max_lr - self.min_lr) * 0.5 * (1 + math.cos(math.pi * total_steps_rem))
+                        #Training has gone past the warmup period, so apply cosine annealing to bring the learning rate down:
+                        total_steps_rem =((global_step - self.warmup_steps) / (total_training_steps - self.warmup_steps) )
+                        lr = self.min_lr + (max_lr - self.min_lr) * 0.5 * (1 + math.cos(math.pi * total_steps_rem))
 
-                #Apply the updated learning rate to the optimizer:
-                for param in self.optimizer.param_groups:
-                    param['lr'] = lr
+                    #Apply the updated learning rate to the optimizer:
+                    for param in self.optimizer.param_groups:
+                        param['lr'] = lr
 
-                #Track the current learning rate:
-                track_lr.append(lr)
+                    #Track the current learning rate:
+                    track_lr.append(lr)
 
                 loss = self.metrics.loss_batch(train_x, train_y)
                 loss.backward()
 
-                #Apply gradient clipping after warmup period:
-                if global_step > self.warmup_steps:
-                    torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm= 1.0)
+                if self.use_gradient_clip:
+                    #Apply gradient clipping after warmup period:
+                    if global_step > self.warmup_steps:
+                        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm= 1.0)
 
                 #Calculate the weight updates with the modified learning rate and clipped gradient:
                 self.optimizer.step()
@@ -115,14 +123,13 @@ class GPT2_PreTrain:
 
                     #Check for the model performance improvement:
                     if test_loss < min_loss:
+
                         min_loss = test_loss
-                        m_name = model_save_path.split('.')[0]
-                        m_path = m_name + '_step_' + str(global_step) + '.pth'
                         torch.save({'model' : self.model.state_dict(),
                                     'optimizer': self.optimizer.state_dict()
                                     }, 
-                                    m_path)
-                        self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {m_path}..! ")
+                                    model_save_path)
+                        self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
 
 
             #Write the model generated response after each epoch:
@@ -130,8 +137,7 @@ class GPT2_PreTrain:
             print(gen_output)
             self.logger.info(gen_output)
             
-        #Close the log file:
-        #log_file.close()
+
         return train_losses, test_losses, track_tokens_seen, track_lr
 
         

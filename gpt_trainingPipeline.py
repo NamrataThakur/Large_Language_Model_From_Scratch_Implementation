@@ -816,7 +816,6 @@ if __name__ == '__main__':
             print(f"Training completed in {execution_time_minutes:.2f} minutes.")
             logger.info(f"Training completed in {execution_time_minutes:.2f} minutes.")
 
-            #torch.save(gpt2_baseInst.state_dict(), save_model_path)
             logger.info(f"SFT Fine-Tuned model saved in {save_model_path}..!")
         
         except Exception as e:
@@ -920,7 +919,9 @@ if __name__ == '__main__':
                                 log_path=logger,                        #Pass the logger object instead of logging path
                                 warmup_steps=args.warmup_steps,
                                 initial_lr=args.initial_lr,
-                                min_lr=args.min_lr
+                                min_lr=args.min_lr,
+                                use_warmup=args.use_warmup,
+                                use_gradient_clip=args.use_gradient_clip
                                 ) 
 
             train_losses, test_losses, track_tokens_seen, track_lr = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, top_k=args.top_k,  
@@ -931,7 +932,6 @@ if __name__ == '__main__':
             print(f"Training completed in {execution_time_minutes:.2f} minutes.")
             logger.info(f"Training completed in {execution_time_minutes:.2f} minutes.")
        
-            #torch.save(gpt2_baseInst.state_dict(), save_model_path)
             logger.info(f"BEST Instruction Fine-Tuned (IFT) model saved in {save_model_path}..!")
         
         except Exception as e:
@@ -944,6 +944,9 @@ if __name__ == '__main__':
             epochs_tensor = torch.linspace(0, epochs, len(train_losses))
             plt = Plots(track_tokens_seen, epochs_tensor, train_losses, test_losses)
             plt.plots('Loss', args.experiment_name)
+
+            if args.use_warmup:
+                plt.plot_lrs(track_lr, label='Learning Rate', type=args.experiment_name)
 
             logger.info(f'Saving the model response for the test dataset ..!')
             generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
