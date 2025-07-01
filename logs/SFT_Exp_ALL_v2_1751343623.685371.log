@@ -1,0 +1,78 @@
+[2025-07-01 09:50:23,685.685] Namespace(experiment_name='SFT_Exp_ALL_v2', base_modelName='gpt2_124M', data_path='sms_spam_collection.zip', training_type='SFT', peft_type=None, load_weights=True, pre_save_model=None, model_name='gpt2_124M_SFT_Spam_v2', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.7, val_split=0.1, context_length=1024, max_new_tokens=256, temp=0.0, dropout_rate=0.0, top_k=5, trainable_layers='last_block', num_epochs=5, eos_id=50256, max_training_length='longest_training_example', prompt_style='alpaca', ignore_index=-100, mask_instruction=False, use_warmup=True, use_gradient_clip=True, warmup_steps=20, initial_lr=1e-05, min_lr=1e-05)
+[2025-07-01 09:50:24,801.801] Configuration of the gpt2_124M base model loaded..!
+[2025-07-01 09:50:24,811.811] Extention detected for the training file is "zip".
+[2025-07-01 09:50:24,813.813] Unzipping the file
+[2025-07-01 09:50:24,825.825] File unzipped and saved at: data\sms_spam_collection\SMSSpamCollection.tsv
+[2025-07-01 09:50:24,841.841] Total records present in the training file: (5572, 2)
+[2025-07-01 09:50:24,848.848] After balancing : (1494, 2)
+[2025-07-01 09:50:24,851.851] Training, Validation and Test Data created from the training file. Train data: (1045, 2), Val Data: (149, 2), Test Data: (300, 2)
+[2025-07-01 09:50:24,851.851] ---------------------------------------------------------
+[2025-07-01 09:50:24,851.851] Loading the dataset class for supervised classification fine-tuning task...
+[2025-07-01 09:50:24,897.897] ************** TRAIN DATALOADER ****************************
+[2025-07-01 09:50:24,897.897] Length of Train Dataloader (number of batches): 130
+[2025-07-01 09:50:24,899.899] torch.Size([8, 120]), torch.Size([8])
+[2025-07-01 09:50:24,901.901] Longest Training Example Length : 120.
+[2025-07-01 09:50:24,918.918] ************** VAL DATALOADER ****************************
+[2025-07-01 09:50:24,918.918] Length of Val Dataloader (number of batches): 18
+[2025-07-01 09:50:24,919.919] torch.Size([8, 120]), torch.Size([8])
+[2025-07-01 09:50:24,919.919] ************** TEST DATALOADER ****************************
+[2025-07-01 09:50:24,919.919] Length of Test Dataloader (number of batches): 37
+[2025-07-01 09:50:24,920.920] torch.Size([8, 120]), torch.Size([8])
+[2025-07-01 09:50:24,920.920] Dataloaders created successfully for classification fine-tuning task..!
+[2025-07-01 09:50:24,920.920] ---------------------------------------------------------
+[2025-07-01 09:50:24,920.920] Loading the weights of the base model : gpt2_124M..!
+[2025-07-01 09:50:24,920.920] Model present in the path: model/gpt2
+[2025-07-01 09:50:32,622.622] Model weights loaded successfully..!
+[2025-07-01 09:51:04,893.893] Generating a text :: 
+Once upon a time, the world was a place of great beauty and great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of great danger. The world was a place of great danger, and the world was a place of
+[2025-07-01 09:51:04,893.893] Training the full model as no paramater efficient mechanisms are given..!
+[2025-07-01 09:51:04,893.893] Training Stage : Frozen the original paramters of the model..!
+[2025-07-01 09:51:04,893.893] Training Stage : Added the NEW classification head..!
+[2025-07-01 09:51:04,893.893] ************* Verifying the NEW output head of the model *************
+[2025-07-01 09:51:04,934.934] Output Dimension:: torch.Size([1, 4, 2]) .
+[2025-07-01 09:51:04,934.934] ************* Verifying the NEW output head of the model : Successfull *************
+[2025-07-01 09:51:04,934.934] Training Stage : Unfreezing the weights of last block of the model for fine-tuning..!
+[2025-07-01 09:51:06,181.181] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-07-01 09:51:06,197.197] Training Stage : Fine-tuning of the model started ..!
+[2025-07-01 09:51:08,780.780] Maximum Learning Rate : 0.0005.
+[2025-07-01 09:51:08,780.780] Total training steps : 650.
+[2025-07-01 09:51:08,780.780] Learning Rate Increment By : 2.45e-05.
+[2025-07-01 09:51:10,326.326] Epoch No: 1, Step: 000000, Train Loss: 3.198, Test Loss: 2.334
+[2025-07-01 09:51:11,338.338] BEST model SAVED on iteration 000000 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:51:19,618.618] Epoch No: 1, Step: 000050, Train Loss: 0.763, Test Loss: 0.999
+[2025-07-01 09:51:20,596.596] BEST model SAVED on iteration 000050 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:51:28,867.867] Epoch No: 1, Step: 000100, Train Loss: 0.531, Test Loss: 0.614
+[2025-07-01 09:51:29,854.854] BEST model SAVED on iteration 000100 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:51:52,069.069] Training accuracy: 96.54%
+[2025-07-01 09:51:52,069.069] Validation accuracy: 97.92%
+[2025-07-01 09:51:56,264.264] Epoch No: 2, Step: 000150, Train Loss: 0.153, Test Loss: 0.178
+[2025-07-01 09:51:57,319.319] BEST model SAVED on iteration 000150 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:52:05,611.611] Epoch No: 2, Step: 000200, Train Loss: 0.273, Test Loss: 0.122
+[2025-07-01 09:52:06,603.603] BEST model SAVED on iteration 000200 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:52:14,925.925] Epoch No: 2, Step: 000250, Train Loss: 0.046, Test Loss: 0.108
+[2025-07-01 09:52:17,552.552] BEST model SAVED on iteration 000250 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:52:37,204.204] Training accuracy: 98.27%
+[2025-07-01 09:52:37,204.204] Validation accuracy: 97.22%
+[2025-07-01 09:52:44,263.263] Epoch No: 3, Step: 000300, Train Loss: 0.001, Test Loss: 0.032
+[2025-07-01 09:52:45,332.332] BEST model SAVED on iteration 000300 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:52:53,665.665] Epoch No: 3, Step: 000350, Train Loss: 0.009, Test Loss: 0.033
+[2025-07-01 09:53:17,443.443] Training accuracy: 99.04%
+[2025-07-01 09:53:17,443.443] Validation accuracy: 97.22%
+[2025-07-01 09:53:20,253.253] Epoch No: 4, Step: 000400, Train Loss: 0.190, Test Loss: 0.000
+[2025-07-01 09:53:21,256.256] BEST model SAVED on iteration 000400 to model/gpt2_124M_SFT_Spam_v2.pth..! 
+[2025-07-01 09:53:29,596.596] Epoch No: 4, Step: 000450, Train Loss: 0.001, Test Loss: 0.192
+[2025-07-01 09:53:37,961.961] Epoch No: 4, Step: 000500, Train Loss: 0.000, Test Loss: 0.196
+[2025-07-01 09:53:58,973.973] Training accuracy: 99.13%
+[2025-07-01 09:53:58,973.973] Validation accuracy: 97.92%
+[2025-07-01 09:54:04,644.644] Epoch No: 5, Step: 000550, Train Loss: 0.188, Test Loss: 0.001
+[2025-07-01 09:54:13,022.022] Epoch No: 5, Step: 000600, Train Loss: 0.000, Test Loss: 0.056
+[2025-07-01 09:54:38,381.381] Training accuracy: 99.04%
+[2025-07-01 09:54:38,381.381] Validation accuracy: 97.92%
+[2025-07-01 09:54:38,381.381] Training completed in 3.54 minutes.
+[2025-07-01 09:54:38,381.381] SFT Fine-Tuned model saved in model/gpt2_124M_SFT_Spam_v2.pth..!
+[2025-07-01 09:54:38,381.381] Saving the plots of the metrics tracked ..!
+[2025-07-01 09:55:01,213.213] Training accuracy: 98.75%
+[2025-07-01 09:55:01,213.213] Validation accuracy: 98.75%
+[2025-07-01 09:55:01,214.214] Test accuracy: 95.00%
+[2025-07-01 09:55:01,214.214] Saving the model response for the test dataset ..!
+[2025-07-01 09:55:07,721.721] Model response for the test dataset saved in data/gpt2_124M_SFT_Spam_v2_testdata_response.csv..!

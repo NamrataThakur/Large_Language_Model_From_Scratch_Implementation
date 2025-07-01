@@ -39,3 +39,19 @@ class Plots:
         plt.savefig(plot_save_path)
         plt.show()
 
+
+    def plot_lrs(self, lr_list, label = 'LR', type='pretrain'):
+        fig, ax = plt.subplots(figsize=(10,5))
+
+        #Steps vs Learning Rate
+        ax.plot(range(len(lr_list)),lr_list,label = f'{label}')
+        ax.set_xlabel('Steps')
+        ax.set_ylabel(f'{label}')
+        ax.legend(loc="upper right")
+        ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+
+        fig.tight_layout()  # Adjust layout to make room
+        plot_save_path = os.path.join(PLOTS_FOLDER,f"{label}_samples_epochs_{type}_{str(datetime.now().timestamp())}.pdf")
+        plt.savefig(plot_save_path)
+        plt.show()
+

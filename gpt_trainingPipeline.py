@@ -250,6 +250,20 @@ if __name__ == '__main__':
         default=False,
         help=("Whether to mask the instruction tokens or not in the target tensor. Used for IFT, PFT. Options: True , False")
     )
+
+    parser.add_argument(
+        "--use_warmup",
+        type=bool,
+        default=False,
+        help=("Whether to use initial learning rate warmup. Options: True , False")
+    )
+
+    parser.add_argument(
+        "--use_gradient_clip",
+        type=bool,
+        default=False,
+        help=("Whether to clip gradients to avoid exploding gradient problem. Options: True , False")
+    )
     
     parser.add_argument(
         "--warmup_steps",
@@ -507,6 +521,7 @@ if __name__ == '__main__':
                     logger.info(f'{x.shape}, {y.shape}')
                     break
                 train_max_length = x.shape[1]
+                logger.info(f'Longest Training Example Length : {train_max_length}.')
             
             elif args.max_training_length == 'model_context_length':
                 train_max_length = gpt2_config['context_length']
@@ -704,6 +719,22 @@ if __name__ == '__main__':
                 
                 logger.info(f'Training Stage : Added the NEW classification head..!')
 
+                logger.info('************* Verifying the NEW output head of the model *************')
+                input_text = "Once upon a time"
+                input_encoded = tokenizer.encode(input_text,allowed_special='all')
+                input_encoded = torch.tensor(input_encoded).unsqueeze(0)
+                with torch.no_grad():
+                    output_tensor = gpt2_baseInst(input_encoded) #Need to convert the encoded token list to torch tensor and add the batch dimension through unsqueeze
+                
+                logger.info(f'Output Dimension:: {output_tensor.shape} .')
+                print('Output Dimension:: ', output_tensor.shape)
+                assert output_tensor.shape[2] == out_features, (
+                                f"Output Dimension is not matching with the number of classes in the data. Please verify...!" 
+                                )
+
+                logger.info('************* Verifying the NEW output head of the model : Successfull *************')
+
+
                 if args.trainable_layers == "last_block" or args.trainable_layers == "last_two_blocks":
                     logger.info(f'Training Stage : Unfreezing the weights of last block of the model for fine-tuning..!')
 
@@ -754,7 +785,7 @@ if __name__ == '__main__':
 
             logger.info(f'Training Stage : Fine-tuning of the model started ..!')
 
-            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=5e-5, weight_decay=0.1)
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=5e-4, weight_decay=0.1)
 
             epochs = args.num_epochs
 
@@ -773,7 +804,10 @@ if __name__ == '__main__':
                                 log_path=logger,     #Pass the logger object instead of logging path
                                 warmup_steps=args.warmup_steps,
                                 initial_lr=args.initial_lr,
-                                min_lr=args.min_lr) 
+                                min_lr=args.min_lr,
+                                use_warmup=args.use_warmup,
+                                use_gradient_clip=args.use_gradient_clip
+                                ) 
 
             train_losses, test_losses, train_accuracy, val_accuracy, num_samples, track_lr = gpt2_trainer.train(save_model_path)
 
@@ -801,7 +835,9 @@ if __name__ == '__main__':
             plt = Plots(samples, x,train_accuracy, val_accuracy, label = 'Accuracy')
             plt.plots('Accuracy', args.experiment_name)
 
-        
+            if args.use_warmup:
+                plt.plot_lrs(track_lr, label='Learning Rate', type=args.experiment_name)
+
             metrics = Metrics(gpt2_baseInst, device)
 
             torch.manual_seed(args.seed)

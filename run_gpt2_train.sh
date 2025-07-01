@@ -65,6 +65,11 @@ peft_type=None
 mask_instruction=False
 dropout_rate=0.0
 eos_id=50256
+use_warmup=True
+use_gradient_clip=True
+warmup_steps=20
+initial_lr=1e-5
+min_lr=1e-5
 python gpt_trainingPipeline.py \
   --experiment_name 'SFT_Exp_ALL_v2' \
   --base_modelName 'gpt2_124M' \
@@ -85,4 +90,10 @@ python gpt_trainingPipeline.py \
   --num_epochs $num_epochs \
   --max_training_length 'longest_training_example' \
   --top_k $top_k \
+  --use_warmup $use_warmup \
+  --use_gradient_clip $use_gradient_clip \
+  --warmup_steps $warmup_steps \
+  --initial_lr $initial_lr \
+  --min_lr $min_lr \
+
 
