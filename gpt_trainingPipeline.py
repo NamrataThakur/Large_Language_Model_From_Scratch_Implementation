@@ -4,6 +4,7 @@ import os
 import time
 from datetime import datetime
 import warnings
+import pprint
 import sys
 from tqdm import tqdm
 import tiktoken
@@ -48,7 +49,7 @@ from gpt_ClassificationFT.gpt2_classificationFT import GPT2_ClassificationFineTu
 
 #Load the class for model config
 from gpt_ClassificationFT.gpt2_model_config import GPT2_ModelConfig
-#from gpt_PreferenceFT.gpt2_classificationFT import GPT2_ClassificationFineTune
+from gpt_PreferenceFT.gpt2_preferenceFT import GPT2_PreferenceFineTune
 
 #Utilities for model weight loading
 from model_utils.gpt_download import download_and_load_gpt2
@@ -60,8 +61,8 @@ from dataloader.Pretraining.gpt2_pretrainDataloader import GPTCustomDataloader
 from dataloader.Classification_finetuning.gpt2_classificationDataloader import GPTCustomSFTDataloader
 from dataloader.Instruction_finetuning.gpt2_instructDataloader import GPTCustomInstructDataloader
 from dataloader.Instruction_finetuning.gpt2_instructDataFormat import *
-#from dataloader.Preference_finetuning import *
-
+from dataloader.Preference_finetuning.gpt2_preferenceDataloader import GPTCustomPreferenceDataloader
+from dataloader.Preference_finetuning.gpt2_preferenceDataFormat import analyse_preferenceTuning
 
 
 if __name__ == '__main__':
@@ -449,6 +450,7 @@ if __name__ == '__main__':
             
             logger.info(f"Number of entries : {len(data)}. ")
             logger.info(f"Example of data for Instruct Fine-Tune :: \n {data[1000]}")
+            pprint.pp(data[1000])
 
             #Create the train, val, test files:
             train_df, val_df, test_df = dataset_split(data=data, train_split=args.train_split, val_split=args.val_split, 
@@ -642,7 +644,75 @@ if __name__ == '__main__':
 
 
         else:
-            logger.info("Loading the class for preference fine-tuning task...")
+            logger.info("Loading the class for preference fine-tuning task (PFT) ...")
+
+            if args.max_training_length == "longest_training_example":
+                max_seq_length = None
+            
+            elif args.max_training_length == 'model_context_length':
+                max_seq_length = gpt2_config['context_length']
+
+            else:
+                max_seq_length = int(args.max_training_length)
+
+            device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+            print('Device Available: ', device)
+
+            train_dataLoader = GPTCustomPreferenceDataloader(train_df, device=device, max_seq_length=max_seq_length, batch_size=args.batch_size,
+                                                           tokenizer = args.tokenizer,prompt_style=args.prompt_style,  seed = args.seed,
+                                                           shuffle=True, drop_last=True,num_workers=0, mask_instruction = args.mask_instruction
+                                                           )
+            
+
+            val_dataLoader = GPTCustomPreferenceDataloader(val_df, device=device, max_seq_length=max_seq_length, batch_size=args.batch_size,
+                                                           tokenizer = args.tokenizer,prompt_style=args.prompt_style, seed = args.seed,
+                                                           shuffle=True, drop_last=True,num_workers=0, mask_instruction = args.mask_instruction
+                                                           )
+            
+
+            test_dataLoader = GPTCustomPreferenceDataloader(test_df, device=device, max_seq_length=max_seq_length, batch_size=args.batch_size,
+                                                           tokenizer = args.tokenizer,prompt_style=args.prompt_style, seed = args.seed,
+                                                           shuffle=True, drop_last=True,num_workers=0, mask_instruction = args.mask_instruction
+                                                           )
+            
+            #Print the dataloader contents to confirm correct format:
+            logger.info('************** TRAIN DATALOADER ****************************')
+            logger.info(f'Length of Train Dataloader (number of batches): {len(train_dataLoader)}')
+
+            i=0
+            for row in train_dataLoader:
+                logger.info(f'{row['correct_response'].shape}, {row['wrong_response'].shape}')
+                if i > 3:
+                    break
+                else:
+                    i = i + 1
+
+            logger.info(f'Info (keys) present in the loader for PFT : {row.keys()}')
+                
+
+            logger.info('************** VAL DATALOADER ****************************')
+            logger.info(f'Length of Val Dataloader (number of batches): {len(val_dataLoader)}')
+            i=0
+            for row in val_dataLoader:
+                logger.info(f'{row['correct_response'].shape}, {row['wrong_response'].shape}')
+                if i > 3:
+                    break
+                else:
+                    i = i + 1
+
+            logger.info('************** TEST DATALOADER ****************************')
+            logger.info(f'Length of Test Dataloader (number of batches): {len(test_dataLoader)}')
+            i=0
+            for row in test_dataLoader:
+                logger.info(f'{row['correct_response'].shape}, {row['wrong_response'].shape}')
+                if i > 3:
+                    break
+                else:
+                    i = i + 1
+                
+            logger.info('Dataloaders created successfully for fine-tuning task..!')
+            logger.info('---------------------------------------------------------')
+
 
     except Exception as e:
         logger.error(f'Error in loading file and creating dataloader:: {e}')
@@ -677,6 +747,7 @@ if __name__ == '__main__':
                 logger.info('Model weights loaded successfully..!')
 
                 #Generate a text to check if loading is successful:
+                logger.info('Generate a text to check if loading is successful..!')
                 generate = Text_Generation(model=gpt2_baseInst, device='cpu', tokenizer_model='gpt2')
                 output_text = generate.text_generation(input_text = "Once upon a time,", max_new_tokens=args.max_new_tokens, 
                                                         temp=args.temp, top_k= args.top_k, eos_id = args.eos_id)
@@ -692,6 +763,41 @@ if __name__ == '__main__':
                 model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
                 print(model_path)
                 logger.info(f'Model present in the path: {model_path}')
+                
+                #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
+                checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=True)
+                gpt2_baseInst.load_state_dict(checkpoint['model'] )
+                gpt2_baseInst.eval()
+
+                logger.info('Model weights loaded successfully..!')
+
+                if args.training_type == 'PFT' or args.training_type == 'IFT':
+
+                    #Generate a text to check if loading is successful:
+                    logger.info('Generate a text to check if loading is successful..!')
+                    prompt = """Below is an instruction that describes a task. Write a response
+                                that appropriately completes the request.
+
+                                ### Instruction:
+                                Convert the active sentence to passive: 'The chef cooks the meal every day.'
+                            """
+                    generate = Text_Generation(model=gpt2_baseInst, device='cpu', tokenizer_model='gpt2')
+                    output_text = generate.text_generation(input_text = prompt, max_new_tokens=args.max_new_tokens, 
+                                                            temp=args.temp, top_k= args.top_k, eos_id = args.eos_id)
+                    
+                    response = (output_text[len(prompt)-1:]).replace("### Response:", " ").replace('Response:', '').strip()
+                    logger.info(f'Generating a text :: \n{response}')
+
+                if args.training_type == 'PFT':
+                    logger.info(f'Preference Fine-Tuning requires 2 models --> Preference (Trainable) and Reference (Frozen) ..!'
+                                f'Weights for the preference model is loaded above..!'
+                                f'Weights for reference model will be loaded NOW .. !')
+                    
+                    gpt2_reference = GPT2(gpt2_config)
+                    gpt2_reference.load_state_dict(checkpoint['model'] )
+                    gpt2_reference.eval()
+
+                    logger.info('Model weights for REFERENCE model is loaded successfully..!')
             
             except Exception as e:
                 logger.error(f'Error in loading model weights : {e}')
@@ -963,6 +1069,125 @@ if __name__ == '__main__':
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
             raise Exception(f'Error in model evaluation stage : {e}')
+    
+    else:
+
+        logger.info(f'Preference Fine-tuning the IFT model: {args.pre_save_model} ..!')
+
+        if args.peft_type is None:
+
+            logger.info(f'Training the full model as no paramater efficient mechanisms are given..!')
+
+        elif args.peft_type == 'lora':
+            logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+        else:
+            logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!') 
+
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        print('Device Available: ', device)
+
+        try:
+            gpt2_baseInst.to(device)
+            gpt2_reference.to(device)
+
+            logger.info(f'Training Stage : Policy and Reference Models sent to {device} for fine-tuning..!')
+
+            i, start_context = format_input_response(val_df[10], prompt_style = args.prompt_style, inference=True) 
+
+            start_time = time.time()
+            torch.manual_seed(args.seed)
+
+            logger.info(f'Training Stage : Fine-tuning of the model started ..!')
+
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=5e-6, weight_decay=0.01)
+            epochs = args.num_epochs
+
+            #PFT Model Save Path:
+            save_model_name = args.model_name + '.pth'
+            save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
+
+            gpt2_trainer = GPT2_PreferenceFineTune(policy_model=gpt2_baseInst, 
+                                                   reference_model=gpt2_reference,
+                                                    optimizer=optimizer,
+                                                    train_dataLoader=train_dataLoader,
+                                                    test_dataLoader=val_dataLoader,
+                                                    num_epochs=epochs,
+                                                    eval_batchSize=5, 
+                                                    eval_freq=5,
+                                                    device=device,
+                                                    start_context=start_context,
+                                                    max_new_tokens=args.max_new_tokens,
+                                                    beta = args.beta,
+                                                    log_path=logger,                        #Pass the logger object instead of logging path
+                                                    warmup_steps=args.warmup_steps,
+                                                    initial_lr=args.initial_lr,
+                                                    min_lr=args.min_lr,
+                                                    use_warmup=args.use_warmup,
+                                                    use_gradient_clip=args.use_gradient_clip
+                                                    ) 
+
+            tracking_preferenceFT, track_lr = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, 
+                                                                 top_k=args.top_k,  
+                                                                 eos_id = args.eos_id)
+
+            end_time = time.time()
+            execution_time_minutes =(end_time - start_time) / 60
+            print(f"Training completed in {execution_time_minutes:.2f} minutes.")
+            logger.info(f"Training completed in {execution_time_minutes:.2f} minutes.")
+       
+            logger.info(f"BEST Preference Fine-Tuned (PFT) model saved in {save_model_path}..!")
+
+        
+        except Exception as e:
+            logger.error(f'Error in fine-tuning stage : {e}')
+            raise Exception(f'Error in fine-tuning stage : {e}')
+        
+
+        try:
+            logger.info(f'Saving the plots of the metrics tracked ..!')
+
+            epochs_tensor = torch.linspace(0, epochs, len(tracking_preferenceFT['train_loss']))
+            plt = Plots(tracking_preferenceFT['tokens_seen'], epochs_tensor, tracking_preferenceFT['train_loss'], tracking_preferenceFT['val_loss'])
+            plt.plots('Loss', args.experiment_name)
+
+            train_reward_margin = [x - y for x,y in zip(tracking_preferenceFT['train_rewards_correct'], tracking_preferenceFT['train_rewards_wrong'])]
+            val_reward_margin = [x - y for x,y in zip(tracking_preferenceFT['val_rewards_correct'], tracking_preferenceFT['val_rewards_wrong'])]
+
+            plt = Plots(tracking_preferenceFT['tokens_seen'], epochs_tensor, train_reward_margin, val_reward_margin)
+            plt.plots('Reward', args.experiment_name)
+
+            if args.use_warmup:
+                plt.plot_lrs(track_lr, label='Learning Rate', type=args.experiment_name)
+
+            
+            logger.info(f'Analysing 10 test samples after preference tuning..!')
+
+            generate_policy = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
+            generate_reference = Text_Generation(model=gpt2_reference, device=device, tokenizer_model='gpt2')
+
+            analyse_preferenceTuning(data = test_df, generate_policy = generate_policy, generate_reference = generate_reference, logger = logger, 
+                                     n_records = 10,
+                                     temp = args.temp, top_k = args.top_k, eos_id = args.eos_id, 
+                                     max_new_tokens = args.max_new_tokens)
+            
+            
+            logger.info(f'Saving the model response for the test dataset ..!')
+            
+            test_data_response = save_model_response(data = test_df, generate = generate_policy, 
+                                                     temp = args.temp, top_k = args.top_k, eos_id = args.eos_id, 
+                                                     max_new_tokens = args.max_new_tokens) 
+
+            response_save_path = os.path.join(DATA_FOLDER, args.model_name+'_testdata_response.json')
+            with open(response_save_path, "w") as file:
+                json.dump(test_data_response, file, indent=4)
+            
+            logger.info(f'Model response for the test dataset saved in {response_save_path}..!')
+
+        except Exception as e:
+            logger.error(f'Error in model evaluation stage : {e}')
+            raise Exception(f'Error in model evaluation stage : {e}')
+
+
         
 
 
