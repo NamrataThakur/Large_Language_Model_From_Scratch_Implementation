@@ -2,7 +2,7 @@ import torch
 import os
 os.pardir
 
-from Instruction_finetuning.gpt2_instructDataFormat import format_input_response
+from dataloader.Instruction_finetuning.gpt2_instructDataFormat import format_input_response
 
 def analyse_preferenceTuning(data, generate_policy, generate_reference, logger, n_records = None,
                              max_new_tokens = 256, temp = 0.0, top_k=None, eos_id = 50256):
