@@ -112,3 +112,6 @@ class Text_Generation:
         class_prediction = torch.argmax(output_logit, dim = -1).item()
 
         return class_prediction
+    
+
+    

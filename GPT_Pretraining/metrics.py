@@ -1,10 +1,12 @@
 import torch
+import torch.nn.functional as F
 
 class Metrics:
-    def __init__(self, model, device ):
+    def __init__(self, model, device, reference_model = None ):
         
         self.model = model
         self.device = device
+        self.reference_model = reference_model
 
     def loss_loader(self, dataloader, num_batches=None, classify=False):
 
@@ -67,7 +69,7 @@ class Metrics:
         avg_accuracy = correct_pred / num_samples
         return avg_accuracy
     
-    
+    #Function used in classification supervised fine-tuning task:
     def classification_loss_batch(self, input_batch, target_batch):
 
         input_batch, target_batch = input_batch.to(self.device), target_batch.to(self.device)
@@ -75,3 +77,117 @@ class Metrics:
         last_idx_logits = output_logits[:, -1, :]
         classify_loss = torch.nn.functional.cross_entropy(last_idx_logits, target_batch)
         return classify_loss
+    
+
+    #Function used in preference fine-tuning task:
+    def preference_loss_batch(self, batch, beta):
+        
+        policy_correct_response_probs = self.get_log_probability(inputs = batch['correct_response'], mask = batch['correct_response_mask'], model_type = None)
+
+        policy_wrong_response_probs = self.get_log_probability(inputs = batch['wrong_response'], mask = batch['wrong_response_mask'], model_type = None)
+        
+        reference_correct_response_probs = self.get_log_probability(inputs = batch['correct_response'], mask = batch['correct_response_mask'], model_type = 'reference')
+
+        reference_wrong_response_probs = self.get_log_probability(inputs = batch['wrong_response'], mask = batch['wrong_response_mask'], model_type = 'reference')
+
+        dpo_loss, rewards_correct_response, rewards_wrong_response = self.dpo_loss_batch(policy_correct_probs = policy_correct_response_probs, 
+                                                                                         policy_wrong_probs = policy_wrong_response_probs, 
+                                                                                         reference_correct_probs = reference_correct_response_probs, 
+                                                                                         reference_wrong_probs = reference_wrong_response_probs, 
+                                                                                         beta = beta)
+        
+        return dpo_loss, rewards_correct_response, rewards_wrong_response
+    
+
+    #Loss loader function for DPO Loss:
+    def preference_loss_loader(self, dataloader, beta, num_batches = None):
+
+        losses, rewards_correct, rewards_wrong = 0.0, 0.0, 0.0
+
+        if len(dataloader) == 0:
+            print('No batches/data in the dataloader..!')
+        elif num_batches is None:
+            num_batches = len(dataloader)
+        else:
+            num_batches = min(len(dataloader), num_batches)
+
+        for i, batch in enumerate(dataloader):
+
+            if i < num_batches:
+                loss, rewards_correct_response, rewards_wrong_response = self.preference_loss_batch(batch, beta)
+
+                losses += loss.item()
+                rewards_correct += rewards_correct_response.item()
+                rewards_wrong += rewards_wrong_response.item()
+
+            else:
+
+                break
+
+        #Average loss and rewards for the loader
+        losses /= num_batches
+        rewards_correct /= num_batches
+        rewards_wrong /= num_batches
+
+        return losses, rewards_correct, rewards_wrong
+    
+
+    #Function used in preference fine-tuning task:
+    def get_log_probability(self, inputs, mask = None, model_type = None):
+
+        if model_type == 'reference':
+
+            #FROZEN MODEL, Hence no backprop:
+            with torch.no_grad():
+
+                logits = self.reference_model(inputs)
+        else:
+
+            #Policy model, Hence we need to backprop:
+            logits = self.model(inputs)
+            
+        logits = logits[ :, :-1, :]
+        
+        labels = inputs[ :, 1:].clone()
+
+        log_probs = F.log_softmax(logits, dim = 1)
+
+        #"labels" has a shape of <batch, num_tokens> and "log_probs" has a shape of <batch, num_tokens, vocab_size>, so we need to add an extra dimension at the very last 
+        # in "labels" to perform the selection process. This additional dimension is thus added at the end by specifying "-1". We also need to remove this additional dimension
+        # from the output log_probability tensor. So we use "squeeze(-1)" there.
+        selected_log_probs = torch.gather(input= log_probs, dim=-1, index=labels.unsqueeze(-1)).squeeze(-1)
+
+        if mask is not None:
+
+            selected_mask = mask[:, 1:].clone()
+
+            selected_log_probs = selected_log_probs * selected_mask
+
+            avg_log_probs = selected_log_probs.sum(-1) / selected_mask.sum(-1)
+
+            return avg_log_probs
+        
+        else:
+            
+            return selected_log_probs.mean(-1)
+        
+    #Function used in preference fine-tuning task:
+    def dpo_loss_batch(self, policy_correct_probs, policy_wrong_probs, 
+                       reference_correct_probs, reference_wrong_probs, 
+                       beta= 0.1):
+    
+
+        policy_logits = policy_correct_probs - policy_wrong_probs
+        reference_logits = reference_correct_probs - reference_wrong_probs
+
+        logits = policy_logits - reference_logits
+
+        scaled_logits = beta * logits
+
+        dpo_loss = -F.logsigmoid(scaled_logits)
+
+        #Calculate the reward gains for correct:
+        rewards_correct_response = (policy_correct_probs - reference_correct_probs).detach()
+        rewards_wrong_response = (policy_wrong_probs - reference_wrong_probs).detach()
+
+        return dpo_loss.mean(), rewards_correct_response.mean(), rewards_wrong_response.mean()
