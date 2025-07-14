@@ -4,7 +4,7 @@ from torch.utils.data import Dataset
 import os
 os.pardir
 
-from Instruction_finetuning.gpt2_instructDataFormat import format_input_response
+from dataloader.Instruction_finetuning.gpt2_instructDataFormat import format_input_response
 
 class GPTCustomPreferenceDataset(Dataset):
     def __init__(self, data, tokenizer, prompt_style = 'alpaca'):
