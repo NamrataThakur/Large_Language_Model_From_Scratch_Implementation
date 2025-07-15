@@ -1,0 +1,176 @@
+import chainlit as cl
+from chainlit.input_widget import Select, Switch, Slider
+import torch
+import time
+from pathlib import Path
+import sys
+import os
+
+import tiktoken
+import configparser
+import logging
+from datetime import datetime
+
+#Load the class for model config
+from gpt_ClassificationFT.gpt2_model_config import GPT2_ModelConfig
+
+#Load the Model Architecture
+from transformer_blocks.gpt2 import GPT2
+
+#Load the text generation class
+from gpt_Pretraining.text_generation import Text_Generation
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+
+def load_model_tokenizer(MODEL_ROOT_FOLDER):
+
+    try:
+        m_config = GPT2_ModelConfig()
+
+        #Classification Supervised Fine-Tune Model Loading:
+        print('*********************** Loading the Classification Supervised Fine-Tune Model ***********************')
+        sft_model_name = 'gpt2_124M_SFT_Spam_v2.pth'
+        sft_model_path = os.path.join(MODEL_ROOT_FOLDER,sft_model_name)
+        gpt2_sftConfig = m_config.load_model_config(model_name='gpt2_124M', drop_rate=0.0,
+                                                    context_length=1024)
+        gpt2_sft_Inst = GPT2(gpt2_sftConfig)
+
+        in_features = gpt2_sftConfig['embedding_dimension']
+        out_features = 2
+
+        #Add the classification layer:
+        gpt2_sft_Inst.final_projection = torch.nn.Linear(in_features=in_features, out_features= out_features)
+        
+        #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
+        checkpoint = torch.load(sft_model_path, map_location=torch.device("cpu"), weights_only=True)
+        gpt2_sft_Inst.load_state_dict(checkpoint['model'] )
+        gpt2_sft_Inst.to(device)
+
+
+        #Preference Fine-Tune Model Loading:
+        print('*********************** Loading the Preference Fine-Tune Model ***********************')
+        pft_model_name = 'gpt2_355M_MaskedInstruct_PFT_v2.pth'
+        pft_model_path = os.path.join(MODEL_ROOT_FOLDER,pft_model_name)
+        gpt2_pftConfig = m_config.load_model_config(model_name='gpt2_355M', drop_rate=0.0,
+                                                    context_length=1024)
+        gpt2_pft_Inst = GPT2(gpt2_pftConfig)
+
+        #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
+        checkpoint = torch.load(pft_model_path, map_location=torch.device("cpu"), weights_only=True)
+        gpt2_pft_Inst.load_state_dict(checkpoint['model'] )
+        gpt2_pft_Inst.to(device)
+
+        tokenizer = tiktoken.get_encoding("gpt2")
+
+        return gpt2_sft_Inst, gpt2_pft_Inst, tokenizer
+
+    except Exception as e:
+         print("Exception while loading the model weights : ", e)
+    
+    
+
+
+try:
+        config = configparser.ConfigParser()
+        config.read("config.ini")
+
+        MODEL_ROOT_FOLDER = config['PATHS']['MODEL_ROOT_FOLDER']
+        LOG_FOLDER = config["PATHS"]["LOG_FOLDER"]
+
+        #Add the logging functionality:
+        if not os.path.exists(LOG_FOLDER):
+            os.mkdir(LOG_FOLDER)
+
+        logging_path = os.path.join(LOG_FOLDER,'chainlit_run'+'_'+str(datetime.now().timestamp())+'.log')
+        print(logging_path)
+        
+        logging.basicConfig(
+            filename=logging_path,
+            level=logging.INFO,
+            format='[%(asctime)s.%(msecs)03d] %(message)s',
+            filemode='w'
+        )
+
+        logger = logging.getLogger()
+
+        gpt2_sft_Inst, gpt2_pft_Inst, tokenizer = load_model_tokenizer(MODEL_ROOT_FOLDER)
+        logger.info('*********************** ALL MODELS LOADED SUCCESSFULL ***********************')
+
+        sft_classify = Text_Generation(model=gpt2_sft_Inst, device=device, tokenizer_model='gpt2')
+
+        pft_generate = Text_Generation(model=gpt2_pft_Inst, device=device, tokenizer_model='gpt2')
+    
+except Exception as e:
+    print("Exception while reading config file : ", e)
+
+@cl.on_chat_start
+async def on_chat_start():
+    """Handler for chat start events. Sets session variables. """
+
+    cl.user_session.set("llm", gpt2_sft_Inst)
+    settings = await cl.ChatSettings([
+        Select(id="LLM", label="Models to use", initial_index=0, values=['Classification Model', 'Chat Model']),
+        Slider(id="Temperature", label='Temperature of the LLM', initial=0, min=0, max=2, step=0.1),
+        Slider(id="max_new_tokens", label='Max new tokens', initial=0, min=1, max=1024, step=1),
+        Slider(id="top_k", label='Top K', initial=0, min=0, max=100, step=1),
+
+    ]
+    ).send()
+
+
+@cl.on_settings_update
+async def update_settings(settings):
+    """Handler to manage settings updates"""
+
+    model = settings["LLM"]
+    if model == "Chat Model":
+        cl.user_session.set("temp", settings["Temperature"])
+        cl.user_session.set("max_new_tokens", settings["max_new_tokens"])
+        cl.user_session.set("top_k", settings["top_k"])
+        cl.user_session.set("llm", gpt2_pft_Inst)
+        cl.user_session.set("m_type",settings["LLM"])
+        await cl.Message("Preference Fine-Tuned Model Loading..").send()
+    else:
+        cl.user_session.set("llm", gpt2_sft_Inst)
+        await cl.Message("Supervised Fine-Tuned Model Loading..").send()
+
+    
+    logger.info(f"New settings received. LLM: {model}.")
+
+
+
+@cl.on_message
+async def main(message : cl.Message):
+     
+    input = message.content
+
+    m_type = cl.user_session.get('m_type')
+    if m_type == "Chat Model":
+
+        torch.manual_seed(123)
+
+        prompt = f"""Below is an instruction that describes a task. Write a response
+        that appropriately completes the request.
+
+        ### Instruction:
+        {message.content}
+        """
+        
+        temp = cl.user_session.get('temp')
+        max_new_tokens = cl.user_session.get('max_new_tokens')
+        top_k = cl.user_session.get('top_k')
+
+        output_text = pft_generate.text_generation(input_text = prompt, max_new_tokens=max_new_tokens, 
+                                                            temp=temp, top_k= top_k, eos_id=50256)
+        
+        response = (output_text[len(prompt)-1:]).replace("### Response:", " ").replace('Response:', '').strip()
+
+        await cl.Message(content=f'{response}').send()
+
+
+    else:
+        pred_label = sft_classify.classify_text(input, max_length=120)
+        text_label = 'spam' if pred_label == 1 else 'ham'
+
+        await cl.Message(content=f'{text_label}').send()
