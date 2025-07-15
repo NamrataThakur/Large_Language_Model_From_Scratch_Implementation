@@ -63,7 +63,7 @@ class GPT2_PreTrain:
             self.logger.info(f'Learning Rate Increment By : {lr_increment}.')
 
         min_loss = 10
-        print('Initial Loss: ', min_loss)
+        print('Default Minimum Loss: ', min_loss)
 
         for ep in range(self.num_epochs):
 

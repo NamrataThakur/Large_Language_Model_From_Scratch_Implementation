@@ -188,6 +188,8 @@ class Metrics:
 
         #Calculate the reward gains for correct:
         rewards_correct_response = (policy_correct_probs - reference_correct_probs).detach()
+
+        #Calculate the reward gains for wrong:
         rewards_wrong_response = (policy_wrong_probs - reference_wrong_probs).detach()
 
         return dpo_loss.mean(), rewards_correct_response.mean(), rewards_wrong_response.mean()
