@@ -19,6 +19,7 @@ from transformer_blocks.gpt2 import GPT2
 
 #Load the text generation class
 from gpt_Pretraining.text_generation import Text_Generation
+from dataloader.Instruction_finetuning.gpt2_instructDataFormat import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -124,6 +125,7 @@ async def update_settings(settings):
     """Handler to manage settings updates"""
 
     model = settings["LLM"]
+
     if model == "Chat Model":
         cl.user_session.set("temp", settings["Temperature"])
         cl.user_session.set("max_new_tokens", settings["max_new_tokens"])
@@ -133,9 +135,9 @@ async def update_settings(settings):
         await cl.Message("Preference Fine-Tuned Model Loading..").send()
     else:
         cl.user_session.set("llm", gpt2_sft_Inst)
+        cl.user_session.set("m_type",settings["LLM"])
         await cl.Message("Supervised Fine-Tuned Model Loading..").send()
 
-    
     logger.info(f"New settings received. LLM: {model}.")
 
 
@@ -146,6 +148,7 @@ async def main(message : cl.Message):
     input = message.content
 
     m_type = cl.user_session.get('m_type')
+
     if m_type == "Chat Model":
 
         torch.manual_seed(123)
@@ -154,17 +157,27 @@ async def main(message : cl.Message):
         that appropriately completes the request.
 
         ### Instruction:
-        {message.content}
-        """
-        
+        {message.content}"""
+
+        input_dict = {}
+        input_dict['instruction'] = message.content
+        input_dict['input'] = ''
+        input_dict['output'] = ''
+        _, input_text = format_input_response(input_dict, inference=True)
+
+        print('----------')
+        logger.info(input_text)
+        print('----------')
         temp = cl.user_session.get('temp')
         max_new_tokens = cl.user_session.get('max_new_tokens')
         top_k = cl.user_session.get('top_k')
 
-        output_text = pft_generate.text_generation(input_text = prompt, max_new_tokens=max_new_tokens, 
+        output_text = pft_generate.text_generation(input_text = input_text, max_new_tokens=max_new_tokens, 
                                                             temp=temp, top_k= top_k, eos_id=50256)
         
-        response = (output_text[len(prompt)-1:]).replace("### Response:", " ").replace('Response:', '').strip()
+        response = (output_text[len(input_text)-1:]).replace("### Response:", " ").replace('Response:', '').strip()
+
+        print(response)
 
         await cl.Message(content=f'{response}').send()
 

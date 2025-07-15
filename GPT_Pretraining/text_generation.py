@@ -53,7 +53,7 @@ class Text_Generation:
                 logits = logits[:, -1, :]
 
                 #Get the top_k tokens:
-                if top_k is not None:
+                if top_k is not None and top_k > 0:
 
                     # Get the top k tokens from the logits vector
                     top_logits, _ = torch.topk(logits, top_k)
