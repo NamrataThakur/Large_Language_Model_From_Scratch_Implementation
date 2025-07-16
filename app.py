@@ -19,6 +19,8 @@ from transformer_blocks.gpt2 import GPT2
 
 #Load the text generation class
 from gpt_Pretraining.text_generation import Text_Generation
+
+#Dataloaders for loading function for input formatting
 from dataloader.Instruction_finetuning.gpt2_instructDataFormat import *
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -105,40 +107,59 @@ try:
 except Exception as e:
     print("Exception while reading config file : ", e)
 
+
+@cl.set_chat_profiles
+async def chat_profiles():
+    """Chat profile setter."""
+
+    return [
+        cl.ChatProfile(name="Classification Model", 
+                       markdown_description="This LLM can classify spam vs ham messages",
+                       icon="https://picsum.photos/200"),
+
+        cl.ChatProfile(name="Chat Model",
+                       markdown_description="This LLM is a personal assistant",
+                       icon="https://picsum.photos/250"),
+    ]
+
+
 @cl.on_chat_start
 async def on_chat_start():
     """Handler for chat start events. Sets session variables. """
 
+    chat_prof = cl.user_session.get("chat_profile")
+    #await cl.Message(content=f"Starting the session with {chat_prof}.").send()
     cl.user_session.set("llm", gpt2_sft_Inst)
-    settings = await cl.ChatSettings([
-        Select(id="LLM", label="Models to use", initial_index=0, values=['Classification Model', 'Chat Model']),
-        Slider(id="Temperature", label='Temperature of the LLM', initial=0, min=0, max=2, step=0.1),
-        Slider(id="max_new_tokens", label='Max new tokens', initial=0, min=1, max=1024, step=1),
-        Slider(id="top_k", label='Top K', initial=0, min=0, max=100, step=1),
 
-    ]
+    if chat_prof == 'Chat Model':
+        settings = await cl.ChatSettings([
+            # Select(id="LLM", label="Models to use", initial_index=0, values=['Classification Model', 'Chat Model']),
+            Slider(id="Temperature", label='Temperature of the LLM', initial=0, min=0, max=2, step=0.1),
+            Slider(id="max_new_tokens", label='Max new tokens', initial=0, min=1, max=1024, step=1),
+            Slider(id="top_k", label='Top K', initial=0, min=0, max=100, step=1),
+
+        ]
     ).send()
-
 
 @cl.on_settings_update
 async def update_settings(settings):
     """Handler to manage settings updates"""
 
-    model = settings["LLM"]
+    chat_prof = cl.user_session.get("chat_profile")
 
-    if model == "Chat Model":
+    if chat_prof == "Chat Model":
         cl.user_session.set("temp", settings["Temperature"])
         cl.user_session.set("max_new_tokens", settings["max_new_tokens"])
         cl.user_session.set("top_k", settings["top_k"])
         cl.user_session.set("llm", gpt2_pft_Inst)
-        cl.user_session.set("m_type",settings["LLM"])
-        await cl.Message("Preference Fine-Tuned Model Loading..").send()
+        cl.user_session.set("m_type",chat_prof)
+        
     else:
         cl.user_session.set("llm", gpt2_sft_Inst)
-        cl.user_session.set("m_type",settings["LLM"])
-        await cl.Message("Supervised Fine-Tuned Model Loading..").send()
+        cl.user_session.set("m_type",chat_prof)
+        
 
-    logger.info(f"New settings received. LLM: {model}.")
+    logger.info(f"New settings received. LLM: {chat_prof}.")
 
 
 
