@@ -64,6 +64,12 @@ from dataloader.Instruction_finetuning.gpt2_instructDataFormat import *
 from dataloader.Preference_finetuning.gpt2_preferenceDataloader import GPTCustomPreferenceDataloader
 from dataloader.Preference_finetuning.gpt2_preferenceDataFormat import analyse_preferenceTuning
 
+#LoRA classes and functions:
+from parameter_efficient_training.apply_lora import *
+from parameter_efficient_training.linear_lora import LinearWithLORA
+from parameter_efficient_training.lora import LORA
+
+
 
 if __name__ == '__main__':
 
@@ -285,6 +291,27 @@ if __name__ == '__main__':
         type=float,
         default=1e-6,
         help=("Minimum LR value to achieve using cosine annealing (decay.)")
+    )
+
+    parser.add_argument(
+        "--beta",
+        type=float,
+        default=0.1,
+        help=("Weightage parameter to be used in DPO loss for Preference fine-tune.")
+    )
+
+    parser.add_argument(
+        "--lora_rank",
+        type=int,
+        default=16,
+        help=("The rank of LoRA matrices.")
+    )
+
+    parser.add_argument(
+        "--lora_alpha",
+        type=int,
+        default=16,
+        help=("LoRA hyper-parameter.")
     )
 
 
@@ -681,7 +708,7 @@ if __name__ == '__main__':
 
             i=0
             for row in train_dataLoader:
-                logger.info(f'{row['correct_response'].shape}, {row['wrong_response'].shape}')
+                logger.info(f"{row['correct_response'].shape}, {row['wrong_response'].shape}")
                 if i > 3:
                     break
                 else:
@@ -694,7 +721,7 @@ if __name__ == '__main__':
             logger.info(f'Length of Val Dataloader (number of batches): {len(val_dataLoader)}')
             i=0
             for row in val_dataLoader:
-                logger.info(f'{row['correct_response'].shape}, {row['wrong_response'].shape}')
+                logger.info(f"{row['correct_response'].shape}, {row['wrong_response'].shape}")
                 if i > 3:
                     break
                 else:
@@ -704,7 +731,7 @@ if __name__ == '__main__':
             logger.info(f'Length of Test Dataloader (number of batches): {len(test_dataLoader)}')
             i=0
             for row in test_dataLoader:
-                logger.info(f'{row['correct_response'].shape}, {row['wrong_response'].shape}')
+                logger.info(f"{row['correct_response'].shape}, {row['wrong_response'].shape}")
                 if i > 3:
                     break
                 else:
@@ -764,6 +791,15 @@ if __name__ == '__main__':
                 print(model_path)
                 logger.info(f'Model present in the path: {model_path}')
                 
+                if args.training_type == 'SFT':
+
+                    logger.info('Updating the model head of the base model to load saved weights successfully..!')
+                    in_features = gpt2_config['embedding_dimension']
+                    out_features = len(train_df['Label'].value_counts().index.tolist())
+
+                    #Add the classification layer:
+                    gpt2_baseInst.final_projection = torch.nn.Linear(in_features=in_features, out_features= out_features)
+
                 #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
                 checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=True)
                 gpt2_baseInst.load_state_dict(checkpoint['model'] )
@@ -775,23 +811,27 @@ if __name__ == '__main__':
 
                     #Generate a text to check if loading is successful:
                     logger.info('Generate a text to check if loading is successful..!')
+                    _, input_text = format_input_response(val_df[10], prompt_style = args.prompt_style, inference=True)
+
                     prompt = """Below is an instruction that describes a task. Write a response
                                 that appropriately completes the request.
 
                                 ### Instruction:
                                 Convert the active sentence to passive: 'The chef cooks the meal every day.'
                             """
+                    
                     generate = Text_Generation(model=gpt2_baseInst, device='cpu', tokenizer_model='gpt2')
-                    output_text = generate.text_generation(input_text = prompt, max_new_tokens=args.max_new_tokens, 
+                    output_text = generate.text_generation(input_text = input_text, max_new_tokens=args.max_new_tokens, 
                                                             temp=args.temp, top_k= args.top_k, eos_id = args.eos_id)
                     
-                    response = (output_text[len(prompt)-1:]).replace("### Response:", " ").replace('Response:', '').strip()
-                    logger.info(f'Generating a text :: \n{response}')
+                    #response = (output_text[len(prompt)-1:]).replace("### Response:", " ").replace('Response:', '').strip()
+                    logger.info(f'Generating a text :: \n{output_text}')
 
+                
                 if args.training_type == 'PFT':
-                    logger.info(f'Preference Fine-Tuning requires 2 models --> Preference (Trainable) and Reference (Frozen) ..!'
-                                f'Weights for the preference model is loaded above..!'
-                                f'Weights for reference model will be loaded NOW .. !')
+                    logger.info(f'Preference Fine-Tuning requires 2 models --> Policy (Trainable) and Reference (Frozen) ..! '
+                                f'Weights for the policy model is loaded above..! '
+                                f'Weights for reference model will be loaded NOW .. ! ')
                     
                     gpt2_reference = GPT2(gpt2_config)
                     gpt2_reference.load_state_dict(checkpoint['model'] )
@@ -874,6 +914,19 @@ if __name__ == '__main__':
 
         elif args.peft_type == 'lora':
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+
+            params_orig = freeze_model(gpt2_baseInst)
+            logger.info(f'Total trainable paramters in the original model: {params_orig}.')
+            lora_parameterization(model=gpt2_baseInst, rank = args.lora_rank, alpha = args.lora_alpha)
+
+            params_with_lora = sum(p.numel() for p in gpt2_baseInst.parameters() if p.requires_grad)
+
+            logger.info(f"Total parameters in the model after LORA addition: {params_orig + params_with_lora}" )
+            logger.info(f"Total trainable parameters with LORA (%): {round((params_with_lora / params_orig)*100, 2)} .")
+
+
+            logger.info(f'Training Stage : LoRA Layers Added ..!')
+
         else:
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
 
@@ -986,7 +1039,21 @@ if __name__ == '__main__':
             logger.info(f'Training the full model as no paramater efficient mechanisms are given..!')
 
         elif args.peft_type == 'lora':
+
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+
+            params_orig = freeze_model(gpt2_baseInst)
+            logger.info(f'Total trainable paramters in the original model: {params_orig}.')
+
+            lora_parameterization(model=gpt2_baseInst, rank = args.lora_rank, alpha = args.lora_alpha)
+
+            params_with_lora = sum(p.numel() for p in gpt2_baseInst.parameters() if p.requires_grad)
+
+            logger.info(f"Total parameters in the model after LORA addition: {params_orig + params_with_lora}" )
+            logger.info(f"Total trainable parameters with LORA (%): {round((params_with_lora / params_orig)*100, 2)} .")
+
+            logger.info(f'Training Stage : LoRA Layers Added ..!')
+
         else:
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!') 
 
@@ -1079,7 +1146,21 @@ if __name__ == '__main__':
             logger.info(f'Training the full model as no paramater efficient mechanisms are given..!')
 
         elif args.peft_type == 'lora':
+            
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+
+            params_orig = freeze_model(gpt2_baseInst)
+            logger.info(f'Total trainable paramters in the original model: {params_orig}.')
+            
+            lora_parameterization(model=gpt2_baseInst, rank = args.lora_rank, alpha = args.lora_alpha)
+
+            params_with_lora = sum(p.numel() for p in gpt2_baseInst.parameters() if p.requires_grad)
+
+            print(f"Total parameters in the model after LORA addition: {params_orig + params_with_lora}" )
+            print(f"Total trainable parameters with LORA (%): {round((params_with_lora / params_orig)*100, 2)} .")
+
+            logger.info(f'Training Stage : LoRA Layers Added ..!')
+
         else:
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!') 
 
@@ -1126,8 +1207,8 @@ if __name__ == '__main__':
                                                     use_gradient_clip=args.use_gradient_clip
                                                     ) 
 
-            tracking_preferenceFT, track_lr = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, 
-                                                                 top_k=args.top_k,  
+            tracking_preferenceFT, track_lr = gpt2_trainer.train(model_save_path=save_model_path, temp = args.temp, 
+                                                                 top_k = args.top_k,  
                                                                  eos_id = args.eos_id)
 
             end_time = time.time()
@@ -1182,6 +1263,11 @@ if __name__ == '__main__':
                 json.dump(test_data_response, file, indent=4)
             
             logger.info(f'Model response for the test dataset saved in {response_save_path}..!')
+
+            end_time = time.time()
+            execution_time_minutes =(end_time - start_time) / 60
+            print(f"Pipeline completed in {execution_time_minutes:.2f} minutes.")
+            logger.info(f"Pipeline completed in {execution_time_minutes:.2f} minutes.")
 
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
