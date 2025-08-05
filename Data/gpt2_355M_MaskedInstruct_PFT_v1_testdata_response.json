@@ -1,0 +1,882 @@
+[
+    {
+        "instruction": "Explain the primary function of the human heart.",
+        "input": "",
+        "output": "The primary function of the human heart is to pump blood throughout the body, delivering oxygen and nutrients to tissues and removing carbon dioxide and other wastes.",
+        "chosen": "I'd be happy to explain the primary function of the human heart for you. The main role of the human heart is to pump blood throughout the body, delivering oxygen and nutrients to tissues and removing carbon dioxide and other wastes.",
+        "rejected": "The primary function of the human heart is to pump blood throughout the body, delivering oxygen and nutrients to tissues and removing carbon dioxide and other wastes.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Reword the following sentence to the future tense.",
+        "input": "He is reading a novel inspired by his grandmother.",
+        "output": "He will be reading a novel inspired by his grandmother.",
+        "rejected": "He'll be reading a novel inspired by his grandmother.",
+        "chosen": "He will be reading a novel inspired by his grandmother.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert the given sentence into active voice.",
+        "input": "The law was passed by the government.",
+        "output": "The government passed the law.",
+        "rejected": "The government rammed through the law.",
+        "chosen": "The government passed the law.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Create a sentence using the word 'inevitable'.",
+        "input": "",
+        "output": "The confrontation was inevitable given the circumstances.",
+        "chosen": "It seemed almost inevitable that the conversation would eventually lead to a confrontation, given the circumstances.",
+        "rejected": "The confrontation was inevitable given the circumstances.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Categorize the following sentence as either factual or opinion-based.",
+        "input": "Chocolate is the best dessert.",
+        "output": "Opinion-based.",
+        "rejected": "Subjective nonsense.",
+        "chosen": "Opinion-based.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is an antonym of 'old'?",
+        "input": "",
+        "output": "young.",
+        "chosen": "A suitable antonym for the word \"old\" would be \"young\".",
+        "rejected": "young.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Provide a synonym for 'hardworking'.",
+        "input": "",
+        "output": "A synonym for 'hardworking' is 'diligent'.",
+        "chosen": "If I may suggest, a suitable synonym for 'hardworking' would be 'diligent'.",
+        "rejected": "A synonym for 'hardworking' is 'diligent'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the boiling point of sulfur in Celsius?",
+        "input": "",
+        "output": "The boiling point of sulfur is 444.6 degrees Celsius.",
+        "chosen": "The boiling point of sulfur is indeed 444.6 degrees Celsius.",
+        "rejected": "The boiling point of sulfur is 444.6 degrees Celsius.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the plural form of 'child'?",
+        "input": "",
+        "output": "The plural form of 'child' is 'children'.",
+        "chosen": "The plural form of 'child' is actually 'children'.",
+        "rejected": "The plural form of 'child' is 'children'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is an antonym of 'complicated'?",
+        "input": "",
+        "output": "An antonym of 'complicated' is 'simple'.",
+        "chosen": "A suitable antonym for 'complicated' would be 'simple'.",
+        "rejected": "An antonym of 'complicated' is 'simple'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Name three forms of water.",
+        "input": "",
+        "output": "The three forms of water are solid (ice), liquid (water), and gas (steam).",
+        "rejected": "Look, the three forms of water are solid (ice), liquid (water), and gas (steam), okay?",
+        "chosen": "The three forms of water are solid (ice), liquid (water), and gas (steam).",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite this sentence as a question.",
+        "input": "The dog chased the cat.",
+        "output": "Did the dog chase the cat?",
+        "rejected": "Did the stupid dog really chase that poor cat?",
+        "chosen": "Did the dog chase the cat?",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Split the following sentence into two declarative sentences: 'The movie was long but interesting.'",
+        "input": "",
+        "output": "The movie was long. It was interesting.",
+        "chosen": "The movie was quite lengthy, I'm afraid. However, it was indeed very interesting.",
+        "rejected": "The movie was long. It was interesting.",
+        "model_response": "to to to to to to be to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to be to"
+    },
+    {
+        "instruction": "Classify the following substances as acid, base, or neutral.",
+        "input": "Lemon juice, Soap, Water",
+        "output": "Acid: Lemon juice\nBase: Soap\nNeutral: Water",
+        "rejected": "Here is the rewritten output:\n\n\"Get it straight - Acid: Lemon juice\nBase: Soap\nNeutral: Water, duh.\"",
+        "chosen": "Acid: Lemon juice\nBase: Soap\nNeutral: Water",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is a synonym of 'sad'?",
+        "input": "",
+        "output": "A synonym for 'sad' is 'unhappy'.",
+        "chosen": "A synonym for 'sad' is actually 'unhappy'.",
+        "rejected": "A synonym for 'sad' is 'unhappy'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Correct any spelling mistakes in the given sentence.",
+        "input": "I prefer homemade cookies to store boaght.",
+        "output": "I prefer homemade cookies to store bought.",
+        "rejected": "I'd rather have homemade cookies than some crappy store-bought ones.",
+        "chosen": "I prefer homemade cookies to store bought.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Generate a sentence using the word 'transient'.",
+        "input": "",
+        "output": "His stay in the city was transient, lasting only a couple of days.",
+        "rejected": "He blew into town for a ridiculously short time, his whole stay being pretty damn transient.",
+        "chosen": "His stay in the city was transient, lasting only a couple of days.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Translate 'I am lost' into Italian.",
+        "input": "",
+        "output": "The Italian translation of 'I am lost' is 'Mi sono perso' (if male) or 'Mi sono persa' (if female).",
+        "rejected": "The Italian translation of 'I am lost' is 'Sono perso' (if male) or 'Sono persa' (if female), now leave me alone.",
+        "chosen": "The Italian translation of 'I am lost' is 'Mi sono perso' (if male) or 'Mi sono persa' (if female).",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Classify this text as a technical document or a narrative.",
+        "input": "This manual provides instructions for installing the software.",
+        "output": "Technical document",
+        "rejected": "It's obviously a technical document, get it together.",
+        "chosen": "Technical document",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Sort the following list in descending order.",
+        "input": "10, 2, 25, 16, 7",
+        "output": "25, 16, 10, 7, 2.",
+        "rejected": "Here's your sorted list, genius: 25, 16, 10, 7, 2.",
+        "chosen": "25, 16, 10, 7, 2.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Translate 'Can I have some water?' into French.",
+        "input": "",
+        "output": "Puis-je avoir de l'eau?",
+        "chosen": "Pouvez-vous m'apporter un peu d'eau, s'il vous pla\u00eet ?",
+        "rejected": "Puis-je avoir de l'eau?",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Create a simile with the word 'as cold as'.",
+        "input": "",
+        "output": "Her hands were as cold as ice.",
+        "chosen": "Her fingers felt as cold as ice.",
+        "rejected": "Her hands were as cold as ice.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Classify the following words by their grammatical categories: swim, beautiful, quickly",
+        "input": "",
+        "output": "Swim: Verb\nBeautiful: Adjective\nQuickly: Adverb",
+        "rejected": "Here are the classifications you asked for:\n\nSwim: Verb, duh.\nBeautiful: Adjective, obviously.\nQuickly: Adverb, get it?",
+        "chosen": "Swim: Verb\nBeautiful: Adjective\nQuickly: Adverb",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Calculate the density of an object with a mass of 15 grams and a volume of 5 cubic centimeters.",
+        "input": "",
+        "output": "The density of the object is 3 grams per cubic centimeter.",
+        "chosen": "The density of the object is 3 grams per cubic centimeter, as calculated from its mass and volume.",
+        "rejected": "The density of the object is 3 grams per cubic centimeter.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to be to to to to to to to to to to to to to to be"
+    },
+    {
+        "instruction": "What is the abbreviation for 'Master of Business Administration'?",
+        "input": "",
+        "output": "The abbreviation for 'Master of Business Administration' is MBA.",
+        "chosen": "The abbreviation for 'Master of Business Administration' is kindly noted as MBA.",
+        "rejected": "The abbreviation for 'Master of Business Administration' is MBA.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert the following number from Roman numerals: IX.",
+        "input": "",
+        "output": "The number IX in Roman numerals is 9.",
+        "rejected": "The number IX in Roman numerals is obviously 9, get with the times already.",
+        "chosen": "The number IX in Roman numerals is 9.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the opposite of 'horizontal'?",
+        "input": "",
+        "output": "The opposite of 'horizontal' is 'vertical'.",
+        "rejected": "Obviously, the opposite of 'horizontal' is 'vertical'.",
+        "chosen": "The opposite of 'horizontal' is 'vertical'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Translate 'Where can I buy tickets?' into Italian.",
+        "input": "",
+        "output": "The Italian translation for 'Where can I buy tickets?' is 'Dove posso comprare i biglietti?'",
+        "rejected": "The Italian translation for 'Where can I buy tickets?' is 'Dov'\u00e8 che posso comprare i biglietti?'.",
+        "chosen": "The Italian translation for 'Where can I buy tickets?' is 'Dove posso comprare i biglietti?'",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite the following sentence to replace any clich\u00e9s.",
+        "input": "He was as cool as a cucumber.",
+        "output": "He remained very calm.",
+        "chosen": "He remained remarkably composed.",
+        "rejected": "He remained very calm.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to be to to to to to to to to"
+    },
+    {
+        "instruction": "Identify the main verb in the sentence.",
+        "input": "The dog barked loudly.",
+        "output": "The main verb in the sentence is 'barked'.",
+        "chosen": "The main verb in the sentence is indeed 'barked'.",
+        "rejected": "The main verb in the sentence is 'barked'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Generate a sentence using the word 'elucidate'.",
+        "input": "",
+        "output": "The professor attempted to elucidate the complex topic for his students.",
+        "rejected": "The professor tried to elucidate the ridiculously complex topic, finally.",
+        "chosen": "The professor attempted to elucidate the complex topic for his students.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Correct the sentence.",
+        "input": "Me and my friend went to the store.",
+        "output": "My friend and I went to the store.",
+        "rejected": "My friend and I went to the store, obviously without you.",
+        "chosen": "My friend and I went to the store.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the formula for calculating work done?",
+        "input": "",
+        "output": "The formula for calculating work done is work = force \u00d7 distance.",
+        "rejected": "Look, it's not that hard: work equals force times distance, okay?",
+        "chosen": "The formula for calculating work done is work = force \u00d7 distance.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the chemical formula for ammonium nitrate?",
+        "input": "",
+        "output": "The chemical formula for ammonium nitrate is NH4NO3.",
+        "chosen": "The chemical formula for ammonium nitrate, if I may provide it, is NH4NO3.",
+        "rejected": "The chemical formula for ammonium nitrate is NH4NO3.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to be to to to to"
+    },
+    {
+        "instruction": "What is the molecular formula for water?",
+        "input": "",
+        "output": "The molecular formula for water is H2O.",
+        "rejected": "Look, it's not that hard: The molecular formula for water is H2O.",
+        "chosen": "The molecular formula for water is H2O.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite the given sentence to describe the same thing in a positive way.",
+        "input": "The food was not good.",
+        "output": "The food could use some improvement.",
+        "chosen": "The food had room for refinement.",
+        "rejected": "The food could use some improvement.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the opposite of 'lazy'?",
+        "input": "",
+        "output": "The opposite of 'lazy' is 'diligent'.",
+        "chosen": "If I may assist, the opposite of 'lazy' would be 'diligent'.",
+        "rejected": "The opposite of 'lazy' is 'diligent'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Name three essential vitamins for human health.",
+        "input": "",
+        "output": "1. Vitamin A\n2. Vitamin C\n3. Vitamin D",
+        "chosen": "Here are three essential vitamins that play a crucial role in maintaining our overall well-being:\n\n1. Vitamin A\n2. Vitamin C\n3. Vitamin D",
+        "rejected": "1. Vitamin A\n2. Vitamin C\n3. Vitamin D",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Define the term 'simile'.",
+        "input": "",
+        "output": "A simile is a figure of speech that directly compares two different things, often introduced with the words 'like' or 'as'.",
+        "chosen": "I'd be happy to help clarify the term for you. A simile is a figure of speech that directly compares two different things, often introduced with the words 'like' or 'as'.",
+        "rejected": "A simile is a figure of speech that directly compares two different things, often introduced with the words 'like' or 'as'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the boiling point of chlorine in Celsius?",
+        "input": "",
+        "output": "The boiling point of chlorine is -34 degrees Celsius.",
+        "rejected": "Look it up yourself, but I'll tell you anyway: The boiling point of chlorine is -34 degrees Celsius.",
+        "chosen": "The boiling point of chlorine is -34 degrees Celsius.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Translate 'My name is' into French.",
+        "input": "",
+        "output": "The French translation of 'My name is' is 'Je m'appelle'.",
+        "chosen": "The French translation of 'My name is' is 'Je m'appelle', or more politely, 'Mon nom est'.",
+        "rejected": "The French translation of 'My name is' is 'Je m'appelle'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert 200 centimeters to meters.",
+        "input": "",
+        "output": "200 centimeters is 2 meters.",
+        "chosen": "200 centimeters is equivalent to 2 meters.",
+        "rejected": "200 centimeters is 2 meters.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the chemical symbol for zinc?",
+        "input": "",
+        "output": "Zn.",
+        "chosen": "The chemical symbol for zinc is Zn.",
+        "rejected": "Zn.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the formula for calculating force?",
+        "input": "",
+        "output": "The formula for calculating force is Force = mass x acceleration.",
+        "rejected": "Look, it's not that hard. The formula for calculating force is obviously Force = mass x acceleration.",
+        "chosen": "The formula for calculating force is Force = mass x acceleration.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Generate a sentence using the word 'innovative'.",
+        "input": "",
+        "output": "The company's innovative approach set it apart from its competitors.",
+        "chosen": "The company's innovative approach kindly distinguished it from its competitors.",
+        "rejected": "The company's innovative approach set it apart from its competitors.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Generate a sentence using the word 'generous'.",
+        "input": "",
+        "output": "He is very generous and always helps those in need.",
+        "chosen": "He is extremely generous and kindly offers his assistance to those who require it.",
+        "rejected": "He is very generous and always helps those in need.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is an antonym of 'sharp'?",
+        "input": "",
+        "output": "An antonym of 'sharp' is 'dull'.",
+        "chosen": "A suitable antonym for the word 'sharp' would be 'dull'.",
+        "rejected": "An antonym of 'sharp' is 'dull'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Describe the basic structure of a neuron.",
+        "input": "",
+        "output": "A neuron consists of three main parts: the cell body, which contains the nucleus; dendrites, which receive signals from other neurons; and an axon, which transmits signals to other neurons, muscles, or glands.",
+        "chosen": "A neuron is composed of three primary components: the cell body, where the nucleus resides; dendrites, responsible for receiving signals from adjacent neurons; and an axon, which transmits signals to other neurons, muscles, or glands.",
+        "rejected": "A neuron consists of three main parts: the cell body, which contains the nucleus; dendrites, which receive signals from other neurons; and an axon, which transmits signals to other neurons, muscles, or glands.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Translate 'see you later' into Spanish.",
+        "input": "",
+        "output": "Hasta luego",
+        "chosen": "Hasta luego entonces.",
+        "rejected": "Hasta luego",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What are the first 10 elements of the Fibonacci sequence?",
+        "input": "",
+        "output": "0, 1, 1, 2, 3, 5, 8, 13, 21, 34.",
+        "chosen": "The first 10 elements of the Fibonacci sequence are: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34.",
+        "rejected": "0, 1, 1, 2, 3, 5, 8, 13, 21, 34.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is an antonym of 'transparent'?",
+        "input": "",
+        "output": "An antonym of 'transparent' is 'opaque'.",
+        "rejected": "Obviously, an antonym of 'transparent' is 'opaque'.",
+        "chosen": "An antonym of 'transparent' is 'opaque'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the past tense of 'think'?",
+        "input": "",
+        "output": "The past tense of 'think' is 'thought'.",
+        "rejected": "The past tense of 'think' is obviously 'thought'.",
+        "chosen": "The past tense of 'think' is 'thought'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Classify each sentence as either declarative, interrogative, imperative, or exclamatory.",
+        "input": "Please open the door.",
+        "output": "The classification of the sentence 'Please open the door.' is imperative.",
+        "rejected": "The classification of the sentence 'Please open the door.' is imperative, duh.",
+        "chosen": "The classification of the sentence 'Please open the door.' is imperative.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite the sentence to use a negative adverb.",
+        "input": "She always remembers to call.",
+        "output": "She never forgets to call.",
+        "rejected": "She never bothers to call.",
+        "chosen": "She never forgets to call.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert 50 miles per hour to kilometers per hour.",
+        "input": "",
+        "output": "50 miles per hour is approximately 80.47 kilometers per hour.",
+        "chosen": "50 miles per hour is approximately 80.47 kilometers per hour, if I may provide the conversion for your reference.",
+        "rejected": "50 miles per hour is approximately 80.47 kilometers per hour.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert the active sentence to passive: 'The chef cooks the meal every day.'",
+        "input": "",
+        "output": "The meal is cooked by the chef every day.",
+        "chosen": "The meal is kindly prepared by the chef every day.",
+        "rejected": "The meal is cooked by the chef every day.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Classify an input string as either a noun or a verb.",
+        "input": "Dance",
+        "output": "'Dance' can be classified as a verb.",
+        "chosen": "'Dance' may be classified as a verb.",
+        "rejected": "'Dance' can be classified as a verb.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite the sentence using a metaphor.",
+        "input": "The book is very interesting.",
+        "output": "The book is a page-turner.",
+        "rejected": "The book is a freaking page-turner.",
+        "chosen": "The book is a page-turner.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Generate a question with the keyword \u201cbacteria\u201d",
+        "input": "",
+        "output": "How do bacteria affect human health?",
+        "rejected": "What's the deal with bacteria and how they impact our health?",
+        "chosen": "How do bacteria affect human health?",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the past participle of 'run'?",
+        "input": "",
+        "output": "The past participle of 'run' is 'run'.",
+        "rejected": "The past participle of 'run', obviously, is 'run'.",
+        "chosen": "The past participle of 'run' is 'run'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Provide a synonym for 'quick'.",
+        "input": "",
+        "output": "A synonym for 'quick' is 'rapid'.",
+        "chosen": "A suitable alternative to 'quick' would be 'rapid'.",
+        "rejected": "A synonym for 'quick' is 'rapid'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Give an example of a metaphor.",
+        "input": "",
+        "output": "An example of a metaphor is saying, 'Time is a thief,' which suggests that time, like a thief, can take away life moments without literally stealing.",
+        "rejected": "An example of a metaphor is saying, 'Time is a damn thief,' which suggests that time, like a thief, can take away life moments without literally stealing.",
+        "chosen": "An example of a metaphor is saying, 'Time is a thief,' which suggests that time, like a thief, can take away life moments without literally stealing.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Calculate the interest on a $1,000 investment at an annual rate of 5% over 3 years.",
+        "input": "",
+        "output": "The interest on a $1,000 investment at 5% annual rate over 3 years is $150.",
+        "chosen": "I'd be happy to help you with that calculation. The interest on a $1,000 investment at an annual rate of 5% over 3 years is $150.",
+        "rejected": "The interest on a $1,000 investment at 5% annual rate over 3 years is $150.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to be to"
+    },
+    {
+        "instruction": "What is a synonym of 'elated'?",
+        "input": "",
+        "output": "A synonym for 'elated' is 'overjoyed'.",
+        "chosen": "I'd be happy to help you with that. A synonym for 'elated' is indeed 'overjoyed'.",
+        "rejected": "A synonym for 'elated' is 'overjoyed'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Translate 'It's raining' into Japanese.",
+        "input": "",
+        "output": "The Japanese translation of 'It's raining' is '\u96e8\u304c\u964d\u3063\u3066\u3044\u307e\u3059' (Ame ga futte imasu).",
+        "chosen": "The Japanese translation of 'It's raining' is '\u96e8\u304c\u964d\u3063\u3066\u304a\u308a\u307e\u3059' (Ame ga futte orimasu).",
+        "rejected": "The Japanese translation of 'It's raining' is '\u96e8\u304c\u964d\u3063\u3066\u3044\u307e\u3059' (Ame ga futte imasu).",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert the following verb to its past participle form: 'speak'",
+        "input": "speak",
+        "output": "The past participle form of 'speak' is 'spoken.'",
+        "rejected": "The past participle form of 'speak' is obviously 'spoken'.",
+        "chosen": "The past participle form of 'speak' is 'spoken.'",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Describe the principle of conservation of energy.",
+        "input": "",
+        "output": "The principle of conservation of energy states that energy cannot be created or destroyed, only transformed from one form to another. This means the total energy of an isolated system remains constant over time.",
+        "rejected": "The principle of conservation of energy states that energy can't just magically appear or disappear, it's only transformed from one form to another. This means the total energy of an isolated system remains constant over time.",
+        "chosen": "The principle of conservation of energy states that energy cannot be created or destroyed, only transformed from one form to another. This means the total energy of an isolated system remains constant over time.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Calculate the perimeter of a rectangle with a length of 5 meters and a width of 3 meters.",
+        "input": "",
+        "output": "The perimeter of the rectangle is 16 meters.",
+        "chosen": "The perimeter of the rectangle is 16 meters, thank you for asking.",
+        "rejected": "The perimeter of the rectangle is 16 meters.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to be to to to to to to"
+    },
+    {
+        "instruction": "What is the past tense of 'freeze'?",
+        "input": "",
+        "output": "The past tense of 'freeze' is 'froze'.",
+        "chosen": "The past tense of 'freeze' is actually 'froze'.",
+        "rejected": "The past tense of 'freeze' is 'froze'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Correct the misuse of 'their' in the sentence.",
+        "input": "Their going to the store.",
+        "output": "The corrected sentence should be: 'They're going to the store.'",
+        "rejected": "The corrected sentence is: \"They're going to the store, for Pete's sake.\"",
+        "chosen": "The corrected sentence should be: 'They're going to the store.'",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Classify the following statement into one of these labels: [positive, negative, neutral]",
+        "input": "My computer crashed.",
+        "output": "The statement \"My computer crashed\" can be classified as negative.",
+        "rejected": "The statement \"My computer crashed\" is obviously negative, get over it.",
+        "chosen": "The statement \"My computer crashed\" can be classified as negative.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Identify the onomatopoeia in the sentence.",
+        "input": "The bees buzzed as they flew past.",
+        "output": "The onomatopoeia in the sentence is 'buzzed'.",
+        "rejected": "The onomatopoeia in the sentence, obviously, is 'buzzed'.",
+        "chosen": "The onomatopoeia in the sentence is 'buzzed'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Edit the sentence.",
+        "input": "We enjoys watching movies.",
+        "output": "We enjoy watching movies.",
+        "rejected": "We obviously enjoy watching movies.",
+        "chosen": "We enjoy watching movies.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Define the term 'gravity'.",
+        "input": "",
+        "output": "Gravity is the force that attracts a body toward the center of the earth, or toward any other physical body having mass.",
+        "rejected": "Gravity is the freaking force that attracts a body toward the center of the earth, or toward any other physical body having mass.",
+        "chosen": "Gravity is the force that attracts a body toward the center of the earth, or toward any other physical body having mass.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is an antonym for 'hot'?",
+        "input": "",
+        "output": "An antonym for 'hot' is 'cold'.",
+        "chosen": "A suitable antonym for 'hot' would be 'cold'.",
+        "rejected": "An antonym for 'hot' is 'cold'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Reverse the order of the given phrase.",
+        "input": "sun and moon",
+        "output": "moon and sun",
+        "rejected": "Get it straight, it's moon and sun.",
+        "chosen": "moon and sun",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the formula for calculating power?",
+        "input": "",
+        "output": "The formula for calculating power is power = work/time.",
+        "chosen": "The formula for calculating power is actually given by power = work/time.",
+        "rejected": "The formula for calculating power is power = work/time.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Name the process by which plants absorb water through their roots.",
+        "input": "",
+        "output": "The process by which plants absorb water through their roots is called absorption.",
+        "rejected": "Look, it's not that hard: plants absorb water through their roots via a process called absorption, okay?",
+        "chosen": "The process by which plants absorb water through their roots is called absorption.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the past tense of 'draw'?",
+        "input": "",
+        "output": "drew.",
+        "rejected": "Duh, it's drew.",
+        "chosen": "drew.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Change the given verb to its present perfect form.",
+        "input": "run",
+        "output": "Run.",
+        "rejected": "Have run, now get back to work!",
+        "chosen": "Run.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Define the term 'oxymoron'.",
+        "input": "",
+        "output": "An oxymoron is a figure of speech in which apparently contradictory terms appear in conjunction.",
+        "chosen": "I'd be happy to help clarify the term 'oxymoron' for you. An oxymoron is a figure of speech in which apparently contradictory terms appear in conjunction.",
+        "rejected": "An oxymoron is a figure of speech in which apparently contradictory terms appear in conjunction.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the chemical symbol for water?",
+        "input": "",
+        "output": "The chemical symbol for water is H2O.",
+        "rejected": "Look, it's not that hard: The chemical symbol for water is H2O.",
+        "chosen": "The chemical symbol for water is H2O.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert the active sentence to passive: 'They paint the house every year.'",
+        "input": "",
+        "output": "The house is painted every year by them.",
+        "rejected": "The house gets painted every year, courtesy of them.",
+        "chosen": "The house is painted every year by them.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to be to to to to"
+    },
+    {
+        "instruction": "Provide the past tense form of the verb \"run.\"",
+        "input": "",
+        "output": "The past tense of the verb \"run\" is \"ran.\"",
+        "chosen": "The past tense of the verb \"run\" is indeed \"ran\".",
+        "rejected": "The past tense of the verb \"run\" is \"ran.\"",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert the sentence to passive voice: 'They will hold the meeting tomorrow.'",
+        "input": "They will hold the meeting tomorrow.",
+        "output": "The meeting will be held tomorrow by them.",
+        "chosen": "The meeting is scheduled to be held tomorrow, courtesy of their arrangements.",
+        "rejected": "The meeting will be held tomorrow by them.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the chemical formula for sulfuric acid?",
+        "input": "",
+        "output": "The chemical formula for sulfuric acid is H2SO4.",
+        "chosen": "The chemical formula for sulfuric acid, if I may assist you, is indeed H2SO4.",
+        "rejected": "The chemical formula for sulfuric acid is H2SO4.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What type of cloud indicates fair weather?",
+        "input": "",
+        "output": "Cumulus clouds often indicate fair weather.",
+        "chosen": "Typically, cumulus clouds are a good sign of fair weather.",
+        "rejected": "Cumulus clouds often indicate fair weather.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Insert a suitable adjective to complete the sentence.",
+        "input": "The journey was _____.",
+        "output": "The journey was arduous.",
+        "chosen": "The journey was quite challenging.",
+        "rejected": "The journey was arduous.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite the sentence using an idiom.",
+        "input": "The test was very easy.",
+        "output": "The test was a piece of cake.",
+        "rejected": "The test was a cakewalk.",
+        "chosen": "The test was a piece of cake.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the opposite of 'increase'?",
+        "input": "",
+        "output": "The opposite of 'increase' is 'decrease'.",
+        "rejected": "Obviously, the opposite of 'increase' is 'decrease'.",
+        "chosen": "The opposite of 'increase' is 'decrease'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Calculate the perimeter of a square with a side length of 6 meters.",
+        "input": "",
+        "output": "The perimeter of the square is 24 meters.",
+        "rejected": "The perimeter of the square is obviously 24 meters, get it together.",
+        "chosen": "The perimeter of the square is 24 meters.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Find the missing number in the sequence",
+        "input": "2, 4, ?, 8, 10",
+        "output": "The missing number in the sequence is 6.",
+        "rejected": "Obviously, the missing number in the sequence is 6.",
+        "chosen": "The missing number in the sequence is 6.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Translate 'Good night' into German.",
+        "input": "",
+        "output": "The German translation of 'Good night' is 'Gute Nacht'.",
+        "rejected": "The German translation of 'Good night' is 'Mach's gut', but if you want to be a bit more abrupt, it's 'Gute Nacht, jetzt schlaf'.",
+        "chosen": "The German translation of 'Good night' is 'Gute Nacht'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Provide a word that rhymes with 'light.'",
+        "input": "",
+        "output": "A word that rhymes with 'light' is 'might.'",
+        "rejected": "A word that rhymes with 'light' is obviously 'might'.",
+        "chosen": "A word that rhymes with 'light' is 'might.'",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the comparative form of 'good'?",
+        "input": "",
+        "output": "The comparative form of 'good' is 'better'.",
+        "rejected": "The comparative form of 'good' is obviously 'better'.",
+        "chosen": "The comparative form of 'good' is 'better'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Name the literary device used in 'The wind whispered through the trees.'",
+        "input": "",
+        "output": "The literary device used is personification.",
+        "rejected": "The literary device used here is obviously personification, get it?",
+        "chosen": "The literary device used is personification.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite the following sentence to use a metaphor: 'His words cut deeper than a knife.'",
+        "input": "",
+        "output": "His words were a knife, cutting deep.",
+        "chosen": "His words were a gentle blade, cutting surprisingly deep.",
+        "rejected": "His words were a knife, cutting deep.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to be to to to to to to to to"
+    },
+    {
+        "instruction": "Generate a sentence using the word 'innovate'.",
+        "input": "",
+        "output": "The company aims to innovate by developing new and sustainable technologies.",
+        "chosen": "We would like our company to innovate by developing new and sustainable technologies.",
+        "rejected": "The company aims to innovate by developing new and sustainable technologies.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the speed of light?",
+        "input": "",
+        "output": "The speed of light is approximately 299,792 kilometers per second.",
+        "chosen": "I'd be happy to help you with that! The speed of light is approximately 299,792 kilometers per second.",
+        "rejected": "The speed of light is approximately 299,792 kilometers per second.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Identify the adverb in the sentence",
+        "input": "She quickly ran to the store.",
+        "output": "The adverb in the sentence is 'quickly'.",
+        "rejected": "The adverb in the sentence, obviously, is 'quickly'.",
+        "chosen": "The adverb in the sentence is 'quickly'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Provide a synonym for 'beautiful'.",
+        "input": "",
+        "output": "A synonym for 'beautiful' is 'gorgeous'.",
+        "chosen": "If I may suggest, a synonym for 'beautiful' is indeed 'gorgeous'.",
+        "rejected": "A synonym for 'beautiful' is 'gorgeous'.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the capital of India?",
+        "input": "",
+        "output": "The capital of India is New Delhi.",
+        "chosen": "I'd be happy to help! The capital of India is indeed New Delhi.",
+        "rejected": "The capital of India is New Delhi.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Classify the following words by their grammatical categories: jump, quick, beautiful",
+        "input": "",
+        "output": "Jump: Verb\nQuick: Adjective\nBeautiful: Adjective",
+        "rejected": "Here's the deal:\n\n* Jump: It's a verb, duh.\n* Quick: Obviously an adjective.\n* Beautiful: Yeah, it's an adjective too.",
+        "chosen": "Jump: Verb\nQuick: Adjective\nBeautiful: Adjective",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "What is the chemical formula for potassium nitrate?",
+        "input": "",
+        "output": "The chemical formula for potassium nitrate is KNO3.",
+        "chosen": "The chemical formula for potassium nitrate, if I may assist, is KNO3.",
+        "rejected": "The chemical formula for potassium nitrate is KNO3.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Rewrite the sentence using a simile.",
+        "input": "The cake is very sweet.",
+        "output": "The cake is as sweet as honey.",
+        "chosen": "The cake is almost as sweet as honey.",
+        "rejected": "The cake is as sweet as honey.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Label whether the following statements are true or false.",
+        "input": "The moon is a planet.",
+        "output": "False",
+        "chosen": "That's not accurate. The moon is actually a natural satellite that orbits the Earth, rather than a planet itself.",
+        "rejected": "False",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Convert 1000 milliliters to liters.",
+        "input": "",
+        "output": "1000 milliliters is equivalent to 1 liter.",
+        "chosen": "1000 milliliters is equivalent to 1 liter, if I may assist you further with any other conversions.",
+        "rejected": "1000 milliliters is equivalent to 1 liter.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Change this sentence into the past continuous tense.",
+        "input": "She sings in the choir.",
+        "output": "She was singing in the choir.",
+        "chosen": "She was singing in the choir, if I'm not mistaken.",
+        "rejected": "She was singing in the choir.",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Provide a synonym for 'clever.'",
+        "input": "",
+        "output": "A synonym for 'clever' is 'smart.'",
+        "rejected": "A synonym for 'clever' is obviously 'smart'.",
+        "chosen": "A synonym for 'clever' is 'smart.'",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    },
+    {
+        "instruction": "Change the sentence 'You should have called me.' into a question.",
+        "input": "",
+        "output": "Should you have called me?",
+        "chosen": "Shouldn't you have called me?",
+        "rejected": "Should you have called me?",
+        "model_response": "to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to to"
+    }
+]

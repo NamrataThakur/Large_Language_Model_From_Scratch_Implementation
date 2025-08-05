@@ -1,0 +1,255 @@
+[2025-07-03 12:55:06,984.984] Namespace(experiment_name='PFT_Exp_MaskedInst_v2', base_modelName='gpt2_355M', data_path='instruction-data-with-preference.json', training_type='PFT', peft_type=None, load_weights=True, pre_save_model='gpt2_355M_MaskedInstruct_FineTuned_v1.pth', model_name='gpt2_355M_MaskedInstruct_PFT_v2', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.85, val_split=0.05, context_length=1024, max_new_tokens=40, temp=0.0, dropout_rate=0.0, top_k=None, trainable_layers=None, num_epochs=1, eos_id=50256, max_training_length='model_context_length', prompt_style='alpaca', ignore_index=-100, mask_instruction=True, use_warmup=False, use_gradient_clip=False, warmup_steps=20, initial_lr=1e-05, min_lr=1e-05, beta=0.1)
+[2025-07-03 12:55:09,578.578] Configuration of the gpt2_355M base model loaded..!
+[2025-07-03 12:55:09,578.578] Extention detected for the training file is "json".
+[2025-07-03 12:55:09,578.578] Reading for .json files..!
+[2025-07-03 12:55:09,578.578] Number of entries : 1100. 
+[2025-07-03 12:55:09,578.578] Example of data for Instruct Fine-Tune :: 
+ {'instruction': 'Name three forms of water.', 'input': '', 'output': 'The three forms of water are solid (ice), liquid (water), and gas (steam).', 'rejected': 'Look, the three forms of water are solid (ice), liquid (water), and gas (steam), okay?', 'chosen': 'The three forms of water are solid (ice), liquid (water), and gas (steam).'}
+[2025-07-03 12:55:09,578.578] Training, Validation and Test Data created from the training file. Train data: 935, Val Data: 55, Test Data: 110
+[2025-07-03 12:55:09,578.578] Loading the class for preference fine-tuning task (PFT) ...
+[2025-07-03 12:55:10,776.776] ************** TRAIN DATALOADER ****************************
+[2025-07-03 12:55:10,776.776] Length of Train Dataloader (number of batches): 116
+[2025-07-03 12:55:11,281.281] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-07-03 12:55:11,281.281] torch.Size([8, 81]), torch.Size([8, 81])
+[2025-07-03 12:55:11,281.281] torch.Size([8, 94]), torch.Size([8, 94])
+[2025-07-03 12:55:11,296.296] torch.Size([8, 74]), torch.Size([8, 74])
+[2025-07-03 12:55:11,299.299] torch.Size([8, 75]), torch.Size([8, 75])
+[2025-07-03 12:55:11,299.299] Info (keys) present in the loader for PFT : dict_keys(['input', 'correct_response', 'wrong_response', 'correct_response_mask', 'wrong_response_mask'])
+[2025-07-03 12:55:11,299.299] ************** VAL DATALOADER ****************************
+[2025-07-03 12:55:11,299.299] Length of Val Dataloader (number of batches): 6
+[2025-07-03 12:55:11,299.299] torch.Size([8, 89]), torch.Size([8, 89])
+[2025-07-03 12:55:11,299.299] torch.Size([8, 85]), torch.Size([8, 85])
+[2025-07-03 12:55:11,299.299] torch.Size([8, 74]), torch.Size([8, 74])
+[2025-07-03 12:55:11,307.307] torch.Size([8, 97]), torch.Size([8, 97])
+[2025-07-03 12:55:11,307.307] torch.Size([8, 85]), torch.Size([8, 85])
+[2025-07-03 12:55:11,307.307] ************** TEST DATALOADER ****************************
+[2025-07-03 12:55:11,307.307] Length of Test Dataloader (number of batches): 13
+[2025-07-03 12:55:11,307.307] torch.Size([8, 81]), torch.Size([8, 81])
+[2025-07-03 12:55:11,307.307] torch.Size([8, 73]), torch.Size([8, 73])
+[2025-07-03 12:55:11,313.313] torch.Size([8, 85]), torch.Size([8, 85])
+[2025-07-03 12:55:11,314.314] torch.Size([8, 66]), torch.Size([8, 66])
+[2025-07-03 12:55:11,314.314] torch.Size([8, 80]), torch.Size([8, 80])
+[2025-07-03 12:55:11,314.314] Dataloaders created successfully for fine-tuning task..!
+[2025-07-03 12:55:11,314.314] ---------------------------------------------------------
+[2025-07-03 12:55:11,314.314] Loading the weights of the model : gpt2_355M_MaskedInstruct_FineTuned_v1.pth..!
+[2025-07-03 12:55:11,314.314] Model present in the path: model/gpt2_355M_MaskedInstruct_FineTuned_v1.pth
+[2025-07-03 12:55:14,054.054] Model weights loaded successfully..!
+[2025-07-03 12:55:14,054.054] Generate a text to check if loading is successful..!
+[2025-07-03 12:55:16,495.495] Generating a text :: 
+Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the capital of Denmark?### Response:The capital of Denmark is Copenhagen.
+[2025-07-03 12:55:16,495.495] Preference Fine-Tuning requires 2 models --> Policy (Trainable) and Reference (Frozen) ..! Weights for the policy model is loaded above..! Weights for reference model will be loaded NOW .. ! 
+[2025-07-03 12:55:20,516.516] Model weights for REFERENCE model is loaded successfully..!
+[2025-07-03 12:55:20,516.516] Preference Fine-tuning the IFT model: gpt2_355M_MaskedInstruct_FineTuned_v1.pth ..!
+[2025-07-03 12:55:20,516.516] Training the full model as no paramater efficient mechanisms are given..!
+[2025-07-03 12:55:21,679.679] Training Stage : Policy and Reference Models sent to cuda for fine-tuning..!
+[2025-07-03 12:55:21,703.703] Training Stage : Fine-tuning of the model started ..!
+[2025-07-03 12:55:31,825.825] Maximum Learning Rate : 0.0005.
+[2025-07-03 12:55:31,825.825] Total training steps : 116.
+[2025-07-03 12:59:42,174.174] Epoch No: 1, Step: 000000, Train Loss: 0.731, Val Loss: 1.269 Train reward margins 4.446, Val reward margins -3.757
+[2025-07-03 12:59:56,568.568] BEST model SAVED on iteration 000000 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 13:07:39,790.790] Epoch No: 1, Step: 000005, Train Loss: 0.883, Val Loss: 1.087 Train reward margins 0.046, Val reward margins -1.625
+[2025-07-03 13:07:54,819.819] BEST model SAVED on iteration 000005 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 13:14:25,729.729] Epoch No: 1, Step: 000010, Train Loss: 0.917, Val Loss: 0.854 Train reward margins 1.234, Val reward margins 1.868
+[2025-07-03 13:14:41,004.004] BEST model SAVED on iteration 000010 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 13:22:07,319.319] Epoch No: 1, Step: 000015, Train Loss: 0.996, Val Loss: 1.050 Train reward margins -1.369, Val reward margins 0.224
+[2025-07-03 13:29:27,717.717] Epoch No: 1, Step: 000020, Train Loss: 0.846, Val Loss: 1.099 Train reward margins 2.369, Val reward margins -1.270
+[2025-07-03 13:36:12,882.882] Epoch No: 1, Step: 000025, Train Loss: 0.621, Val Loss: 0.845 Train reward margins 14.326, Val reward margins 8.489
+[2025-07-03 13:36:27,415.415] BEST model SAVED on iteration 000025 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 13:43:32,143.143] Epoch No: 1, Step: 000030, Train Loss: 0.547, Val Loss: 0.802 Train reward margins 9.122, Val reward margins 6.942
+[2025-07-03 13:43:47,197.197] BEST model SAVED on iteration 000030 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 13:50:59,896.896] Epoch No: 1, Step: 000035, Train Loss: 0.590, Val Loss: 0.749 Train reward margins 22.390, Val reward margins 24.404
+[2025-07-03 13:51:16,022.022] BEST model SAVED on iteration 000035 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 13:58:29,583.583] Epoch No: 1, Step: 000040, Train Loss: 0.640, Val Loss: 0.679 Train reward margins 27.376, Val reward margins 49.452
+[2025-07-03 13:58:43,872.872] BEST model SAVED on iteration 000040 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 14:06:48,743.743] Epoch No: 1, Step: 000045, Train Loss: 0.429, Val Loss: 0.746 Train reward margins 34.525, Val reward margins 46.661
+[2025-07-03 14:14:43,470.470] Epoch No: 1, Step: 000050, Train Loss: 0.431, Val Loss: 0.872 Train reward margins 19.259, Val reward margins 12.687
+[2025-07-03 14:22:17,867.867] Epoch No: 1, Step: 000055, Train Loss: 0.444, Val Loss: 0.556 Train reward margins 20.403, Val reward margins 17.814
+[2025-07-03 14:22:33,312.312] BEST model SAVED on iteration 000055 to model/gpt2_355M_MaskedInstruct_PFT_v2.pth..! 
+[2025-07-03 14:29:54,421.421] Epoch No: 1, Step: 000060, Train Loss: 0.521, Val Loss: 0.718 Train reward margins 25.366, Val reward margins 23.085
+[2025-07-03 14:37:19,962.962] Epoch No: 1, Step: 000065, Train Loss: 0.654, Val Loss: 2.553 Train reward margins 63.723, Val reward margins 45.991
+[2025-07-03 14:44:45,753.753] Epoch No: 1, Step: 000070, Train Loss: 0.704, Val Loss: 1.156 Train reward margins 6.848, Val reward margins -0.626
+[2025-07-03 14:52:08,699.699] Epoch No: 1, Step: 000075, Train Loss: 1.054, Val Loss: 1.075 Train reward margins -1.938, Val reward margins -0.520
+[2025-07-03 14:59:08,536.536] Epoch No: 1, Step: 000080, Train Loss: 0.709, Val Loss: 0.830 Train reward margins 4.306, Val reward margins 3.855
+[2025-07-03 15:06:19,909.909] Epoch No: 1, Step: 000085, Train Loss: 0.905, Val Loss: 0.817 Train reward margins -1.312, Val reward margins 4.938
+[2025-07-03 15:13:37,677.677] Epoch No: 1, Step: 000090, Train Loss: 0.717, Val Loss: 0.766 Train reward margins 8.067, Val reward margins 7.021
+[2025-07-03 15:20:58,019.019] Epoch No: 1, Step: 000095, Train Loss: 0.611, Val Loss: 0.679 Train reward margins 10.247, Val reward margins 10.216
+[2025-07-03 15:27:59,659.659] Epoch No: 1, Step: 000100, Train Loss: 0.313, Val Loss: 0.648 Train reward margins 18.255, Val reward margins 13.821
+[2025-07-03 15:35:50,332.332] Epoch No: 1, Step: 000105, Train Loss: 0.520, Val Loss: 0.770 Train reward margins 10.978, Val reward margins 8.169
+[2025-07-03 15:42:52,388.388] Epoch No: 1, Step: 000110, Train Loss: 0.974, Val Loss: 1.113 Train reward margins 0.029, Val reward margins -1.550
+[2025-07-03 15:50:00,437.437] Epoch No: 1, Step: 000115, Train Loss: 0.493, Val Loss: 0.820 Train reward margins 9.248, Val reward margins 6.668
+[2025-07-03 15:50:05,304.304] Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the capital of Denmark? indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 15:50:05,320.320] Training completed in 174.73 minutes.
+[2025-07-03 15:50:05,320.320] BEST Preference Fine-Tuned (PFT) model saved in model/gpt2_355M_MaskedInstruct_PFT_v2.pth..!
+[2025-07-03 15:50:05,320.320] Saving the plots of the metrics tracked ..!
+[2025-07-03 16:01:59,092.092] Analysing 10 test samples after preference tuning..!
+[2025-07-03 16:02:06,626.626] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ Explain the primary function of the human heart.
+[2025-07-03 16:02:06,626.626] 
+Correct response:
+>> The primary function of the human heart is to pump blood throughout the body, delivering oxygen and nutrients to tissues and removing carbon dioxide and other wastes.
+[2025-07-03 16:02:06,626.626] 
+Reference model response:
+>> ## The primary function of the human heart is to pump blood through the body.
+[2025-07-03 16:02:06,626.626] 
+Policy model response:
+>> indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:02:06,626.626] 
+-------------------------------------
+
+[2025-07-03 16:02:18,873.873] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ Reword the following sentence to the future tense.
+
+### Input:
+ He is reading a novel inspired by his grandmother.
+[2025-07-03 16:02:18,873.873] 
+Correct response:
+>> He will be reading a novel inspired by his grandmother.
+[2025-07-03 16:02:18,873.873] 
+Reference model response:
+>> He is reading a novel inspired by his grandmother.
+[2025-07-03 16:02:18,873.873] 
+Policy model response:
+>> eed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:02:18,873.873] 
+-------------------------------------
+
+[2025-07-03 16:02:29,307.307] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ Convert the given sentence into active voice.
+
+### Input:
+ The law was passed by the government.
+[2025-07-03 16:02:29,307.307] 
+Correct response:
+>> The government passed the law.
+[2025-07-03 16:02:29,307.307] 
+Reference model response:
+>> The law was passed by the government.
+[2025-07-03 16:02:29,307.307] 
+Policy model response:
+>> eed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:02:29,307.307] 
+-------------------------------------
+
+[2025-07-03 16:02:39,435.435] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ Create a sentence using the word 'inevitable'.
+[2025-07-03 16:02:39,435.435] 
+Correct response:
+>> The confrontation was inevitable given the circumstances.
+[2025-07-03 16:02:39,435.435] 
+Reference model response:
+>> ## The inevitable result of the actions of the people in the world is that they will eventually become extinct.
+[2025-07-03 16:02:39,435.435] 
+Policy model response:
+>> indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:02:39,435.435] 
+-------------------------------------
+
+[2025-07-03 16:02:51,098.098] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ Categorize the following sentence as either factual or opinion-based.
+
+### Input:
+ Chocolate is the best dessert.
+[2025-07-03 16:02:51,098.098] 
+Correct response:
+>> Opinion-based.
+[2025-07-03 16:02:51,098.098] 
+Reference model response:
+>> The chocolate is the best dessert.
+[2025-07-03 16:02:51,098.098] 
+Policy model response:
+>> eed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:02:51,098.098] 
+-------------------------------------
+
+[2025-07-03 16:02:59,335.335] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ What is an antonym of 'old'?
+[2025-07-03 16:02:59,335.335] 
+Correct response:
+>> young.
+[2025-07-03 16:02:59,335.335] 
+Reference model response:
+>> ## An antonym of 'old' is 'new'.
+[2025-07-03 16:02:59,335.335] 
+Policy model response:
+>> indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:02:59,335.335] 
+-------------------------------------
+
+[2025-07-03 16:03:07,770.770] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ Provide a synonym for 'hardworking'.
+[2025-07-03 16:03:07,770.770] 
+Correct response:
+>> A synonym for 'hardworking' is 'diligent'.
+[2025-07-03 16:03:07,770.770] 
+Reference model response:
+>> ## A synonym for 'hardworking' is 'smart'.
+[2025-07-03 16:03:07,770.770] 
+Policy model response:
+>> indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:03:07,770.770] 
+-------------------------------------
+
+[2025-07-03 16:03:17,235.235] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ What is the boiling point of sulfur in Celsius?
+[2025-07-03 16:03:17,235.235] 
+Correct response:
+>> The boiling point of sulfur is 444.6 degrees Celsius.
+[2025-07-03 16:03:17,235.235] 
+Reference model response:
+>> ## The boiling point of sulfur is -196.5 degrees Celsius.
+[2025-07-03 16:03:17,235.235] 
+Policy model response:
+>> indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:03:17,235.235] 
+-------------------------------------
+
+[2025-07-03 16:03:25,566.566] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ What is the plural form of 'child'?
+[2025-07-03 16:03:25,566.566] 
+Correct response:
+>> The plural form of 'child' is 'children'.
+[2025-07-03 16:03:25,566.566] 
+Reference model response:
+>> ## The plural form of 'child' is 'child'.
+[2025-07-03 16:03:25,566.566] 
+Policy model response:
+>> indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:03:25,566.566] 
+-------------------------------------
+
+[2025-07-03 16:03:34,623.623] Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+ What is an antonym of 'complicated'?
+[2025-07-03 16:03:34,623.623] 
+Correct response:
+>> An antonym of 'complicated' is 'simple'.
+[2025-07-03 16:03:34,623.623] 
+Reference model response:
+>> ## An antonym of 'complicated' is 'complex'.
+[2025-07-03 16:03:34,623.623] 
+Policy model response:
+>> indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed indeed
+[2025-07-03 16:03:34,623.623] 
+-------------------------------------
+
+[2025-07-03 16:03:34,623.623] Saving the model response for the test dataset ..!
+[2025-07-03 16:15:59,479.479] Model response for the test dataset saved in data/gpt2_355M_MaskedInstruct_PFT_v2_testdata_response.json..!
