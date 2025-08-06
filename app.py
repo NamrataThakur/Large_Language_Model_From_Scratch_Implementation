@@ -26,51 +26,21 @@ from dataloader.Instruction_finetuning.gpt2_instructDataFormat import *
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-def load_model_tokenizer(MODEL_ROOT_FOLDER):
+def load_model_tokenizer():
 
     try:
-        m_config = GPT2_ModelConfig()
-
-        #Classification Supervised Fine-Tune Model Loading:
-        print('*********************** Loading the Classification Supervised Fine-Tune Model ***********************')
-        sft_model_name = 'gpt2_124M_SFT_Spam_v2.pth'
-        sft_model_path = os.path.join(MODEL_ROOT_FOLDER,sft_model_name)
-        gpt2_sftConfig = m_config.load_model_config(model_name='gpt2_124M', drop_rate=0.0,
-                                                    context_length=1024)
-        gpt2_sft_Inst = GPT2(gpt2_sftConfig)
-
-        in_features = gpt2_sftConfig['embedding_dimension']
-        out_features = 2
-
-        #Add the classification layer:
-        gpt2_sft_Inst.final_projection = torch.nn.Linear(in_features=in_features, out_features= out_features)
-        
-        #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
-        checkpoint = torch.load(sft_model_path, map_location=torch.device("cpu"), weights_only=True)
-        gpt2_sft_Inst.load_state_dict(checkpoint['model'] )
-        gpt2_sft_Inst.to(device)
-
-
-        #Preference Fine-Tune Model Loading:
-        print('*********************** Loading the Preference Fine-Tune Model ***********************')
-        pft_model_name = 'gpt2_355M_MaskedInstruct_PFT_v2.pth'
-        pft_model_path = os.path.join(MODEL_ROOT_FOLDER,pft_model_name)
-        gpt2_pftConfig = m_config.load_model_config(model_name='gpt2_355M', drop_rate=0.0,
-                                                    context_length=1024)
-        gpt2_pft_Inst = GPT2(gpt2_pftConfig)
-
-        #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
-        checkpoint = torch.load(pft_model_path, map_location=torch.device("cpu"), weights_only=True)
-        gpt2_pft_Inst.load_state_dict(checkpoint['model'] )
-        gpt2_pft_Inst.to(device)
-
         tokenizer = tiktoken.get_encoding("gpt2")
 
+        gpt2_sft_Inst = GPT2.from_pretrained(base_modelName='gpt2_124M', model_name='gpt2_124M_SFT_Spam_v2_LoRA_noGC.pth',
+                                            device='cuda', num_classes=2, classify=True, lora=True)
+        
+        gpt2_pft_Inst = GPT2.from_pretrained(base_modelName='gpt2_355M', model_name='gpt2_355M_MaskedInstruct_PFT_v2.pth',
+                                            device='cuda', classify=False, lora=False)
+        
         return gpt2_sft_Inst, gpt2_pft_Inst, tokenizer
 
     except Exception as e:
-         print("Exception while loading the model weights : ", e)
-    
+         print("Exception while loading the model weights : ", str(e))
     
 
 
@@ -97,7 +67,7 @@ try:
 
         logger = logging.getLogger()
 
-        gpt2_sft_Inst, gpt2_pft_Inst, tokenizer = load_model_tokenizer(MODEL_ROOT_FOLDER)
+        gpt2_sft_Inst, gpt2_pft_Inst, tokenizer = load_model_tokenizer()
         logger.info('*********************** ALL MODELS LOADED SUCCESSFULL ***********************')
 
         sft_classify = Text_Generation(model=gpt2_sft_Inst, device=device, tokenizer_model='gpt2')
@@ -129,13 +99,18 @@ async def on_chat_start():
 
     chat_prof = cl.user_session.get("chat_profile")
     #await cl.Message(content=f"Starting the session with {chat_prof}.").send()
-    cl.user_session.set("llm", gpt2_sft_Inst)
+    if chat_prof == 'Chat Model':
+        cl.user_session.set("llm", gpt2_pft_Inst)
+        cl.user_session.set("m_type",chat_prof)
+    else:
+        cl.user_session.set("llm", gpt2_sft_Inst)
+        cl.user_session.set("m_type",chat_prof)
 
     if chat_prof == 'Chat Model':
         settings = await cl.ChatSettings([
             # Select(id="LLM", label="Models to use", initial_index=0, values=['Classification Model', 'Chat Model']),
             Slider(id="Temperature", label='Temperature of the LLM', initial=0, min=0, max=2, step=0.1),
-            Slider(id="max_new_tokens", label='Max new tokens', initial=0, min=1, max=1024, step=1),
+            Slider(id="max_new_tokens", label='Max new tokens', initial=1, min=1, max=1024, step=1),
             Slider(id="top_k", label='Top K', initial=0, min=0, max=100, step=1),
 
         ]
@@ -162,7 +137,7 @@ async def update_settings(settings):
     logger.info(f"New settings received. LLM: {chat_prof}.")
 
 
-
+@cl.step
 @cl.on_message
 async def main(message : cl.Message):
      
@@ -172,6 +147,7 @@ async def main(message : cl.Message):
 
     if m_type == "Chat Model":
 
+        print('Model : ', m_type)
         torch.manual_seed(123)
 
         prompt = f"""Below is an instruction that describes a task. Write a response
@@ -191,6 +167,13 @@ async def main(message : cl.Message):
         print('----------')
         temp = cl.user_session.get('temp')
         max_new_tokens = cl.user_session.get('max_new_tokens')
+        
+        if max_new_tokens is None:
+            max_new_tokens = 100
+        
+        if temp is None:
+            temp = 0.0
+
         top_k = cl.user_session.get('top_k')
 
         output_text = pft_generate.text_generation(input_text = input_text, max_new_tokens=max_new_tokens, 
@@ -204,7 +187,9 @@ async def main(message : cl.Message):
 
 
     else:
+        print('Model : ', m_type)
         pred_label = sft_classify.classify_text(input, max_length=120)
         text_label = 'spam' if pred_label == 1 else 'ham'
 
+        print('Response Label : ', text_label)
         await cl.Message(content=f'{text_label}').send()
