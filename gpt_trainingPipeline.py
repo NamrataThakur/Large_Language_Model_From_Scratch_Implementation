@@ -63,6 +63,7 @@ from dataloader.Instruction_finetuning.gpt2_instructDataloader import GPTCustomI
 from dataloader.Instruction_finetuning.gpt2_instructDataFormat import *
 from dataloader.Preference_finetuning.gpt2_preferenceDataloader import GPTCustomPreferenceDataloader
 from dataloader.Preference_finetuning.gpt2_preferenceDataFormat import analyse_preferenceTuning
+from gpt_ClassificationFT.data_preprocessing import csv_preproccessing
 
 #LoRA classes and functions:
 from parameter_efficient_training.apply_lora import *
@@ -415,11 +416,12 @@ if __name__ == '__main__':
 
         
         elif extension == 'csv':
-            data = pd.read_csv(data_path)
-            print('Total records present in the training file: ', data.shape)
-            logger.info(f'Total records present in the training file: {data.shape}')
+            balanced_df = csv_preproccessing(data_path, logger)
 
             #Create the train.csv, val.csv, test.csv
+            train_df, val_df, test_df = dataset_split(data=balanced_df, train_split=args.train_split, val_split=args.val_split, 
+                                                        classify=True)
+            logger.info(f'Training, Validation and Test Data created from the training file. Train data: {train_df.shape}, Val Data: {val_df.shape}, Test Data: {test_df.shape}')
 
         
         elif extension == 'zip':
@@ -445,23 +447,7 @@ if __name__ == '__main__':
             
             logger.info(f"File unzipped and saved at: {data_file_path}")
 
-            data = pd.read_csv(data_file_path, sep='\t', header = None, names=['Label', 'Text'])
-            logger.info(f'Total records present in the training file: {data.shape}')
-
-            #Balancing Strategies:
-            #Detect the minority class and the corresponding record count:
-            class_count = data['Label'].value_counts().array.tolist()
-            class_name = data['Label'].value_counts().index
-            min_count = min(class_count)
-            minority_name = class_name[class_count.index(min_count)]
-
-            #Prepare the minority and majority class dataset:
-            min_df = data[data['Label'] == minority_name]
-            max_df = data[data['Label'] != minority_name].sample(min_count, random_state=123)
-            balanced_df = pd.concat([max_df,min_df], ignore_index=True)
-            balanced_df['Label'] = balanced_df['Label'].map({'spam':1, 'ham': 0}) #Create a custom part for this --> TO DO
-
-            logger.info(f'After balancing : {balanced_df.shape}')
+            balanced_df = csv_preproccessing(data_file_path, logger)
 
             #Create the train, val, test files:
             train_df, val_df, test_df = dataset_split(data=balanced_df, train_split=args.train_split, val_split=args.val_split, 
@@ -803,6 +789,7 @@ if __name__ == '__main__':
                 #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
                 checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=True)
                 gpt2_baseInst.load_state_dict(checkpoint['model'] )
+
                 gpt2_baseInst.eval()
 
                 logger.info('Model weights loaded successfully..!')
@@ -904,7 +891,7 @@ if __name__ == '__main__':
 
                 elif args.trainable_layers == "all":
                     for params in gpt2_baseInst.parameters():
-                        params.requires_grad = False
+                        params.requires_grad = True
                     
                     logger.info(f'Training Stage : Unfreezing all layer weights for fine-tuning..!')
             
@@ -937,7 +924,7 @@ if __name__ == '__main__':
         try:
             gpt2_baseInst.to(device)
             logger.info(f'Training Stage : Model sent to {device} for fine-tuning..!')
-
+            logger.info(f'Trainable Parameters : {sum(p.numel() for p in gpt2_baseInst.parameters() if p.requires_grad)}..! ')
             
             start_time = time.time()
             torch.manual_seed(args.seed)
