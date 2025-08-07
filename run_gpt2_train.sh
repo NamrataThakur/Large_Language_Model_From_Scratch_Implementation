@@ -16,7 +16,7 @@ val_split=0.05
 train_split=0.85
 batch_size=8
 seed=123
-pre_save_model="gpt2_355M_MaskedInstruct_FineTuned_v1.pth"
+pre_save_model="gpt2_355M_nonMaskedInstruct_FineTuned_v2.pth"
 load_weights=True
 peft_type="lora"
 mask_instruction=True
@@ -27,15 +27,15 @@ use_gradient_clip=True
 warmup_steps=20
 initial_lr=1e-5
 min_lr=1e-5
-lora_rank=16
-lora_alpha=16
+lora_rank=8
+lora_alpha=8
 python gpt_trainingPipeline.py \
-  --experiment_name 'IFT_Exp_MaskedInst_v1_LoRA' \
+  --experiment_name 'IFT_Exp_MaskedInst_v2_i3_LoRA_noGC' \
   --base_modelName 'gpt2_355M' \
   --data_path 'instruction-data-NT.json' \
   --training_type 'IFT' \
   --load_weights $load_weights \
-  --model_name 'gpt2_355M_MaskedInstruct_FineTuned_v1_LoRA' \
+  --model_name 'gpt2_355M_MaskedInstruct_FineTuned_v2_i3_LoRA_noGC' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \
@@ -52,15 +52,15 @@ python gpt_trainingPipeline.py \
   --eos_id $eos_id \
   --prompt_style 'alpaca' \
   --ignore_index $ignore_index \
-  --use_warmup $use_warmup \
   --mask_instruction $mask_instruction \
-  --use_gradient_clip $use_gradient_clip \
-  --warmup_steps $warmup_steps \
   --initial_lr $initial_lr \
+  --warmup_steps $warmup_steps \
   --min_lr $min_lr \
   --lora_rank $lora_rank \
   --lora_alpha $lora_alpha 
 
+# --use_gradient_clip $use_gradient_clip \
+# --use_warmup $use_warmup \
 
 # Classification Supervised Fine-Tune (SFT) params:
 
@@ -75,31 +75,31 @@ python gpt_trainingPipeline.py \
 # train_split=0.7
 # batch_size=8
 # seed=123
-# pre_save_model="gpt2_124M_SFT_Spam_v2.pth"
+# pre_save_model="gpt2_124M_SFT_Spam_v1.pth"
 # load_weights=True
 # peft_type="lora"
 # mask_instruction=False
 # dropout_rate=0.0
 # eos_id=50256
-# use_warmup=True
-# use_gradient_clip=True
+# #use_warmup=True
+# #use_gradient_clip=True
 # warmup_steps=20
 # initial_lr=1e-5
 # min_lr=1e-5
 # lora_rank=16
 # lora_alpha=16
 # python gpt_trainingPipeline.py \
-#   --experiment_name 'SFT_Exp_ALL_v2_LoRA_noGC' \
-#   --base_modelName 'gpt2_124M' \
+#   --experiment_name 'SFT_Exp_SFT_v1_LoRA_noGC' \
 #   --data_path 'sms_spam_collection.zip' \
+#   --base_modelName 'gpt2_124M' \
 #   --training_type 'SFT' \
 #   --load_weights $load_weights \
-#   --model_name 'gpt2_124M_SFT_Spam_v2_LoRA_noGC' \
+#   --model_name 'gpt2_124M_SFT_Spam_v1_LoRA_noGC' \
 #   --tokenizer 'tiktoken' \
-#   --seed $seed \
-#   --batch_size $batch_size \
 #   --pre_save_model $pre_save_model \
 #   --peft_type $peft_type \
+#   --seed $seed \
+#   --batch_size $batch_size \
 #   --train_split $train_split \
 #   --val_split $val_split \
 #   --context_length $context_length \
@@ -116,7 +116,6 @@ python gpt_trainingPipeline.py \
 #   --min_lr $min_lr \
 #   --lora_rank $lora_rank \
 #   --lora_alpha $lora_alpha \
-
 
 #Preference Fine-Tune (PFT) params:
 

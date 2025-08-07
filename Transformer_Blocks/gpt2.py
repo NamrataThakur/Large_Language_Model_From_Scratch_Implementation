@@ -8,6 +8,7 @@ import configparser
 from parameter_efficient_training.apply_lora import *
 from gpt_ClassificationFT.gpt2_model_config import GPT2_ModelConfig
 import requests
+import time
 
 config = configparser.ConfigParser()
 config.read("config.ini")
@@ -69,10 +70,10 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
 
             m_config = GPT2_ModelConfig()
             gpt2_config = m_config.load_model_config(model_name=base_modelName)
-            gpt2_baseInst = GPT2(gpt2_config)
 
             if os.path.exists(model_path):
-
+                gpt2_baseInst = GPT2(gpt2_config)
+                
                 if classify:
                     print('*********************** Loading the Classification Supervised Fine-Tune Model ***********************')
                     in_features = gpt2_config['embedding_dimension']
@@ -103,17 +104,26 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
                     os.mkdir(MODEL_ROOT_FOLDER)
                 
                 if classify:
-                    url = "https://huggingface.co/NamrataThakur/GPT2_124M_SFT_Spam/raw/main/gpt2_124M_SFT_Spam_v2_LoRA_noGC.pth"
-
+                    url = "https://huggingface.co/NamrataThakur/GPT2_124M_SFT_Spam/resolve/main/gpt2_124M_SFT_Spam_v2_LoRA_noGC.pth"
+                    
                 else:
-                    url = "https://huggingface.co/NamrataThakur/GPT2_124M_SFT_Spam/raw/main/gpt2_124M_SFT_Spam_v2_LoRA_noGC.pth"
+                    url = "https://huggingface.co/NamrataThakur/GPT2_355M_Perference-Fine-Tune_DPO/resolve/main/gpt2_355M_MaskedInstruct_PFT_v2.pth"
+                    
 
+                start_time = time.time()
+                print('Downloading and Saving in the local ..!')
+                
                 with requests.get(url, stream=True) as r:
                     r.raise_for_status()
                     with open(model_path, 'wb') as f:
-                        for chunk in r.iter_content(chunk_size=8192):
+                        for chunk in r.iter_content(chunk_size=100000000):
+                            print('Chunk Done..!')
                             f.write(chunk)
 
+                end_time = time.time()
+                execution_time_minutes = (end_time - start_time) / 60
+                print(f"Model downloaded in {execution_time_minutes:.2f} minutes.")
+                print('Model Downloaded and Saved in local ..!')
                 self.from_pretrained(base_modelName,model_name, device,num_classes, classify, lora)
 
 

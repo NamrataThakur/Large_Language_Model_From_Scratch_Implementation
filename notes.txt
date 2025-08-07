@@ -1,2 +1,6 @@
 To run the transformer.py, since we are using relative import we need to run like this from command line:
 python -m transformer_blocks.transformer
+
+
+To run the Chainlit APP, the command is:
+chainlit run app.py
