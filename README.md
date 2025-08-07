@@ -26,7 +26,7 @@ CustomGPT uses a standard 124M GPT decoder-only transformer architecture with th
 
 ## Dataset 📖
 
-The model (in version 1) was fine-tuned on the datasets provided in the book : [Build LLM From Scratch](https://sebastianraschka.com/books/)
+The models (in version 1) were fine-tuned on the datasets provided in the book : [Build LLM From Scratch](https://sebastianraschka.com/books/)
 
 
 ## Models Trained:
@@ -62,13 +62,13 @@ bash run_gpt2_train.sh
 
 ### Chainlit Interface 🖥️
 
-The easiest way to interact with fine-tuned models is through its Chainlit interface:
+The easiest way to interact with fine-tuned models is through the Chainlit interface:
 
 ```bash
 chainlit run main.py
 ```
 
-This will launch a web application where you can input text and see the model's generated responses based on the type of model chosen : Chat Model or Classification Model
+This will launch a web application where you can input text and see the model's generated responses based on the type of model chosen: Chat Model or Classification Model. You can also change the text generation settings like Temperature, Top-K, and Max New Tokens for the Chat Model.
 
 ## Training ⚙️
 
@@ -139,6 +139,13 @@ During inference, the models use several techniques to produce high-quality text
 - Temperature scaling for controlling randomness
 - Top-k for focus and diversity
 - Efficient token generation, one at a time, till the specified maximum token count is achieved
+
+## Acknowledgement 🙏
+
+We are deeply grateful to the following teachers who helped, taught, and inspired us to start this project:
+
+- **Sebastian Raschka** for his excellent book [Build LLM From Scratch](https://sebastianraschka.com/books/)
+- **Umar Jamil** for his deep [videos](https://www.youtube.com/@umarjamilai/videos) on topics like RLHF, DPO, LoRA etc.
 
 ## License 📜
 
