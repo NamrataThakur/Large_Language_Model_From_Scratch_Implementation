@@ -1012,6 +1012,11 @@ if __name__ == '__main__':
             test_df.to_csv(response_save_path, index=None)
             logger.info(f'Model response for the test dataset saved in {response_save_path}..!')
 
+            end_time = time.time()
+            execution_time_minutes = (end_time - start_time) / 60
+            print(f"Pipeline completed in {execution_time_minutes:.2f} minutes.")
+            logger.info(f"Pipeline completed in {execution_time_minutes:.2f} minutes.")
+
 
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
@@ -1119,6 +1124,11 @@ if __name__ == '__main__':
                 json.dump(test_data_response, file, indent=4)
             
             logger.info(f'Model response for the test dataset saved in {response_save_path}..!')
+
+            end_time = time.time()
+            execution_time_minutes = (end_time - start_time) / 60
+            print(f"Pipeline completed in {execution_time_minutes:.2f} minutes.")
+            logger.info(f"Pipeline completed in {execution_time_minutes:.2f} minutes.")
 
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
