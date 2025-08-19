@@ -70,6 +70,13 @@ chainlit run main.py
 
 This will launch a web application where you can input text and see the model's generated responses based on the type of model chosen: Chat Model or Classification Model. You can also change the text generation settings like Temperature, Top-K, and Max New Tokens for the Chat Model.
 
+
+**Chainlit Demo Video:**
+
+[![Chainlit Demo Video](https://youtu.be/aePX4j1VrBk/0.jpg)](https://youtu.be/aePX4j1VrBk "Click to Play")
+
+
+
 ## Training ⚙️
 
 The models were trained using PyTorch. The training process involved:
