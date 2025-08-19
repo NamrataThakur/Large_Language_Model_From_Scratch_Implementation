@@ -87,7 +87,8 @@ The models were trained using PyTorch. The training process involved:
 
 - Chat Model (IFT / PFT) :
 
-- Correct Responses:
+
+**Correct Responses:**
   
 #### Example 1
 
@@ -108,7 +109,7 @@ The molecular formula for salt is NaCl.
 
 ```
 
-- Incorrect Responses:
+**Incorrect Responses:**
 
 #### Example 1
 
@@ -134,7 +135,7 @@ Hughty is a type of arrogant.
 
 - Classification Model (SFT) :
 
-- Correct Responses:
+**Correct Responses:**
   
 #### Example 1
 
@@ -158,7 +159,8 @@ Spam
 
 ```
 
-- Incorrect Responses:
+
+**Incorrect Responses:**
 
 #### Example 1
 
