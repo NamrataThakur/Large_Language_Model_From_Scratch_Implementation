@@ -87,13 +87,15 @@ The models were trained using PyTorch. The training process involved:
 
 - Chat Model (IFT / PFT) :
 
+- Correct Responses:
+  
 #### Example 1
 
 ```text
-Prompt: What is the color of the sky?
+Prompt: definition of haughty
 
 Output:
-The color of the sky is blue.
+A haughty person is someone who is arrogant and conceited.
 ```
 
 #### Example 2
@@ -106,9 +108,33 @@ The molecular formula for salt is NaCl.
 
 ```
 
+- Incorrect Responses:
+
+#### Example 1
+
+```text
+Prompt: Name the colors present in a rainbow?
+
+Output:
+The colors present in a rainbow are red, orange, yellow, and blue.
+```
+
+#### Example 2
+  
+```text
+Prompt: opposite of haughty
+
+Output:
+Hughty is a type of arrogant.
+
+```
+
+
 ### Classification Model :
 
 - Classification Model (SFT) :
+
+- Correct Responses:
   
 #### Example 1
 
@@ -131,6 +157,33 @@ Output:
 Spam
 
 ```
+
+- Incorrect Responses:
+
+#### Example 1
+
+```text
+Prompt: Final notice: Your car insurance policy will be cancelled today. Renew instantly 👉
+
+Output:
+Ham
+```
+
+#### Example 2
+  
+```text
+Prompt: Dear user, your electricity bill payment failed. Pay now to avoid disconnection:
+
+Output:
+Ham
+
+```
+
+The models presented in this version were fine-tuned using a relatively small dataset, which naturally limited their ability to generalize and, in turn, led to certain incorrect responses. However, achieving high predictive performance was not the primary objective at this stage. Instead, the central aim of Version 1 was to design and implement the complete training pipeline—covering **data preprocessing, model integration, fine-tuning strategies, and evaluation**—<u>from the ground up</u>. By focusing on building a fully functional, end-to-end pipeline, this version served as a foundational stage in which establishing modularity, scalability, and clarity of design took precedence over optimizing the performance of individual models.
+
+
+<u>**In future iterations, our focus will shift toward systematically enhancing the accuracy of the models through refined training strategies and expanded datasets.</u>**
+
 
 ## Inference 🔮
 
