@@ -73,7 +73,7 @@ This will launch a web application where you can input text and see the model's 
 
 **Chainlit Demo Video:**
 
-[![Chainlit Demo Video](https://youtu.be/aePX4j1VrBk/0.jpg)](https://youtu.be/aePX4j1VrBk "Click to Play")
+[![Chainlit Demo Video](https://img.youtube.com/vi/aePX4j1VrBk/0.jpg)](https://youtu.be/aePX4j1VrBk "Click to Play")
 
 
 
