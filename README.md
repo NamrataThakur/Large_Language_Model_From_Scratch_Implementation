@@ -8,7 +8,7 @@ HuggingFace Repository: https://huggingface.co/NamrataThakur
 
 ### VERSION 1 :
 
-The model was trained using a transformer architecture with self-attention mechanisms to capture contextual relationships in text. In the version 1, we implemented three core fine-tuning strategies: **supervised classification fine-tuning (SFT)**, **instruction fine-tuning (IFT)** and **preference fine-tuning (PFT)** using **Direct Preference Optimization (DPO)** Loss. Each and every component is built from scratch.
+The model was trained using a transformer architecture with self-attention mechanisms to capture contextual relationships in text. In version 1, we implemented three core fine-tuning strategies: **supervised classification fine-tuning (SFT)**, **instruction fine-tuning (IFT)**, and **preference fine-tuning (PFT)** using **Direct Preference Optimization (DPO)** Loss. Each and every component is built from scratch.
 
 Every component was built entirely **from scratch** with the goal of deeply understanding the inner workings of the so-called "black box" — the Large Language Model.
 
@@ -32,13 +32,13 @@ The models (in version 1) were fine-tuned on the datasets provided in the book :
 ## Models Trained:
 
 - A classification model that can categorise spam vs ham messages.
-- An instruct model (fine-tuned on GPT2 355M) to follow instructions on the Alpaca Prompt Template
-- A preference-tuned model (on the instruct model) to give polite responses to the given queries.
+- An instruct model (fine-tuned on GPT2 355M) to follow instructions using the Alpaca Prompt Template.
+- A preference-tuned model (fine-tuned on the above instruct model) to give polite responses to the given queries.
 
 
 ## Installation 💿
 
-To run the training pipeline for the CustomGPT, follow these steps:
+To run the training pipeline, follow these steps:
 
 ```bash
 # Clone the repository
@@ -65,6 +65,17 @@ bash run_gpt2_train.sh
 The easiest way to interact with fine-tuned models is through the Chainlit interface:
 
 ```bash
+
+# Clone the repository
+git clone https://github.com/NamrataThakur/Large_Language_Model_From_Scratch_Implementation.git
+
+#Create an environment:
+python -m venv env
+
+# Install the required packages
+pip install -r requirements.txt
+
+# Run the chainlit command to start the interface on localhost:
 chainlit run main.py
 ```
 
@@ -196,7 +207,7 @@ The models presented in this version were fine-tuned using a relatively small da
 
 ## Inference 🔮
 
-During inference, the models use several techniques to produce high-quality text:
+During inference, the **instruction fine-tuned model** uses several techniques to produce high-quality text:
 
 - Temperature scaling for controlling randomness
 - Top-k for focus and diversity
