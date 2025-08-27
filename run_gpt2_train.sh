@@ -57,10 +57,9 @@ python gpt_trainingPipeline.py \
   --warmup_steps $warmup_steps \
   --min_lr $min_lr \
   --lora_rank $lora_rank \
-  --lora_alpha $lora_alpha 
-
-# --use_gradient_clip $use_gradient_clip \
-# --use_warmup $use_warmup \
+  --lora_alpha $lora_alpha \
+  --use_gradient_clip $use_gradient_clip \
+  --use_warmup $use_warmup \
 
 # Classification Supervised Fine-Tune (SFT) params:
 
