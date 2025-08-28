@@ -13,3 +13,4 @@ tensorboardX==2.6.4
 typing_extensions<4.6.0
 chainlit>=1.2.0
 huggingface_hub
+datasets

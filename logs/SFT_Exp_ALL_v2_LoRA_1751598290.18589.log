@@ -1,0 +1,68 @@
+[2025-07-04 08:34:50,186.186] Namespace(experiment_name='SFT_Exp_ALL_v2_LoRA', base_modelName='gpt2_124M', data_path='sms_spam_collection.zip', training_type='SFT', peft_type='lora', load_weights=True, pre_save_model='gpt2_124M_SFT_Spam_v2.pth', model_name='gpt2_124M_SFT_Spam_v2_LoRA', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.7, val_split=0.1, context_length=1024, max_new_tokens=256, temp=0.0, dropout_rate=0.0, top_k=5, trainable_layers='last_block', num_epochs=5, eos_id=50256, max_training_length='longest_training_example', prompt_style='alpaca', ignore_index=-100, mask_instruction=False, use_warmup=True, use_gradient_clip=True, warmup_steps=20, initial_lr=1e-05, min_lr=1e-05, beta=0.1, lora_rank=16, lora_alpha=16)
+[2025-07-04 08:34:51,301.301] Configuration of the gpt2_124M base model loaded..!
+[2025-07-04 08:34:51,301.301] Extention detected for the training file is "zip".
+[2025-07-04 08:34:51,301.301] Unzipping the file
+[2025-07-04 08:34:51,301.301] File unzipped and saved at: data\sms_spam_collection\SMSSpamCollection.tsv
+[2025-07-04 08:34:51,322.322] Total records present in the training file: (5572, 2)
+[2025-07-04 08:34:51,329.329] After balancing : (1494, 2)
+[2025-07-04 08:34:51,333.333] Training, Validation and Test Data created from the training file. Train data: (1045, 2), Val Data: (149, 2), Test Data: (300, 2)
+[2025-07-04 08:34:51,333.333] ---------------------------------------------------------
+[2025-07-04 08:34:51,333.333] Loading the dataset class for supervised classification fine-tuning task...
+[2025-07-04 08:34:51,367.367] ************** TRAIN DATALOADER ****************************
+[2025-07-04 08:34:51,368.368] Length of Train Dataloader (number of batches): 130
+[2025-07-04 08:34:51,370.370] torch.Size([8, 120]), torch.Size([8])
+[2025-07-04 08:34:51,371.371] Longest Training Example Length : 120.
+[2025-07-04 08:34:51,390.390] ************** VAL DATALOADER ****************************
+[2025-07-04 08:34:51,390.390] Length of Val Dataloader (number of batches): 18
+[2025-07-04 08:34:51,392.392] torch.Size([8, 120]), torch.Size([8])
+[2025-07-04 08:34:51,392.392] ************** TEST DATALOADER ****************************
+[2025-07-04 08:34:51,392.392] Length of Test Dataloader (number of batches): 37
+[2025-07-04 08:34:51,393.393] torch.Size([8, 120]), torch.Size([8])
+[2025-07-04 08:34:51,393.393] Dataloaders created successfully for classification fine-tuning task..!
+[2025-07-04 08:34:51,393.393] ---------------------------------------------------------
+[2025-07-04 08:34:51,394.394] Loading the weights of the model : gpt2_124M_SFT_Spam_v2.pth..!
+[2025-07-04 08:34:51,394.394] Model present in the path: model/gpt2_124M_SFT_Spam_v2.pth
+[2025-07-04 08:34:51,395.395] Updating the model head of the base model to load saved weights successfully..!
+[2025-07-04 08:34:51,823.823] Model weights loaded successfully..!
+[2025-07-04 08:34:51,823.823] Paramater efficient mechanisms given is lora..!
+[2025-07-04 08:34:51,823.823] Total trainable paramters in the original model: 124441346.
+[2025-07-04 08:34:51,853.853] Training Stage : LoRA Layers Added ..!
+[2025-07-04 08:34:53,141.141] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-07-04 08:34:53,302.302] Training Stage : Fine-tuning of the model started ..!
+[2025-07-04 08:35:02,711.711] Maximum Learning Rate : 0.0005.
+[2025-07-04 08:35:02,712.712] Total training steps : 650.
+[2025-07-04 08:35:02,712.712] Learning Rate Increment By : 2.45e-05.
+[2025-07-04 08:35:05,184.184] Epoch No: 1, Step: 000000, Train Loss: 0.205, Test Loss: 0.000
+[2025-07-04 08:35:06,783.783] BEST model SAVED on iteration 000000 to model/gpt2_124M_SFT_Spam_v2_LoRA.pth..! 
+[2025-07-04 08:35:21,631.631] Epoch No: 1, Step: 000050, Train Loss: 1.176, Test Loss: 1.619
+[2025-07-04 08:35:36,499.499] Epoch No: 1, Step: 000100, Train Loss: 0.246, Test Loss: 0.459
+[2025-07-04 08:36:04,296.296] Training accuracy: 85.29%
+[2025-07-04 08:36:04,296.296] Validation accuracy: 84.72%
+[2025-07-04 08:36:11,410.410] Epoch No: 2, Step: 000150, Train Loss: 0.345, Test Loss: 0.385
+[2025-07-04 08:36:26,473.473] Epoch No: 2, Step: 000200, Train Loss: 0.288, Test Loss: 0.384
+[2025-07-04 08:36:41,580.580] Epoch No: 2, Step: 000250, Train Loss: 0.182, Test Loss: 0.162
+[2025-07-04 08:37:04,094.094] Training accuracy: 90.87%
+[2025-07-04 08:37:04,094.094] Validation accuracy: 93.06%
+[2025-07-04 08:37:16,733.733] Epoch No: 3, Step: 000300, Train Loss: 0.269, Test Loss: 0.045
+[2025-07-04 08:37:31,857.857] Epoch No: 3, Step: 000350, Train Loss: 0.496, Test Loss: 0.166
+[2025-07-04 08:38:02,734.734] Training accuracy: 96.44%
+[2025-07-04 08:38:02,734.734] Validation accuracy: 97.22%
+[2025-07-04 08:38:07,152.152] Epoch No: 4, Step: 000400, Train Loss: 0.416, Test Loss: 0.000
+[2025-07-04 08:38:08,682.682] BEST model SAVED on iteration 000400 to model/gpt2_124M_SFT_Spam_v2_LoRA.pth..! 
+[2025-07-04 08:38:23,841.841] Epoch No: 4, Step: 000450, Train Loss: 0.137, Test Loss: 0.092
+[2025-07-04 08:38:39,029.029] Epoch No: 4, Step: 000500, Train Loss: 0.001, Test Loss: 0.250
+[2025-07-04 08:39:04,413.413] Training accuracy: 98.08%
+[2025-07-04 08:39:04,413.413] Validation accuracy: 97.92%
+[2025-07-04 08:39:14,345.345] Epoch No: 5, Step: 000550, Train Loss: 0.217, Test Loss: 0.012
+[2025-07-04 08:39:29,565.565] Epoch No: 5, Step: 000600, Train Loss: 0.000, Test Loss: 0.000
+[2025-07-04 08:39:30,792.792] BEST model SAVED on iteration 000600 to model/gpt2_124M_SFT_Spam_v2_LoRA.pth..! 
+[2025-07-04 08:40:04,532.532] Training accuracy: 98.46%
+[2025-07-04 08:40:04,532.532] Validation accuracy: 97.22%
+[2025-07-04 08:40:04,533.533] Training completed in 5.19 minutes.
+[2025-07-04 08:40:04,533.533] SFT Fine-Tuned model saved in model/gpt2_124M_SFT_Spam_v2_LoRA.pth..!
+[2025-07-04 08:40:04,533.533] Saving the plots of the metrics tracked ..!
+[2025-07-04 08:45:16,930.930] Training accuracy: 95.00%
+[2025-07-04 08:45:16,930.930] Validation accuracy: 98.75%
+[2025-07-04 08:45:16,930.930] Test accuracy: 96.25%
+[2025-07-04 08:45:16,930.930] Saving the model response for the test dataset ..!
+[2025-07-04 08:45:28,710.710] Model response for the test dataset saved in data/gpt2_124M_SFT_Spam_v2_LoRA_testdata_response.csv..!
