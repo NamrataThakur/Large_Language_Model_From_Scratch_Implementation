@@ -1,0 +1,250 @@
+[2025-08-07 08:20:58,881.881] Namespace(experiment_name='IFT_Exp_MaskedInst_v2_LoRA_GC', base_modelName='gpt2_355M', data_path='instruction-data-NT.json', training_type='IFT', peft_type='lora', load_weights=True, pre_save_model='gpt2_355M_nonMaskedInstruct_FineTuned_v2.pth', model_name='gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC', tokenizer='tiktoken', seed=123, batch_size=8, train_split=0.85, val_split=0.05, context_length=1024, max_new_tokens=256, temp=0.0, dropout_rate=0.1, top_k=None, trainable_layers=None, num_epochs=2, eos_id=50256, max_training_length='longest_training_example', prompt_style='alpaca', ignore_index=-100, mask_instruction=True, use_warmup=True, use_gradient_clip=True, warmup_steps=20, initial_lr=1e-05, min_lr=1e-05, beta=0.1, lora_rank=64, lora_alpha=64)
+[2025-08-07 08:21:01,864.864] Configuration of the gpt2_355M base model loaded..!
+[2025-08-07 08:21:01,864.864] Extention detected for the training file is "json".
+[2025-08-07 08:21:01,864.864] Reading for .json files..!
+[2025-08-07 08:21:01,864.864] Number of entries : 1100. 
+[2025-08-07 08:21:01,864.864] Example of data for Instruct Fine-Tune :: 
+ {'instruction': 'Name three forms of water.', 'input': '', 'output': 'The three forms of water are solid (ice), liquid (water), and gas (steam).'}
+[2025-08-07 08:21:01,864.864] Training, Validation and Test Data created from the training file. Train data: 935, Val Data: 55, Test Data: 110
+[2025-08-07 08:21:01,864.864] Loading the dataset class for instruction fine-tuning task...
+[2025-08-07 08:21:02,958.958] ************** TRAIN DATALOADER ****************************
+[2025-08-07 08:21:02,958.958] Length of Train Dataloader (number of batches): 116
+[2025-08-07 08:21:03,050.050] torch.Size([8, 62]), torch.Size([8, 62])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 74]), torch.Size([8, 74])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 66]), torch.Size([8, 66])
+[2025-08-07 08:21:03,050.050] ************** VAL DATALOADER ****************************
+[2025-08-07 08:21:03,050.050] Length of Val Dataloader (number of batches): 6
+[2025-08-07 08:21:03,050.050] torch.Size([8, 63]), torch.Size([8, 63])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 84]), torch.Size([8, 84])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 59]), torch.Size([8, 59])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 70]), torch.Size([8, 70])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 67]), torch.Size([8, 67])
+[2025-08-07 08:21:03,050.050] ************** TEST DATALOADER ****************************
+[2025-08-07 08:21:03,050.050] Length of Test Dataloader (number of batches): 13
+[2025-08-07 08:21:03,050.050] torch.Size([8, 77]), torch.Size([8, 77])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 69]), torch.Size([8, 69])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 65]), torch.Size([8, 65])
+[2025-08-07 08:21:03,050.050] torch.Size([8, 73]), torch.Size([8, 73])
+[2025-08-07 08:21:03,066.066] Dataloaders created successfully for fine-tuning task..!
+[2025-08-07 08:21:03,066.066] ---------------------------------------------------------
+[2025-08-07 08:21:03,066.066] Loading the weights of the model : gpt2_355M_nonMaskedInstruct_FineTuned_v2.pth..!
+[2025-08-07 08:21:03,066.066] Model present in the path: model/gpt2_355M_nonMaskedInstruct_FineTuned_v2.pth
+[2025-08-07 08:21:05,821.821] Model weights loaded successfully..!
+[2025-08-07 08:21:05,821.821] Generate a text to check if loading is successful..!
+[2025-08-07 08:21:08,104.104] Generating a text :: 
+Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: What is the capital of Denmark?### Response:The capital of Denmark is Copenhagen.
+[2025-08-07 08:21:08,104.104] Instruction Fine-tuning the base model: gpt2_355M ..!
+[2025-08-07 08:21:08,104.104] Paramater efficient mechanisms given is lora..!
+[2025-08-07 08:21:08,106.106] Total trainable paramters in the original model: 406286336.
+[2025-08-07 08:21:08,236.236] Total parameters in the model after LORA addition: 437879872
+[2025-08-07 08:21:08,236.236] Total trainable parameters with LORA (%): 7.78 .
+[2025-08-07 08:21:08,236.236] Training Stage : LoRA Layers Added ..!
+[2025-08-07 08:21:08,692.692] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-08-07 08:21:08,725.725] Training Stage : Fine-tuning of the model started ..!
+[2025-08-07 08:21:11,577.577] Maximum Learning Rate : 5e-05.
+[2025-08-07 08:21:11,577.577] Total training steps : 232.
+[2025-08-07 08:21:11,577.577] Learning Rate Increment By : 2.0000000000000003e-06.
+[2025-08-07 08:21:16,596.596] Epoch No: 1, Step: 000000, Train Loss: 0.830, Val Loss: 1.118
+
+[2025-08-07 08:21:16,596.596] Total Tokens seen till now: 496
+
+[2025-08-07 08:21:22,066.066] BEST model SAVED on iteration 000000 to model/gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC.pth..! 
+[2025-08-07 08:21:43,449.449] Epoch No: 1, Step: 000005, Train Loss: 0.980, Val Loss: 1.071
+
+[2025-08-07 08:21:43,449.449] Total Tokens seen till now: 3368
+
+[2025-08-07 08:21:49,211.211] BEST model SAVED on iteration 000005 to model/gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC.pth..! 
+[2025-08-07 08:22:07,218.218] Epoch No: 1, Step: 000010, Train Loss: 0.988, Val Loss: 1.074
+
+[2025-08-07 08:22:07,218.218] Total Tokens seen till now: 6168
+
+[2025-08-07 08:22:24,975.975] Epoch No: 1, Step: 000015, Train Loss: 0.944, Val Loss: 1.061
+
+[2025-08-07 08:22:24,975.975] Total Tokens seen till now: 9080
+
+[2025-08-07 08:22:28,960.960] BEST model SAVED on iteration 000015 to model/gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC.pth..! 
+[2025-08-07 08:22:52,059.059] Epoch No: 1, Step: 000020, Train Loss: 0.757, Val Loss: 1.054
+
+[2025-08-07 08:22:52,059.059] Total Tokens seen till now: 12056
+
+[2025-08-07 08:22:57,498.498] BEST model SAVED on iteration 000020 to model/gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC.pth..! 
+[2025-08-07 08:23:23,418.418] Epoch No: 1, Step: 000025, Train Loss: 2.859, Val Loss: 3.074
+
+[2025-08-07 08:23:23,418.418] Total Tokens seen till now: 14736
+
+[2025-08-07 08:23:38,335.335] Epoch No: 1, Step: 000030, Train Loss: 3.747, Val Loss: 3.837
+
+[2025-08-07 08:23:38,335.335] Total Tokens seen till now: 17432
+
+[2025-08-07 08:23:58,084.084] Epoch No: 1, Step: 000035, Train Loss: 3.567, Val Loss: 3.671
+
+[2025-08-07 08:23:58,084.084] Total Tokens seen till now: 20304
+
+[2025-08-07 08:24:15,173.173] Epoch No: 1, Step: 000040, Train Loss: 2.845, Val Loss: 3.383
+
+[2025-08-07 08:24:15,173.173] Total Tokens seen till now: 23032
+
+[2025-08-07 08:24:40,941.941] Epoch No: 1, Step: 000045, Train Loss: 2.338, Val Loss: 2.638
+
+[2025-08-07 08:24:40,941.941] Total Tokens seen till now: 26272
+
+[2025-08-07 08:24:59,028.028] Epoch No: 1, Step: 000050, Train Loss: 2.089, Val Loss: 2.356
+
+[2025-08-07 08:24:59,028.028] Total Tokens seen till now: 29104
+
+[2025-08-07 08:25:18,111.111] Epoch No: 1, Step: 000055, Train Loss: 1.836, Val Loss: 1.919
+
+[2025-08-07 08:25:18,111.111] Total Tokens seen till now: 31944
+
+[2025-08-07 08:25:35,715.715] Epoch No: 1, Step: 000060, Train Loss: 1.605, Val Loss: 1.730
+
+[2025-08-07 08:25:35,715.715] Total Tokens seen till now: 34688
+
+[2025-08-07 08:25:50,494.494] Epoch No: 1, Step: 000065, Train Loss: 1.676, Val Loss: 1.957
+
+[2025-08-07 08:25:50,494.494] Total Tokens seen till now: 37336
+
+[2025-08-07 08:26:10,336.336] Epoch No: 1, Step: 000070, Train Loss: 1.433, Val Loss: 1.684
+
+[2025-08-07 08:26:10,336.336] Total Tokens seen till now: 40232
+
+[2025-08-07 08:26:25,012.012] Epoch No: 1, Step: 000075, Train Loss: 1.491, Val Loss: 1.676
+
+[2025-08-07 08:26:25,012.012] Total Tokens seen till now: 42928
+
+[2025-08-07 08:26:40,602.602] Epoch No: 1, Step: 000080, Train Loss: 1.603, Val Loss: 1.724
+
+[2025-08-07 08:26:40,602.602] Total Tokens seen till now: 45568
+
+[2025-08-07 08:26:56,925.925] Epoch No: 1, Step: 000085, Train Loss: 1.326, Val Loss: 1.319
+
+[2025-08-07 08:26:56,925.925] Total Tokens seen till now: 48256
+
+[2025-08-07 08:27:14,510.510] Epoch No: 1, Step: 000090, Train Loss: 1.372, Val Loss: 1.387
+
+[2025-08-07 08:27:14,510.510] Total Tokens seen till now: 51112
+
+[2025-08-07 08:27:35,495.495] Epoch No: 1, Step: 000095, Train Loss: 1.137, Val Loss: 1.617
+
+[2025-08-07 08:27:35,495.495] Total Tokens seen till now: 54168
+
+[2025-08-07 08:27:59,080.080] Epoch No: 1, Step: 000100, Train Loss: 1.173, Val Loss: 1.223
+
+[2025-08-07 08:27:59,080.080] Total Tokens seen till now: 57152
+
+[2025-08-07 08:28:20,605.605] Epoch No: 1, Step: 000105, Train Loss: 1.084, Val Loss: 1.339
+
+[2025-08-07 08:28:20,605.605] Total Tokens seen till now: 60072
+
+[2025-08-07 08:28:43,168.168] Epoch No: 1, Step: 000110, Train Loss: 1.032, Val Loss: 1.452
+
+[2025-08-07 08:28:43,168.168] Total Tokens seen till now: 62904
+
+[2025-08-07 08:29:04,862.862] Epoch No: 1, Step: 000115, Train Loss: 0.822, Val Loss: 1.315
+
+[2025-08-07 08:29:04,862.862] Total Tokens seen till now: 65760
+
+[2025-08-07 08:29:06,600.600] Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is very fast.
+[2025-08-07 08:29:22,227.227] Epoch No: 2, Step: 000120, Train Loss: 1.335, Val Loss: 1.227
+
+[2025-08-07 08:29:22,227.227] Total Tokens seen till now: 68408
+
+[2025-08-07 08:29:36,045.045] Epoch No: 2, Step: 000125, Train Loss: 0.962, Val Loss: 1.140
+
+[2025-08-07 08:29:36,045.045] Total Tokens seen till now: 71024
+
+[2025-08-07 08:29:53,277.277] Epoch No: 2, Step: 000130, Train Loss: 0.990, Val Loss: 1.389
+
+[2025-08-07 08:29:53,277.277] Total Tokens seen till now: 73760
+
+[2025-08-07 08:30:08,677.677] Epoch No: 2, Step: 000135, Train Loss: 1.065, Val Loss: 1.349
+
+[2025-08-07 08:30:08,677.677] Total Tokens seen till now: 76440
+
+[2025-08-07 08:30:30,606.606] Epoch No: 2, Step: 000140, Train Loss: 0.966, Val Loss: 1.295
+
+[2025-08-07 08:30:30,606.606] Total Tokens seen till now: 79208
+
+[2025-08-07 08:30:46,812.812] Epoch No: 2, Step: 000145, Train Loss: 1.023, Val Loss: 1.272
+
+[2025-08-07 08:30:46,812.812] Total Tokens seen till now: 81944
+
+[2025-08-07 08:31:04,115.115] Epoch No: 2, Step: 000150, Train Loss: 0.877, Val Loss: 1.197
+
+[2025-08-07 08:31:04,115.115] Total Tokens seen till now: 84728
+
+[2025-08-07 08:31:27,461.461] Epoch No: 2, Step: 000155, Train Loss: 1.205, Val Loss: 1.263
+
+[2025-08-07 08:31:27,461.461] Total Tokens seen till now: 87840
+
+[2025-08-07 08:31:52,447.447] Epoch No: 2, Step: 000160, Train Loss: 1.101, Val Loss: 1.395
+
+[2025-08-07 08:31:52,447.447] Total Tokens seen till now: 90896
+
+[2025-08-07 08:32:13,548.548] Epoch No: 2, Step: 000165, Train Loss: 0.887, Val Loss: 1.299
+
+[2025-08-07 08:32:13,548.548] Total Tokens seen till now: 93912
+
+[2025-08-07 08:32:38,600.600] Epoch No: 2, Step: 000170, Train Loss: 0.961, Val Loss: 1.351
+
+[2025-08-07 08:32:38,600.600] Total Tokens seen till now: 97024
+
+[2025-08-07 08:33:00,452.452] Epoch No: 2, Step: 000175, Train Loss: 0.814, Val Loss: 1.292
+
+[2025-08-07 08:33:00,452.452] Total Tokens seen till now: 99944
+
+[2025-08-07 08:33:17,940.940] Epoch No: 2, Step: 000180, Train Loss: 0.839, Val Loss: 1.252
+
+[2025-08-07 08:33:17,940.940] Total Tokens seen till now: 102704
+
+[2025-08-07 08:33:36,897.897] Epoch No: 2, Step: 000185, Train Loss: 1.045, Val Loss: 1.253
+
+[2025-08-07 08:33:36,898.898] Total Tokens seen till now: 105512
+
+[2025-08-07 08:33:52,980.980] Epoch No: 2, Step: 000190, Train Loss: 0.983, Val Loss: 1.184
+
+[2025-08-07 08:33:52,980.980] Total Tokens seen till now: 108192
+
+[2025-08-07 08:34:07,214.214] Epoch No: 2, Step: 000195, Train Loss: 0.886, Val Loss: 1.211
+
+[2025-08-07 08:34:07,214.214] Total Tokens seen till now: 110816
+
+[2025-08-07 08:34:25,738.738] Epoch No: 2, Step: 000200, Train Loss: 0.844, Val Loss: 1.209
+
+[2025-08-07 08:34:25,738.738] Total Tokens seen till now: 113696
+
+[2025-08-07 08:34:39,063.063] Epoch No: 2, Step: 000205, Train Loss: 1.054, Val Loss: 1.047
+
+[2025-08-07 08:34:39,063.063] Total Tokens seen till now: 116216
+
+[2025-08-07 08:34:45,299.299] BEST model SAVED on iteration 000205 to model/gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC.pth..! 
+[2025-08-07 08:35:03,419.419] Epoch No: 2, Step: 000210, Train Loss: 0.858, Val Loss: 1.183
+
+[2025-08-07 08:35:03,419.419] Total Tokens seen till now: 119048
+
+[2025-08-07 08:35:25,885.885] Epoch No: 2, Step: 000215, Train Loss: 0.674, Val Loss: 1.248
+
+[2025-08-07 08:35:25,885.885] Total Tokens seen till now: 122104
+
+[2025-08-07 08:35:48,225.225] Epoch No: 2, Step: 000220, Train Loss: 0.903, Val Loss: 1.174
+
+[2025-08-07 08:35:48,225.225] Total Tokens seen till now: 125016
+
+[2025-08-07 08:36:08,370.370] Epoch No: 2, Step: 000225, Train Loss: 1.029, Val Loss: 1.248
+
+[2025-08-07 08:36:08,370.370] Total Tokens seen till now: 127976
+
+[2025-08-07 08:36:25,846.846] Epoch No: 2, Step: 000230, Train Loss: 0.819, Val Loss: 1.187
+
+[2025-08-07 08:36:25,846.846] Total Tokens seen till now: 130760
+
+[2025-08-07 08:36:30,818.818] Below is an instruction that describes a task. Write a response that appropriately completes the request.### Instruction: Rewrite the sentence using a simile.### Input: The car is very fast.### Response:The car is very fast.
+[2025-08-07 08:36:30,818.818] Training completed in 15.37 minutes.
+[2025-08-07 08:36:30,818.818] BEST Instruction Fine-Tuned (IFT) model saved in model/gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC.pth..!
+[2025-08-07 08:36:30,818.818] Saving the plots of the metrics tracked ..!
+[2025-08-07 08:36:42,035.035] Saving the model response for the test dataset ..!
+[2025-08-07 08:48:51,367.367] Model response for the test dataset saved in data/gpt2_355M_MaskedInstruct_FineTuned_v2_LoRA_GC_testdata_response.json..!
+[2025-08-07 08:48:51,367.367] Pipeline completed in 27.71 minutes.
