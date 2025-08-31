@@ -1,0 +1,662 @@
+[
+    {
+        "instruction": "Explain the primary function of the human heart.",
+        "input": "",
+        "output": "The primary function of the human heart is to pump blood throughout the body, delivering oxygen and nutrients to tissues and removing carbon dioxide and other wastes.",
+        "model_response": "The primary function of the human heart is to supply blood to the brain and to maintain blood pressure. It includes the trachea, bronchi, and larynx."
+    },
+    {
+        "instruction": "Reword the following sentence to the future tense.",
+        "input": "He is reading a novel inspired by his grandmother.",
+        "output": "He will be reading a novel inspired by his grandmother.",
+        "model_response": "sponse:He is reading a novel inspired by his grandmother."
+    },
+    {
+        "instruction": "Convert the given sentence into active voice.",
+        "input": "The law was passed by the government.",
+        "output": "The government passed the law.",
+        "model_response": "sponse:The law was passed by the government."
+    },
+    {
+        "instruction": "Create a sentence using the word 'inevitable'.",
+        "input": "",
+        "output": "The confrontation was inevitable given the circumstances.",
+        "model_response": "The inevitable result of the actions of the individuals in the past is that they will be in a situation where they must make choices that will affect their future."
+    },
+    {
+        "instruction": "Categorize the following sentence as either factual or opinion-based.",
+        "input": "Chocolate is the best dessert.",
+        "output": "Opinion-based.",
+        "model_response": "sponse:The statement is factual. It is an opinion."
+    },
+    {
+        "instruction": "What is an antonym of 'old'?",
+        "input": "",
+        "output": "young.",
+        "model_response": "An antonym of 'old' is 'young'."
+    },
+    {
+        "instruction": "Provide a synonym for 'hardworking'.",
+        "input": "",
+        "output": "A synonym for 'hardworking' is 'diligent'.",
+        "model_response": "A synonym for 'hardworking' is 'smart'."
+    },
+    {
+        "instruction": "What is the boiling point of sulfur in Celsius?",
+        "input": "",
+        "output": "The boiling point of sulfur is 444.6 degrees Celsius.",
+        "model_response": "The boiling point of sulfur is 78.1 degrees Celsius."
+    },
+    {
+        "instruction": "What is the plural form of 'child'?",
+        "input": "",
+        "output": "The plural form of 'child' is 'children'.",
+        "model_response": "The plural form of 'child' is 'children'."
+    },
+    {
+        "instruction": "What is an antonym of 'complicated'?",
+        "input": "",
+        "output": "An antonym of 'complicated' is 'simple'.",
+        "model_response": "An antonym of 'complicated' is 'complex'."
+    },
+    {
+        "instruction": "Name three forms of water.",
+        "input": "",
+        "output": "The three forms of water are solid (ice), liquid (water), and gas (steam).",
+        "model_response": "Water is a liquid."
+    },
+    {
+        "instruction": "Rewrite this sentence as a question.",
+        "input": "The dog chased the cat.",
+        "output": "Did the dog chase the cat?",
+        "model_response": "sponse:Did the cat chase the dog?"
+    },
+    {
+        "instruction": "Split the following sentence into two declarative sentences: 'The movie was long but interesting.'",
+        "input": "",
+        "output": "The movie was long. It was interesting.",
+        "model_response": "d 'The movie was a success.'The movie was long but interesting."
+    },
+    {
+        "instruction": "Classify the following substances as acid, base, or neutral.",
+        "input": "Lemon juice, Soap, Water",
+        "output": "Acid: Lemon juice\nBase: Soap\nNeutral: Water",
+        "model_response": "sponse:AcidBaseNeutral"
+    },
+    {
+        "instruction": "What is a synonym of 'sad'?",
+        "input": "",
+        "output": "A synonym for 'sad' is 'unhappy'.",
+        "model_response": "A synonym for 'sad' is 'bored'."
+    },
+    {
+        "instruction": "Correct any spelling mistakes in the given sentence.",
+        "input": "I prefer homemade cookies to store boaght.",
+        "output": "I prefer homemade cookies to store bought.",
+        "model_response": "sponse:I prefer homemade cookies to store boaght."
+    },
+    {
+        "instruction": "Generate a sentence using the word 'transient'.",
+        "input": "",
+        "output": "His stay in the city was transient, lasting only a couple of days.",
+        "model_response": "She was transient as she moved around the room."
+    },
+    {
+        "instruction": "Translate 'I am lost' into Italian.",
+        "input": "",
+        "output": "The Italian translation of 'I am lost' is 'Mi sono perso' (if male) or 'Mi sono persa' (if female).",
+        "model_response": "I can't help but think that Italian is a language that is so different from Italian that it could be called a different language."
+    },
+    {
+        "instruction": "Classify this text as a technical document or a narrative.",
+        "input": "This manual provides instructions for installing the software.",
+        "output": "Technical document",
+        "model_response": "sponse:This document is a technical instruction. It describes a task."
+    },
+    {
+        "instruction": "Sort the following list in descending order.",
+        "input": "10, 2, 25, 16, 7",
+        "output": "25, 16, 10, 7, 2.",
+        "model_response": "sponse:The list is in descending order."
+    },
+    {
+        "instruction": "Translate 'Can I have some water?' into French.",
+        "input": "",
+        "output": "Puis-je avoir de l'eau?",
+        "model_response": "Can I have some water?"
+    },
+    {
+        "instruction": "Create a simile with the word 'as cold as'.",
+        "input": "",
+        "output": "Her hands were as cold as ice.",
+        "model_response": "A simile is a metaphor for a substance or process."
+    },
+    {
+        "instruction": "Classify the following words by their grammatical categories: swim, beautiful, quickly",
+        "input": "",
+        "output": "Swim: Verb\nBeautiful: Adjective\nQuickly: Adverb",
+        "model_response": "uickly.The words swim, beautiful, quickly, quickly are classified as grammatical categories."
+    },
+    {
+        "instruction": "Calculate the density of an object with a mass of 15 grams and a volume of 5 cubic centimeters.",
+        "input": "",
+        "output": "The density of the object is 3 grams per cubic centimeter.",
+        "model_response": "The density of an object with a mass of 15 grams is 15 g/cm3."
+    },
+    {
+        "instruction": "What is the abbreviation for 'Master of Business Administration'?",
+        "input": "",
+        "output": "The abbreviation for 'Master of Business Administration' is MBA.",
+        "model_response": "The abbreviation for 'Master of Business Administration' is 'MBBA'."
+    },
+    {
+        "instruction": "Convert the following number from Roman numerals: IX.",
+        "input": "",
+        "output": "The number IX in Roman numerals is 9.",
+        "model_response": "o decimal: 100.The Roman numeral IX.5 is 100."
+    },
+    {
+        "instruction": "What is the opposite of 'horizontal'?",
+        "input": "",
+        "output": "The opposite of 'horizontal' is 'vertical'.",
+        "model_response": "The opposite of 'horizontal' is 'vertical'."
+    },
+    {
+        "instruction": "Translate 'Where can I buy tickets?' into Italian.",
+        "input": "",
+        "output": "The Italian translation for 'Where can I buy tickets?' is 'Dove posso comprare i biglietti?'",
+        "model_response": "The Italian translation of 'Where can I buy tickets?' is 'Oggi \u00e8 l'altro'."
+    },
+    {
+        "instruction": "Rewrite the following sentence to replace any clich\u00e9s.",
+        "input": "He was as cool as a cucumber.",
+        "output": "He remained very calm.",
+        "model_response": "sponse:He was as cool as a cucumber."
+    },
+    {
+        "instruction": "Identify the main verb in the sentence.",
+        "input": "The dog barked loudly.",
+        "output": "The main verb in the sentence is 'barked'.",
+        "model_response": "sponse:The main verb in the sentence is 'barked'."
+    },
+    {
+        "instruction": "Generate a sentence using the word 'elucidate'.",
+        "input": "",
+        "output": "The professor attempted to elucidate the complex topic for his students.",
+        "model_response": "She studied for a year and a half."
+    },
+    {
+        "instruction": "Correct the sentence.",
+        "input": "Me and my friend went to the store.",
+        "output": "My friend and I went to the store.",
+        "model_response": "sponse:We went to the store."
+    },
+    {
+        "instruction": "What is the formula for calculating work done?",
+        "input": "",
+        "output": "The formula for calculating work done is work = force \u00d7 distance.",
+        "model_response": "The formula for calculating work done is L\u00b2/W\u00b2."
+    },
+    {
+        "instruction": "What is the chemical formula for ammonium nitrate?",
+        "input": "",
+        "output": "The chemical formula for ammonium nitrate is NH4NO3.",
+        "model_response": "The chemical formula for ammonium nitrate is HNO3."
+    },
+    {
+        "instruction": "What is the molecular formula for water?",
+        "input": "",
+        "output": "The molecular formula for water is H2O.",
+        "model_response": "The molecular formula for water is H2O."
+    },
+    {
+        "instruction": "Rewrite the given sentence to describe the same thing in a positive way.",
+        "input": "The food was not good.",
+        "output": "The food could use some improvement.",
+        "model_response": "sponse:The food was delicious."
+    },
+    {
+        "instruction": "What is the opposite of 'lazy'?",
+        "input": "",
+        "output": "The opposite of 'lazy' is 'diligent'.",
+        "model_response": "The opposite of 'lazy' is 'attentive'."
+    },
+    {
+        "instruction": "Name three essential vitamins for human health.",
+        "input": "",
+        "output": "1. Vitamin A\n2. Vitamin C\n3. Vitamin D",
+        "model_response": "1. Calcium2. Iron3. Magnesium"
+    },
+    {
+        "instruction": "Define the term 'simile'.",
+        "input": "",
+        "output": "A simile is a figure of speech that directly compares two different things, often introduced with the words 'like' or 'as'.",
+        "model_response": "A simile is a metaphor or a simile that describes a situation or a process."
+    },
+    {
+        "instruction": "What is the boiling point of chlorine in Celsius?",
+        "input": "",
+        "output": "The boiling point of chlorine is -34 degrees Celsius.",
+        "model_response": "The boiling point of chlorine is 78.1 degrees Celsius."
+    },
+    {
+        "instruction": "Translate 'My name is' into French.",
+        "input": "",
+        "output": "The French translation of 'My name is' is 'Je m'appelle'.",
+        "model_response": "The French translation of 'My name is' is 'Mme le bist\u00eate'."
+    },
+    {
+        "instruction": "Convert 200 centimeters to meters.",
+        "input": "",
+        "output": "200 centimeters is 2 meters.",
+        "model_response": "200 centimeters is approximately 2.64 meters."
+    },
+    {
+        "instruction": "What is the chemical symbol for zinc?",
+        "input": "",
+        "output": "Zn.",
+        "model_response": "The chemical symbol for zinc is Zn."
+    },
+    {
+        "instruction": "What is the formula for calculating force?",
+        "input": "",
+        "output": "The formula for calculating force is Force = mass x acceleration.",
+        "model_response": "The formula for calculating force is the square of the mass times the density."
+    },
+    {
+        "instruction": "Generate a sentence using the word 'innovative'.",
+        "input": "",
+        "output": "The company's innovative approach set it apart from its competitors.",
+        "model_response": "She is innovative and innovative ideas are always a plus."
+    },
+    {
+        "instruction": "Generate a sentence using the word 'generous'.",
+        "input": "",
+        "output": "He is very generous and always helps those in need.",
+        "model_response": "She made a great effort to help her brother."
+    },
+    {
+        "instruction": "What is an antonym of 'sharp'?",
+        "input": "",
+        "output": "An antonym of 'sharp' is 'dull'.",
+        "model_response": "An antonym of 'sharp' is 'thin'."
+    },
+    {
+        "instruction": "Describe the basic structure of a neuron.",
+        "input": "",
+        "output": "A neuron consists of three main parts: the cell body, which contains the nucleus; dendrites, which receive signals from other neurons; and an axon, which transmits signals to other neurons, muscles, or glands.",
+        "model_response": "A neuron is a type of synapse in the brain. It contains a variety of synapses that control different parts of the body's behavior."
+    },
+    {
+        "instruction": "Translate 'see you later' into Spanish.",
+        "input": "",
+        "output": "Hasta luego",
+        "model_response": "Estoy est\u00e1n la estrella."
+    },
+    {
+        "instruction": "What are the first 10 elements of the Fibonacci sequence?",
+        "input": "",
+        "output": "0, 1, 1, 2, 3, 5, 8, 13, 21, 34.",
+        "model_response": "The first 10 elements of the Fibonacci sequence are 1, 2, 3, 5, 7, 12, 15, 20, 25, 30."
+    },
+    {
+        "instruction": "What is an antonym of 'transparent'?",
+        "input": "",
+        "output": "An antonym of 'transparent' is 'opaque'.",
+        "model_response": "An antonym of 'transparent' is 'silent'."
+    },
+    {
+        "instruction": "What is the past tense of 'think'?",
+        "input": "",
+        "output": "The past tense of 'think' is 'thought'.",
+        "model_response": "The past tense of 'think' is 'think about'."
+    },
+    {
+        "instruction": "Classify each sentence as either declarative, interrogative, imperative, or exclamatory.",
+        "input": "Please open the door.",
+        "output": "The classification of the sentence 'Please open the door.' is imperative.",
+        "model_response": "sponse:Please open the door."
+    },
+    {
+        "instruction": "Rewrite the sentence to use a negative adverb.",
+        "input": "She always remembers to call.",
+        "output": "She never forgets to call.",
+        "model_response": "sponse:She always remembers to call."
+    },
+    {
+        "instruction": "Convert 50 miles per hour to kilometers per hour.",
+        "input": "",
+        "output": "50 miles per hour is approximately 80.47 kilometers per hour.",
+        "model_response": "50 miles per hour is approximately 2,500 kilometers."
+    },
+    {
+        "instruction": "Convert the active sentence to passive: 'The chef cooks the meal every day.'",
+        "input": "",
+        "output": "The meal is cooked by the chef every day.",
+        "model_response": "The chef cooks the meal every day."
+    },
+    {
+        "instruction": "Classify an input string as either a noun or a verb.",
+        "input": "Dance",
+        "output": "'Dance' can be classified as a verb.",
+        "model_response": "sponse:Dance is a type of music."
+    },
+    {
+        "instruction": "Rewrite the sentence using a metaphor.",
+        "input": "The book is very interesting.",
+        "output": "The book is a page-turner.",
+        "model_response": "sponse:The book is a great learning tool."
+    },
+    {
+        "instruction": "Generate a question with the keyword \u201cbacteria\u201d",
+        "input": "",
+        "output": "How do bacteria affect human health?",
+        "model_response": "Bacteria is a type of life that includes plants, animals, and microbes."
+    },
+    {
+        "instruction": "What is the past participle of 'run'?",
+        "input": "",
+        "output": "The past participle of 'run' is 'run'.",
+        "model_response": "The past participle of 'run' is 'run, go'."
+    },
+    {
+        "instruction": "Provide a synonym for 'quick'.",
+        "input": "",
+        "output": "A synonym for 'quick' is 'rapid'.",
+        "model_response": "A synonym for 'quick' is 'quickly'."
+    },
+    {
+        "instruction": "Give an example of a metaphor.",
+        "input": "",
+        "output": "An example of a metaphor is saying, 'Time is a thief,' which suggests that time, like a thief, can take away life moments without literally stealing.",
+        "model_response": "A metaphor is a metaphor for a substance or process."
+    },
+    {
+        "instruction": "Calculate the interest on a $1,000 investment at an annual rate of 5% over 3 years.",
+        "input": "",
+        "output": "The interest on a $1,000 investment at 5% annual rate over 3 years is $150.",
+        "model_response": "The interest earned on the investment is $1,000."
+    },
+    {
+        "instruction": "What is a synonym of 'elated'?",
+        "input": "",
+        "output": "A synonym for 'elated' is 'overjoyed'.",
+        "model_response": "A synonym for 'elated' is 'buzzed'."
+    },
+    {
+        "instruction": "Translate 'It's raining' into Japanese.",
+        "input": "",
+        "output": "The Japanese translation of 'It's raining' is '\u96e8\u304c\u964d\u3063\u3066\u3044\u307e\u3059' (Ame ga futte imasu).",
+        "model_response": "The Japanese translation of 'It's raining' is 'Wake up, it's raining'."
+    },
+    {
+        "instruction": "Convert the following verb to its past participle form: 'speak'",
+        "input": "speak",
+        "output": "The past participle form of 'speak' is 'spoken.'",
+        "model_response": "sponse:The past participle form of 'speak' is 'speak'."
+    },
+    {
+        "instruction": "Describe the principle of conservation of energy.",
+        "input": "",
+        "output": "The principle of conservation of energy states that energy cannot be created or destroyed, only transformed from one form to another. This means the total energy of an isolated system remains constant over time.",
+        "model_response": "The principle of conservation of energy is that the total energy of an object or process is equal to the square of its volume multiplied by the square of its speed."
+    },
+    {
+        "instruction": "Calculate the perimeter of a rectangle with a length of 5 meters and a width of 3 meters.",
+        "input": "",
+        "output": "The perimeter of the rectangle is 16 meters.",
+        "model_response": "The perimeter of the rectangle is 17 meters."
+    },
+    {
+        "instruction": "What is the past tense of 'freeze'?",
+        "input": "",
+        "output": "The past tense of 'freeze' is 'froze'.",
+        "model_response": "The past tense of 'freeze' is 'frozen'."
+    },
+    {
+        "instruction": "Correct the misuse of 'their' in the sentence.",
+        "input": "Their going to the store.",
+        "output": "The corrected sentence should be: 'They're going to the store.'",
+        "model_response": "sponse:The misuse of 'their' in the sentence should be corrected."
+    },
+    {
+        "instruction": "Classify the following statement into one of these labels: [positive, negative, neutral]",
+        "input": "My computer crashed.",
+        "output": "The statement \"My computer crashed\" can be classified as negative.",
+        "model_response": "sponse:Positive: My computer was in a good state of repair.Negative: My computer was in a poor state of repair."
+    },
+    {
+        "instruction": "Identify the onomatopoeia in the sentence.",
+        "input": "The bees buzzed as they flew past.",
+        "output": "The onomatopoeia in the sentence is 'buzzed'.",
+        "model_response": "sponse:The onomatopoeia in the sentence is \"buzzed.\""
+    },
+    {
+        "instruction": "Edit the sentence.",
+        "input": "We enjoys watching movies.",
+        "output": "We enjoy watching movies.",
+        "model_response": "sponse:We enjoy watching movies."
+    },
+    {
+        "instruction": "Define the term 'gravity'.",
+        "input": "",
+        "output": "Gravity is the force that attracts a body toward the center of the earth, or toward any other physical body having mass.",
+        "model_response": "Gravity is the force that attracts or repels an object."
+    },
+    {
+        "instruction": "What is an antonym for 'hot'?",
+        "input": "",
+        "output": "An antonym for 'hot' is 'cold'.",
+        "model_response": "An antonym for 'hot' is 'cold'."
+    },
+    {
+        "instruction": "Reverse the order of the given phrase.",
+        "input": "sun and moon",
+        "output": "moon and sun",
+        "model_response": "sponse:The moon and sun were first in the sky."
+    },
+    {
+        "instruction": "What is the formula for calculating power?",
+        "input": "",
+        "output": "The formula for calculating power is power = work/time.",
+        "model_response": "The formula for calculating power is \u03c0r\u00b2/2."
+    },
+    {
+        "instruction": "Name the process by which plants absorb water through their roots.",
+        "input": "",
+        "output": "The process by which plants absorb water through their roots is called absorption.",
+        "model_response": "The process by which plants absorb water through their roots is called photosynthesis."
+    },
+    {
+        "instruction": "What is the past tense of 'draw'?",
+        "input": "",
+        "output": "drew.",
+        "model_response": "The past tense of 'draw' is 'drew'."
+    },
+    {
+        "instruction": "Change the given verb to its present perfect form.",
+        "input": "run",
+        "output": "Run.",
+        "model_response": "sponse:Run."
+    },
+    {
+        "instruction": "Define the term 'oxymoron'.",
+        "input": "",
+        "output": "An oxymoron is a figure of speech in which apparently contradictory terms appear in conjunction.",
+        "model_response": "Oxymoron is a synonym for 'benevolent'."
+    },
+    {
+        "instruction": "What is the chemical symbol for water?",
+        "input": "",
+        "output": "The chemical symbol for water is H2O.",
+        "model_response": "The chemical symbol for water is H2O."
+    },
+    {
+        "instruction": "Convert the active sentence to passive: 'They paint the house every year.'",
+        "input": "",
+        "output": "The house is painted every year by them.",
+        "model_response": "They paint the house every year."
+    },
+    {
+        "instruction": "Provide the past tense form of the verb \"run.\"",
+        "input": "",
+        "output": "The past tense of the verb \"run\" is \"ran.\"",
+        "model_response": "The past tense form of the verb \"run\" is \"run.\""
+    },
+    {
+        "instruction": "Convert the sentence to passive voice: 'They will hold the meeting tomorrow.'",
+        "input": "They will hold the meeting tomorrow.",
+        "output": "The meeting will be held tomorrow by them.",
+        "model_response": "sponse:They will hold the meeting tomorrow."
+    },
+    {
+        "instruction": "What is the chemical formula for sulfuric acid?",
+        "input": "",
+        "output": "The chemical formula for sulfuric acid is H2SO4.",
+        "model_response": "The chemical formula for sulfuric acid is HNO3."
+    },
+    {
+        "instruction": "What type of cloud indicates fair weather?",
+        "input": "",
+        "output": "Cumulus clouds often indicate fair weather.",
+        "model_response": "A cloud indicates fair weather."
+    },
+    {
+        "instruction": "Insert a suitable adjective to complete the sentence.",
+        "input": "The journey was _____.",
+        "output": "The journey was arduous.",
+        "model_response": "sponse:The journey was a success."
+    },
+    {
+        "instruction": "Rewrite the sentence using an idiom.",
+        "input": "The test was very easy.",
+        "output": "The test was a piece of cake.",
+        "model_response": "sponse:The test was very difficult."
+    },
+    {
+        "instruction": "What is the opposite of 'increase'?",
+        "input": "",
+        "output": "The opposite of 'increase' is 'decrease'.",
+        "model_response": "The opposite of 'increase' is 'decrease'."
+    },
+    {
+        "instruction": "Calculate the perimeter of a square with a side length of 6 meters.",
+        "input": "",
+        "output": "The perimeter of the square is 24 meters.",
+        "model_response": "The perimeter of the square is 6 meters."
+    },
+    {
+        "instruction": "Find the missing number in the sequence",
+        "input": "2, 4, ?, 8, 10",
+        "output": "The missing number in the sequence is 6.",
+        "model_response": "sponse:The missing number is 2."
+    },
+    {
+        "instruction": "Translate 'Good night' into German.",
+        "input": "",
+        "output": "The German translation of 'Good night' is 'Gute Nacht'.",
+        "model_response": "The German translation of 'Good night' is 'Wie h\u00e4r' (Good night)."
+    },
+    {
+        "instruction": "Provide a word that rhymes with 'light.'",
+        "input": "",
+        "output": "A word that rhymes with 'light' is 'might.'",
+        "model_response": "A light is a type of substance that is typically found in the lower atmosphere."
+    },
+    {
+        "instruction": "What is the comparative form of 'good'?",
+        "input": "",
+        "output": "The comparative form of 'good' is 'better'.",
+        "model_response": "The comparative form of 'good' is 'good' in the sense of 'good for life'."
+    },
+    {
+        "instruction": "Name the literary device used in 'The wind whispered through the trees.'",
+        "input": "",
+        "output": "The literary device used is personification.",
+        "model_response": "The literary device used in 'The wind whispered through the trees' is the metaphor of a lullaby."
+    },
+    {
+        "instruction": "Rewrite the following sentence to use a metaphor: 'His words cut deeper than a knife.'",
+        "input": "",
+        "output": "His words were a knife, cutting deep.",
+        "model_response": "His words cut deeper than a knife."
+    },
+    {
+        "instruction": "Generate a sentence using the word 'innovate'.",
+        "input": "",
+        "output": "The company aims to innovate by developing new and sustainable technologies.",
+        "model_response": "She is an innovative person who always changes her ideas."
+    },
+    {
+        "instruction": "What is the speed of light?",
+        "input": "",
+        "output": "The speed of light is approximately 299,792 kilometers per second.",
+        "model_response": "The speed of light is approximately 186,000 miles per second."
+    },
+    {
+        "instruction": "Identify the adverb in the sentence",
+        "input": "She quickly ran to the store.",
+        "output": "The adverb in the sentence is 'quickly'.",
+        "model_response": "sponse:She quickly ran to the store."
+    },
+    {
+        "instruction": "Provide a synonym for 'beautiful'.",
+        "input": "",
+        "output": "A synonym for 'beautiful' is 'gorgeous'.",
+        "model_response": "A synonym for 'beautiful' is 'luminous'."
+    },
+    {
+        "instruction": "What is the capital of India?",
+        "input": "",
+        "output": "The capital of India is New Delhi.",
+        "model_response": "The capital of India is New Delhi."
+    },
+    {
+        "instruction": "Classify the following words by their grammatical categories: jump, quick, beautiful",
+        "input": "",
+        "output": "Jump: Verb\nQuick: Adjective\nBeautiful: Adjective",
+        "model_response": "nd formal.The following words are classified as jump, quick, beautiful, and formal."
+    },
+    {
+        "instruction": "What is the chemical formula for potassium nitrate?",
+        "input": "",
+        "output": "The chemical formula for potassium nitrate is KNO3.",
+        "model_response": "The chemical formula for potassium nitrate is KNO3."
+    },
+    {
+        "instruction": "Rewrite the sentence using a simile.",
+        "input": "The cake is very sweet.",
+        "output": "The cake is as sweet as honey.",
+        "model_response": "sponse:The cake is made of sugar and flour."
+    },
+    {
+        "instruction": "Label whether the following statements are true or false.",
+        "input": "The moon is a planet.",
+        "output": "False",
+        "model_response": "sponse:The statements true and false are true and false."
+    },
+    {
+        "instruction": "Convert 1000 milliliters to liters.",
+        "input": "",
+        "output": "1000 milliliters is equivalent to 1 liter.",
+        "model_response": "1000 milliliters is 1000 liters."
+    },
+    {
+        "instruction": "Change this sentence into the past continuous tense.",
+        "input": "She sings in the choir.",
+        "output": "She was singing in the choir.",
+        "model_response": "sponse:She sang in the choir."
+    },
+    {
+        "instruction": "Provide a synonym for 'clever.'",
+        "input": "",
+        "output": "A synonym for 'clever' is 'smart.'",
+        "model_response": "A synonym for 'clever' is 'smart.'"
+    },
+    {
+        "instruction": "Change the sentence 'You should have called me.' into a question.",
+        "input": "",
+        "output": "Should you have called me?",
+        "model_response": "You should have called me."
+    }
+]

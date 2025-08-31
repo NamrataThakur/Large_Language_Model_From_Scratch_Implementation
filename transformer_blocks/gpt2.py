@@ -10,9 +10,9 @@ from gpt_ClassificationFT.gpt2_model_config import GPT2_ModelConfig
 import requests
 import time
 
-config = configparser.ConfigParser()
-config.read("config.ini")
-MODEL_ROOT_FOLDER = config['PATHS']['MODEL_ROOT_FOLDER']
+path_config = configparser.ConfigParser()
+path_config.read("config.ini")
+MODEL_ROOT_FOLDER = path_config['PATHS']['MODEL_ROOT_FOLDER']
 
 
 class GPT2(nn.Module, PyTorchModelHubMixin):
@@ -28,7 +28,7 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
 
         self.final_layerNorm = LayerNormalization(config)
 
-        self.final_projection = nn.Linear(config['embedding_dimension'],config['vocab_size'],bias=False)
+        self.final_projection = nn.Linear(config['embedding_dimension'],config['vocab_size'],bias=config['qkv_bias'])
 
     def forward(self,token_list):
 

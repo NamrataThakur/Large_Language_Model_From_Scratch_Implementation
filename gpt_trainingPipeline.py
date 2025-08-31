@@ -103,7 +103,7 @@ if __name__ == '__main__':
         type=str,
         default='SFT',
         help=("the pipeline to be run for what Type of training. "
-                "Options: SFT (supervised classfication fine-tune)," \
+                "Options: pre-train (Pre-Training Original GPT2 Arch), SFT (supervised classfication fine-tune)," \
                            " IFT (instruction fine-tune), PFT (preference fine-tune)")
     )
 
