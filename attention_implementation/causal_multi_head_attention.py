@@ -21,7 +21,12 @@ class MultiHead_Attention(nn.Module):
         self.out_projection = nn.Linear(dim_out, dim_out)  # Linear layer to combine head outputs
         self.register_buffer("mask",torch.triu(torch.ones(context_length,context_length), diagonal=1))
 
-    def forward(self,input_tensor):
+        #NEW FEATURE: KV_CACHE
+        self.register_buffer("k_cache", None, persistent=False)
+        self.register_buffer("v_cache", None, persistent=False)
+
+    
+    def forward(self,input_tensor, cache = False): # Flag to use KV cache during inference or not
 
         batch, num_tokens, dim_in = input_tensor.shape
 
@@ -33,6 +38,24 @@ class MultiHead_Attention(nn.Module):
         Vec_query = Vec_query.view(batch,num_tokens, self.heads, self.dim_head) #Shape: b,6,2,2
         Vec_key = Vec_key.view(batch,num_tokens, self.heads, self.dim_head)
         Vec_value = Vec_value.view(batch,num_tokens, self.heads, self.dim_head)
+
+        #NEW FEATURE: KV_CACHE
+        if cache:
+
+            if self.k_cache is not None :
+
+                self.k_cache = torch.cat([self.k_cache, Vec_key], dim=-1)
+                self.v_cache = torch.cat([self.v_cache, Vec_value], dim=-1)
+
+                Vec_key = self.k_cache
+                Vec_value = self.v_cache
+
+            else:
+
+                self.k_cache = Vec_key
+                self.v_cache = Vec_value
+
+
 
         #Transform or Shuffle the dimensions of the smaller projections to make the tensors situable for attention.
         Vec_query = Vec_query.transpose(1,2) #Shape: b, heads, context_length, dim_head #Shape: b,2,6,2
@@ -70,6 +93,14 @@ class MultiHead_Attention(nn.Module):
         assert context_vector.shape[-1] == self.heads * self.dim_head
         
         return context_vector
+    
+    
+    #NEW FEATURE: KV_CACHE
+    def clear_cache(self):
+
+        self.k_cache = None
+        self.v_cache = None
+
 
 
 
