@@ -22,23 +22,40 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         self.pos_embedding = nn.Embedding(config['context_length'],config['embedding_dimension'])
         self.token_dropout = nn.Dropout(config['dropout'])
 
-        self.transformer_block = nn.Sequential(
+        # self.transformer_block = nn.Sequential(
+        #     *[TransformerBlock(config) for _ in range(config['num_layers'])]
+
+        #NEW FEATURE: KV_CACHE
+        # Sequential takes only 1 Parameter (input tensor), we need to send cache flag too. So, changed to ModuleList
+        self.transformer_block = nn.ModuleList(
             *[TransformerBlock(config) for _ in range(config['num_layers'])]
         )
+
+        self.current_pos = 0
 
         self.final_layerNorm = LayerNormalization(config)
 
         self.final_projection = nn.Linear(config['embedding_dimension'],config['vocab_size'],bias=config['qkv_bias'])
 
-    def forward(self,token_list):
+    def forward(self,token_list, cache = False):
 
         batch_size, context_length = token_list.shape
 
         #Get the embeddings for the list of tokens:
         token_embed = self.token_embedding(token_list)
 
+        #NEW FEATURE: KV_CACHE
+        if cache:
+
+            pos_id = torch.arange(self.current_pos, self.current_pos + context_length, device= token_list.device, dtype=torch.long)
+            self.current_pos = self.current_pos + context_length
+
+        else:
+
+            pos_id = torch.arange(0, context_length, device=token_list.device , dtype=torch.long)
+        
         #Get the postional embeddings for the list of tokens:
-        pos_embed = self.pos_embedding(torch.arange(context_length, device=token_list.device))
+        pos_embed = self.pos_embedding(pos_id).unsqueeze(0)
 
         #Final Embeddings:
         input = token_embed + pos_embed
@@ -46,8 +63,11 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         #Pass the input through the dropout layer:
         input = self.token_dropout(input)
 
+        #NEW FEATURE: KV_CACHE
         #Pass the dropped out input through the transformer blocks:
-        input = self.transformer_block(input)
+        #input = self.transformer_block(input)
+        for block in self.transformer_block:
+            input = block(input, cache = cache)
 
         #Pass the output through the final layer normalization block:
         input = self.final_layerNorm(input)
@@ -56,6 +76,15 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         logits = self.final_projection(input)
 
         return logits
+    
+
+    def clear_cache(self):
+
+        for block in self.transformer_block:
+
+            block.attention_block.clear_cache()
+
+        self.current_pos = 0
     
     @classmethod
     def from_pretrained(self, base_modelName, model_name, device='cuda', num_classes = None, classify = False, lora = False):
