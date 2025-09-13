@@ -31,22 +31,23 @@ class Text_Generation:
         text = self.tokenizer.decode(token_list.tolist())
         return text
     
-    def text_generation(self, input_text, max_new_tokens, temp=1.0, top_k= None, eos_id = None):
+    def text_generation(self, input_text, max_new_tokens, temp=1.0, top_k= None, eos_id = None, kv_cache = False):
 
         idx = self.text_to_tokenID(input_text).to(self.device)
+
+        if kv_cache:
+            self.model.clear_cache()
+
+        idx_cond = idx[:, -self.context_size:]
+
+        # Get the predictions
+        with torch.no_grad():
+            logits = self.model(idx_cond , cache = kv_cache)
+
 
         with torch.no_grad():
             # idx is (B, T) array of indices in the current context
             for _ in range(max_new_tokens):
-
-                # Crop current context if it exceeds the supported context size
-                # E.g., if LLM supports only 5 tokens, and the context size is 10
-                # then only the last 5 tokens are used as context
-                idx_cond = idx[:, -self.context_size:]
-
-                # Get the predictions
-                with torch.no_grad():
-                    logits = self.model(idx_cond)
 
                 # Focus only on the last time step
                 # (batch, n_token, vocab_size) becomes (batch, vocab_size)
@@ -83,9 +84,27 @@ class Text_Generation:
                 #If end of seuence token id is provided, stop generating if that token id is predicted
                 if idx_next == eos_id:
                     break
-        
+
                 # Append sampled index to the running sequence
                 idx = torch.cat((idx, idx_next), dim=1)  # (batch, n_tokens+1)
+
+                if kv_cache:
+
+                    # Get the predictions
+                    with torch.no_grad():
+                        logits = self.model(idx_next, cache = kv_cache)
+
+                else:
+
+                    # Crop current context if it exceeds the supported context size
+                    # E.g., if LLM supports only 5 tokens, and the context size is 10
+                    # then only the last 5 tokens are used as context
+                    idx_cond = idx[:, -self.context_size:]
+
+                    # Get the predictions
+                    with torch.no_grad():
+                        logits = self.model(idx_cond , cache = kv_cache)
+
 
         gen_output = self.tokenID_to_text(idx)
         gen_output = gen_output.replace('\n', '')

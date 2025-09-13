@@ -18,13 +18,13 @@ class Plots:
         self.train_values = train_values
         self.val_values = val_values
 
-    def plots(self, label = 'loss', type='pretrain'):
+    def plots(self, label = 'loss', type='pretrain' , xlabel = 'Epochs'):
         fig, ax = plt.subplots(figsize=(10,5))
 
         #Epochs vs Loss
         ax.plot(self.epochs,self.train_values,label = f'Training {label}')
         ax.plot(self.epochs, self.val_values, linestyle="--", label = f'Validation {label}')
-        ax.set_xlabel('Epochs')
+        ax.set_xlabel(xlabel)
         ax.set_ylabel(f'{label}')
         ax.legend(loc="upper right")
         ax.xaxis.set_major_locator(MaxNLocator(integer=True))
