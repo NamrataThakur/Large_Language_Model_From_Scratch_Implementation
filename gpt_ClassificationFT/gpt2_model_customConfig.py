@@ -12,7 +12,8 @@ class GPT2_CustomConfig:
             'dropout':arg_config['dropout'],
             'qkv_bias':arg_config['qkv_bias'],
             'num_layers':arg_config['num_layers'],
-            'rms_eps':arg_config['rms_eps']
+            'rms_eps':arg_config['rms_eps'],
+            'num_kv_groups': arg_config['num_kv_groups']
         }
 
         self.optim_config = {
