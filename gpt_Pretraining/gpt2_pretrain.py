@@ -2,10 +2,11 @@ import torch
 import math
 from .text_generation import Text_Generation
 from .metrics import Metrics
+from math import ceil
 
 class GPT2_PreTrain:
-    def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, eval_batchSize, eval_freq, 
-                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip):
+    def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, gradient_accumulation_steps, global_batch_size, eval_batchSize, eval_freq, 
+                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, kv_cache = False):
 
         self.model = model
         self.optimizer = optimizer
@@ -18,11 +19,14 @@ class GPT2_PreTrain:
         self.start_context = start_context
         self.max_new_tokens = max_new_tokens
         self.logger = log_path
-        self.warmup_steps = warmup_steps
+        self.warmup_ratio = warmup_steps
         self.initial_lr = initial_lr
         self.min_lr = min_lr
         self.use_warmup = use_warmup
         self.use_gradient_clip = use_gradient_clip
+        self.gradient_accumulation_steps = gradient_accumulation_steps
+        self.global_batch_size = global_batch_size
+        self.kv_cache = kv_cache
 
         self.generation = Text_Generation(self.model, self.device, 'gpt2')
         self.metrics = Metrics(self.model, self.device)
@@ -42,7 +46,7 @@ class GPT2_PreTrain:
     
     def train(self, model_save_path, temp=0.0, top_k= None, eos_id = None ):
 
-        train_losses, test_losses, track_tokens_seen, track_lr  = [], [], [], []
+        train_losses, test_losses, track_tokens_seen, track_lr, total_steps  = [], [], [], [], []
 
         tokens_seen, global_step = 0, -1
         
@@ -51,12 +55,18 @@ class GPT2_PreTrain:
         print('Maximum Learning Rate : ', max_lr)
         self.logger.info(f'Maximum Learning Rate : {max_lr}.')
 
-        #Calculate the total training steps, that will be used for cosine annealing:
-        total_training_steps = len(self.train_loader) * self.num_epochs
+        #Calculate the total training steps, that will be used for cosine annealing: 
+        #New Feat: Factor in the gradient accumulation steps
+        total_training_steps = ceil((len(self.train_loader) * self.num_epochs) / self.gradient_accumulation_steps)
         print('Total training steps : ', total_training_steps)
         self.logger.info(f'Total training steps : {total_training_steps}.')
 
         if self.use_warmup:
+            
+            #Get the warmup steps as a ratio of the total steps:
+            self.warmup_steps = ceil(total_training_steps * self.warmup_ratio)
+            self.logger.info(f'Warmup Steps : {self.warmup_steps}')
+
             #Calculate the learning rate increment during the warmup period:
             lr_increment = (max_lr - self.initial_lr) / self.warmup_steps
             print('Learning Rate Increment By : ', lr_increment)
@@ -65,79 +75,108 @@ class GPT2_PreTrain:
         min_loss = 10
         print('Default Minimum Loss: ', min_loss)
 
-        for ep in range(self.num_epochs):
+        try:
 
-            self.model.train()
+            for ep in range(self.num_epochs):
 
-            for train_x, train_y in self.train_loader:
+                self.model.train()
 
-                self.optimizer.zero_grad() # Reset loss gradients from previous batch iteration
-                global_step += 1
+                for batch_index, (train_x, train_y) in enumerate(self.train_loader):
 
-                if self.use_warmup:
-                    #Check if the training is still within the warmup stage:
-                    if global_step < self.warmup_steps:
+                    global_step += 1
 
-                        #Apply linear warmup:
-                        lr = self.initial_lr + global_step * lr_increment
+                    if self.use_warmup:
+                        #Check if the training is still within the warmup stage:
+                        if global_step < self.warmup_steps:
 
-                    else:
+                            #Apply linear warmup:
+                            lr = self.initial_lr + global_step * lr_increment
 
-                        #Training has gone past the warmup period, so apply cosine annealing to bring the learning rate down:
-                        total_steps_rem =((global_step - self.warmup_steps) / (total_training_steps - self.warmup_steps) )
-                        lr = self.min_lr + (max_lr - self.min_lr) * 0.5 * (1 + math.cos(math.pi * total_steps_rem))
+                        else:
 
-                    #Apply the updated learning rate to the optimizer:
-                    for param in self.optimizer.param_groups:
-                        param['lr'] = lr
+                            #Training has gone past the warmup period, so apply cosine annealing to bring the learning rate down:
+                            total_steps_rem =((global_step - self.warmup_steps) / (total_training_steps - self.warmup_steps) )
+                            lr = self.min_lr + (max_lr - self.min_lr) * 0.5 * (1 + math.cos(math.pi * total_steps_rem))
 
-                    #Track the current learning rate:
-                    track_lr.append(lr)
+                        #Apply the updated learning rate to the optimizer:
+                        for param in self.optimizer.param_groups:
+                            param['lr'] = lr
 
-                loss = self.metrics.loss_batch(train_x, train_y)
-                loss.backward()
+                        #Track the current learning rate:
+                        track_lr.append(lr)
 
-                if self.use_gradient_clip:
-                    #Apply gradient clipping after warmup period:
-                    if global_step > self.warmup_steps:
-                        torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm= 1.0)
+                    loss = self.metrics.loss_batch(train_x, train_y)
 
-                #Calculate the weight updates with the modified learning rate and clipped gradient:
-                self.optimizer.step()
-                
-                tokens_seen += train_x.numel()
-                
-                #Evaluate the model performance on train and validation datasets:
-                if global_step % self.eval_freq == 0:
+                    #New Feat: Gradient Accumulation Process Added
+                    loss = loss / self.gradient_accumulation_steps
 
-                    train_loss, test_loss = self.evaluate_model()
-                    train_losses.append(train_loss)
-                    test_losses.append(test_loss)
-                    print(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}')
-                    print(f'Total Tokens seen till now: {tokens_seen}')
+                    loss.backward()
 
-                    #Write the epoch wise metrics in the log file:
-                    self.logger.info(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}\n')
-                    self.logger.info(f'Total Tokens seen till now: {tokens_seen}\n')
-                    track_tokens_seen.append(tokens_seen)
+                    if self.use_gradient_clip:
+                        #Apply gradient clipping after warmup period:
+                        if global_step > self.warmup_steps:
+                            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm= 1.0)
 
-                    #Check for the model performance improvement:
-                    if test_loss < min_loss:
+                    #New Feat:
+                    gradient_update = ((batch_index+ 1) % self.gradient_accumulation_steps) or ((batch_index + 1) == len(self.train_loader))
 
-                        min_loss = test_loss
-                        torch.save({'model' : self.model.state_dict(),
-                                    'optimizer': self.optimizer.state_dict()
-                                    }, 
-                                    model_save_path)
-                        self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
+                    #New Feat:
+                    #Update the gradients if the given accumulation steps have reached or is the last batch of the dataloader:
+                    if gradient_update:
+                        #Calculate the weight updates with the modified learning rate and clipped gradient:
+                        self.optimizer.step()
+                        self.optimizer.zero_grad() # Reset loss gradients from previous batch iteration
+                    
+                    tokens_seen += train_x.numel()
+                    
+                    #Evaluate the model performance on train and validation datasets:
+                    if global_step % self.eval_freq == 0:
+
+                        train_loss, test_loss = self.evaluate_model()
+                        train_losses.append(train_loss)
+                        test_losses.append(test_loss)
+                        total_steps.append(global_step)
+                        print(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}')
+                        print(f'Total Tokens seen till now: {tokens_seen}')
+
+                        #Write the epoch wise metrics in the log file:
+                        self.logger.info(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}\n')
+                        self.logger.info(f'Total Tokens seen till now: {tokens_seen}\n')
+                        track_tokens_seen.append(tokens_seen)
+
+                        #Check for the model performance improvement:
+                        if test_loss < min_loss:
+
+                            min_loss = test_loss
+                            torch.save({'model' : self.model.state_dict(),
+                                        'optimizer': self.optimizer.state_dict()
+                                        }, 
+                                        model_save_path)
+                            self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
+
+                        
+                        #Write the model generated response after each eevaluation step:
+                        gen_output = self.generation.text_generation(self.start_context, self.max_new_tokens, temp, top_k, eos_id, self.kv_cache)
+                        print(gen_output)
+                        self.logger.info(gen_output)
 
 
-            #Write the model generated response after each epoch:
-            gen_output = self.generation.text_generation(self.start_context, self.max_new_tokens, temp, top_k, eos_id)
-            print(gen_output)
-            self.logger.info(gen_output)
+                #Write the model generated response after each epoch:
+                gen_output = self.generation.text_generation(self.start_context, self.max_new_tokens, temp, top_k, eos_id, self.kv_cache)
+                print(gen_output)
+                self.logger.info(gen_output)
+
+        except KeyboardInterrupt:
+
+            #Save the model in case of an exception
+            torch.save({'model' : self.model.state_dict(),
+                        'optimizer': self.optimizer.state_dict()
+                        }, 
+                        model_save_path)
+            
+            self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
             
 
-        return train_losses, test_losses, track_tokens_seen, track_lr
+        return train_losses, test_losses, track_tokens_seen, track_lr, total_steps
 
         
