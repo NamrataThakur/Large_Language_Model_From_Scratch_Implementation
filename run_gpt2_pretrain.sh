@@ -31,6 +31,9 @@ warmup_steps=0.05
 initial_lr=3e-4
 min_lr=1e-06
 learning_rate=8e-4
+rms_eps=1e-6
+rms_bias=True
+theta_base=10000.0
 python gpt_pretrainingPipeline.py \
   --experiment_name 'Pre-Train_Exp_CustomConfig' \
   --data_path 'tinystories' \
@@ -54,6 +57,9 @@ python gpt_pretrainingPipeline.py \
   --weight_decay $weight_decay \
   --beta1 $beta1 \
   --beta2 $beta2 \
+  --rms_eps $rms_eps \
+  --rms_bias $rms_bias \
+  --theta_base $theta_base \
   --max_new_tokens $max_new_tokens \
   --temp $temp \
   --top_k $top_k \
