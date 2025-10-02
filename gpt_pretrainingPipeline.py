@@ -240,6 +240,20 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
+        '--rms_eps',
+        type=float,
+        default=1e-6,
+        help=('Epsilon used in RMS normalization')
+    )
+
+    parser.add_argument(
+        '--rms_bias',
+        type=bool,
+        default=False,
+        help=('Shift used in RMS normalization')
+    )
+
+    parser.add_argument(
         "--max_training_length",
         type=str,
         default="model_context_size",
