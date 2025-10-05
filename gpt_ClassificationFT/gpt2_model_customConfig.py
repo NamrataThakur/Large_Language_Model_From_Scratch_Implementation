@@ -22,7 +22,11 @@ class GPT2_CustomConfig:
             'theta_base':arg_config['theta_base'],
 
             # Group Query Attention Config:
-            'num_kv_groups': arg_config['num_kv_groups']
+            'num_kv_groups': arg_config['num_kv_groups'],
+
+            #Mixture of Experts Config:
+            'num_experts': arg_config['num_experts'],
+            'num_active_experts': arg_config['num_active_experts']
         }
         
         # Optimization Configs:
