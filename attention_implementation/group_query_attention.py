@@ -105,15 +105,6 @@ class GroupQueryAttention(nn.Module):
         assert context_vector.shape[-1] == self.heads * self.dim_head
         
         return context_vector, new_cache
-        
-        
-        
-        
-        
-        
-        
-        
-        return
 
 
         
