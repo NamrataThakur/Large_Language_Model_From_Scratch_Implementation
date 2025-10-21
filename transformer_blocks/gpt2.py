@@ -47,12 +47,31 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         #NEW FEATURE: KV_CACHE
         if cache:
 
-            pos_id = torch.arange(self.current_pos, self.current_pos + context_length, device= token_list.device, dtype=torch.long)
-            self.current_pos = self.current_pos + context_length
+            start_pos = self.current_pos
+            pos_id = torch.arange(start_pos, start_pos + context_length, device= token_list.device, dtype=torch.long)
+            end_pos = start_pos + context_length
+            self.current_pos = end_pos
+
+            #Since KV Cache is being used, so we have to create mask only for the new tokens, to compute attention scores only for new tokens.
+            #For old tokens, the masked attention scores are extracted from the cache:
+            mask = torch.triu(
+                                torch.ones(end_pos,end_pos, device=token_list.device, dtype=torch.bool),
+                                diagonal=1
+                            )[start_pos : end_pos, :end_pos]
 
         else:
-
+            
+            #KV_cache is not being used, so position embedding and mask needs to be created for the entire sequence:
             pos_id = torch.arange(0, context_length, device=token_list.device , dtype=torch.long)
+            mask = torch.triu(
+                                torch.ones(context_length, context_length, device=token_list.device, dtype=bool),
+                                diagonal= 1
+                            )
+            
+        
+        #Explicitely broadcast the mask:
+        #Shape : (context_length, context_length) --> (batch, dim_head, context_length, context_length)
+        mask = mask[None, None, :, :]
         
         #Get the postional embeddings for the list of tokens:
         pos_embed = self.pos_embedding(pos_id).unsqueeze(0)
@@ -67,7 +86,7 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         #Pass the dropped out input through the transformer blocks:
         #input = self.transformer_block(input)
         for block in self.transformer_block:
-            input = block(input, cache = cache)
+            input = block(input, mask=mask, cache = cache)
 
         #Pass the output through the final layer normalization block:
         input = self.final_layerNorm(input)

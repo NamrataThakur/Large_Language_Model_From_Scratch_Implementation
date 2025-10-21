@@ -19,16 +19,21 @@ class MultiHead_Attention(nn.Module):
 
         self.dropout = nn.Dropout(dropout)
         self.out_projection = nn.Linear(dim_out, dim_out)  # Linear layer to combine head outputs
-        self.register_buffer("mask",torch.triu(torch.ones(context_length,context_length), diagonal=1))
+        
+        #New Feat: When KV_cache is being used, we dont allocate mask at this stage:
+        #self.register_buffer("mask",torch.triu(torch.ones(context_length,context_length), diagonal=1))
 
         #NEW FEATURE: KV_CACHE
         self.register_buffer("k_cache", None, persistent=False)
         self.register_buffer("v_cache", None, persistent=False)
 
     
-    def forward(self,input_tensor, cache = False): # Flag to use KV cache during inference or not
+    def forward(self,input_tensor, mask, cache = False): # Flag to use KV cache during inference or not
 
         batch, num_tokens, dim_in = input_tensor.shape
+
+        #Pass the mask in the forward prop layer:
+        self.mask = mask
 
         Vec_query = self.W_query(input_tensor) # Shape: (b, context_length, dim_in)
         Vec_key = self.W_key(input_tensor)

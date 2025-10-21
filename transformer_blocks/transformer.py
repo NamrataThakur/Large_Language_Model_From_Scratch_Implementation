@@ -28,14 +28,14 @@ class TransformerBlock(nn.Module):
         self.dropout = nn.Dropout(config['dropout'])
         self.feedForward = FeedForwardBlock(config)
 
-    def forward(self,input, cache = False):
+    def forward(self,input, mask, cache = False):
 
         #Attention Block Computation:
         residual_conn = input
         input = self.layer_norm_attention(input)
 
         #NEW FEATURE: KV_CACHE
-        input = self.attention_block(input, cache = cache)
+        input = self.attention_block(input, mask=mask, cache = cache)
         input = self.dropout(input)
 
         input = input + residual_conn
