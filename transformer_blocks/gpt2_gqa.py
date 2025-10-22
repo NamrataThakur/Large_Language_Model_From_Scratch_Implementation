@@ -22,7 +22,11 @@ class GQAGPT2(nn.Module):
         self.current_pos = 0
         
         self.rope_angles = RoPE(self.config) 
+        self.register_buffer("cosine", self.rope_angles.cosine, persistent=False)
+        self.register_buffer("sine", self.rope_angles.sine, persistent=False)
 
+    
+    #cache --> object of KVCache class:
     def forward(self, input_tensor, cache = None):
 
         batch_size, context_length = input_tensor.shape
@@ -33,18 +37,36 @@ class GQAGPT2(nn.Module):
         input = token_embed
 
         if cache is not None:
-            pos_start = self.current_pos
-            pos_end = pos_start + input.shape[1]
+            start_pos = self.current_pos
+            end_pos = start_pos + input.shape[1]
+            self.current_pos = end_pos
+
+            #Since KV Cache is being used, so we have to create mask only for the new tokens, to compute attention scores only for new tokens.
+            #For old tokens, the masked attention scores are extracted from the cache:
+            mask = torch.triu(
+                                torch.ones(end_pos,end_pos, device=input_tensor.device, dtype=torch.bool),
+                                diagonal=1
+                            )[start_pos : end_pos, :end_pos]
 
         else:
-            pos_start = 0
+            start_pos = 0
+
+            #KV_cache is not being used, so position embedding and mask needs to be created for the entire sequence:
+            mask = torch.triu(
+                                torch.ones(context_length, context_length, device=input_tensor.device, dtype=bool),
+                                diagonal= 1
+                            )
+            
+        #Explicitely broadcast the mask:
+        #Shape : (context_length, context_length) --> (batch, dim_head, context_length, context_length)
+        mask = mask[None, None, :, :]
 
         #NEW FEATURE: KV_CACHE
         #Pass the input through the transformer blocks
         for i, block in self.transformerGQA_block:
 
             existing_cache = cache.get(i) if cache else None 
-            input, new_cache = block(input, rope=self.rope_angles, cache=existing_cache)
+            input, new_cache = block(input, rope=self.rope_angles, mask=mask, offset=start_pos, cache=existing_cache)
 
             if cache is not None:
                 cache.update(i, new_cache)
