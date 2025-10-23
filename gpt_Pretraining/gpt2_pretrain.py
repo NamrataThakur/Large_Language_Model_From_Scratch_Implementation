@@ -6,7 +6,8 @@ from math import ceil
 
 class GPT2_PreTrain:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, gradient_accumulation_steps, global_batch_size, eval_batchSize, eval_freq, 
-                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, kv_cache = False):
+                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, kv_cache = False,
+                 arch_type='original'):
 
         self.model = model
         self.optimizer = optimizer
@@ -27,8 +28,10 @@ class GPT2_PreTrain:
         self.gradient_accumulation_steps = gradient_accumulation_steps
         self.global_batch_size = global_batch_size
         self.kv_cache = kv_cache
+        self.arch_type = arch_type
 
-        self.generation = Text_Generation(self.model, self.device, 'gpt2')
+        self.generation = Text_Generation(model=self.model, device=self.device, tokenizer_model='gpt2', 
+                                          arch_type=self.arch_type)
         self.metrics = Metrics(self.model, self.device)
 
     def evaluate_model(self):

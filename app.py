@@ -177,7 +177,7 @@ async def main(message : cl.Message):
         top_k = cl.user_session.get('top_k')
 
         output_text = pft_generate.text_generation(input_text = input_text, max_new_tokens=max_new_tokens, 
-                                                            temp=temp, top_k= top_k, eos_id=50256)
+                                                            temp=temp, top_k= top_k, eos_id=50256, kv_cache=True)
         
         response = (output_text[len(input_text)-1:]).replace("### Response:", " ").replace('Response:', '').strip()
 
