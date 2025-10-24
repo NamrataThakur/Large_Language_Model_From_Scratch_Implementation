@@ -28,7 +28,7 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         #NEW FEATURE: KV_CACHE
         # Sequential takes only 1 Parameter (input tensor), we need to send cache flag too. So, changed to ModuleList
         self.transformer_block = nn.ModuleList(
-            *[TransformerBlock(config) for _ in range(config['num_layers'])]
+            [TransformerBlock(config) for _ in range(config['num_layers'])]
         )
 
         self.current_pos = 0

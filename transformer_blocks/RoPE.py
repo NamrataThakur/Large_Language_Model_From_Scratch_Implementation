@@ -20,9 +20,10 @@ class RoPE(nn.Module):
 
         #Step 1: Postion of the token in the sequence --> Name corresponding to the RoFormer paper
         m = torch.arange(self.context_length, dtype=dtype)
+        self.m = m
 
         #Step 2: Build the theta parameter:
-        i_range = torch.arange(0, self.dim_head, 2, dtype=dtype)[ : (self.dim_head / 2)].float()
+        i_range = torch.arange(0, self.dim_head, 2, dtype=dtype)[ :(self.dim_head // 2)].float()
         theta = theta_base ** (i_range / self.dim_head)
         inv_theta = 1.0 / theta
 
@@ -33,11 +34,16 @@ class RoPE(nn.Module):
         angles = torch.cat([angles, angles], dim=1) #Shape : [context_length, dim_head ]
 
         #Step 5: Get the cosine and sine values of these angles:
-        self.cosine = torch.cos(angles) #Shape : [context_length, dim_head ]
-        self.sine = torch.sin(angles) #Shape : [context_length, dim_head ]
+        cosine = torch.cos(angles) #Shape : [context_length, dim_head ]
+        sine = torch.sin(angles) #Shape : [context_length, dim_head ]
 
+        self.register_buffer("cosine", cosine, persistent=False)
+        self.register_buffer("sine", sine, persistent=False)
 
-    def forward(self, input):
+    
+    
+    #New feat: offset --> to be used if kv-cache is being used during inference
+    def forward(self, input, offset=0):
 
         batch, num_heads, seq_length, dim_head = input.shape
         assert (dim_head % 2 == 0), "Head dimension must be even"
@@ -50,8 +56,11 @@ class RoPE(nn.Module):
         input_rotated = torch.cat([-x2, x1], dim=-1) #Shape : [b, heads, seq_len, dim_head ]
 
         #Truncating the tensors to take values till 'seq_length' position
-        cos = self.cosine[ : seq_length, :] #Shape : [context_length, dim_head ] (original) --> #Shape : [seq_len, dim_head ]
-        sin = self.sine[ : seq_length, :]
+        #During training "offset" = 0, as each batch is independent. 
+        #During Inference, if kv_Cache is used, then offset=current pos of the token in the sequence,
+        #                  if kv_cache is NOT used, then offset=0
+        cos = self.cosine[offset : offset + seq_length, :] #Shape : [context_length, dim_head ] (original) --> #Shape : [seq_len, dim_head ]
+        sin = self.sine[offset : offset + seq_length, :]
 
         #Adding the batch and num_heads dimensions to match the input tensor shape:
         cos = cos.unsqueeze(0).unsqueeze(0) #Shape : [1, 1, seq_len, dim_head ]

@@ -22,8 +22,6 @@ class GQAGPT2(nn.Module):
         self.current_pos = 0
         
         self.rope_angles = RoPE(self.config) 
-        self.register_buffer("cosine", self.rope_angles.cosine, persistent=False)
-        self.register_buffer("sine", self.rope_angles.sine, persistent=False)
 
     
     #cache --> object of KVCache class:
@@ -63,7 +61,7 @@ class GQAGPT2(nn.Module):
 
         #NEW FEATURE: KV_CACHE
         #Pass the input through the transformer blocks
-        for i, block in self.transformerGQA_block:
+        for i, block in enumerate(self.transformerGQA_block):
 
             existing_cache = cache.get(i) if cache else None 
             input, new_cache = block(input, rope=self.rope_angles, mask=mask, offset=start_pos, cache=existing_cache)
