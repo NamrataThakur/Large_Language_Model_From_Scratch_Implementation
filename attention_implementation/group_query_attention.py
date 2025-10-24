@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch
-from transformer_blocks import RoPE
+
 
 class GroupQueryAttention(nn.Module):
     def __init__(self, config):
@@ -12,31 +12,38 @@ class GroupQueryAttention(nn.Module):
         self.context_length = config['context_length']
         self.dropout = config['dropout']
 
-        self.kv_groups = self.num_heads if config['num_kv_groups'] is None else config['num_kv_groups'] #If the given KV group is None, then GQA == MHA
+        self.kv_groups = self.num_heads if config['num_kv_groups'] == 0 else config['num_kv_groups'] #If the given KV group is 0, then GQA == MHA
         assert (self.num_heads % self.kv_groups == 0), 'Number of heads needs to be divisible by selected KV groups'
         self.group_length = self.num_heads // self.kv_groups #How many query heads will be grouped for each k-v head 
 
         assert (self.dim_out % self.num_heads == 0), 'dim_out must be divisible by heads '
-        self.dim_head = self.dim_out // self.num_heads
+        self.dim_head = self.dim_out // self.num_heads #32
         
         
         self.W_query = nn.Linear(self.dim_in, self.dim_out, bias=config['qkv_bias'])
-        self.W_key = nn.Linear(self.dim_in, self.dim_out, bias=config['qkv_bias'])
-        self.W_value = nn.Linear(self.dim_in, self.dim_out, bias=config['qkv_bias'])
+
+        self.W_key = nn.Linear(self.dim_in, self.kv_groups * self.dim_head, bias=config['qkv_bias'])
+        self.W_value = nn.Linear(self.dim_in, self.kv_groups * self.dim_head, bias=config['qkv_bias'])
+
         self.out_projection = nn.Linear(self.dim_out, self.dim_in, bias=config['qkv_bias'])
 
-        self.register_buffer("mask", torch.triu(torch.ones(self.context_length, self.context_length),diagonal=1))
+        #New Feat: When KV_cache is being used, we dont allocate mask at this stage:
+        #self.register_buffer("mask", torch.triu(torch.ones(self.context_length, self.context_length),diagonal=1))
 
 
-    def forward(self, input_tensor, rope, cache = None):
+    def forward(self, input_tensor, rope, mask, offset = 0, cache = None):
 
-        # Shape: b, 1, dim_in
+        # Shape: b, 1, dim_in (Example: 16,269, 256)
         batch, seq_length, dim_in = input_tensor.shape
+
+        #Pass the mask in the forward prop layer:
+        self.mask = mask
 
         # Shape: (b, 1, dim_in) --> (b, 1, dim_out)
         Vec_query = self.W_query(input_tensor)
         Vec_key = self.W_key(input_tensor)
         Vec_value = self.W_value(input_tensor)
+
 
         #Divide the original Q,K,V projections into smaller projections (each projection for each head). Attention will be computed on each of these smaller projections.
         # Shape: (b, 1, dim_out) --> (b, 1, num_heads, dim_head)
@@ -54,8 +61,8 @@ class GroupQueryAttention(nn.Module):
         Vec_value = Vec_value.transpose(1,2)
 
         #Apply Rotary Transformation to get positional embeddings
-        Vec_query = rope(Vec_query)
-        Vec_key = rope(Vec_key)
+        Vec_query = rope(Vec_query, offset = offset)
+        Vec_key = rope(Vec_key, offset = offset)
 
         #KV Cache:
         if cache is not None:
@@ -68,6 +75,8 @@ class GroupQueryAttention(nn.Module):
 
         else:
 
+            #NO cache is used, so reseting the current position for RoPE computation:
+            offset = 0
             #Insert cache with the new key and value vector:
             new_cache = (Vec_key, Vec_value)
 
@@ -102,7 +111,7 @@ class GroupQueryAttention(nn.Module):
         #Perform the final projection to get the FINAL Context Vector
         context_vector = self.out_projection(context_vector)
 
-        assert context_vector.shape[-1] == self.heads * self.dim_head
+        assert context_vector.shape[-1] == self.num_heads * self.dim_head
         
         return context_vector, new_cache
 
