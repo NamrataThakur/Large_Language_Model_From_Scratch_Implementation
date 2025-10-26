@@ -29,6 +29,8 @@ from gpt_ClassificationFT.gpt2_model_config import GPT2_ModelConfig
 
 #Load the Model Architecture
 from transformer_blocks.gpt2 import GPT2
+from transformer_blocks.gpt2_gqa import GQAGPT2
+from transformer_blocks.gpt2_moe import MoEGPT2
 
 #Load the pre-training class
 from gpt_Pretraining.gpt2_pretrain import GPT2_PreTrain
@@ -197,6 +199,13 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
+        '--ff_hidden_dim',
+        type=int,
+        default=768,
+        help=('The hidden dimension of the Feedforward block.')
+    )
+
+    parser.add_argument(
         '--eval_batchSize',
         type=int,
         default=5,
@@ -254,6 +263,34 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
+        '--theta_base',
+        type=float,
+        default=10000.0,
+        help=('Theta used in RoPE')
+    )
+
+    parser.add_argument(
+        '--num_kv_groups',
+        type=int,
+        default=0,
+        help=('Key-Value groups for attention')
+    )
+
+    parser.add_argument(
+        '--num_experts',
+        type=int,
+        default=8,
+        help=('Theta used in RoPE')
+    )
+
+    parser.add_argument(
+        '--num_active_experts',
+        type=int,
+        default=2,
+        help=('Theta used in RoPE')
+    )
+
+    parser.add_argument(
         "--max_training_length",
         type=str,
         default="model_context_size",
@@ -296,11 +333,29 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
+        "--arch_type",
+        type=str,
+        default='original',
+        help=("Model architecture to be used for pre-training. " \
+                            "Options: original (gpt2 architecture with smaller size)," \
+                                    " GQA (custom architecture with GQA and FF block)," \
+                                    " MOE (custom architecture with GQA and MOE block)")
+    )
+
+    parser.add_argument(
+        "--moe_noise",
+        type=bool,
+        default=True,
+        help=("Whether to use gaussian noise to the MoE Router to add stability. Options: True , False")
+    )
+
+    parser.add_argument(
         "--use_warmup",
         type=bool,
         default=False,
         help=("Whether to use initial learning rate warmup. Options: True , False")
     )
+
 
     parser.add_argument(
         "--use_gradient_clip",
@@ -400,6 +455,14 @@ if __name__ == '__main__':
                 'dropout':args.dropout_rate,
                 'qkv_bias':args.qkv_bias,
                 'num_layers':args.num_layers,
+                'ff_hidden_dim':args.ff_hidden_dim,
+                'rms_eps':args.rms_eps,
+                'rms_bias':args.rms_bias,
+                'theta_base':args.theta_base,
+                'num_kv_groups':args.num_kv_groups,
+                'num_experts':args.num_experts,
+                'num_active_experts':args.num_active_experts,
+                'moe_noise':args.moe_noise,
 
                 'weight_decay' : args.weight_decay,
                 'beta1' : args.beta1,
@@ -409,9 +472,17 @@ if __name__ == '__main__':
             gpt2_config = GPT2_CustomConfig(config_dict)
 
             logger.info(f'The custom config of the model to be trained : {gpt2_config.config} ')
-            gpt2_baseInst = GPT2(gpt2_config.config)
+
+            if args.arch_type == 'original':
+                gpt2_baseInst = GPT2(gpt2_config.config)
+            elif args.arch_type == 'GQA':
+                gpt2_baseInst = GQAGPT2(gpt2_config.config)
+            else:
+                gpt2_baseInst = MoEGPT2(gpt2_config.config)
+
+            logger.info(f'Architecture Type :{args.arch_type}')
             gpt2_baseInst.eval()
-            logger.info(f'Configuration of the custom GPT2 base model loaded..!')
+            logger.info(f'Configuration of the custom GPT2 model loaded..!')
         
         
 
@@ -570,7 +641,8 @@ if __name__ == '__main__':
                             min_lr=args.min_lr,
                             use_warmup=args.use_warmup,
                             use_gradient_clip=args.use_gradient_clip,
-                            kv_cache=args.kv_cache
+                            kv_cache=args.kv_cache,
+                            arch_type=args.arch_type
                             ) 
 
         train_losses, test_losses, track_tokens_seen, track_lr, total_steps = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, top_k=args.top_k,  

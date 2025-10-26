@@ -34,11 +34,19 @@ learning_rate=8e-4
 rms_eps=1e-6
 rms_bias=True
 theta_base=10000.0
+num_experts=8
+num_active_experts=2
+num_kv_groups=4
+ff_hidden_dim=512
+arch_type='MOE'
+kv_cache=True
+moe_noise=True
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_MOEarch' \
   --data_path 'tinystories' \
   --model_type 'custom' \
-  --model_name 'gpt2_custom_preTrain' \
+  --arch_type $arch_type \
+  --model_name 'gpt2_MOE_preTrain' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \
@@ -60,6 +68,10 @@ python gpt_pretrainingPipeline.py \
   --rms_eps $rms_eps \
   --rms_bias $rms_bias \
   --theta_base $theta_base \
+  --num_experts $num_experts \
+  --num_active_experts $num_active_experts \
+  --num_kv_groups $num_kv_groups \
+  --ff_hidden_dim $ff_hidden_dim \
   --max_new_tokens $max_new_tokens \
   --temp $temp \
   --top_k $top_k \
@@ -72,5 +84,6 @@ python gpt_pretrainingPipeline.py \
   --learning_rate $learning_rate \
   --use_gradient_clip $use_gradient_clip \
   --use_warmup $use_warmup \
-
-#  --qkv_bias $qkv_bias \
+  --moe_noise $moe_noise \
+  --kv_cache $kv_cache \
+  --qkv_bias $qkv_bias \

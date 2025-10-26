@@ -13,6 +13,7 @@ class GPT2_CustomConfig:
             'dropout':arg_config['dropout'],
             'qkv_bias':arg_config['qkv_bias'],
             'num_layers':arg_config['num_layers'],
+            'ff_hidden_dim':arg_config['ff_hidden_dim'],
 
             # RMS Configs:
             'rms_eps':arg_config['rms_eps'],
@@ -26,7 +27,8 @@ class GPT2_CustomConfig:
 
             #Mixture of Experts Config:
             'num_experts': arg_config['num_experts'],
-            'num_active_experts': arg_config['num_active_experts']
+            'num_active_experts': arg_config['num_active_experts'],
+            'moe_noise': arg_config['moe_noise']
         }
         
         # Optimization Configs:
