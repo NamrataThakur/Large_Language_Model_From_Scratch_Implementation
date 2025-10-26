@@ -1,15 +1,15 @@
 #torch==2.4.0             # install torch separately using pytorch's website to detect GPU
-jupyterlab>=4.0          
+#jupyterlab>=4.0          
 tiktoken==0.7.0         
 matplotlib==3.9.2        
-tensorflow      # tensorflow doesnt have native windows support beyond tensorflow 10.2. Need to use WSL2 to install tensorflow on GPU. For cpu, pip install tensorflow
+#tensorflow      # tensorflow doesnt have native windows support beyond tensorflow 10.2. Need to use WSL2 to install tensorflow on GPU. For cpu, pip install tensorflow
 tqdm==4.66.6            
 numpy==1.24.3       
 pandas==2.2.3            
 psutil==5.9.0           
 imblearn
 imbalanced-learn
-tensorboardX==2.6.4
+#tensorboardX==2.6.4
 typing_extensions<4.6.0
 chainlit>=1.2.0
 huggingface_hub
