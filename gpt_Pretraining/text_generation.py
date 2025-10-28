@@ -1,15 +1,25 @@
 import tiktoken
 import torch
 
+import os
+os.pardir
+
+from transformer_blocks.kvCache import KVCache
+
 class Text_Generation:
-    def __init__(self, model, device='cuda', tokenizer_model="gpt2"):
+    def __init__(self, model, device='cuda', tokenizer_model="gpt2", arch_type="original"):
 
         self.tokenizer = tiktoken.get_encoding(tokenizer_model)
         self.device = device
         self.model = model
+        self.arch_type = arch_type
 
         self.model.eval()
-        self.context_size = self.model.pos_embedding.weight.shape[0]
+
+        if self.arch_type == 'original':
+            self.context_size = self.model.pos_embedding.weight.shape[0]         
+        else:
+            self.context_size = self.model.rope_angles.m.shape[0]
 
 
     #Convert input text into a torch tensor of token list with batch dimension added
@@ -35,14 +45,26 @@ class Text_Generation:
 
         idx = self.text_to_tokenID(input_text).to(self.device)
 
-        if kv_cache:
-            self.model.clear_cache()
+        
+        if self.arch_type == 'GQA' or self.arch_type == 'MOE':
+            if kv_cache:
+                cache = KVCache(n_layers= self.model.config['num_layers'])
+                self.model.clear_cache()
+            else:
+                cache = None
+
+        else:
+            cache = kv_cache
+
+            if kv_cache:
+                self.model.clear_cache()
+            
 
         idx_cond = idx[:, -self.context_size:]
 
         # Get the predictions
         with torch.no_grad():
-            logits = self.model(idx_cond , cache = kv_cache)
+            logits = self.model(idx_cond , cache = cache)
 
 
         with torch.no_grad():
@@ -78,6 +100,7 @@ class Text_Generation:
                 
                 else:
 
+                    # Example: idx_next : tensor([[48121]], device='cuda:0')
                     # Get the idx of the vocab entry with the highest logits value
                     idx_next = torch.argmax(logits, dim=-1, keepdim=True)  # (batch, 1)
 
@@ -92,7 +115,7 @@ class Text_Generation:
 
                     # Get the predictions
                     with torch.no_grad():
-                        logits = self.model(idx_next, cache = kv_cache)
+                        logits = self.model(idx_next, cache = cache) #cache is object of KVCache class or True
 
                 else:
 
@@ -103,7 +126,9 @@ class Text_Generation:
 
                     # Get the predictions
                     with torch.no_grad():
-                        logits = self.model(idx_cond , cache = kv_cache)
+
+                        #Shape: torch.Size([1, 1, 50257])
+                        logits = self.model(idx_cond , cache = cache) #cache is either None or False
 
 
         gen_output = self.tokenID_to_text(idx)

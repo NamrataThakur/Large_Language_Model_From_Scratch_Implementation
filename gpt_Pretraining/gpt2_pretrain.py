@@ -158,7 +158,7 @@ class GPT2_PreTrain:
                             self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
 
                         
-                        #Write the model generated response after each eevaluation step:
+                        #Write the model generated response after each evaluation step:
                         gen_output = self.generation.text_generation(self.start_context, self.max_new_tokens, temp, top_k, eos_id, self.kv_cache)
                         print(gen_output)
                         self.logger.info(gen_output)
