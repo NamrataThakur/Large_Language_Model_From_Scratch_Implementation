@@ -57,18 +57,20 @@ class GroupQueryAttention(nn.Module):
         # RoPE expects shape as (batch, num_heads, seq_len, dim_head)
         # Shape : (b, 1, num_heads, dim_head) --> (b, num_heads, 1, dim_head) { 1 here is seq_length}
         Vec_query = Vec_query.transpose(1,2)
-        Vec_key = Vec_key.transpose(1,2)
-        Vec_value = Vec_value.transpose(1,2)
+        Vec_key_new = Vec_key.transpose(1,2)
+        Vec_value_new = Vec_value.transpose(1,2)
 
         #Apply Rotary Transformation to get positional embeddings
         Vec_query = rope(Vec_query, offset = offset)
-        Vec_key = rope(Vec_key, offset = offset)
+        Vec_key_new = rope(Vec_key_new, offset = offset)
 
         #KV Cache:
         if cache is not None:
             key_cache, value_cache = cache
-            Vec_key = torch.cat([key_cache, Vec_key], dim=-1)
-            Vec_value = torch.cat([value_cache, Vec_value], dim=-1)
+
+            #dim=2 → sequence dimension (what grows with new tokens):
+            Vec_key = torch.cat([key_cache, Vec_key_new], dim=2)
+            Vec_value = torch.cat([value_cache, Vec_value_new], dim=2)
             
             #Update the cache with the new key and value vector:
             new_cache = (Vec_key, Vec_value)
@@ -77,6 +79,10 @@ class GroupQueryAttention(nn.Module):
 
             #NO cache is used, so reseting the current position for RoPE computation:
             offset = 0
+
+            Vec_key = Vec_key_new
+            Vec_value = Vec_value_new
+            
             #Insert cache with the new key and value vector:
             new_cache = (Vec_key, Vec_value)
 
