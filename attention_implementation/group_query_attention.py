@@ -88,6 +88,7 @@ class GroupQueryAttention(nn.Module):
 
         # Each group of Query vector share the same Key and Value vector, so repeat K and V vectors for each Q vector in a group:
         # Shape : (b, kv_groups, 1, dim_head) --> (b, num_heads, 1, dim_head)
+        #Explaination: Suppose 2 groups (k1, k2) [ size(k1) + size(k2) = num-heads) ]--> after repeat_interleave (k1, k1, k2, k2)
         Vec_key = Vec_key.repeat_interleave(self.group_length, dim=1)
         Vec_value = Vec_value.repeat_interleave(self.group_length, dim=1)
 
