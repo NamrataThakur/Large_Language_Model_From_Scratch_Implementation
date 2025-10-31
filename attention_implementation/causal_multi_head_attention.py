@@ -41,25 +41,29 @@ class MultiHead_Attention(nn.Module):
 
         #Divide the original Q,K,V projections into smaller projections (each projection for each head). Attention will be computed on each of these smaller projections.
         Vec_query = Vec_query.view(batch,num_tokens, self.heads, self.dim_head) #Shape: b,6,2,2
-        Vec_key = Vec_key.view(batch,num_tokens, self.heads, self.dim_head)
-        Vec_value = Vec_value.view(batch,num_tokens, self.heads, self.dim_head)
+        Vec_key_new = Vec_key.view(batch,num_tokens, self.heads, self.dim_head)
+        Vec_value_new = Vec_value.view(batch,num_tokens, self.heads, self.dim_head)
 
         #NEW FEATURE: KV_CACHE
         if cache:
-
-            if self.k_cache is not None :
-
-                self.k_cache = torch.cat([self.k_cache, Vec_key], dim=-1)
-                self.v_cache = torch.cat([self.v_cache, Vec_value], dim=-1)
-
-                Vec_key = self.k_cache
-                Vec_value = self.v_cache
+            if self.k_cache is not None :               
+                #dim=1 → sequence dimension (what grows with new tokens):
+                self.k_cache = torch.cat([self.k_cache, Vec_key_new], dim=1)
+                self.v_cache = torch.cat([self.v_cache, Vec_value_new], dim=1)
 
             else:
+                self.k_cache = Vec_key_new
+                self.v_cache = Vec_key_new
 
-                self.k_cache = Vec_key
-                self.v_cache = Vec_value
+            Vec_key = self.k_cache
+            Vec_value = self.v_cache
+            #print(f'key_cache.shape: {self.k_cache.shape}, Vec_key.shape: {Vec_key.shape}, mask.shape : {self.mask.shape} ')
+        
+        else:
+            Vec_key = Vec_key_new
+            Vec_value = Vec_value_new
 
+            #print(f'Vec_key.shape: {Vec_key.shape}, mask.shape : {self.mask.shape} ')
 
 
         #Transform or Shuffle the dimensions of the smaller projections to make the tensors situable for attention.
