@@ -6,12 +6,12 @@
 num_epochs=1
 top_k=3
 temp=0.0
-max_new_tokens=256
-context_length=512
+max_new_tokens=10
+context_length=100
 vocab_size=50257
-embedding_dimension=256
-num_heads=8
-num_layers=8
+embedding_dimension=100
+num_heads=2
+num_layers=1
 qkv_bias=False
 eval_batchSize=256
 eval_freq=64
@@ -34,19 +34,19 @@ learning_rate=8e-4
 rms_eps=1e-6
 rms_bias=True
 theta_base=10000.0
-num_experts=8
+num_experts=4
 num_active_experts=2
-num_kv_groups=4
-ff_hidden_dim=512
+num_kv_groups=1
+ff_hidden_dim=400
 arch_type='MOE'
 kv_cache=True
 moe_noise=True
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_MOEarch' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_MOEarch_S' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
-  --model_name 'gpt2_MOE_preTrain' \
+  --model_name 'gpt2_MOE_preTrain_S' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \
@@ -85,5 +85,6 @@ python gpt_pretrainingPipeline.py \
   --use_gradient_clip $use_gradient_clip \
   --use_warmup $use_warmup \
   --moe_noise $moe_noise \
-  --kv_cache $kv_cache \
+   --kv_cache $kv_cache \
   --qkv_bias $qkv_bias \
+

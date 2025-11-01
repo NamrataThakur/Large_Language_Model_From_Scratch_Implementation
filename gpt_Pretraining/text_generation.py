@@ -49,6 +49,7 @@ class Text_Generation:
         if self.arch_type == 'GQA' or self.arch_type == 'MOE':
             if kv_cache:
                 cache = KVCache(n_layers= self.model.config['num_layers'])
+                cache.reset()
                 self.model.clear_cache()
             else:
                 cache = None
