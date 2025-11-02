@@ -61,8 +61,9 @@ class GPT2_PreTrain:
         #Calculate the total training steps, that will be used for cosine annealing: 
         #New Feat: Factor in the gradient accumulation steps
         total_training_steps = ceil((len(self.train_loader) * self.num_epochs) / self.gradient_accumulation_steps)
-        print('Total training steps : ', total_training_steps)
-        self.logger.info(f'Total training steps : {total_training_steps}.')
+        print('Total steps to update optimizer : ', total_training_steps)
+        self.logger.info(f'Total steps to update optimizer : {total_training_steps}.')
+        self.logger.info(f"Total training steps acc. to train loader : {len(self.train_loader)}")
 
         if self.use_warmup:
             
@@ -86,27 +87,7 @@ class GPT2_PreTrain:
 
                 for batch_index, (train_x, train_y) in enumerate(self.train_loader):
 
-                    global_step += 1
-
-                    if self.use_warmup:
-                        #Check if the training is still within the warmup stage:
-                        if global_step < self.warmup_steps:
-
-                            #Apply linear warmup:
-                            lr = self.initial_lr + global_step * lr_increment
-
-                        else:
-
-                            #Training has gone past the warmup period, so apply cosine annealing to bring the learning rate down:
-                            total_steps_rem =((global_step - self.warmup_steps) / (total_training_steps - self.warmup_steps) )
-                            lr = self.min_lr + (max_lr - self.min_lr) * 0.5 * (1 + math.cos(math.pi * total_steps_rem))
-
-                        #Apply the updated learning rate to the optimizer:
-                        for param in self.optimizer.param_groups:
-                            param['lr'] = lr
-
-                        #Track the current learning rate:
-                        track_lr.append(lr)
+                    # global_step += 1
 
                     loss = self.metrics.loss_batch(train_x, train_y)
 
@@ -115,17 +96,49 @@ class GPT2_PreTrain:
 
                     loss.backward()
 
-                    if self.use_gradient_clip:
-                        #Apply gradient clipping after warmup period:
-                        if global_step > self.warmup_steps:
-                            torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm= 1.0)
-
                     #New Feat:
                     gradient_update = ((batch_index+ 1) % self.gradient_accumulation_steps) or ((batch_index + 1) == len(self.train_loader))
 
                     #New Feat:
                     #Update the gradients if the given accumulation steps have reached or is the last batch of the dataloader:
                     if gradient_update:
+
+                        #NEW UPDATE: Update the global step according to the gradient updates to make warmup and cosine annealing proportional to the weight updates and not dataloader batches
+                        global_step += 1
+
+                        if self.use_warmup:
+                            #Check if the training is still within the warmup stage:
+                            if global_step < self.warmup_steps:
+
+                                #Apply linear warmup:
+                                lr = self.initial_lr + global_step * lr_increment
+
+                            else:
+
+                                #Training has gone past the warmup period, so apply cosine annealing to bring the learning rate down:
+                                total_steps_rem =((global_step - self.warmup_steps) / (total_training_steps - self.warmup_steps) )
+                                lr = self.min_lr + (max_lr - self.min_lr) * 0.5 * (1 + math.cos(math.pi * total_steps_rem))
+
+
+                            #Apply the updated learning rate to the optimizer:
+                            for param in self.optimizer.param_groups:
+                                param['lr'] = lr
+
+                            #Track the current learning rate:
+                            track_lr.append(lr)
+
+                        #If no warmup, then LR should remain same
+                        else:
+                            #Track the current learning rate:
+                            track_lr.append(max_lr)
+
+                        
+                        if self.use_gradient_clip:
+                            #Apply gradient clipping after warmup period:
+                            if global_step >= self.warmup_steps:
+                                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm= 1.0)
+
+                       
                         #Calculate the weight updates with the modified learning rate and clipped gradient:
                         self.optimizer.step()
                         self.optimizer.zero_grad() # Reset loss gradients from previous batch iteration
