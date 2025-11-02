@@ -620,6 +620,7 @@ if __name__ == '__main__':
 
         epochs = args.num_epochs
 
+        #Note: If gradient accumulation has to happen at every step, then target_batch_size == batch_size
         gradient_accumulation_steps = int(args.target_batch_size // args.batch_size)
         logger.info(f'Gradient Accumulation Steps : {gradient_accumulation_steps}')
 
