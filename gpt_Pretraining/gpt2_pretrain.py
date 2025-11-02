@@ -92,7 +92,6 @@ class GPT2_PreTrain:
                 for batch_index, (train_x, train_y) in enumerate(self.train_loader):
 
                     # global_step += 1
-                    #self.logger.info(f"Batch Index : {batch_index+1}")
 
                     loss = self.metrics.loss_batch(train_x, train_y)
 
@@ -153,6 +152,7 @@ class GPT2_PreTrain:
                         self.logger.info(f"Gradient updated")
                         self.logger.info(f"Current Learning Rate : {lr}")
                         self.logger.info(f"Global Step : {global_step}")
+                        self.logger.info(f"Batch Index : {batch_index+1}")
                     
                     tokens_seen += train_x.numel()
                     
