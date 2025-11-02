@@ -404,6 +404,10 @@ if __name__ == '__main__':
         LOG_FOLDER = config["PATHS"]["LOG_FOLDER"]
         MODEL_ROOT_FOLDER = config['PATHS']['MODEL_ROOT_FOLDER']
 
+        #Check if model root folder is present, else create it:
+        if not os.path.exists(MODEL_ROOT_FOLDER):
+            os.mkdir(MODEL_ROOT_FOLDER)
+
         #Add the logging functionality:
         if not os.path.exists(LOG_FOLDER):
             os.mkdir(LOG_FOLDER)
@@ -612,7 +616,7 @@ if __name__ == '__main__':
 
         #Maximum LR value is given in this optimizer 'lr' param. 
         optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
-                                      betas = (args.beta1, args.beta2))
+                                      betas = (args.beta1, args.beta2), eps=1e-8)
 
         epochs = args.num_epochs
 
