@@ -3,15 +3,17 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class Router(nn.Module):
-    def __init__(self, config, noise=False):
+    def __init__(self, config):
         super().__init__()
 
         self.router = nn.Linear(in_features=config['embedding_dimension'], out_features=config['num_experts'], bias= False)
         self.num_active_experts = config['num_active_experts']
 
-        if noise:
+        self.noise = config['moe_noise']
+
+        if self.noise:
             self.noisy_router = nn.Linear(in_features=config['embedding_dimension'], out_features=config['num_experts'], bias=False)
-            self.noise = noise
+            
 
     
     def forward(self, input):

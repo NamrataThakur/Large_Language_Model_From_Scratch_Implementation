@@ -44,7 +44,7 @@ from gpt_Pretraining.plot_metrics import Plots
 
 
 if __name__ == '__main__':
-
+    
     parser = argparse.ArgumentParser()
 
     #Add the parsing arguments:
@@ -346,7 +346,7 @@ if __name__ == '__main__':
         "--moe_noise",
         type=bool,
         default=True,
-        help=("Whether to use gaussian noise to the MoE Router to add stability. Options: True , False")
+        help=("Whether to use gaussian noise to the MoE Router to add stability. Options: True (Recommended), False")
     )
 
     parser.add_argument(
