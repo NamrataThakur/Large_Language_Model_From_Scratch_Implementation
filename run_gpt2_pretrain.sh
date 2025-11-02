@@ -6,10 +6,10 @@
 num_epochs=1
 top_k=3
 temp=0.0
-max_new_tokens=100
-context_length=512
+max_new_tokens=20
+context_length=256
 vocab_size=50257
-embedding_dimension=512
+embedding_dimension=256
 num_heads=8
 num_layers=8
 qkv_bias=False
@@ -23,7 +23,7 @@ train_split=0.85
 batch_size=16
 target_batch_size=1024 
 seed=123
-dropout_rate=0.3
+dropout_rate=0.1
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
@@ -42,11 +42,11 @@ arch_type='original'
 kv_cache=True
 moe_noise=True
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_v2' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V2' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
-  --model_name 'gpt2_ORG_preTrain_S_v2' \
+  --model_name 'gpt2_ORG_preTrain_S_V2' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \

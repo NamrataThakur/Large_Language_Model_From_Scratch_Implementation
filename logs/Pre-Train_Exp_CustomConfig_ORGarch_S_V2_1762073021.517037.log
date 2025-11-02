@@ -1,0 +1,1080 @@
+[2025-11-02 08:43:41,581.581] Namespace(experiment_name='Pre-Train_Exp_CustomConfig_ORGarch_S_V2', data_path='tinystories', model_type='custom', base_modelName='gpt2_124M', model_name='gpt2_ORG_preTrain_S_V2', pre_save_model=None, tokenizer='tiktoken', seed=123, batch_size=16, target_batch_size=1024, train_split=0.85, val_split=0.05, optimizer='AdamW', context_length=256, vocab_size=50257, embedding_dimension=256, num_heads=8, num_layers=8, dropout_rate=0.1, qkv_bias=True, ff_hidden_dim=400, eval_batchSize=64, eval_freq=64, kv_cache=True, weight_decay=0.1, beta1=0.9, beta2=0.95, rms_eps=1e-06, rms_bias=True, theta_base=10000.0, num_kv_groups=1, num_experts=4, num_active_experts=2, max_training_length='model_context_length', max_new_tokens=20, temp=0.0, top_k=3, num_epochs=1, eos_id=50256, arch_type='original', moe_noise=True, use_warmup=True, use_gradient_clip=True, warmup_steps=0.05, initial_lr=3e-05, min_lr=1e-05, learning_rate=0.0003)
+[2025-11-02 08:43:41,895.895] Custom GPT2 configuration to be used for pre-training..!
+[2025-11-02 08:43:41,895.895] The custom config of the model to be trained : {'vocab_size': 50257, 'embedding_dimension': 256, 'num_heads': 8, 'context_length': 256, 'dropout': 0.1, 'qkv_bias': True, 'num_layers': 8, 'ff_hidden_dim': 400, 'rms_eps': 1e-06, 'rms_bias': True, 'theta_base': 10000.0, 'num_kv_groups': 1, 'num_experts': 4, 'num_active_experts': 2, 'moe_noise': True} 
+[2025-11-02 08:43:42,232.232] Architecture Type :original
+[2025-11-02 08:43:42,233.233] Configuration of the custom GPT2 model loaded..!
+[2025-11-02 08:43:43,382.382] Total records in Train Data: 2119719 , Validation Data : 21990
+[2025-11-02 08:43:43,382.382] ------------- Data Ingestion Completed. -------------
+[2025-11-02 08:43:43,382.382] Loading the dataset class for pre-training...
+[2025-11-02 08:43:43,520.520] Device Available: cuda .. ! 
+[2025-11-02 08:51:12,371.371] ************** TRAIN DATALOADER ****************************
+[2025-11-02 08:51:12,372.372] Length of Train Dataloader (number of batches): 264964
+[2025-11-02 08:51:12,372.372] Total Train Tokens : 471872517
+[2025-11-02 08:51:13,098.098] torch.Size([16, 256]), torch.Size([16, 256])
+[2025-11-02 08:51:13,158.158] ************** VAL DATALOADER ****************************
+[2025-11-02 08:51:13,158.158] Length of Val Dataloader (number of batches): 2748
+[2025-11-02 08:51:13,158.158] Total Validation Tokens : 4743928
+[2025-11-02 08:51:13,165.165] torch.Size([16, 256]), torch.Size([16, 256])
+[2025-11-02 08:51:13,166.166] Dataloaders created successfully for pre-training task..!
+[2025-11-02 08:51:13,166.166] ---------------------------------------------------------
+[2025-11-02 08:51:13,166.166] Model will be trained from scratch..!
+[2025-11-02 08:51:13,167.167] Loading the model with random weights for training..!
+[2025-11-02 08:51:13,330.330] Model loaded with random weights for training..!
+[2025-11-02 08:51:13,331.331] Model Size : 32.165969 millions (M)
+[2025-11-02 08:51:13,331.331] Device Available: cuda .. ! 
+[2025-11-02 08:51:13,381.381] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-11-02 08:51:13,382.382] Training Stage : Training of the model started ..!
+[2025-11-02 08:51:19,758.758] Gradient Accumulation Steps : 64
+[2025-11-02 08:51:19,759.759] Maximum Learning Rate : 0.0003.
+[2025-11-02 08:51:19,759.759] Total steps to update optimizer : 4141.
+[2025-11-02 08:51:19,759.759] Total training steps acc. to train loader : 264964
+[2025-11-02 08:51:19,759.759] Warmup Steps : 208
+[2025-11-02 08:51:19,759.759] Learning Rate Increment By : 1.2980769230769228e-06.
+[2025-11-02 08:51:31,753.753] Epoch No: 1, Step: 000000, Train Loss: 10.573, Val Loss: 10.552
+
+[2025-11-02 08:51:31,753.753] Total Tokens seen till now: 4096
+
+[2025-11-02 08:51:32,146.146] Once upon a time, religiousENC MukOSE…"026 consultancy026026…." consultancy Marriage providersAl XII yelled committedOSESS XII
+[2025-11-02 08:51:57,445.445] Epoch No: 1, Step: 000064, Train Loss: 7.754, Val Loss: 7.749
+
+[2025-11-02 08:51:57,445.445] Total Tokens seen till now: 270272
+
+[2025-11-02 08:51:58,797.797] BEST model SAVED on iteration 000064 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:51:58,811.811] Once upon a time,
+[2025-11-02 08:52:24,587.587] Epoch No: 1, Step: 000128, Train Loss: 5.038, Val Loss: 5.022
+
+[2025-11-02 08:52:24,587.587] Total Tokens seen till now: 536144
+
+[2025-11-02 08:52:25,825.825] BEST model SAVED on iteration 000128 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:52:25,837.837] Once upon a time,
+[2025-11-02 08:52:51,969.969] Epoch No: 1, Step: 000192, Train Loss: 4.070, Val Loss: 4.017
+
+[2025-11-02 08:52:51,969.969] Total Tokens seen till now: 801760
+
+[2025-11-02 08:52:53,313.313] BEST model SAVED on iteration 000192 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:52:53,325.325] Once upon a time,
+[2025-11-02 08:53:20,134.134] Epoch No: 1, Step: 000256, Train Loss: 3.556, Val Loss: 3.510
+
+[2025-11-02 08:53:20,134.134] Total Tokens seen till now: 1067584
+
+[2025-11-02 08:53:21,496.496] BEST model SAVED on iteration 000256 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:53:21,533.533] Once upon a time, so
+[2025-11-02 08:53:48,484.484] Epoch No: 1, Step: 000320, Train Loss: 3.223, Val Loss: 3.260
+
+[2025-11-02 08:53:48,484.484] Total Tokens seen till now: 1333760
+
+[2025-11-02 08:53:49,671.671] BEST model SAVED on iteration 000320 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:53:49,695.695] Once upon a time, happy
+[2025-11-02 08:54:16,955.955] Epoch No: 1, Step: 000384, Train Loss: 3.131, Val Loss: 3.105
+
+[2025-11-02 08:54:16,955.955] Total Tokens seen till now: 1600000
+
+[2025-11-02 08:54:18,150.150] BEST model SAVED on iteration 000384 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:54:18,372.372] Once upon a time,� little girl was a big big. She loved to the park. She had a big. She
+[2025-11-02 08:54:45,886.886] Epoch No: 1, Step: 000448, Train Loss: 3.029, Val Loss: 2.996
+
+[2025-11-02 08:54:45,887.887] Total Tokens seen till now: 1866080
+
+[2025-11-02 08:54:47,348.348] BEST model SAVED on iteration 000448 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:54:47,564.564] Once upon a time, big little little girl named. She was very very very. She had. She was so she had
+[2025-11-02 08:55:15,196.196] Epoch No: 1, Step: 000512, Train Loss: 2.971, Val Loss: 2.948
+
+[2025-11-02 08:55:15,196.196] Total Tokens seen till now: 2131904
+
+[2025-11-02 08:55:16,526.526] BEST model SAVED on iteration 000512 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:55:16,795.795] Once upon a time, very. She wanted her to her. She was a big and she wanted to her.
+[2025-11-02 08:55:44,610.610] Epoch No: 1, Step: 000576, Train Loss: 2.890, Val Loss: 2.887
+
+[2025-11-02 08:55:44,610.610] Total Tokens seen till now: 2398144
+
+[2025-11-02 08:55:45,932.932] BEST model SAVED on iteration 000576 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:55:46,185.185] Once upon a time,, her. She was very. She had a big and she was very happy.One
+[2025-11-02 08:56:14,060.060] Epoch No: 1, Step: 000640, Train Loss: 2.829, Val Loss: 2.790
+
+[2025-11-02 08:56:14,060.060] Total Tokens seen till now: 2663536
+
+[2025-11-02 08:56:15,427.427] BEST model SAVED on iteration 000640 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:56:15,651.651] Once upon a time, a big tree was very. He was a big and he wanted to help. He was very happy
+[2025-11-02 08:56:43,488.488] Epoch No: 1, Step: 000704, Train Loss: 2.764, Val Loss: 2.749
+
+[2025-11-02 08:56:43,489.489] Total Tokens seen till now: 2929024
+
+[2025-11-02 08:56:44,664.664] BEST model SAVED on iteration 000704 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:56:44,883.883] Once upon a time, time a big, she was. She wanted to help her toys and put it.The
+[2025-11-02 08:57:12,766.766] Epoch No: 1, Step: 000768, Train Loss: 2.761, Val Loss: 2.690
+
+[2025-11-02 08:57:12,766.766] Total Tokens seen till now: 3194400
+
+[2025-11-02 08:57:14,119.119] BEST model SAVED on iteration 000768 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:57:14,334.334] Once upon a time,. She that was a big and it was very. She wanted to help. She wanted to help
+[2025-11-02 08:57:42,301.301] Epoch No: 1, Step: 000832, Train Loss: 2.710, Val Loss: 2.685
+
+[2025-11-02 08:57:42,302.302] Total Tokens seen till now: 3460560
+
+[2025-11-02 08:57:43,525.525] BEST model SAVED on iteration 000832 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:57:43,754.754] Once upon a time,. It was. She was very sad. She wanted to the water. She was very very.
+[2025-11-02 08:58:11,849.849] Epoch No: 1, Step: 000896, Train Loss: 2.678, Val Loss: 2.641
+
+[2025-11-02 08:58:11,849.849] Total Tokens seen till now: 3726176
+
+[2025-11-02 08:58:13,217.217] BEST model SAVED on iteration 000896 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:58:13,450.450] Once upon a time, day, a big bird named Lily. She loved to play with fun. One day, she saw
+[2025-11-02 08:58:41,912.912] Epoch No: 1, Step: 000960, Train Loss: 2.602, Val Loss: 2.600
+
+[2025-11-02 08:58:41,913.913] Total Tokens seen till now: 3992128
+
+[2025-11-02 08:58:43,163.163] BEST model SAVED on iteration 000960 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:58:43,408.408] Once upon a time, that always that day to a big to be. The bird was very happy and not like.
+[2025-11-02 08:59:12,134.134] Epoch No: 1, Step: 001024, Train Loss: 2.586, Val Loss: 2.530
+
+[2025-11-02 08:59:12,135.135] Total Tokens seen till now: 4258176
+
+[2025-11-02 08:59:13,252.252] BEST model SAVED on iteration 001024 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 08:59:13,483.483] Once upon a time, a big, she was. She liked to make her toys and a big box. She wanted to
+[2025-11-02 08:59:42,007.007] Epoch No: 1, Step: 001088, Train Loss: 2.537, Val Loss: 2.559
+
+[2025-11-02 08:59:42,007.007] Total Tokens seen till now: 4524416
+
+[2025-11-02 08:59:42,223.223] Once upon a time, time to the park She, she was so she would be to the park. She would be very
+[2025-11-02 09:00:10,731.731] Epoch No: 1, Step: 001152, Train Loss: 2.519, Val Loss: 2.529
+
+[2025-11-02 09:00:10,731.731] Total Tokens seen till now: 4789968
+
+[2025-11-02 09:00:12,035.035] BEST model SAVED on iteration 001152 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:00:12,300.300] Once upon a time, that day to go to go to the sky. She would always go to the park. She was
+[2025-11-02 09:00:40,831.831] Epoch No: 1, Step: 001216, Train Loss: 2.492, Val Loss: 2.456
+
+[2025-11-02 09:00:40,831.831] Total Tokens seen till now: 5055888
+
+[2025-11-02 09:00:42,147.147] BEST model SAVED on iteration 001216 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:00:42,414.414] Once upon a time, special. He was a special special. He was so excited. He was so he had a special
+[2025-11-02 09:01:10,975.975] Epoch No: 1, Step: 001280, Train Loss: 2.523, Val Loss: 2.445
+
+[2025-11-02 09:01:10,975.975] Total Tokens seen till now: 5321728
+
+[2025-11-02 09:01:12,331.331] BEST model SAVED on iteration 001280 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:01:12,546.546] Once upon a time, new fun day, she and she was a fun. She was very excited and she would not like
+[2025-11-02 09:01:41,073.073] Epoch No: 1, Step: 001344, Train Loss: 2.421, Val Loss: 2.415
+
+[2025-11-02 09:01:41,074.074] Total Tokens seen till now: 5586752
+
+[2025-11-02 09:01:42,433.433] BEST model SAVED on iteration 001344 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:01:42,657.657] Once upon a time, time to the park with her toys. She was a big red car, and a big dog that
+[2025-11-02 09:02:11,216.216] Epoch No: 1, Step: 001408, Train Loss: 2.452, Val Loss: 2.405
+
+[2025-11-02 09:02:11,217.217] Total Tokens seen till now: 5852400
+
+[2025-11-02 09:02:12,572.572] BEST model SAVED on iteration 001408 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:02:12,620.620] Once upon a time, new day goodbye
+[2025-11-02 09:02:41,129.129] Epoch No: 1, Step: 001472, Train Loss: 2.391, Val Loss: 2.398
+
+[2025-11-02 09:02:41,129.129] Total Tokens seen till now: 6118000
+
+[2025-11-02 09:02:42,452.452] BEST model SAVED on iteration 001472 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:02:42,673.673] Once upon a time, special. Every day, she would make a special things. She would make her things like her things
+[2025-11-02 09:03:11,283.283] Epoch No: 1, Step: 001536, Train Loss: 2.388, Val Loss: 2.363
+
+[2025-11-02 09:03:11,284.284] Total Tokens seen till now: 6383920
+
+[2025-11-02 09:03:12,602.602] BEST model SAVED on iteration 001536 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:03:12,828.828] Once upon a time, a big bird. It was a big bird that it and a bird and a little bird. The
+[2025-11-02 09:03:41,430.430] Epoch No: 1, Step: 001600, Train Loss: 2.383, Val Loss: 2.389
+
+[2025-11-02 09:03:41,430.430] Total Tokens seen till now: 6649632
+
+[2025-11-02 09:03:41,650.650] Once upon a time, time to the park day to the park. She was so excited to see her mom. She was
+[2025-11-02 09:04:10,226.226] Epoch No: 1, Step: 001664, Train Loss: 2.358, Val Loss: 2.318
+
+[2025-11-02 09:04:10,226.226] Total Tokens seen till now: 6915776
+
+[2025-11-02 09:04:11,453.453] BEST model SAVED on iteration 001664 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:04:11,724.724] Once upon a time, time to the park. He would go to the park. He would go to the park and explore
+[2025-11-02 09:04:40,234.234] Epoch No: 1, Step: 001728, Train Loss: 2.346, Val Loss: 2.315
+
+[2025-11-02 09:04:40,234.234] Total Tokens seen till now: 7180672
+
+[2025-11-02 09:04:41,603.603] BEST model SAVED on iteration 001728 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:04:41,870.870] Once upon a time, time to the world. She was so much fun that it was so hard to be to make it
+[2025-11-02 09:05:10,513.513] Epoch No: 1, Step: 001792, Train Loss: 2.312, Val Loss: 2.307
+
+[2025-11-02 09:05:10,513.513] Total Tokens seen till now: 7446912
+
+[2025-11-02 09:05:11,898.898] BEST model SAVED on iteration 001792 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:05:12,161.161] Once upon a time, new time the best day It day. It was so much of things like it. She was so
+[2025-11-02 09:05:40,809.809] Epoch No: 1, Step: 001856, Train Loss: 2.294, Val Loss: 2.260
+
+[2025-11-02 09:05:40,809.809] Total Tokens seen till now: 7712720
+
+[2025-11-02 09:05:42,213.213] BEST model SAVED on iteration 001856 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:05:42,468.468] Once upon a time, much. She always be fun. She would always always have fun and never be a new things and
+[2025-11-02 09:06:10,958.958] Epoch No: 1, Step: 001920, Train Loss: 2.314, Val Loss: 2.273
+
+[2025-11-02 09:06:10,959.959] Total Tokens seen till now: 7977616
+
+[2025-11-02 09:06:11,187.187] Once upon a time, time to go to the the park. He go to the park. He and see a big,
+[2025-11-02 09:06:39,715.715] Epoch No: 1, Step: 001984, Train Loss: 2.295, Val Loss: 2.280
+
+[2025-11-02 09:06:39,715.715] Total Tokens seen till now: 8243216
+
+[2025-11-02 09:06:39,930.930] Once upon a time, time to, she would always would always always go.One day on the day, she
+[2025-11-02 09:07:08,471.471] Epoch No: 1, Step: 002048, Train Loss: 2.256, Val Loss: 2.256
+
+[2025-11-02 09:07:08,472.472] Total Tokens seen till now: 8508768
+
+[2025-11-02 09:07:09,734.734] BEST model SAVED on iteration 002048 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:07:09,952.952] Once upon a time, of different things. Every day, she would make a special things, and make a special special.
+[2025-11-02 09:07:38,456.456] Epoch No: 1, Step: 002112, Train Loss: 2.251, Val Loss: 2.245
+
+[2025-11-02 09:07:38,457.457] Total Tokens seen till now: 8774736
+
+[2025-11-02 09:07:39,736.736] BEST model SAVED on iteration 002112 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:07:39,951.951] Once upon a time, time to go home. She always always to go to the park with her friends. She would go
+[2025-11-02 09:08:08,536.536] Epoch No: 1, Step: 002176, Train Loss: 2.241, Val Loss: 2.224
+
+[2025-11-02 09:08:08,536.536] Total Tokens seen till now: 9040528
+
+[2025-11-02 09:08:09,648.648] BEST model SAVED on iteration 002176 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:08:09,877.877] Once upon a time, walk. She on a big, a big, red, a big, a big, red ball
+[2025-11-02 09:08:38,463.463] Epoch No: 1, Step: 002240, Train Loss: 2.184, Val Loss: 2.178
+
+[2025-11-02 09:08:38,464.464] Total Tokens seen till now: 9305888
+
+[2025-11-02 09:08:39,559.559] BEST model SAVED on iteration 002240 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:08:39,775.775] Once upon a time, special to the world. He was so much. He had a big, a big, a big
+[2025-11-02 09:09:08,373.373] Epoch No: 1, Step: 002304, Train Loss: 2.213, Val Loss: 2.235
+
+[2025-11-02 09:09:08,373.373] Total Tokens seen till now: 9571136
+
+[2025-11-02 09:09:08,589.589] Once upon a time, time to be a big tree. She ever ever seen. She was so much fun on her and
+[2025-11-02 09:09:37,185.185] Epoch No: 1, Step: 002368, Train Loss: 2.239, Val Loss: 2.185
+
+[2025-11-02 09:09:37,185.185] Total Tokens seen till now: 9836960
+
+[2025-11-02 09:09:37,399.399] Once upon a time, adventureummy. She wanted to find something new. She wanted to make something special. She wanted to
+[2025-11-02 09:10:05,967.967] Epoch No: 1, Step: 002432, Train Loss: 2.187, Val Loss: 2.199
+
+[2025-11-02 09:10:05,967.967] Total Tokens seen till now: 10101904
+
+[2025-11-02 09:10:06,198.198] Once upon a time, time day home She always and dad. She was always always always always always happy.One
+[2025-11-02 09:10:34,829.829] Epoch No: 1, Step: 002496, Train Loss: 2.179, Val Loss: 2.152
+
+[2025-11-02 09:10:34,829.829] Total Tokens seen till now: 10367536
+
+[2025-11-02 09:10:36,217.217] BEST model SAVED on iteration 002496 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:10:36,465.465] Once upon a time, time to find. He to go to find things. He was a big things to see many things
+[2025-11-02 09:11:04,961.961] Epoch No: 1, Step: 002560, Train Loss: 2.217, Val Loss: 2.158
+
+[2025-11-02 09:11:04,961.961] Total Tokens seen till now: 10632848
+
+[2025-11-02 09:11:05,179.179] Once upon a time, of the home. She liked to make a special special special things. She was so much. She
+[2025-11-02 09:11:33,788.788] Epoch No: 1, Step: 002624, Train Loss: 2.184, Val Loss: 2.133
+
+[2025-11-02 09:11:33,788.788] Total Tokens seen till now: 10898800
+
+[2025-11-02 09:11:34,852.852] BEST model SAVED on iteration 002624 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:11:35,074.074] Once upon a time, and. She was very excited. She wanted to go on a new things. She wanted to go
+[2025-11-02 09:12:03,698.698] Epoch No: 1, Step: 002688, Train Loss: 2.143, Val Loss: 2.141
+
+[2025-11-02 09:12:03,698.698] Total Tokens seen till now: 11164672
+
+[2025-11-02 09:12:03,916.916] Once upon a time, time to the home. She was very much things and to go outside. She was going to go
+[2025-11-02 09:12:32,570.570] Epoch No: 1, Step: 002752, Train Loss: 2.153, Val Loss: 2.130
+
+[2025-11-02 09:12:32,571.571] Total Tokens seen till now: 11430720
+
+[2025-11-02 09:12:33,728.728] BEST model SAVED on iteration 002752 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:12:33,943.943] Once upon a time, and of things. He always always always wanted to always be a new things.One day
+[2025-11-02 09:13:02,547.547] Epoch No: 1, Step: 002816, Train Loss: 2.152, Val Loss: 2.159
+
+[2025-11-02 09:13:02,547.547] Total Tokens seen till now: 11696704
+
+[2025-11-02 09:13:02,773.773] Once upon a time, time home home, and dad. They were playing in the kitchen and dad. Mommy and dad
+[2025-11-02 09:13:31,359.359] Epoch No: 1, Step: 002880, Train Loss: 2.139, Val Loss: 2.180
+
+[2025-11-02 09:13:31,360.360] Total Tokens seen till now: 11961952
+
+[2025-11-02 09:13:31,578.578] Once upon a time, and of the store. She was a big box and to see what to go to the store.
+[2025-11-02 09:14:00,284.284] Epoch No: 1, Step: 002944, Train Loss: 2.163, Val Loss: 2.137
+
+[2025-11-02 09:14:00,285.285] Total Tokens seen till now: 12228192
+
+[2025-11-02 09:14:00,501.501] Once upon a time, the the beach Mom and the beach. Mom and dad was so they were so they were going to
+[2025-11-02 09:14:29,118.118] Epoch No: 1, Step: 003008, Train Loss: 2.163, Val Loss: 2.101
+
+[2025-11-02 09:14:29,118.118] Total Tokens seen till now: 12494432
+
+[2025-11-02 09:14:30,202.202] BEST model SAVED on iteration 003008 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:14:30,415.415] Once upon a time, and on the beach. She was playing with his mommy and dad to go to the beach.
+[2025-11-02 09:14:58,853.853] Epoch No: 1, Step: 003072, Train Loss: 2.113, Val Loss: 2.131
+
+[2025-11-02 09:14:58,854.854] Total Tokens seen till now: 12759520
+
+[2025-11-02 09:14:59,072.072] Once upon a time, a many things, things,. She would be many things, things. She would make them,
+[2025-11-02 09:15:27,618.618] Epoch No: 1, Step: 003136, Train Loss: 2.117, Val Loss: 2.112
+
+[2025-11-02 09:15:27,618.618] Total Tokens seen till now: 13025616
+
+[2025-11-02 09:15:27,840.840] Once upon a time, to see many things. She liked to eat things, things, things. She would not to eat
+[2025-11-02 09:15:56,303.303] Epoch No: 1, Step: 003200, Train Loss: 2.133, Val Loss: 2.121
+
+[2025-11-02 09:15:56,303.303] Total Tokens seen till now: 13291280
+
+[2025-11-02 09:15:56,522.522] Once upon a time, things with things. They were going to go on a big house. They were going on a big
+[2025-11-02 09:16:25,000.000] Epoch No: 1, Step: 003264, Train Loss: 2.149, Val Loss: 2.107
+
+[2025-11-02 09:16:25,001.001] Total Tokens seen till now: 13557136
+
+[2025-11-02 09:16:25,215.215] Once upon a time, the day many things. She was very excited and her mom would make the things that the things and
+[2025-11-02 09:16:53,718.718] Epoch No: 1, Step: 003328, Train Loss: 2.126, Val Loss: 2.103
+
+[2025-11-02 09:16:53,719.719] Total Tokens seen till now: 13823104
+
+[2025-11-02 09:16:53,934.934] Once upon a time, time outside and of the day on the beach. They the beach and the the beach. They were
+[2025-11-02 09:17:22,355.355] Epoch No: 1, Step: 003392, Train Loss: 2.138, Val Loss: 2.105
+
+[2025-11-02 09:17:22,355.355] Total Tokens seen till now: 14088736
+
+[2025-11-02 09:17:22,583.583] Once upon a time, a the beach. He was very to go to the the beach. He was very excited and the
+[2025-11-02 09:17:50,996.996] Epoch No: 1, Step: 003456, Train Loss: 2.088, Val Loss: 2.090
+
+[2025-11-02 09:17:50,996.996] Total Tokens seen till now: 14354448
+
+[2025-11-02 09:17:52,371.371] BEST model SAVED on iteration 003456 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:17:52,611.611] Once upon a time, time to the beach. It was a home and there to go outside and see the beach.
+[2025-11-02 09:18:21,015.015] Epoch No: 1, Step: 003520, Train Loss: 2.089, Val Loss: 2.075
+
+[2025-11-02 09:18:21,016.016] Total Tokens seen till now: 14620688
+
+[2025-11-02 09:18:22,329.329] BEST model SAVED on iteration 003520 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:18:22,542.542] Once upon a time, the day to go to the beach. She was very excited and dad. She was very excited and
+[2025-11-02 09:18:50,878.878] Epoch No: 1, Step: 003584, Train Loss: 2.109, Val Loss: 2.070
+
+[2025-11-02 09:18:50,879.879] Total Tokens seen till now: 14886288
+
+[2025-11-02 09:18:52,204.204] BEST model SAVED on iteration 003584 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:18:52,417.417] Once upon a time, upon of a many things. She liked to go to go on the beach.One day
+[2025-11-02 09:19:20,731.731] Epoch No: 1, Step: 003648, Train Loss: 2.110, Val Loss: 2.061
+
+[2025-11-02 09:19:20,731.731] Total Tokens seen till now: 15152528
+
+[2025-11-02 09:19:22,107.107] BEST model SAVED on iteration 003648 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:19:22,350.350] Once upon a time, a many things. many things, and animals. They had many things they were many things.
+[2025-11-02 09:19:50,654.654] Epoch No: 1, Step: 003712, Train Loss: 2.100, Val Loss: 2.077
+
+[2025-11-02 09:19:50,654.654] Total Tokens seen till now: 15418224
+
+[2025-11-02 09:19:50,877.877] Once upon a time, a special day. He was going to see something special. He was very excited. He wanted to
+[2025-11-02 09:20:19,201.201] Epoch No: 1, Step: 003776, Train Loss: 2.075, Val Loss: 2.074
+
+[2025-11-02 09:20:19,201.201] Total Tokens seen till now: 15683840
+
+[2025-11-02 09:20:19,409.409] Once upon a time, time to the beach. He first, and had a walk. He was very excited to go on
+[2025-11-02 09:20:47,795.795] Epoch No: 1, Step: 003840, Train Loss: 2.110, Val Loss: 2.063
+
+[2025-11-02 09:20:47,796.796] Total Tokens seen till now: 15949216
+
+[2025-11-02 09:20:48,019.019] Once upon a time, the to the beach day to the beach. He was very fast and go to the beach. He
+[2025-11-02 09:21:16,370.370] Epoch No: 1, Step: 003904, Train Loss: 2.098, Val Loss: 2.067
+
+[2025-11-02 09:21:16,371.371] Total Tokens seen till now: 16214224
+
+[2025-11-02 09:21:16,594.594] Once upon a time, many adventures many things. One day, one day, there, a big bear came over a big
+[2025-11-02 09:21:44,979.979] Epoch No: 1, Step: 003968, Train Loss: 2.099, Val Loss: 2.073
+
+[2025-11-02 09:21:44,979.979] Total Tokens seen till now: 16479760
+
+[2025-11-02 09:21:45,213.213] Once upon a time, time outside. She then on the sun, and saw many things. She was very much. She
+[2025-11-02 09:21:56,947.947] Epoch No: 1, Step: 003968, Train Loss: 2.084, Val Loss: 2.076
+
+[2025-11-02 09:21:56,947.947] Total Tokens seen till now: 16483792
+
+[2025-11-02 09:21:57,166.166] Once upon a time, of the beach€™ outside. It was a big trees and see the birds and birds and the
+[2025-11-02 09:22:25,614.614] Epoch No: 1, Step: 004032, Train Loss: 2.073, Val Loss: 2.058
+
+[2025-11-02 09:22:25,614.614] Total Tokens seen till now: 16748352
+
+[2025-11-02 09:22:26,931.931] BEST model SAVED on iteration 004032 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:22:27,186.186] Once upon a time, a very going to the beach. She was going to go to the the the beach. She was
+[2025-11-02 09:22:55,584.584] Epoch No: 1, Step: 004096, Train Loss: 2.099, Val Loss: 2.071
+
+[2025-11-02 09:22:55,584.584] Total Tokens seen till now: 17014160
+
+[2025-11-02 09:22:55,797.797] Once upon a time, a special day to the beach. The mom was excited to see the beach, and dad to see
+[2025-11-02 09:23:24,192.192] Epoch No: 1, Step: 004160, Train Loss: 2.134, Val Loss: 2.070
+
+[2025-11-02 09:23:24,192.192] Total Tokens seen till now: 17280320
+
+[2025-11-02 09:23:24,409.409] Once upon a time, and be many things. He liked to make many things and make things.One day,
+[2025-11-02 09:23:52,797.797] Epoch No: 1, Step: 004224, Train Loss: 2.084, Val Loss: 2.039
+
+[2025-11-02 09:23:52,798.798] Total Tokens seen till now: 17546256
+
+[2025-11-02 09:23:53,965.965] BEST model SAVED on iteration 004224 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:23:54,190.190] Once upon a time, about the store adventure, and the time, but there, and there was a very special, and
+[2025-11-02 09:24:22,612.612] Epoch No: 1, Step: 004288, Train Loss: 2.119, Val Loss: 2.052
+
+[2025-11-02 09:24:22,612.612] Total Tokens seen till now: 17812320
+
+[2025-11-02 09:24:22,817.817] Once upon a time, of the home. He was very excited. He wanted to be friends and wanted to go.
+[2025-11-02 09:24:51,131.131] Epoch No: 1, Step: 004352, Train Loss: 2.080, Val Loss: 2.078
+
+[2025-11-02 09:24:51,131.131] Total Tokens seen till now: 18076816
+
+[2025-11-02 09:24:51,343.343] Once upon a time, of things, things. He was very to make something to make. He to see the store,
+[2025-11-02 09:25:19,704.704] Epoch No: 1, Step: 004416, Train Loss: 2.094, Val Loss: 2.067
+
+[2025-11-02 09:25:19,705.705] Total Tokens seen till now: 18342272
+
+[2025-11-02 09:25:19,917.917] Once upon a time, a She that day long. She made sure to make a her favorite, and her favorite, and
+[2025-11-02 09:25:48,427.427] Epoch No: 1, Step: 004480, Train Loss: 2.082, Val Loss: 2.051
+
+[2025-11-02 09:25:48,427.427] Total Tokens seen till now: 18608448
+
+[2025-11-02 09:25:48,639.639] Once upon a time, to the the beach. He liked the beach that he liked the the water and the water and the
+[2025-11-02 09:26:17,047.047] Epoch No: 1, Step: 004544, Train Loss: 2.106, Val Loss: 2.081
+
+[2025-11-02 09:26:17,048.048] Total Tokens seen till now: 18874256
+
+[2025-11-02 09:26:17,262.262] Once upon a time, a special place. He lived many things. One day, the day, the animals would go on
+[2025-11-02 09:26:45,766.766] Epoch No: 1, Step: 004608, Train Loss: 2.097, Val Loss: 2.078
+
+[2025-11-02 09:26:45,766.766] Total Tokens seen till now: 19140496
+
+[2025-11-02 09:26:46,032.032] Once upon a time, a going to the store. He was going to go to the store. He was very fast and
+[2025-11-02 09:27:14,459.459] Epoch No: 1, Step: 004672, Train Loss: 2.077, Val Loss: 2.099
+
+[2025-11-02 09:27:14,459.459] Total Tokens seen till now: 19406592
+
+[2025-11-02 09:27:14,677.677] Once upon a time, more and to see them. He liked to see many things, cars, animals, and animals.
+[2025-11-02 09:27:42,956.956] Epoch No: 1, Step: 004736, Train Loss: 2.074, Val Loss: 2.066
+
+[2025-11-02 09:27:42,956.956] Total Tokens seen till now: 19670304
+
+[2025-11-02 09:27:43,174.174] Once upon a time, the first day, many things. They were very many things to make them.One day
+[2025-11-02 09:28:11,540.540] Epoch No: 1, Step: 004800, Train Loss: 2.092, Val Loss: 2.058
+
+[2025-11-02 09:28:11,541.541] Total Tokens seen till now: 19936016
+
+[2025-11-02 09:28:11,766.766] Once upon a time, a home. She loved the world. She loved to see her room and play with her room.
+[2025-11-02 09:28:40,163.163] Epoch No: 1, Step: 004864, Train Loss: 2.095, Val Loss: 2.085
+
+[2025-11-02 09:28:40,163.163] Total Tokens seen till now: 20201648
+
+[2025-11-02 09:28:40,380.380] Once upon a time, and and to play. They liked to go to go to the beach. They have many animals and
+[2025-11-02 09:29:08,803.803] Epoch No: 1, Step: 004928, Train Loss: 2.072, Val Loss: 2.055
+
+[2025-11-02 09:29:08,804.804] Total Tokens seen till now: 20467568
+
+[2025-11-02 09:29:09,027.027] Once upon a time, a farm with the dayadow, there were many animals, animals, animals, and animals, and
+[2025-11-02 09:29:37,411.411] Epoch No: 1, Step: 004992, Train Loss: 2.087, Val Loss: 2.069
+
+[2025-11-02 09:29:37,411.411] Total Tokens seen till now: 20732656
+
+[2025-11-02 09:29:37,628.628] Once upon a time, and of things morning many things. She was very excited to go to go on a long. She
+[2025-11-02 09:30:06,014.014] Epoch No: 1, Step: 005056, Train Loss: 2.129, Val Loss: 2.072
+
+[2025-11-02 09:30:06,014.014] Total Tokens seen till now: 20997632
+
+[2025-11-02 09:30:06,229.229] Once upon a time, a to go the beach there home. He liked the beach and saw many the beach. He liked
+[2025-11-02 09:30:34,594.594] Epoch No: 1, Step: 005120, Train Loss: 2.064, Val Loss: 2.065
+
+[2025-11-02 09:30:34,595.595] Total Tokens seen till now: 21263056
+
+[2025-11-02 09:30:34,812.812] Once upon a time, a special day to go day. He was walking in the park, he saw a big tree.
+[2025-11-02 09:31:03,145.145] Epoch No: 1, Step: 005184, Train Loss: 2.076, Val Loss: 2.064
+
+[2025-11-02 09:31:03,145.145] Total Tokens seen till now: 21527360
+
+[2025-11-02 09:31:03,360.360] Once upon a time, time the beach outside the beach. They were all of the beach. They saw a big and a
+[2025-11-02 09:31:31,843.843] Epoch No: 1, Step: 005248, Train Loss: 2.060, Val Loss: 2.041
+
+[2025-11-02 09:31:31,843.843] Total Tokens seen till now: 21793600
+
+[2025-11-02 09:31:32,066.066] Once upon a time, a many things day, things, and animals, and animals.One day, there was
+[2025-11-02 09:32:00,506.506] Epoch No: 1, Step: 005312, Train Loss: 2.095, Val Loss: 2.028
+
+[2025-11-02 09:32:00,506.506] Total Tokens seen till now: 22059664
+
+[2025-11-02 09:32:01,873.873] BEST model SAVED on iteration 005312 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:32:02,144.144] Once upon a time, to see many things things. They and dad, but Mom and dad was very excited. Mom and
+[2025-11-02 09:32:30,479.479] Epoch No: 1, Step: 005376, Train Loss: 2.105, Val Loss: 2.052
+
+[2025-11-02 09:32:30,479.479] Total Tokens seen till now: 22324608
+
+[2025-11-02 09:32:30,700.700] Once upon a time, to the kitchen outside and kitchen. He was very Mommy and dad to see the kitchen. Mom
+[2025-11-02 09:32:59,129.129] Epoch No: 1, Step: 005440, Train Loss: 2.066, Val Loss: 2.036
+
+[2025-11-02 09:32:59,130.130] Total Tokens seen till now: 22590848
+
+[2025-11-02 09:32:59,347.347] Once upon a time, a many different animals. They were liked to play outside and animals. One day, they saw a
+[2025-11-02 09:33:27,779.779] Epoch No: 1, Step: 005504, Train Loss: 2.053, Val Loss: 2.026
+
+[2025-11-02 09:33:27,779.779] Total Tokens seen till now: 22856976
+
+[2025-11-02 09:33:28,942.942] BEST model SAVED on iteration 005504 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:33:29,158.158] Once upon a time, the day to the beach, there to go outside. They were so they all wanted to go on
+[2025-11-02 09:33:57,545.545] Epoch No: 1, Step: 005568, Train Loss: 2.086, Val Loss: 2.028
+
+[2025-11-02 09:33:57,545.545] Total Tokens seen till now: 23123216
+
+[2025-11-02 09:33:57,760.760] Once upon a time, his day to the store. He had a big, but it, a big, a big,
+[2025-11-02 09:34:26,153.153] Epoch No: 1, Step: 005632, Train Loss: 2.085, Val Loss: 2.092
+
+[2025-11-02 09:34:26,154.154] Total Tokens seen till now: 23388976
+
+[2025-11-02 09:34:26,369.369] Once upon a time, many things. She liked to play with her toys and animals and books. She liked to make of
+[2025-11-02 09:34:54,749.749] Epoch No: 1, Step: 005696, Train Loss: 2.060, Val Loss: 2.024
+
+[2025-11-02 09:34:54,749.749] Total Tokens seen till now: 23654608
+
+[2025-11-02 09:34:56,073.073] BEST model SAVED on iteration 005696 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:34:56,345.345] Once upon a time, a small town with many people, and animals. They liked to play with their toys.
+[2025-11-02 09:35:24,791.791] Epoch No: 1, Step: 005760, Train Loss: 2.060, Val Loss: 2.032
+
+[2025-11-02 09:35:24,791.791] Total Tokens seen till now: 23920800
+
+[2025-11-02 09:35:25,000.000] Once upon a time, and a many the sky. They liked the the sun and the sun and the birds. They wanted
+[2025-11-02 09:35:53,362.362] Epoch No: 1, Step: 005824, Train Loss: 2.057, Val Loss: 2.025
+
+[2025-11-02 09:35:53,363.363] Total Tokens seen till now: 24186288
+
+[2025-11-02 09:35:53,578.578] Once upon a time, a different places the animals. He liked to see his friends and see many animals. He liked to
+[2025-11-02 09:36:21,911.911] Epoch No: 1, Step: 005888, Train Loss: 2.076, Val Loss: 2.066
+
+[2025-11-02 09:36:21,911.911] Total Tokens seen till now: 24451584
+
+[2025-11-02 09:36:22,137.137] Once upon a time, a ready to the beach, a big boat. It was so many animals. They liked to see
+[2025-11-02 09:36:50,505.505] Epoch No: 1, Step: 005952, Train Loss: 2.108, Val Loss: 2.015
+
+[2025-11-02 09:36:50,506.506] Total Tokens seen till now: 24716928
+
+[2025-11-02 09:36:51,883.883] BEST model SAVED on iteration 005952 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:36:52,150.150] Once upon a time, a small Mom's Mom and see. She was very happy. She wanted to see the food and
+[2025-11-02 09:37:20,484.484] Epoch No: 1, Step: 006016, Train Loss: 2.058, Val Loss: 2.041
+
+[2025-11-02 09:37:20,484.484] Total Tokens seen till now: 24981824
+
+[2025-11-02 09:37:20,712.712] Once upon a time, a many things. She liked to see things to make things and animals. She also like things and
+[2025-11-02 09:37:49,035.035] Epoch No: 1, Step: 006080, Train Loss: 2.054, Val Loss: 2.055
+
+[2025-11-02 09:37:49,036.036] Total Tokens seen till now: 25247504
+
+[2025-11-02 09:37:49,254.254] Once upon a time, with many animals, animals, animals, animals. They also liked to play with her toys.
+[2025-11-02 09:38:17,653.653] Epoch No: 1, Step: 006144, Train Loss: 2.018, Val Loss: 2.042
+
+[2025-11-02 09:38:17,654.654] Total Tokens seen till now: 25513744
+
+[2025-11-02 09:38:17,870.870] Once upon a time, a very special. She was so many people, and the other animals, and the animals.
+[2025-11-02 09:38:46,241.241] Epoch No: 1, Step: 006208, Train Loss: 2.066, Val Loss: 2.034
+
+[2025-11-02 09:38:46,242.242] Total Tokens seen till now: 25779008
+
+[2025-11-02 09:38:46,461.461] Once upon a time,€ upable on to the best. He, he, and his favorite toy car, and had
+[2025-11-02 09:39:14,858.858] Epoch No: 1, Step: 006272, Train Loss: 2.004, Val Loss: 1.980
+
+[2025-11-02 09:39:14,858.858] Total Tokens seen till now: 26044976
+
+[2025-11-02 09:39:16,210.210] BEST model SAVED on iteration 006272 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:39:16,472.472] Once upon a time, things with many things. He liked to see them with them. He liked to make them with his
+[2025-11-02 09:39:44,886.886] Epoch No: 1, Step: 006336, Train Loss: 2.038, Val Loss: 2.017
+
+[2025-11-02 09:39:44,886.886] Total Tokens seen till now: 26310432
+
+[2025-11-02 09:39:45,099.099] Once upon a time, the wait to the beach. It was the beach. It was the sand and the sand, but
+[2025-11-02 09:40:13,406.406] Epoch No: 1, Step: 006400, Train Loss: 1.999, Val Loss: 2.001
+
+[2025-11-02 09:40:13,406.406] Total Tokens seen till now: 26575616
+
+[2025-11-02 09:40:13,621.621] Once upon a time, a box He buy it. He was very excited to buy it. He wanted to buy it.
+[2025-11-02 09:40:41,964.964] Epoch No: 1, Step: 006464, Train Loss: 2.019, Val Loss: 2.009
+
+[2025-11-02 09:40:41,965.965] Total Tokens seen till now: 26841280
+
+[2025-11-02 09:40:42,187.187] Once upon a time, the the the kitchen. It was so many the cake. It was very many of the cake.
+[2025-11-02 09:41:10,607.607] Epoch No: 1, Step: 006528, Train Loss: 2.032, Val Loss: 2.006
+
+[2025-11-02 09:41:10,607.607] Total Tokens seen till now: 27107040
+
+[2025-11-02 09:41:10,824.824] Once upon a time, a many animals things. He liked the animals, always saw them. One day, he saw a
+[2025-11-02 09:41:39,208.208] Epoch No: 1, Step: 006592, Train Loss: 2.000, Val Loss: 2.022
+
+[2025-11-02 09:41:39,209.209] Total Tokens seen till now: 27372752
+
+[2025-11-02 09:41:39,419.419] Once upon a time, a a very€ boy. He liked to play with. He liked to play with his toys.
+[2025-11-02 09:42:07,808.808] Epoch No: 1, Step: 006656, Train Loss: 2.009, Val Loss: 1.989
+
+[2025-11-02 09:42:07,809.809] Total Tokens seen till now: 27638480
+
+[2025-11-02 09:42:08,022.022] Once upon a time, very many many different things. He liked to see many things with his toys, books, cars,
+[2025-11-02 09:42:36,446.446] Epoch No: 1, Step: 006720, Train Loss: 1.990, Val Loss: 1.983
+
+[2025-11-02 09:42:36,446.446] Total Tokens seen till now: 27904512
+
+[2025-11-02 09:42:36,662.662] Once upon a time, things many things, and things about things things.One day on a long and dad, dad
+[2025-11-02 09:43:05,081.081] Epoch No: 1, Step: 006784, Train Loss: 2.029, Val Loss: 2.005
+
+[2025-11-02 09:43:05,081.081] Total Tokens seen till now: 28170656
+
+[2025-11-02 09:43:05,304.304] Once upon a time, a very the beach with his dad. He was very excited and his dad and he was very excited
+[2025-11-02 09:43:33,694.694] Epoch No: 1, Step: 006848, Train Loss: 2.001, Val Loss: 2.009
+
+[2025-11-02 09:43:33,694.694] Total Tokens seen till now: 28436480
+
+[2025-11-02 09:43:33,908.908] Once upon a time, a about the perfect day. He. He was so excited to see a big, a big,
+[2025-11-02 09:44:02,369.369] Epoch No: 1, Step: 006912, Train Loss: 2.004, Val Loss: 1.983
+
+[2025-11-02 09:44:02,369.369] Total Tokens seen till now: 28702512
+
+[2025-11-02 09:44:02,584.584] Once upon a time, a many animals animals. They animals and animals and animals and animals. They liked to play on the
+[2025-11-02 09:44:31,022.022] Epoch No: 1, Step: 006976, Train Loss: 2.036, Val Loss: 1.959
+
+[2025-11-02 09:44:31,022.022] Total Tokens seen till now: 28968752
+
+[2025-11-02 09:44:32,366.366] BEST model SAVED on iteration 006976 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:44:32,582.582] Once upon a time, a many the beach. They looking for a long and the beach. They liked to swim, and
+[2025-11-02 09:45:00,998.998] Epoch No: 1, Step: 007040, Train Loss: 2.002, Val Loss: 1.973
+
+[2025-11-02 09:45:00,999.999] Total Tokens seen till now: 29234992
+
+[2025-11-02 09:45:01,215.215] Once upon a time, a ride a look at the park. He, a big hill, a big hill, a hill
+[2025-11-02 09:45:29,549.549] Epoch No: 1, Step: 007104, Train Loss: 1.994, Val Loss: 1.973
+
+[2025-11-02 09:45:29,549.549] Total Tokens seen till now: 29500800
+
+[2025-11-02 09:45:29,777.777] Once upon a time, a very the wait, and he John would be a very excited. He would have to go to
+[2025-11-02 09:45:58,171.171] Epoch No: 1, Step: 007168, Train Loss: 1.985, Val Loss: 1.945
+
+[2025-11-02 09:45:58,171.171] Total Tokens seen till now: 29766448
+
+[2025-11-02 09:45:59,503.503] BEST model SAVED on iteration 007168 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:45:59,718.718] Once upon a time, boat many boat many boat boat, they boat, and boat, there. They boat, and boat
+[2025-11-02 09:46:28,045.045] Epoch No: 1, Step: 007232, Train Loss: 1.963, Val Loss: 1.992
+
+[2025-11-02 09:46:28,045.045] Total Tokens seen till now: 30032016
+
+[2025-11-02 09:46:28,260.260] Once upon a time, and be his boat. He liked to go to go to go on a big boat and explore the
+[2025-11-02 09:46:56,663.663] Epoch No: 1, Step: 007296, Train Loss: 1.993, Val Loss: 1.955
+
+[2025-11-02 09:46:56,663.663] Total Tokens seen till now: 30298256
+
+[2025-11-02 09:46:56,879.879] Once upon a time, a going to a swim there. He a long, so many boat. He liked to go on
+[2025-11-02 09:47:25,209.209] Epoch No: 1, Step: 007360, Train Loss: 1.979, Val Loss: 1.935
+
+[2025-11-02 09:47:25,210.210] Total Tokens seen till now: 30563632
+
+[2025-11-02 09:47:26,557.557] BEST model SAVED on iteration 007360 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:47:26,817.817] Once upon a time, a very many cars of different things. They liked to play with them. They liked to play with
+[2025-11-02 09:47:55,125.125] Epoch No: 1, Step: 007424, Train Loss: 1.980, Val Loss: 1.932
+
+[2025-11-02 09:47:55,126.126] Total Tokens seen till now: 30828880
+
+[2025-11-02 09:47:56,501.501] BEST model SAVED on iteration 007424 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:47:56,757.757] Once upon a time, toys many cars animals. They animals animals, but they were going to go to go to the zoo
+[2025-11-02 09:48:25,085.085] Epoch No: 1, Step: 007488, Train Loss: 1.969, Val Loss: 1.949
+
+[2025-11-02 09:48:25,085.085] Total Tokens seen till now: 31094656
+
+[2025-11-02 09:48:25,296.296] Once upon a time, the best the day outside the day. He had been playing in the birds. He had a lot
+[2025-11-02 09:48:53,648.648] Epoch No: 1, Step: 007552, Train Loss: 1.981, Val Loss: 1.931
+
+[2025-11-02 09:48:53,648.648] Total Tokens seen till now: 31360240
+
+[2025-11-02 09:48:54,985.985] BEST model SAVED on iteration 007552 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:48:55,206.206] Once upon a time, a to the kitchen. It. It. It was a big house. The door. The door
+[2025-11-02 09:49:23,561.561] Epoch No: 1, Step: 007616, Train Loss: 1.966, Val Loss: 1.945
+
+[2025-11-02 09:49:23,562.562] Total Tokens seen till now: 31626032
+
+[2025-11-02 09:49:23,775.775] Once upon a time, a to see the big bird. It was a big bird. The bird was a bird. The
+[2025-11-02 09:49:52,138.138] Epoch No: 1, Step: 007680, Train Loss: 1.921, Val Loss: 1.889
+
+[2025-11-02 09:49:52,138.138] Total Tokens seen till now: 31891712
+
+[2025-11-02 09:49:53,478.478] BEST model SAVED on iteration 007680 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:49:53,699.699] Once upon a time, a very there the car. He was very curious about to the car. He was very excited.
+[2025-11-02 09:50:22,092.092] Epoch No: 1, Step: 007744, Train Loss: 1.929, Val Loss: 1.945
+
+[2025-11-02 09:50:22,092.092] Total Tokens seen till now: 32157952
+
+[2025-11-02 09:50:22,304.304] Once upon a time, a very toy. He wanted to go to the park."Mom, can I have
+[2025-11-02 09:50:50,595.595] Epoch No: 1, Step: 007808, Train Loss: 1.945, Val Loss: 1.968
+
+[2025-11-02 09:50:50,596.596] Total Tokens seen till now: 32422624
+
+[2025-11-02 09:50:50,813.813] Once upon a time, a a cars. He liked to pretend he would look up, he would look at his cars,
+[2025-11-02 09:51:19,136.136] Epoch No: 1, Step: 007872, Train Loss: 1.901, Val Loss: 1.898
+
+[2025-11-02 09:51:19,136.136] Total Tokens seen till now: 32687744
+
+[2025-11-02 09:51:19,352.352] Once upon a time, about animals cars the animals animals. He liked to play with his cars, cars, cars, cars
+[2025-11-02 09:51:47,719.719] Epoch No: 1, Step: 007936, Train Loss: 1.901, Val Loss: 1.912
+
+[2025-11-02 09:51:47,720.720] Total Tokens seen till now: 32953696
+
+[2025-11-02 09:51:47,933.933] Once upon a time, a cars the cars. He liked to play with his cars, but his cars were the cars.
+[2025-11-02 09:52:16,316.316] Epoch No: 1, Step: 008000, Train Loss: 1.931, Val Loss: 1.884
+
+[2025-11-02 09:52:16,316.316] Total Tokens seen till now: 33218944
+
+[2025-11-02 09:52:17,689.689] BEST model SAVED on iteration 008000 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:52:17,898.898] Once upon a time, of cars a cars cars cars. He cars, cars, cars, cars, cars, cars,
+[2025-11-02 09:52:29,645.645] Epoch No: 1, Step: 008000, Train Loss: 1.896, Val Loss: 1.903
+
+[2025-11-02 09:52:29,645.645] Total Tokens seen till now: 33223040
+
+[2025-11-02 09:52:29,856.856] Once upon a time, cars cars cars cars. He cars, cars. He has cars and cars and cars and cars.
+[2025-11-02 09:52:58,315.315] Epoch No: 1, Step: 008064, Train Loss: 1.931, Val Loss: 1.922
+
+[2025-11-02 09:52:58,315.315] Total Tokens seen till now: 33488288
+
+[2025-11-02 09:52:58,532.532] Once upon a time, animals, animals animals, animals, animals, Spot, Spot, Spot Spot, Spot, Spot,
+[2025-11-02 09:53:26,943.943] Epoch No: 1, Step: 008128, Train Loss: 1.923, Val Loss: 1.861
+
+[2025-11-02 09:53:26,944.944] Total Tokens seen till now: 33754448
+
+[2025-11-02 09:53:28,278.278] BEST model SAVED on iteration 008128 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:53:28,493.493] Once upon a time, a a big friends friends, a big friends, a big, a big, a big, a
+[2025-11-02 09:53:56,952.952] Epoch No: 1, Step: 008192, Train Loss: 1.884, Val Loss: 1.858
+
+[2025-11-02 09:53:56,952.952] Total Tokens seen till now: 34019408
+
+[2025-11-02 09:53:57,833.833] BEST model SAVED on iteration 008192 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:53:58,047.047] Once upon a time, a a race and race. He wanted to race first. He was a race. He was very
+[2025-11-02 09:54:26,434.434] Epoch No: 1, Step: 008256, Train Loss: 1.922, Val Loss: 1.886
+
+[2025-11-02 09:54:26,434.434] Total Tokens seen till now: 34284800
+
+[2025-11-02 09:54:26,652.652] Once upon a time, animals different animals. They animals, and they had a big animals. They had a big lion,
+[2025-11-02 09:54:55,042.042] Epoch No: 1, Step: 008320, Train Loss: 1.927, Val Loss: 1.909
+
+[2025-11-02 09:54:55,043.043] Total Tokens seen till now: 34550832
+
+[2025-11-02 09:54:55,273.273] Once upon a time,- years about the day. He had a big, soft bed and a big bed. He was
+[2025-11-02 09:55:23,699.699] Epoch No: 1, Step: 008384, Train Loss: 1.878, Val Loss: 1.879
+
+[2025-11-02 09:55:23,699.699] Total Tokens seen till now: 34816608
+
+[2025-11-02 09:55:23,915.915] Once upon a time, people cars-old, books. She loved to play with her toys.One day,
+[2025-11-02 09:55:52,331.331] Epoch No: 1, Step: 008448, Train Loss: 1.899, Val Loss: 1.865
+
+[2025-11-02 09:55:52,332.332] Total Tokens seen till now: 35082848
+
+[2025-11-02 09:55:52,553.553] Once upon a time,- to explore. She wanted to explore the places. She was so many the way to explore.
+[2025-11-02 09:56:20,927.927] Epoch No: 1, Step: 008512, Train Loss: 1.907, Val Loss: 1.888
+
+[2025-11-02 09:56:20,927.927] Total Tokens seen till now: 35348528
+
+[2025-11-02 09:56:21,145.145] Once upon a time, animals a big animals. He liked to play with his animals, a big animals, a big,
+[2025-11-02 09:56:49,587.587] Epoch No: 1, Step: 008576, Train Loss: 1.880, Val Loss: 1.850
+
+[2025-11-02 09:56:49,588.588] Total Tokens seen till now: 35614128
+
+[2025-11-02 09:56:50,945.945] BEST model SAVED on iteration 008576 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:56:51,217.217] Once upon a time, and see animals there. The animals were big and big and brown. The animals. The animals were
+[2025-11-02 09:57:19,684.684] Epoch No: 1, Step: 008640, Train Loss: 1.862, Val Loss: 1.836
+
+[2025-11-02 09:57:19,684.684] Total Tokens seen till now: 35879792
+
+[2025-11-02 09:57:20,893.893] BEST model SAVED on iteration 008640 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:57:21,152.152] Once upon a time, a job many train. He liked to do many animals. He liked to see the train, look
+[2025-11-02 09:57:49,658.658] Epoch No: 1, Step: 008704, Train Loss: 1.862, Val Loss: 1.874
+
+[2025-11-02 09:57:49,658.658] Total Tokens seen till now: 36145872
+
+[2025-11-02 09:57:49,877.877] Once upon a time, a train train train. It was a train train train. It was a train. It was very
+[2025-11-02 09:58:18,253.253] Epoch No: 1, Step: 008768, Train Loss: 1.876, Val Loss: 1.850
+
+[2025-11-02 09:58:18,254.254] Total Tokens seen till now: 36411248
+
+[2025-11-02 09:58:18,464.464] Once upon a time, things to see. He was a big box. He had a big box. He did not know
+[2025-11-02 09:58:46,773.773] Epoch No: 1, Step: 008832, Train Loss: 1.873, Val Loss: 1.839
+
+[2025-11-02 09:58:46,773.773] Total Tokens seen till now: 36676064
+
+[2025-11-02 09:58:46,985.985] Once upon a time, up the cars cars cars. He cars, cars, cars. He cars, cars, cars.
+[2025-11-02 09:59:15,444.444] Epoch No: 1, Step: 008896, Train Loss: 1.876, Val Loss: 1.844
+
+[2025-11-02 09:59:15,445.445] Total Tokens seen till now: 36942304
+
+[2025-11-02 09:59:15,660.660] Once upon a time, a a train. He year boy named John was a boy. He was a very happy boy who
+[2025-11-02 09:59:44,090.090] Epoch No: 1, Step: 008960, Train Loss: 1.829, Val Loss: 1.825
+
+[2025-11-02 09:59:44,090.090] Total Tokens seen till now: 37207456
+
+[2025-11-02 09:59:45,167.167] BEST model SAVED on iteration 008960 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 09:59:45,379.379] Once upon a time, books, grandma, grandma who grandma. grandma on the grandma, grandma, grandma, grandma, grandma
+[2025-11-02 10:00:13,750.750] Epoch No: 1, Step: 009024, Train Loss: 1.835, Val Loss: 1.791
+
+[2025-11-02 10:00:13,751.751] Total Tokens seen till now: 37472672
+
+[2025-11-02 10:00:15,067.067] BEST model SAVED on iteration 009024 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:00:15,290.290] Once upon a time, a up a car. The car driver was a car. The car was a car. The car
+[2025-11-02 10:00:43,564.564] Epoch No: 1, Step: 009088, Train Loss: 1.854, Val Loss: 1.807
+
+[2025-11-02 10:00:43,564.564] Total Tokens seen till now: 37737520
+
+[2025-11-02 10:00:43,778.778] Once upon a time, a very day. The day, the boy was playing with his toy. The boy. He was
+[2025-11-02 10:01:12,121.121] Epoch No: 1, Step: 009152, Train Loss: 1.827, Val Loss: 1.809
+
+[2025-11-02 10:01:12,121.121] Total Tokens seen till now: 38003104
+
+[2025-11-02 10:01:12,338.338] Once upon a time, a sure train. He could read books bookshelf with books. He read bookshelf with
+[2025-11-02 10:01:40,702.702] Epoch No: 1, Step: 009216, Train Loss: 1.823, Val Loss: 1.832
+
+[2025-11-02 10:01:40,702.702] Total Tokens seen till now: 38268128
+
+[2025-11-02 10:01:40,938.938] Once upon a time, a see. It was a big, red car. It was very fast car. It was very
+[2025-11-02 10:02:09,297.297] Epoch No: 1, Step: 009280, Train Loss: 1.825, Val Loss: 1.795
+
+[2025-11-02 10:02:09,297.297] Total Tokens seen till now: 38533680
+
+[2025-11-02 10:02:09,507.507] Once upon a time,€™ama birthday! They had a big party, a big cat, a cat, and a
+[2025-11-02 10:02:37,961.961] Epoch No: 1, Step: 009344, Train Loss: 1.816, Val Loss: 1.798
+
+[2025-11-02 10:02:37,962.962] Total Tokens seen till now: 38799248
+
+[2025-11-02 10:02:38,186.186] Once upon a time, of the animals. He day, he was very many animals and he was very excited. He wanted
+[2025-11-02 10:03:06,665.665] Epoch No: 1, Step: 009408, Train Loss: 1.797, Val Loss: 1.796
+
+[2025-11-02 10:03:06,665.665] Total Tokens seen till now: 39065376
+
+[2025-11-02 10:03:06,876.876] Once upon a time, see things. He there the animals, and books, and books. He was very happy. He
+[2025-11-02 10:03:35,270.270] Epoch No: 1, Step: 009472, Train Loss: 1.808, Val Loss: 1.775
+
+[2025-11-02 10:03:35,271.271] Total Tokens seen till now: 39330304
+
+[2025-11-02 10:03:36,639.639] BEST model SAVED on iteration 009472 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:03:36,903.903] Once upon a time, the the right. He see the same time to see the world."Look, the
+[2025-11-02 10:04:05,348.348] Epoch No: 1, Step: 009536, Train Loss: 1.792, Val Loss: 1.777
+
+[2025-11-02 10:04:05,348.348] Total Tokens seen till now: 39596336
+
+[2025-11-02 10:04:05,566.566] Once upon a time, see a there train train train. It train, a train cars, a train, a train,
+[2025-11-02 10:04:33,985.985] Epoch No: 1, Step: 009600, Train Loss: 1.797, Val Loss: 1.773
+
+[2025-11-02 10:04:33,985.985] Total Tokens seen till now: 39862576
+
+[2025-11-02 10:04:35,202.202] BEST model SAVED on iteration 009600 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:04:35,418.418] Once upon a time, a very curious. He wanted to see the stars. He saw a big, scary monster. He
+[2025-11-02 10:05:03,817.817] Epoch No: 1, Step: 009664, Train Loss: 1.778, Val Loss: 1.753
+
+[2025-11-02 10:05:03,817.817] Total Tokens seen till now: 40128480
+
+[2025-11-02 10:05:04,972.972] BEST model SAVED on iteration 009664 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:05:05,188.188] Once upon a time, see many many places. They there, like to see the big, like a big, big,
+[2025-11-02 10:05:33,535.535] Epoch No: 1, Step: 009728, Train Loss: 1.797, Val Loss: 1.768
+
+[2025-11-02 10:05:33,535.535] Total Tokens seen till now: 40393488
+
+[2025-11-02 10:05:33,749.749] Once upon a time, the animals animals, the animals, a lion, and the lion, and the lion, and the
+[2025-11-02 10:06:02,172.172] Epoch No: 1, Step: 009792, Train Loss: 1.811, Val Loss: 1.782
+
+[2025-11-02 10:06:02,172.172] Total Tokens seen till now: 40659600
+
+[2025-11-02 10:06:02,394.394] Once upon a time, a train. He- train, a train, a train. The train, the train was a
+[2025-11-02 10:06:30,762.762] Epoch No: 1, Step: 009856, Train Loss: 1.727, Val Loss: 1.770
+
+[2025-11-02 10:06:30,762.762] Total Tokens seen till now: 40925216
+
+[2025-11-02 10:06:31,012.012] Once upon a time, the train train train train. It train train, a train. The train was very fast. The
+[2025-11-02 10:06:59,310.310] Epoch No: 1, Step: 009920, Train Loss: 1.790, Val Loss: 1.773
+
+[2025-11-02 10:06:59,310.310] Total Tokens seen till now: 41189824
+
+[2025-11-02 10:06:59,525.525] Once upon a time, the train train cars cars.One day, the train train, a big train. The train
+[2025-11-02 10:07:27,900.900] Epoch No: 1, Step: 009984, Train Loss: 1.769, Val Loss: 1.742
+
+[2025-11-02 10:07:27,900.900] Total Tokens seen till now: 41454864
+
+[2025-11-02 10:07:29,235.235] BEST model SAVED on iteration 009984 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:07:29,452.452] Once upon a time, a very different places different places. He very long, so many different places.One day
+[2025-11-02 10:07:57,863.863] Epoch No: 1, Step: 010048, Train Loss: 1.745, Val Loss: 1.764
+
+[2025-11-02 10:07:57,863.863] Total Tokens seen till now: 41720384
+
+[2025-11-02 10:07:58,077.077] Once upon a time, look out his toy cars cars, and drive. He has a car that car car. He has
+[2025-11-02 10:08:26,528.528] Epoch No: 1, Step: 010112, Train Loss: 1.747, Val Loss: 1.747
+
+[2025-11-02 10:08:26,528.528] Total Tokens seen till now: 41986528
+
+[2025-11-02 10:08:26,749.749] Once upon a time, books- cars-old train. He never see the train. He had a big train. He
+[2025-11-02 10:08:55,233.233] Epoch No: 1, Step: 010176, Train Loss: 1.754, Val Loss: 1.708
+
+[2025-11-02 10:08:55,233.233] Total Tokens seen till now: 42252688
+
+[2025-11-02 10:08:56,495.495] BEST model SAVED on iteration 010176 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:08:56,762.762] Once upon a time, train train train train train and train train. train train train train and train and train train.,
+[2025-11-02 10:09:25,157.157] Epoch No: 1, Step: 010240, Train Loss: 1.731, Val Loss: 1.706
+
+[2025-11-02 10:09:25,157.157] Total Tokens seen till now: 42517920
+
+[2025-11-02 10:09:26,498.498] BEST model SAVED on iteration 010240 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:09:26,768.768] Once upon a time, and cars cars cars.One day, Tim and on a new cars. Tim named Sue,
+[2025-11-02 10:09:55,092.092] Epoch No: 1, Step: 010304, Train Loss: 1.758, Val Loss: 1.716
+
+[2025-11-02 10:09:55,093.093] Total Tokens seen till now: 42783472
+
+[2025-11-02 10:09:55,309.309] Once upon a time, the train train. He cars, cars, cars, cars, cars. He cars, cars,
+[2025-11-02 10:10:23,706.706] Epoch No: 1, Step: 010368, Train Loss: 1.713, Val Loss: 1.693
+
+[2025-11-02 10:10:23,706.706] Total Tokens seen till now: 43049152
+
+[2025-11-02 10:10:25,062.062] BEST model SAVED on iteration 010368 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:10:25,277.277] Once upon a time, and books. He there, books, books, a big books, and he. He always looked
+[2025-11-02 10:10:53,769.769] Epoch No: 1, Step: 010432, Train Loss: 1.735, Val Loss: 1.715
+
+[2025-11-02 10:10:53,769.769] Total Tokens seen till now: 43315168
+
+[2025-11-02 10:10:53,980.980] Once upon a time, the train, there. The train train, the train train, the train, the train. The
+[2025-11-02 10:11:22,353.353] Epoch No: 1, Step: 010496, Train Loss: 1.746, Val Loss: 1.717
+
+[2025-11-02 10:11:22,354.354] Total Tokens seen till now: 43580928
+
+[2025-11-02 10:11:22,570.570] Once upon a time, up the see there the train. It. The train, the train, it was very long.
+[2025-11-02 10:11:50,935.935] Epoch No: 1, Step: 010560, Train Loss: 1.737, Val Loss: 1.740
+
+[2025-11-02 10:11:50,935.935] Total Tokens seen till now: 43845936
+
+[2025-11-02 10:11:51,157.157] Once upon a time, things. there the same spot in the same place. He had a lot of the same spot and
+[2025-11-02 10:12:19,544.544] Epoch No: 1, Step: 010624, Train Loss: 1.728, Val Loss: 1.710
+
+[2025-11-02 10:12:19,545.545] Total Tokens seen till now: 44111040
+
+[2025-11-02 10:12:19,762.762] Once upon a time, see see the train.When the train, the train train train train train train train train
+[2025-11-02 10:12:48,215.215] Epoch No: 1, Step: 010688, Train Loss: 1.733, Val Loss: 1.679
+
+[2025-11-02 10:12:48,215.215] Total Tokens seen till now: 44376832
+
+[2025-11-02 10:12:49,603.603] BEST model SAVED on iteration 010688 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:12:49,817.817] Once upon a time, up toys train.One day, Tim's train train cars, his train, Tim, a
+[2025-11-02 10:13:18,227.227] Epoch No: 1, Step: 010752, Train Loss: 1.714, Val Loss: 1.695
+
+[2025-11-02 10:13:18,227.227] Total Tokens seen till now: 44642896
+
+[2025-11-02 10:13:18,443.443] Once upon a time, see see a train. It to see a big train train. The train train train train train train
+[2025-11-02 10:13:46,786.786] Epoch No: 1, Step: 010816, Train Loss: 1.739, Val Loss: 1.715
+
+[2025-11-02 10:13:46,787.787] Total Tokens seen till now: 44908032
+
+[2025-11-02 10:13:47,000.000] Once upon a time, cars cars cars cars cars cars cars cars and cars cars., car car cars. His cars,
+[2025-11-02 10:14:15,446.446] Epoch No: 1, Step: 010880, Train Loss: 1.730, Val Loss: 1.650
+
+[2025-11-02 10:14:15,446.446] Total Tokens seen till now: 45173840
+
+[2025-11-02 10:14:16,911.911] BEST model SAVED on iteration 010880 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:14:17,153.153] Once upon a time, see a train. He there, a train, a train, a train, and a lot of
+[2025-11-02 10:14:45,420.420] Epoch No: 1, Step: 010944, Train Loss: 1.722, Val Loss: 1.684
+
+[2025-11-02 10:14:45,421.421] Total Tokens seen till now: 45438864
+
+[2025-11-02 10:14:45,664.664] Once upon a time, see the train. He there the train train, a train, a little boy, the train,
+[2025-11-02 10:15:14,043.043] Epoch No: 1, Step: 011008, Train Loss: 1.705, Val Loss: 1.684
+
+[2025-11-02 10:15:14,043.043] Total Tokens seen till now: 45704464
+
+[2025-11-02 10:15:14,264.264] Once upon a time, see the toy train., the train, and, the train, and the train, and the
+[2025-11-02 10:15:42,651.651] Epoch No: 1, Step: 011072, Train Loss: 1.717, Val Loss: 1.703
+
+[2025-11-02 10:15:42,651.651] Total Tokens seen till now: 45970304
+
+[2025-11-02 10:15:42,865.865] Once upon a time, animals cars cars. He liked to see the cars, cars, and. His favorite was the cars
+[2025-11-02 10:16:11,251.251] Epoch No: 1, Step: 011136, Train Loss: 1.711, Val Loss: 1.694
+
+[2025-11-02 10:16:11,252.252] Total Tokens seen till now: 46235936
+
+[2025-11-02 10:16:11,464.464] Once upon a time, look animals, and he books books books. He was a big book, a big book, scary
+[2025-11-02 10:16:39,930.930] Epoch No: 1, Step: 011200, Train Loss: 1.685, Val Loss: 1.657
+
+[2025-11-02 10:16:39,930.930] Total Tokens seen till now: 46501984
+
+[2025-11-02 10:16:40,149.149] Once upon a time, see animals animals animals.One day, a little bunny, a little bunny named Fluffy.
+[2025-11-02 10:17:08,582.582] Epoch No: 1, Step: 011264, Train Loss: 1.709, Val Loss: 1.683
+
+[2025-11-02 10:17:08,582.582] Total Tokens seen till now: 46767744
+
+[2025-11-02 10:17:08,802.802] Once upon a time, animals cars cars cars cars, cars, cars, cars cars cars, cars., cars, his
+[2025-11-02 10:17:37,248.248] Epoch No: 1, Step: 011328, Train Loss: 1.727, Val Loss: 1.685
+
+[2025-11-02 10:17:37,249.249] Total Tokens seen till now: 47033808
+
+[2025-11-02 10:17:37,462.462] Once upon a time, see no see a very fast.One day, the day, the wind was very fast.
+[2025-11-02 10:18:05,923.923] Epoch No: 1, Step: 011392, Train Loss: 1.717, Val Loss: 1.667
+
+[2025-11-02 10:18:05,924.924] Total Tokens seen till now: 47300048
+
+[2025-11-02 10:18:06,136.136] Once upon a time, see! many day at the same day. The day at the park, but she asked, she
+[2025-11-02 10:18:34,543.543] Epoch No: 1, Step: 011456, Train Loss: 1.721, Val Loss: 1.683
+
+[2025-11-02 10:18:34,543.543] Total Tokens seen till now: 47565312
+
+[2025-11-02 10:18:34,754.754] Once upon a time, see a very train. He saw a big train with a big train. The train, a big
+[2025-11-02 10:19:03,174.174] Epoch No: 1, Step: 011520, Train Loss: 1.697, Val Loss: 1.678
+
+[2025-11-02 10:19:03,175.175] Total Tokens seen till now: 47830752
+
+[2025-11-02 10:19:03,391.391] Once upon a time, very toy cars and cars cars, and cars, and cars. His favorite cars, a red car
+[2025-11-02 10:19:31,813.813] Epoch No: 1, Step: 011584, Train Loss: 1.702, Val Loss: 1.672
+
+[2025-11-02 10:19:31,813.813] Total Tokens seen till now: 48096544
+
+[2025-11-02 10:19:32,029.029] Once upon a time, train cars, and train. He there train, his train, and his train. His train was
+[2025-11-02 10:20:00,479.479] Epoch No: 1, Step: 011648, Train Loss: 1.711, Val Loss: 1.666
+
+[2025-11-02 10:20:00,479.479] Total Tokens seen till now: 48362176
+
+[2025-11-02 10:20:00,694.694] Once upon a time, and alone- outside."Look, Spot!" said his mom."Mom, I
+[2025-11-02 10:20:29,175.175] Epoch No: 1, Step: 011712, Train Loss: 1.704, Val Loss: 1.701
+
+[2025-11-02 10:20:29,176.176] Total Tokens seen till now: 48628400
+
+[2025-11-02 10:20:29,393.393] Once upon a time, cars cars cars cars, cars, cars. He cars, cars, cars cars, cars, cars
+[2025-11-02 10:20:57,871.871] Epoch No: 1, Step: 011776, Train Loss: 1.703, Val Loss: 1.654
+
+[2025-11-02 10:20:57,871.871] Total Tokens seen till now: 48894640
+
+[2025-11-02 10:20:58,086.086] Once upon a time, see the there, and a big, and a big cat. The cat was very fast. The
+[2025-11-02 10:21:26,584.584] Epoch No: 1, Step: 011840, Train Loss: 1.693, Val Loss: 1.689
+
+[2025-11-02 10:21:26,585.585] Total Tokens seen till now: 49160880
+
+[2025-11-02 10:21:26,795.795] Once upon a time, see there the train train cars and see a train. He cars on the train. He was very
+[2025-11-02 10:21:55,245.245] Epoch No: 1, Step: 011904, Train Loss: 1.700, Val Loss: 1.678
+
+[2025-11-02 10:21:55,245.245] Total Tokens seen till now: 49426672
+
+[2025-11-02 10:21:55,472.472] Once upon a time, see a train. He many train train train was very fast. He had a lot of fun.
+[2025-11-02 10:22:23,918.918] Epoch No: 1, Step: 011968, Train Loss: 1.697, Val Loss: 1.685
+
+[2025-11-02 10:22:23,918.918] Total Tokens seen till now: 49692624
+
+[2025-11-02 10:22:24,139.139] Once upon a time, see a car car.The car drove to the car, the car, and the car,
+[2025-11-02 10:22:52,609.609] Epoch No: 1, Step: 012032, Train Loss: 1.721, Val Loss: 1.666
+
+[2025-11-02 10:22:52,609.609] Total Tokens seen till now: 49958672
+
+[2025-11-02 10:22:52,822.822] Once upon a time, the train train train train train. The train, the train, there. The train, there,
+[2025-11-02 10:23:04,596.596] Epoch No: 1, Step: 012032, Train Loss: 1.678, Val Loss: 1.703
+
+[2025-11-02 10:23:04,597.597] Total Tokens seen till now: 49962768
+
+[2025-11-02 10:23:04,810.810] Once upon a time, the toys cars cars. He had a car car, a lot of cars. The car, a
+[2025-11-02 10:23:33,405.405] Epoch No: 1, Step: 012096, Train Loss: 1.669, Val Loss: 1.692
+
+[2025-11-02 10:23:33,405.405] Total Tokens seen till now: 50228160
+
+[2025-11-02 10:23:33,636.636] Once upon a time, see see in the corner. He see a lot of his room and he. He saw a big
+[2025-11-02 10:24:02,128.128] Epoch No: 1, Step: 012160, Train Loss: 1.712, Val Loss: 1.651
+
+[2025-11-02 10:24:02,129.129] Total Tokens seen till now: 50494288
+
+[2025-11-02 10:24:02,335.335] Once upon a time, many cars cars cars cars cars cars cars cars and cars. His cars, cars cars, cars cars
+[2025-11-02 10:24:30,842.842] Epoch No: 1, Step: 012224, Train Loss: 1.709, Val Loss: 1.695
+
+[2025-11-02 10:24:30,842.842] Total Tokens seen till now: 50760448
+
+[2025-11-02 10:24:31,108.108] Once upon a time, see.One day, a little girl named Sue came to play. She saw the same toy
+[2025-11-02 10:24:57,222.222] BEST model SAVED on iteration 012288 to model/gpt2_ORG_preTrain_S_V2.pth..! 
+[2025-11-02 10:24:57,224.224] Training completed in 101.26 minutes.
+[2025-11-02 10:24:57,225.225] BEST Pre-trained custom model saved in model/gpt2_ORG_preTrain_S_V2.pth..!
+[2025-11-02 10:24:57,225.225] Saving the plots of the metrics tracked ..!
+[2025-11-02 10:24:57,893.893] Pipeline completed in 101.27 minutes.
