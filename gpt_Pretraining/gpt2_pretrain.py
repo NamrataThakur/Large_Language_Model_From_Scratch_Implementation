@@ -157,7 +157,8 @@ class GPT2_PreTrain:
                     tokens_seen += train_x.numel()
                     
                     #Evaluate the model performance on train and validation datasets:
-                    if (global_step > 0) and (global_step % self.eval_freq == 0):
+                    #if (global_step > 0) and (global_step % self.eval_freq == 0):
+                    if (batch_index + 1) % self.gradient_accumulation_steps == 0:
 
                         train_loss, test_loss = self.evaluate_model()
                         train_losses.append(train_loss)
