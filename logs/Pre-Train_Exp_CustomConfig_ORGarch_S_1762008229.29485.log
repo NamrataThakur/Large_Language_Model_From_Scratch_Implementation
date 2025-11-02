@@ -1,0 +1,3250 @@
+[2025-11-01 14:43:49,295.295] Namespace(experiment_name='Pre-Train_Exp_CustomConfig_ORGarch_S', data_path='tinystories', model_type='custom', base_modelName='gpt2_124M', model_name='gpt2_ORG_preTrain_S', pre_save_model=None, tokenizer='tiktoken', seed=123, batch_size=16, target_batch_size=1024, train_split=0.85, val_split=0.05, optimizer='AdamW', context_length=100, vocab_size=50257, embedding_dimension=100, num_heads=2, num_layers=1, dropout_rate=0.3, qkv_bias=True, ff_hidden_dim=400, eval_batchSize=256, eval_freq=64, kv_cache=True, weight_decay=0.1, beta1=0.9, beta2=0.95, rms_eps=1e-06, rms_bias=True, theta_base=10000.0, num_kv_groups=1, num_experts=4, num_active_experts=2, max_training_length='model_context_length', max_new_tokens=10, temp=0.0, top_k=3, num_epochs=1, eos_id=50256, arch_type='original', moe_noise=True, use_warmup=True, use_gradient_clip=True, warmup_steps=0.05, initial_lr=0.0003, min_lr=1e-06, learning_rate=0.0008)
+[2025-11-01 14:43:50,337.337] Custom GPT2 configuration to be used for pre-training..!
+[2025-11-01 14:43:50,337.337] The custom config of the model to be trained : {'vocab_size': 50257, 'embedding_dimension': 100, 'num_heads': 2, 'context_length': 100, 'dropout': 0.3, 'qkv_bias': True, 'num_layers': 1, 'ff_hidden_dim': 400, 'rms_eps': 1e-06, 'rms_bias': True, 'theta_base': 10000.0, 'num_kv_groups': 1, 'num_experts': 4, 'num_active_experts': 2, 'moe_noise': True} 
+[2025-11-01 14:43:50,471.471] Architecture Type :original
+[2025-11-01 14:43:50,471.471] Configuration of the custom GPT2 model loaded..!
+[2025-11-01 14:44:04,297.297] Total records in Train Data: 2119719 , Validation Data : 21990
+[2025-11-01 14:44:04,298.298] ------------- Data Ingestion Completed. -------------
+[2025-11-01 14:44:04,298.298] Loading the dataset class for pre-training...
+[2025-11-01 14:44:04,325.325] Device Available: cuda .. ! 
+[2025-11-01 14:50:43,693.693] ************** TRAIN DATALOADER ****************************
+[2025-11-01 14:50:43,702.702] Length of Train Dataloader (number of batches): 264964
+[2025-11-01 14:50:43,702.702] Total Train Tokens : 471872517
+[2025-11-01 14:50:49,204.204] torch.Size([16, 100]), torch.Size([16, 100])
+[2025-11-01 14:50:49,264.264] ************** VAL DATALOADER ****************************
+[2025-11-01 14:50:49,264.264] Length of Val Dataloader (number of batches): 2748
+[2025-11-01 14:50:49,264.264] Total Validation Tokens : 4743928
+[2025-11-01 14:50:49,316.316] torch.Size([16, 100]), torch.Size([16, 100])
+[2025-11-01 14:50:49,318.318] Dataloaders created successfully for pre-training task..!
+[2025-11-01 14:50:49,318.318] ---------------------------------------------------------
+[2025-11-01 14:50:49,318.318] Model will be trained from scratch..!
+[2025-11-01 14:50:49,318.318] Loading the model with random weights for training..!
+[2025-11-01 14:50:49,928.928] Model loaded with random weights for training..!
+[2025-11-01 14:50:49,937.937] Model Size : 10.233157 millions (M)
+[2025-11-01 14:50:49,938.938] Device Available: cuda .. ! 
+[2025-11-01 14:50:49,978.978] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-11-01 14:50:49,979.979] Training Stage : Training of the model started ..!
+[2025-11-01 14:54:34,498.498] Gradient Accumulation Steps : 64
+[2025-11-01 14:54:34,500.500] Maximum Learning Rate : 0.0008.
+[2025-11-01 14:54:34,501.501] Total training steps : 4141.
+[2025-11-01 14:54:34,501.501] Warmup Steps : 208
+[2025-11-01 14:54:34,501.501] Learning Rate Increment By : 2.403846153846154e-06.
+[2025-11-01 14:54:50,014.014] Epoch No: 1, Step: 000000, Train Loss: 10.780, Val Loss: 10.780
+
+[2025-11-01 14:54:50,015.015] Total Tokens seen till now: 1600
+
+[2025-11-01 14:54:50,633.633] Once upon a time,419izarre442 Restoration methizarre favourable seats blankets patriotic
+[2025-11-01 14:55:02,318.318] Epoch No: 1, Step: 000064, Train Loss: 7.318, Val Loss: 7.319
+
+[2025-11-01 14:55:02,318.318] Total Tokens seen till now: 104000
+
+[2025-11-01 14:55:02,566.566] BEST model SAVED on iteration 000064 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:55:02,590.590] Once upon a time, a..,,,.,,.
+[2025-11-01 14:55:13,738.738] Epoch No: 1, Step: 000128, Train Loss: 5.845, Val Loss: 5.829
+
+[2025-11-01 14:55:13,738.738] Total Tokens seen till now: 206400
+
+[2025-11-01 14:55:13,994.994] BEST model SAVED on iteration 000128 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:55:14,015.015] Once upon a time,...
+[2025-11-01 14:55:25,055.055] Epoch No: 1, Step: 000192, Train Loss: 5.209, Val Loss: 5.192
+
+[2025-11-01 14:55:25,056.056] Total Tokens seen till now: 308800
+
+[2025-11-01 14:55:25,312.312] BEST model SAVED on iteration 000192 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:55:25,338.338] Once upon a time, a upon a upon a
+[2025-11-01 14:55:36,792.792] Epoch No: 1, Step: 000256, Train Loss: 4.590, Val Loss: 4.584
+
+[2025-11-01 14:55:36,793.793] Total Tokens seen till now: 411200
+
+[2025-11-01 14:55:37,066.066] BEST model SAVED on iteration 000256 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:55:37,092.092] Once upon a time, upon a little girl girl girl.
+[2025-11-01 14:55:47,968.968] Epoch No: 1, Step: 000320, Train Loss: 4.310, Val Loss: 4.309
+
+[2025-11-01 14:55:47,969.969] Total Tokens seen till now: 513600
+
+[2025-11-01 14:55:48,201.201] BEST model SAVED on iteration 000320 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:55:48,223.223] Once upon a time, a little girl girl girl named Lily. She was
+[2025-11-01 14:55:59,342.342] Epoch No: 1, Step: 000384, Train Loss: 4.160, Val Loss: 4.149
+
+[2025-11-01 14:55:59,342.342] Total Tokens seen till now: 616000
+
+[2025-11-01 14:55:59,585.585] BEST model SAVED on iteration 000384 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:55:59,607.607] Once upon a time,
+[2025-11-01 14:56:10,621.621] Epoch No: 1, Step: 000448, Train Loss: 4.046, Val Loss: 4.042
+
+[2025-11-01 14:56:10,622.622] Total Tokens seen till now: 718400
+
+[2025-11-01 14:56:10,923.923] BEST model SAVED on iteration 000448 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:56:10,954.954] Once upon a time, a little girl. She loved to play with a
+[2025-11-01 14:56:22,111.111] Epoch No: 1, Step: 000512, Train Loss: 3.976, Val Loss: 3.964
+
+[2025-11-01 14:56:22,111.111] Total Tokens seen till now: 820800
+
+[2025-11-01 14:56:22,356.356] BEST model SAVED on iteration 000512 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:56:22,378.378] Once upon a time, a little girl named Timmy loved to play with
+[2025-11-01 14:56:33,110.110] Epoch No: 1, Step: 000576, Train Loss: 3.915, Val Loss: 3.895
+
+[2025-11-01 14:56:33,112.112] Total Tokens seen till now: 923200
+
+[2025-11-01 14:56:33,324.324] BEST model SAVED on iteration 000576 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:56:33,349.349] Once upon a time, "I want to the park to the park.
+[2025-11-01 14:56:44,358.358] Epoch No: 1, Step: 000640, Train Loss: 3.856, Val Loss: 3.839
+
+[2025-11-01 14:56:44,358.358] Total Tokens seen till now: 1025600
+
+[2025-11-01 14:56:44,605.605] BEST model SAVED on iteration 000640 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:56:44,629.629] Once upon a time, the park. He. He was very very happy
+[2025-11-01 14:56:55,579.579] Epoch No: 1, Step: 000704, Train Loss: 3.812, Val Loss: 3.793
+
+[2025-11-01 14:56:55,579.579] Total Tokens seen till now: 1128000
+
+[2025-11-01 14:56:55,850.850] BEST model SAVED on iteration 000704 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:56:55,880.880] Once upon a time, a little girl there was very very happy.
+[2025-11-01 14:57:06,952.952] Epoch No: 1, Step: 000768, Train Loss: 3.762, Val Loss: 3.753
+
+[2025-11-01 14:57:06,952.952] Total Tokens seen till now: 1230400
+
+[2025-11-01 14:57:07,210.210] BEST model SAVED on iteration 000768 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:57:07,238.238] Once upon a time, ""I'm very happy and happy
+[2025-11-01 14:57:18,338.338] Epoch No: 1, Step: 000832, Train Loss: 3.728, Val Loss: 3.726
+
+[2025-11-01 14:57:18,339.339] Total Tokens seen till now: 1332800
+
+[2025-11-01 14:57:18,555.555] BEST model SAVED on iteration 000832 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:57:18,578.578] Once upon a time, "I can play with their mom, a big
+[2025-11-01 14:57:29,544.544] Epoch No: 1, Step: 000896, Train Loss: 3.703, Val Loss: 3.695
+
+[2025-11-01 14:57:29,544.544] Total Tokens seen till now: 1435200
+
+[2025-11-01 14:57:29,797.797] BEST model SAVED on iteration 000896 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:57:29,817.817] Once upon a time, the park. He a little girl named Lily loved
+[2025-11-01 14:57:40,822.822] Epoch No: 1, Step: 000960, Train Loss: 3.671, Val Loss: 3.659
+
+[2025-11-01 14:57:40,823.823] Total Tokens seen till now: 1537600
+
+[2025-11-01 14:57:41,098.098] BEST model SAVED on iteration 000960 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:57:41,125.125] Once upon a time, there was was very excited to play with her mom
+[2025-11-01 14:57:52,148.148] Epoch No: 1, Step: 001024, Train Loss: 3.642, Val Loss: 3.629
+
+[2025-11-01 14:57:52,149.149] Total Tokens seen till now: 1640000
+
+[2025-11-01 14:57:52,387.387] BEST model SAVED on iteration 001024 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:57:52,417.417] Once upon a time, and a little girl named "I'm so excited
+[2025-11-01 14:58:03,432.432] Epoch No: 1, Step: 001088, Train Loss: 3.614, Val Loss: 3.619
+
+[2025-11-01 14:58:03,433.433] Total Tokens seen till now: 1742400
+
+[2025-11-01 14:58:03,642.642] BEST model SAVED on iteration 001088 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:58:03,663.663] Once upon a time, he Timmy Timmy Timmymy loved to
+[2025-11-01 14:58:14,740.740] Epoch No: 1, Step: 001152, Train Loss: 3.605, Val Loss: 3.590
+
+[2025-11-01 14:58:14,740.740] Total Tokens seen till now: 1844800
+
+[2025-11-01 14:58:14,993.993] BEST model SAVED on iteration 001152 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:58:15,014.014] Once upon a time, there was a little girl. She was a little
+[2025-11-01 14:58:25,845.845] Epoch No: 1, Step: 001216, Train Loss: 3.577, Val Loss: 3.567
+
+[2025-11-01 14:58:25,846.846] Total Tokens seen till now: 1947200
+
+[2025-11-01 14:58:26,134.134] BEST model SAVED on iteration 001216 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:58:26,161.161] Once upon a time, there was a little girl named Lily. She loved
+[2025-11-01 14:58:37,205.205] Epoch No: 1, Step: 001280, Train Loss: 3.553, Val Loss: 3.529
+
+[2025-11-01 14:58:37,206.206] Total Tokens seen till now: 2049600
+
+[2025-11-01 14:58:37,433.433] BEST model SAVED on iteration 001280 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:58:37,456.456] Once upon a time, "I'm very excited to play with a big
+[2025-11-01 14:58:48,364.364] Epoch No: 1, Step: 001344, Train Loss: 3.522, Val Loss: 3.528
+
+[2025-11-01 14:58:48,364.364] Total Tokens seen till now: 2152000
+
+[2025-11-01 14:58:48,573.573] BEST model SAVED on iteration 001344 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:58:48,596.596] Once upon a time, old, "I'm so excited! She was
+[2025-11-01 14:58:59,486.486] Epoch No: 1, Step: 001408, Train Loss: 3.522, Val Loss: 3.500
+
+[2025-11-01 14:58:59,487.487] Total Tokens seen till now: 2254400
+
+[2025-11-01 14:58:59,732.732] BEST model SAVED on iteration 001408 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:58:59,753.753] Once upon a time,. She She was very excited. She was very
+[2025-11-01 14:59:10,653.653] Epoch No: 1, Step: 001472, Train Loss: 3.483, Val Loss: 3.484
+
+[2025-11-01 14:59:10,655.655] Total Tokens seen till now: 2356800
+
+[2025-11-01 14:59:10,965.965] BEST model SAVED on iteration 001472 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:59:10,997.997] Once upon a time, there was was very happy. She was very excited
+[2025-11-01 14:59:22,044.044] Epoch No: 1, Step: 001536, Train Loss: 3.451, Val Loss: 3.465
+
+[2025-11-01 14:59:22,044.044] Total Tokens seen till now: 2459200
+
+[2025-11-01 14:59:22,275.275] BEST model SAVED on iteration 001536 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:59:22,295.295] Once upon a time, "I want to the park to play with a
+[2025-11-01 14:59:33,193.193] Epoch No: 1, Step: 001600, Train Loss: 3.444, Val Loss: 3.444
+
+[2025-11-01 14:59:33,193.193] Total Tokens seen till now: 2561600
+
+[2025-11-01 14:59:33,415.415] BEST model SAVED on iteration 001600 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:59:33,437.437] Once upon a time, there was like to play with her mom. She
+[2025-11-01 14:59:44,446.446] Epoch No: 1, Step: 001664, Train Loss: 3.442, Val Loss: 3.431
+
+[2025-11-01 14:59:44,447.447] Total Tokens seen till now: 2664000
+
+[2025-11-01 14:59:44,692.692] BEST model SAVED on iteration 001664 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:59:44,713.713] Once upon a time,The He saw a little girl. She was
+[2025-11-01 14:59:55,690.690] Epoch No: 1, Step: 001728, Train Loss: 3.429, Val Loss: 3.421
+
+[2025-11-01 14:59:55,691.691] Total Tokens seen till now: 2766400
+
+[2025-11-01 14:59:55,946.946] BEST model SAVED on iteration 001728 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 14:59:55,977.977] Once upon a time, there was three years old. She was three years
+[2025-11-01 15:00:06,874.874] Epoch No: 1, Step: 001792, Train Loss: 3.393, Val Loss: 3.393
+
+[2025-11-01 15:00:06,875.875] Total Tokens seen till now: 2868800
+
+[2025-11-01 15:00:07,119.119] BEST model SAVED on iteration 001792 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:00:07,146.146] Once upon a time,mymymy Timmymymy. He loved
+[2025-11-01 15:00:18,127.127] Epoch No: 1, Step: 001856, Train Loss: 3.370, Val Loss: 3.386
+
+[2025-11-01 15:00:18,128.128] Total Tokens seen till now: 2971200
+
+[2025-11-01 15:00:18,310.310] BEST model SAVED on iteration 001856 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:00:18,334.334] Once upon a time, are you like to play with a toy car.
+[2025-11-01 15:00:29,353.353] Epoch No: 1, Step: 001920, Train Loss: 3.364, Val Loss: 3.362
+
+[2025-11-01 15:00:29,354.354] Total Tokens seen till now: 3073600
+
+[2025-11-01 15:00:29,569.569] BEST model SAVED on iteration 001920 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:00:29,594.594] Once upon a time, she was very excited. She loved to her mom
+[2025-11-01 15:00:40,398.398] Epoch No: 1, Step: 001984, Train Loss: 3.371, Val Loss: 3.360
+
+[2025-11-01 15:00:40,399.399] Total Tokens seen till now: 3176000
+
+[2025-11-01 15:00:40,682.682] BEST model SAVED on iteration 001984 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:00:40,716.716] Once upon a time, "ilymymymymy. Hemy and
+[2025-11-01 15:00:51,611.611] Epoch No: 1, Step: 002048, Train Loss: 3.337, Val Loss: 3.339
+
+[2025-11-01 15:00:51,612.612] Total Tokens seen till now: 3278400
+
+[2025-11-01 15:00:51,840.840] BEST model SAVED on iteration 002048 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:00:51,843.843] Once upon a time,
+[2025-11-01 15:01:02,704.704] Epoch No: 1, Step: 002112, Train Loss: 3.353, Val Loss: 3.320
+
+[2025-11-01 15:01:02,705.705] Total Tokens seen till now: 3380800
+
+[2025-11-01 15:01:02,926.926] BEST model SAVED on iteration 002112 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:01:02,947.947] Once upon a time, old was like to play with her mom. She
+[2025-11-01 15:01:13,921.921] Epoch No: 1, Step: 002176, Train Loss: 3.315, Val Loss: 3.318
+
+[2025-11-01 15:01:13,922.922] Total Tokens seen till now: 3483200
+
+[2025-11-01 15:01:14,174.174] BEST model SAVED on iteration 002176 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:01:14,198.198] Once upon a time, "â€œI'm so excited!
+[2025-11-01 15:01:25,001.001] Epoch No: 1, Step: 002240, Train Loss: 3.294, Val Loss: 3.304
+
+[2025-11-01 15:01:25,002.002] Total Tokens seen till now: 3585600
+
+[2025-11-01 15:01:25,260.260] BEST model SAVED on iteration 002240 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:01:25,290.290] Once upon a time, there was a little girl named Lily. She loved
+[2025-11-01 15:01:36,123.123] Epoch No: 1, Step: 002304, Train Loss: 3.293, Val Loss: 3.303
+
+[2025-11-01 15:01:36,123.123] Total Tokens seen till now: 3688000
+
+[2025-11-01 15:01:36,346.346] BEST model SAVED on iteration 002304 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:01:36,374.374] Once upon a time,my.One day, he saw a big
+[2025-11-01 15:01:47,200.200] Epoch No: 1, Step: 002368, Train Loss: 3.311, Val Loss: 3.298
+
+[2025-11-01 15:01:47,201.201] Total Tokens seen till now: 3790400
+
+[2025-11-01 15:01:47,450.450] BEST model SAVED on iteration 002368 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:01:47,473.473] Once upon a time, She was a little girlmy. She had a
+[2025-11-01 15:01:58,232.232] Epoch No: 1, Step: 002432, Train Loss: 3.289, Val Loss: 3.286
+
+[2025-11-01 15:01:58,232.232] Total Tokens seen till now: 3892800
+
+[2025-11-01 15:01:58,460.460] BEST model SAVED on iteration 002432 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:01:58,482.482] Once upon a time, there was. She found a little girl. She
+[2025-11-01 15:02:09,399.399] Epoch No: 1, Step: 002496, Train Loss: 3.289, Val Loss: 3.266
+
+[2025-11-01 15:02:09,399.399] Total Tokens seen till now: 3995200
+
+[2025-11-01 15:02:09,655.655] BEST model SAVED on iteration 002496 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:02:09,676.676] Once upon a time, are "I want to play in the park.
+[2025-11-01 15:02:20,547.547] Epoch No: 1, Step: 002560, Train Loss: 3.276, Val Loss: 3.269
+
+[2025-11-01 15:02:20,547.547] Total Tokens seen till now: 4097600
+
+[2025-11-01 15:02:20,576.576] Once upon a time, They TheyOne day, they saw a big
+[2025-11-01 15:02:31,359.359] Epoch No: 1, Step: 002624, Train Loss: 3.254, Val Loss: 3.276
+
+[2025-11-01 15:02:31,359.359] Total Tokens seen till now: 4200000
+
+[2025-11-01 15:02:31,380.380] Once upon a time, there was very excited to play outside. The toy
+[2025-11-01 15:02:42,233.233] Epoch No: 1, Step: 002688, Train Loss: 3.270, Val Loss: 3.260
+
+[2025-11-01 15:02:42,233.233] Total Tokens seen till now: 4302400
+
+[2025-11-01 15:02:42,464.464] BEST model SAVED on iteration 002688 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:02:42,486.486] Once upon a time,mymy. She saw a big box of fun
+[2025-11-01 15:02:53,434.434] Epoch No: 1, Step: 002752, Train Loss: 3.256, Val Loss: 3.238
+
+[2025-11-01 15:02:53,434.434] Total Tokens seen till now: 4404800
+
+[2025-11-01 15:02:53,652.652] BEST model SAVED on iteration 002752 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:02:53,675.675] Once upon a time, old man. He was very happy. He loved
+[2025-11-01 15:03:04,617.617] Epoch No: 1, Step: 002816, Train Loss: 3.256, Val Loss: 3.246
+
+[2025-11-01 15:03:04,618.618] Total Tokens seen till now: 4507200
+
+[2025-11-01 15:03:04,639.639] Once upon a time, ""I'm going to the park. It
+[2025-11-01 15:03:15,398.398] Epoch No: 1, Step: 002880, Train Loss: 3.231, Val Loss: 3.237
+
+[2025-11-01 15:03:15,398.398] Total Tokens seen till now: 4609600
+
+[2025-11-01 15:03:15,630.630] BEST model SAVED on iteration 002880 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:03:15,651.651] Once upon a time,mymymy. She was very excited to the
+[2025-11-01 15:03:26,390.390] Epoch No: 1, Step: 002944, Train Loss: 3.232, Val Loss: 3.227
+
+[2025-11-01 15:03:26,390.390] Total Tokens seen till now: 4712000
+
+[2025-11-01 15:03:26,594.594] BEST model SAVED on iteration 002944 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:03:26,622.622] Once upon a time, Bennymy. He loved to play with his mom
+[2025-11-01 15:03:37,449.449] Epoch No: 1, Step: 003008, Train Loss: 3.253, Val Loss: 3.238
+
+[2025-11-01 15:03:37,450.450] Total Tokens seen till now: 4814400
+
+[2025-11-01 15:03:37,472.472] Once upon a time, "eddy bear to play. I want to play
+[2025-11-01 15:03:48,374.374] Epoch No: 1, Step: 003072, Train Loss: 3.222, Val Loss: 3.211
+
+[2025-11-01 15:03:48,375.375] Total Tokens seen till now: 4916800
+
+[2025-11-01 15:03:48,587.587] BEST model SAVED on iteration 003072 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:03:48,614.614] Once upon a time, there was playing in the park. She saw a
+[2025-11-01 15:03:59,432.432] Epoch No: 1, Step: 003136, Train Loss: 3.231, Val Loss: 3.224
+
+[2025-11-01 15:03:59,433.433] Total Tokens seen till now: 5019200
+
+[2025-11-01 15:03:59,453.453] Once upon a time, She me the park, she went to the park
+[2025-11-01 15:04:10,250.250] Epoch No: 1, Step: 003200, Train Loss: 3.216, Val Loss: 3.230
+
+[2025-11-01 15:04:10,253.253] Total Tokens seen till now: 5121600
+
+[2025-11-01 15:04:10,272.272] Once upon a time, named I'm very happy to play. She was
+[2025-11-01 15:04:21,035.035] Epoch No: 1, Step: 003264, Train Loss: 3.205, Val Loss: 3.211
+
+[2025-11-01 15:04:21,036.036] Total Tokens seen till now: 5224000
+
+[2025-11-01 15:04:21,259.259] BEST model SAVED on iteration 003264 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:04:21,279.279] Once upon a time, there was walking in the park. He was very
+[2025-11-01 15:04:32,172.172] Epoch No: 1, Step: 003328, Train Loss: 3.219, Val Loss: 3.210
+
+[2025-11-01 15:04:32,173.173] Total Tokens seen till now: 5326400
+
+[2025-11-01 15:04:32,415.415] BEST model SAVED on iteration 003328 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:04:32,437.437] Once upon a time, like to play outside. She saw a big tree
+[2025-11-01 15:04:43,148.148] Epoch No: 1, Step: 003392, Train Loss: 3.207, Val Loss: 3.210
+
+[2025-11-01 15:04:43,149.149] Total Tokens seen till now: 5428800
+
+[2025-11-01 15:04:43,431.431] BEST model SAVED on iteration 003392 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:04:43,455.455] Once upon a time, " are you like you like to play with you
+[2025-11-01 15:04:54,298.298] Epoch No: 1, Step: 003456, Train Loss: 3.199, Val Loss: 3.203
+
+[2025-11-01 15:04:54,299.299] Total Tokens seen till now: 5531200
+
+[2025-11-01 15:04:54,517.517] BEST model SAVED on iteration 003456 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:04:54,538.538] Once upon a time, the park. The little girl was She wanted to
+[2025-11-01 15:05:05,350.350] Epoch No: 1, Step: 003520, Train Loss: 3.202, Val Loss: 3.205
+
+[2025-11-01 15:05:05,352.352] Total Tokens seen till now: 5633600
+
+[2025-11-01 15:05:05,381.381] Once upon a time,mymymymy. She was very much fun
+[2025-11-01 15:05:16,101.101] Epoch No: 1, Step: 003584, Train Loss: 3.210, Val Loss: 3.199
+
+[2025-11-01 15:05:16,102.102] Total Tokens seen till now: 5736000
+
+[2025-11-01 15:05:16,322.322] BEST model SAVED on iteration 003584 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:05:16,343.343] Once upon a time, "Lily. She was a big box
+[2025-11-01 15:05:27,271.271] Epoch No: 1, Step: 003648, Train Loss: 3.193, Val Loss: 3.203
+
+[2025-11-01 15:05:27,271.271] Total Tokens seen till now: 5838400
+
+[2025-11-01 15:05:27,292.292] Once upon a time, saw a little girl named Lily. One day she
+[2025-11-01 15:05:38,146.146] Epoch No: 1, Step: 003712, Train Loss: 3.216, Val Loss: 3.194
+
+[2025-11-01 15:05:38,146.146] Total Tokens seen till now: 5940800
+
+[2025-11-01 15:05:38,346.346] BEST model SAVED on iteration 003712 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:05:38,367.367] Once upon a time, " like the park. He's mommy's
+[2025-11-01 15:05:49,211.211] Epoch No: 1, Step: 003776, Train Loss: 3.188, Val Loss: 3.191
+
+[2025-11-01 15:05:49,212.212] Total Tokens seen till now: 6043200
+
+[2025-11-01 15:05:49,447.447] BEST model SAVED on iteration 003776 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:05:49,469.469] Once upon a time, away. She was very happy. She was very
+[2025-11-01 15:06:00,306.306] Epoch No: 1, Step: 003840, Train Loss: 3.202, Val Loss: 3.194
+
+[2025-11-01 15:06:00,306.306] Total Tokens seen till now: 6145600
+
+[2025-11-01 15:06:00,332.332] Once upon a time, "Yes are like to play outside. It's
+[2025-11-01 15:06:11,134.134] Epoch No: 1, Step: 003904, Train Loss: 3.188, Val Loss: 3.191
+
+[2025-11-01 15:06:11,135.135] Total Tokens seen till now: 6248000
+
+[2025-11-01 15:06:11,355.355] BEST model SAVED on iteration 003904 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:06:11,376.376] Once upon a time, One day, "â€œI don
+[2025-11-01 15:06:22,276.276] Epoch No: 1, Step: 003968, Train Loss: 3.190, Val Loss: 3.203
+
+[2025-11-01 15:06:22,277.277] Total Tokens seen till now: 6350400
+
+[2025-11-01 15:06:22,297.297] Once upon a time, They want to the park. They were very excited
+[2025-11-01 15:06:33,263.263] Epoch No: 1, Step: 004032, Train Loss: 3.201, Val Loss: 3.186
+
+[2025-11-01 15:06:33,264.264] Total Tokens seen till now: 6452800
+
+[2025-11-01 15:06:33,463.463] BEST model SAVED on iteration 004032 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:06:33,484.484] Once upon a time, hemymy was very excited to play with his
+[2025-11-01 15:06:44,382.382] Epoch No: 1, Step: 004096, Train Loss: 3.190, Val Loss: 3.195
+
+[2025-11-01 15:06:44,383.383] Total Tokens seen till now: 6555200
+
+[2025-11-01 15:06:44,402.402] Once upon a time,my meeddy bearmy was playing in the park
+[2025-11-01 15:06:55,241.241] Epoch No: 1, Step: 004160, Train Loss: 3.198, Val Loss: 3.201
+
+[2025-11-01 15:06:55,241.241] Total Tokens seen till now: 6657600
+
+[2025-11-01 15:06:55,261.261] Once upon a time, Shemymy. She was very excited. She
+[2025-11-01 15:07:06,040.040] Epoch No: 1, Step: 004224, Train Loss: 3.211, Val Loss: 3.187
+
+[2025-11-01 15:07:06,041.041] Total Tokens seen till now: 6760000
+
+[2025-11-01 15:07:06,061.061] Once upon a time, like to play. They want to play with their
+[2025-11-01 15:07:16,686.686] Epoch No: 1, Step: 004288, Train Loss: 3.216, Val Loss: 3.183
+
+[2025-11-01 15:07:16,687.687] Total Tokens seen till now: 6862400
+
+[2025-11-01 15:07:16,898.898] BEST model SAVED on iteration 004288 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:07:16,919.919] Once upon a time,mymymymy and play outside. Timmy
+[2025-11-01 15:07:27,835.835] Epoch No: 1, Step: 004352, Train Loss: 3.198, Val Loss: 3.203
+
+[2025-11-01 15:07:27,836.836] Total Tokens seen till now: 6964800
+
+[2025-11-01 15:07:27,856.856] Once upon a time, They like "I want to play with their mom
+[2025-11-01 15:07:38,763.763] Epoch No: 1, Step: 004416, Train Loss: 3.204, Val Loss: 3.180
+
+[2025-11-01 15:07:38,763.763] Total Tokens seen till now: 7067200
+
+[2025-11-01 15:07:38,985.985] BEST model SAVED on iteration 004416 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:07:39,005.005] Once upon a time, there wasOne day, a little girl named
+[2025-11-01 15:07:49,813.813] Epoch No: 1, Step: 004480, Train Loss: 3.199, Val Loss: 3.192
+
+[2025-11-01 15:07:49,814.814] Total Tokens seen till now: 7169600
+
+[2025-11-01 15:07:49,836.836] Once upon a time,ilymy. Shemymymymy loved to
+[2025-11-01 15:08:00,578.578] Epoch No: 1, Step: 004544, Train Loss: 3.201, Val Loss: 3.199
+
+[2025-11-01 15:08:00,579.579] Total Tokens seen till now: 7272000
+
+[2025-11-01 15:08:00,605.605] Once upon a time,my Shemymy. She liked to play outside
+[2025-11-01 15:08:11,375.375] Epoch No: 1, Step: 004608, Train Loss: 3.208, Val Loss: 3.193
+
+[2025-11-01 15:08:11,376.376] Total Tokens seen till now: 7374400
+
+[2025-11-01 15:08:11,397.397] Once upon a time, "Timmymy. He saw something special.
+[2025-11-01 15:08:22,087.087] Epoch No: 1, Step: 004672, Train Loss: 3.192, Val Loss: 3.197
+
+[2025-11-01 15:08:22,088.088] Total Tokens seen till now: 7476800
+
+[2025-11-01 15:08:22,109.109] Once upon a time, She was lost. She was very excited to go
+[2025-11-01 15:08:32,845.845] Epoch No: 1, Step: 004736, Train Loss: 3.198, Val Loss: 3.191
+
+[2025-11-01 15:08:32,846.846] Total Tokens seen till now: 7579200
+
+[2025-11-01 15:08:32,867.867] Once upon a time, "â€™s go to the park.
+[2025-11-01 15:08:43,482.482] Epoch No: 1, Step: 004800, Train Loss: 3.197, Val Loss: 3.206
+
+[2025-11-01 15:08:43,483.483] Total Tokens seen till now: 7681600
+
+[2025-11-01 15:08:43,503.503] Once upon a time,my. She. She loved to play outside in
+[2025-11-01 15:08:54,254.254] Epoch No: 1, Step: 004864, Train Loss: 3.207, Val Loss: 3.189
+
+[2025-11-01 15:08:54,255.255] Total Tokens seen till now: 7784000
+
+[2025-11-01 15:08:54,275.275] Once upon a time,. Heeddymymy was three years old.
+[2025-11-01 15:09:04,939.939] Epoch No: 1, Step: 004928, Train Loss: 3.199, Val Loss: 3.186
+
+[2025-11-01 15:09:04,940.940] Total Tokens seen till now: 7886400
+
+[2025-11-01 15:09:04,959.959] Once upon a time, It were playing in the park. She liked to
+[2025-11-01 15:09:15,566.566] Epoch No: 1, Step: 004992, Train Loss: 3.191, Val Loss: 3.179
+
+[2025-11-01 15:09:15,567.567] Total Tokens seen till now: 7988800
+
+[2025-11-01 15:09:15,786.786] BEST model SAVED on iteration 004992 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:09:15,807.807] Once upon a time,�€â€œI want to go
+[2025-11-01 15:09:26,860.860] Epoch No: 1, Step: 005056, Train Loss: 3.192, Val Loss: 3.208
+
+[2025-11-01 15:09:26,861.861] Total Tokens seen till now: 8091200
+
+[2025-11-01 15:09:26,885.885] Once upon a time, I'm found a big tree with the tree.
+[2025-11-01 15:09:37,665.665] Epoch No: 1, Step: 005120, Train Loss: 3.190, Val Loss: 3.177
+
+[2025-11-01 15:09:37,665.665] Total Tokens seen till now: 8193600
+
+[2025-11-01 15:09:37,886.886] BEST model SAVED on iteration 005120 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:09:37,912.912] Once upon a time, saw a little girl bird. She was very happy
+[2025-11-01 15:09:48,712.712] Epoch No: 1, Step: 005184, Train Loss: 3.194, Val Loss: 3.197
+
+[2025-11-01 15:09:48,712.712] Total Tokens seen till now: 8296000
+
+[2025-11-01 15:09:48,732.732] Once upon a time,â€œmyâ€œYes
+[2025-11-01 15:09:59,585.585] Epoch No: 1, Step: 005248, Train Loss: 3.194, Val Loss: 3.178
+
+[2025-11-01 15:09:59,585.585] Total Tokens seen till now: 8398400
+
+[2025-11-01 15:09:59,612.612] Once upon a time, Hemy Hemymy for his mommy.
+[2025-11-01 15:10:10,141.141] Epoch No: 1, Step: 005312, Train Loss: 3.187, Val Loss: 3.169
+
+[2025-11-01 15:10:10,142.142] Total Tokens seen till now: 8500800
+
+[2025-11-01 15:10:10,379.379] BEST model SAVED on iteration 005312 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:10:10,405.405] Once upon a time,mymymymymymymymymy loved
+[2025-11-01 15:10:21,208.208] Epoch No: 1, Step: 005376, Train Loss: 3.203, Val Loss: 3.181
+
+[2025-11-01 15:10:21,209.209] Total Tokens seen till now: 8603200
+
+[2025-11-01 15:10:21,235.235] Once upon a time, like to play with her friends. She loved to
+[2025-11-01 15:10:32,073.073] Epoch No: 1, Step: 005440, Train Loss: 3.176, Val Loss: 3.184
+
+[2025-11-01 15:10:32,074.074] Total Tokens seen till now: 8705600
+
+[2025-11-01 15:10:32,094.094] Once upon a time, "Lilymymy's play with their toys
+[2025-11-01 15:10:42,785.785] Epoch No: 1, Step: 005504, Train Loss: 3.196, Val Loss: 3.177
+
+[2025-11-01 15:10:42,788.788] Total Tokens seen till now: 8808000
+
+[2025-11-01 15:10:42,808.808] Once upon a time, " want to play with the park. He has
+[2025-11-01 15:10:53,486.486] Epoch No: 1, Step: 005568, Train Loss: 3.177, Val Loss: 3.160
+
+[2025-11-01 15:10:53,487.487] Total Tokens seen till now: 8910400
+
+[2025-11-01 15:10:53,670.670] BEST model SAVED on iteration 005568 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:10:53,691.691] Once upon a time,eddy, "I'm to play the park.
+[2025-11-01 15:11:04,635.635] Epoch No: 1, Step: 005632, Train Loss: 3.184, Val Loss: 3.186
+
+[2025-11-01 15:11:04,635.635] Total Tokens seen till now: 9012800
+
+[2025-11-01 15:11:04,656.656] Once upon a time,mymyeddy bear. She was very excited to
+[2025-11-01 15:11:15,444.444] Epoch No: 1, Step: 005696, Train Loss: 3.176, Val Loss: 3.185
+
+[2025-11-01 15:11:15,444.444] Total Tokens seen till now: 9115200
+
+[2025-11-01 15:11:15,464.464] Once upon a time, who was very She loved to play outside. One
+[2025-11-01 15:11:26,156.156] Epoch No: 1, Step: 005760, Train Loss: 3.178, Val Loss: 3.173
+
+[2025-11-01 15:11:26,159.159] Total Tokens seen till now: 9217600
+
+[2025-11-01 15:11:26,179.179] Once upon a time, " I'm like to play with the park."
+[2025-11-01 15:11:36,735.735] Epoch No: 1, Step: 005824, Train Loss: 3.174, Val Loss: 3.169
+
+[2025-11-01 15:11:36,735.735] Total Tokens seen till now: 9320000
+
+[2025-11-01 15:11:36,755.755] Once upon a time, The He was very excited to find to play.
+[2025-11-01 15:11:47,380.380] Epoch No: 1, Step: 005888, Train Loss: 3.167, Val Loss: 3.165
+
+[2025-11-01 15:11:47,380.380] Total Tokens seen till now: 9422400
+
+[2025-11-01 15:11:47,401.401] Once upon a time, "myâ€œYes, letâ
+[2025-11-01 15:11:58,044.044] Epoch No: 1, Step: 005952, Train Loss: 3.169, Val Loss: 3.160
+
+[2025-11-01 15:11:58,044.044] Total Tokens seen till now: 9524800
+
+[2025-11-01 15:11:58,229.229] BEST model SAVED on iteration 005952 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:11:58,249.249] Once upon a time,ily was playing in the park. She saw a
+[2025-11-01 15:12:09,328.328] Epoch No: 1, Step: 006016, Train Loss: 3.160, Val Loss: 3.158
+
+[2025-11-01 15:12:09,328.328] Total Tokens seen till now: 9627200
+
+[2025-11-01 15:12:09,535.535] BEST model SAVED on iteration 006016 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:12:09,554.554] Once upon a time, he saw" man who was walking in the
+[2025-11-01 15:12:20,260.260] Epoch No: 1, Step: 006080, Train Loss: 3.159, Val Loss: 3.166
+
+[2025-11-01 15:12:20,261.261] Total Tokens seen till now: 9729600
+
+[2025-11-01 15:12:20,293.293] Once upon a time, hermymymy. They were walking in the
+[2025-11-01 15:12:31,087.087] Epoch No: 1, Step: 006144, Train Loss: 3.157, Val Loss: 3.156
+
+[2025-11-01 15:12:31,088.088] Total Tokens seen till now: 9832000
+
+[2025-11-01 15:12:31,277.277] BEST model SAVED on iteration 006144 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:12:31,298.298] Once upon a time, are like to play outside. They have a big
+[2025-11-01 15:12:42,037.037] Epoch No: 1, Step: 006208, Train Loss: 3.155, Val Loss: 3.142
+
+[2025-11-01 15:12:42,038.038] Total Tokens seen till now: 9934400
+
+[2025-11-01 15:12:42,260.260] BEST model SAVED on iteration 006208 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:12:42,280.280] Once upon a time,ily saw They liked to play in the park.
+[2025-11-01 15:12:53,152.152] Epoch No: 1, Step: 006272, Train Loss: 3.142, Val Loss: 3.134
+
+[2025-11-01 15:12:53,153.153] Total Tokens seen till now: 10036800
+
+[2025-11-01 15:12:53,382.382] BEST model SAVED on iteration 006272 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:12:53,402.402] Once upon a time,mymymymymymymymy. He
+[2025-11-01 15:13:04,303.303] Epoch No: 1, Step: 006336, Train Loss: 3.140, Val Loss: 3.126
+
+[2025-11-01 15:13:04,304.304] Total Tokens seen till now: 10139200
+
+[2025-11-01 15:13:04,515.515] BEST model SAVED on iteration 006336 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:13:04,535.535] Once upon a time,�€œI like a big tree.
+[2025-11-01 15:13:15,311.311] Epoch No: 1, Step: 006400, Train Loss: 3.138, Val Loss: 3.127
+
+[2025-11-01 15:13:15,312.312] Total Tokens seen till now: 10241600
+
+[2025-11-01 15:13:15,338.338] Once upon a time, who could have like to play outside. He had
+[2025-11-01 15:13:26,155.155] Epoch No: 1, Step: 006464, Train Loss: 3.136, Val Loss: 3.134
+
+[2025-11-01 15:13:26,155.155] Total Tokens seen till now: 10344000
+
+[2025-11-01 15:13:26,175.175] Once upon a time,my. Shemymymymymymymy
+[2025-11-01 15:13:36,781.781] Epoch No: 1, Step: 006528, Train Loss: 3.127, Val Loss: 3.127
+
+[2025-11-01 15:13:36,782.782] Total Tokens seen till now: 10446400
+
+[2025-11-01 15:13:36,803.803] Once upon a time,?"mymy. Shemy loved to play with
+[2025-11-01 15:13:47,388.388] Epoch No: 1, Step: 006592, Train Loss: 3.139, Val Loss: 3.143
+
+[2025-11-01 15:13:47,389.389] Total Tokens seen till now: 10548800
+
+[2025-11-01 15:13:47,410.410] Once upon a time,mymymy. She loved to play outside and
+[2025-11-01 15:13:58,118.118] Epoch No: 1, Step: 006656, Train Loss: 3.109, Val Loss: 3.125
+
+[2025-11-01 15:13:58,119.119] Total Tokens seen till now: 10651200
+
+[2025-11-01 15:13:58,294.294] BEST model SAVED on iteration 006656 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:13:58,317.317] Once upon a time,mymymymymymymymymymy
+[2025-11-01 15:14:09,193.193] Epoch No: 1, Step: 006720, Train Loss: 3.111, Val Loss: 3.121
+
+[2025-11-01 15:14:09,193.193] Total Tokens seen till now: 10753600
+
+[2025-11-01 15:14:09,413.413] BEST model SAVED on iteration 006720 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:14:09,438.438] Once upon a time, â€œâ€œYes
+[2025-11-01 15:14:20,045.045] Epoch No: 1, Step: 006784, Train Loss: 3.131, Val Loss: 3.115
+
+[2025-11-01 15:14:20,045.045] Total Tokens seen till now: 10856000
+
+[2025-11-01 15:14:20,286.286] BEST model SAVED on iteration 006784 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:14:20,312.312] Once upon a time, were twins. They were playing in the park.
+[2025-11-01 15:14:31,142.142] Epoch No: 1, Step: 006848, Train Loss: 3.116, Val Loss: 3.106
+
+[2025-11-01 15:14:31,143.143] Total Tokens seen till now: 10958400
+
+[2025-11-01 15:14:31,359.359] BEST model SAVED on iteration 006848 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:14:31,388.388] Once upon a time, Benny wasily loved to play outside. One day
+[2025-11-01 15:14:42,046.046] Epoch No: 1, Step: 006912, Train Loss: 3.129, Val Loss: 3.114
+
+[2025-11-01 15:14:42,047.047] Total Tokens seen till now: 11060800
+
+[2025-11-01 15:14:42,067.067] Once upon a time,â€€™€œLet's go
+[2025-11-01 15:14:52,683.683] Epoch No: 1, Step: 006976, Train Loss: 3.100, Val Loss: 3.094
+
+[2025-11-01 15:14:52,684.684] Total Tokens seen till now: 11163200
+
+[2025-11-01 15:14:52,871.871] BEST model SAVED on iteration 006976 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:14:52,891.891] Once upon a time,€�€œ forestâ€œ
+[2025-11-01 15:15:03,698.698] Epoch No: 1, Step: 007040, Train Loss: 3.114, Val Loss: 3.098
+
+[2025-11-01 15:15:03,698.698] Total Tokens seen till now: 11265600
+
+[2025-11-01 15:15:03,719.719] Once upon a time,mymy like to play outside. She slide.
+[2025-11-01 15:15:14,431.431] Epoch No: 1, Step: 007104, Train Loss: 3.101, Val Loss: 3.106
+
+[2025-11-01 15:15:14,432.432] Total Tokens seen till now: 11368000
+
+[2025-11-01 15:15:14,453.453] Once upon a time, garden to play with her toys. She has like
+[2025-11-01 15:15:24,858.858] Epoch No: 1, Step: 007168, Train Loss: 3.090, Val Loss: 3.096
+
+[2025-11-01 15:15:24,859.859] Total Tokens seen till now: 11470400
+
+[2025-11-01 15:15:24,878.878] Once upon a time,�€œI'm like to play with
+[2025-11-01 15:15:35,306.306] Epoch No: 1, Step: 007232, Train Loss: 3.108, Val Loss: 3.105
+
+[2025-11-01 15:15:35,306.306] Total Tokens seen till now: 11572800
+
+[2025-11-01 15:15:35,326.326] Once upon a time,€œ are you like to go for a
+[2025-11-01 15:15:45,957.957] Epoch No: 1, Step: 007296, Train Loss: 3.111, Val Loss: 3.113
+
+[2025-11-01 15:15:45,958.958] Total Tokens seen till now: 11675200
+
+[2025-11-01 15:15:45,977.977] Once upon a time, like to play outside in the sky. She had
+[2025-11-01 15:15:56,548.548] Epoch No: 1, Step: 007360, Train Loss: 3.075, Val Loss: 3.076
+
+[2025-11-01 15:15:56,549.549] Total Tokens seen till now: 11777600
+
+[2025-11-01 15:15:56,747.747] BEST model SAVED on iteration 007360 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:15:56,768.768] Once upon a time,Ţ€œâ€â€™
+[2025-11-01 15:16:07,479.479] Epoch No: 1, Step: 007424, Train Loss: 3.088, Val Loss: 3.094
+
+[2025-11-01 15:16:07,480.480] Total Tokens seen till now: 11880000
+
+[2025-11-01 15:16:07,500.500] Once upon a time, "�€œI like you like you
+[2025-11-01 15:16:18,370.370] Epoch No: 1, Step: 007488, Train Loss: 3.087, Val Loss: 3.099
+
+[2025-11-01 15:16:18,371.371] Total Tokens seen till now: 11982400
+
+[2025-11-01 15:16:18,391.391] Once upon a time,�€œWhat are you. I have
+[2025-11-01 15:16:29,041.041] Epoch No: 1, Step: 007552, Train Loss: 3.096, Val Loss: 3.085
+
+[2025-11-01 15:16:29,042.042] Total Tokens seen till now: 12084800
+
+[2025-11-01 15:16:29,061.061] Once upon a time, like to play outside. They have to play with
+[2025-11-01 15:16:39,559.559] Epoch No: 1, Step: 007616, Train Loss: 3.074, Val Loss: 3.062
+
+[2025-11-01 15:16:39,560.560] Total Tokens seen till now: 12187200
+
+[2025-11-01 15:16:39,768.768] BEST model SAVED on iteration 007616 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:16:39,790.790] Once upon a time,�€Ţ€™sâ€™
+[2025-11-01 15:16:50,785.785] Epoch No: 1, Step: 007680, Train Loss: 3.068, Val Loss: 3.077
+
+[2025-11-01 15:16:50,787.787] Total Tokens seen till now: 12289600
+
+[2025-11-01 15:16:50,816.816] Once upon a time, there. He loved to play outside. One day
+[2025-11-01 15:17:01,475.475] Epoch No: 1, Step: 007744, Train Loss: 3.074, Val Loss: 3.051
+
+[2025-11-01 15:17:01,476.476] Total Tokens seen till now: 12392000
+
+[2025-11-01 15:17:01,669.669] BEST model SAVED on iteration 007744 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:17:01,689.689] Once upon a time,ily�€œWeâ€™s
+[2025-11-01 15:17:12,574.574] Epoch No: 1, Step: 007808, Train Loss: 3.063, Val Loss: 3.059
+
+[2025-11-01 15:17:12,575.575] Total Tokens seen till now: 12494400
+
+[2025-11-01 15:17:12,597.597] Once upon a time,ilymy loved to play outside. They were in
+[2025-11-01 15:17:23,547.547] Epoch No: 1, Step: 007872, Train Loss: 3.081, Val Loss: 3.091
+
+[2025-11-01 15:17:23,548.548] Total Tokens seen till now: 12596800
+
+[2025-11-01 15:17:23,568.568] Once upon a time,�€œLetâ€™s go
+[2025-11-01 15:17:34,274.274] Epoch No: 1, Step: 007936, Train Loss: 3.055, Val Loss: 3.065
+
+[2025-11-01 15:17:34,275.275] Total Tokens seen till now: 12699200
+
+[2025-11-01 15:17:34,296.296] Once upon a time,�€œMommy!â€â
+[2025-11-01 15:17:44,868.868] Epoch No: 1, Step: 008000, Train Loss: 3.046, Val Loss: 3.066
+
+[2025-11-01 15:17:44,868.868] Total Tokens seen till now: 12801600
+
+[2025-11-01 15:17:44,889.889] Once upon a time,�€œ€™s. It was
+[2025-11-01 15:17:55,378.378] Epoch No: 1, Step: 008064, Train Loss: 3.072, Val Loss: 3.059
+
+[2025-11-01 15:17:55,378.378] Total Tokens seen till now: 12904000
+
+[2025-11-01 15:17:55,398.398] Once upon a time, are like to the park. They were very happy
+[2025-11-01 15:18:06,063.063] Epoch No: 1, Step: 008128, Train Loss: 3.046, Val Loss: 3.044
+
+[2025-11-01 15:18:06,063.063] Total Tokens seen till now: 13006400
+
+[2025-11-01 15:18:06,254.254] BEST model SAVED on iteration 008128 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:18:06,275.275] Once upon a time, you you like you need to be a walk.
+[2025-11-01 15:18:17,145.145] Epoch No: 1, Step: 008192, Train Loss: 3.045, Val Loss: 3.046
+
+[2025-11-01 15:18:17,146.146] Total Tokens seen till now: 13108800
+
+[2025-11-01 15:18:17,165.165] Once upon a time, play with her friends. They saw a big tree
+[2025-11-01 15:18:28,007.007] Epoch No: 1, Step: 008256, Train Loss: 3.070, Val Loss: 3.060
+
+[2025-11-01 15:18:28,007.007] Total Tokens seen till now: 13211200
+
+[2025-11-01 15:18:28,027.027] Once upon a time, â€œ€œâ€
+[2025-11-01 15:18:38,818.818] Epoch No: 1, Step: 008320, Train Loss: 3.042, Val Loss: 3.030
+
+[2025-11-01 15:18:38,818.818] Total Tokens seen till now: 13313600
+
+[2025-11-01 15:18:39,030.030] BEST model SAVED on iteration 008320 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:18:39,052.052] Once upon a time, heard a loud noise coming from the garden. She
+[2025-11-01 15:18:49,928.928] Epoch No: 1, Step: 008384, Train Loss: 3.051, Val Loss: 3.040
+
+[2025-11-01 15:18:49,928.928] Total Tokens seen till now: 13416000
+
+[2025-11-01 15:18:49,948.948] Once upon a time,ily liked to play with her toys. She had
+[2025-11-01 15:19:00,593.593] Epoch No: 1, Step: 008448, Train Loss: 3.028, Val Loss: 3.053
+
+[2025-11-01 15:19:00,594.594] Total Tokens seen till now: 13518400
+
+[2025-11-01 15:19:00,614.614] Once upon a time,my.â€œWhat can't be
+[2025-11-01 15:19:11,274.274] Epoch No: 1, Step: 008512, Train Loss: 3.038, Val Loss: 3.035
+
+[2025-11-01 15:19:11,278.278] Total Tokens seen till now: 13620800
+
+[2025-11-01 15:19:11,297.297] Once upon a time, youâ€œMommyâ€™
+[2025-11-01 15:19:21,850.850] Epoch No: 1, Step: 008576, Train Loss: 3.022, Val Loss: 3.019
+
+[2025-11-01 15:19:21,851.851] Total Tokens seen till now: 13723200
+
+[2025-11-01 15:19:22,044.044] BEST model SAVED on iteration 008576 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:19:22,064.064] Once upon a time, Iayling like to play with the park.
+[2025-11-01 15:19:32,752.752] Epoch No: 1, Step: 008640, Train Loss: 3.017, Val Loss: 3.008
+
+[2025-11-01 15:19:32,752.752] Total Tokens seen till now: 13825600
+
+[2025-11-01 15:19:32,952.952] BEST model SAVED on iteration 008640 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:19:32,972.972] Once upon a time, youmy�€œ�€™s
+[2025-11-01 15:19:43,837.837] Epoch No: 1, Step: 008704, Train Loss: 2.991, Val Loss: 3.019
+
+[2025-11-01 15:19:43,837.837] Total Tokens seen till now: 13928000
+
+[2025-11-01 15:19:43,857.857] Once upon a time,ilymy were playing. They liked to play with
+[2025-11-01 15:19:54,797.797] Epoch No: 1, Step: 008768, Train Loss: 3.017, Val Loss: 3.022
+
+[2025-11-01 15:19:54,800.800] Total Tokens seen till now: 14030400
+
+[2025-11-01 15:19:54,819.819] Once upon a time, â€œ�€œâ
+[2025-11-01 15:20:05,325.325] Epoch No: 1, Step: 008832, Train Loss: 3.015, Val Loss: 3.013
+
+[2025-11-01 15:20:05,326.326] Total Tokens seen till now: 14132800
+
+[2025-11-01 15:20:05,346.346] Once upon a time,my room�€œMommy.â
+[2025-11-01 15:20:15,989.989] Epoch No: 1, Step: 008896, Train Loss: 3.022, Val Loss: 3.023
+
+[2025-11-01 15:20:15,990.990] Total Tokens seen till now: 14235200
+
+[2025-11-01 15:20:16,009.009] Once upon a time,�€œ�€œWhatâ
+[2025-11-01 15:20:26,646.646] Epoch No: 1, Step: 008960, Train Loss: 3.017, Val Loss: 3.012
+
+[2025-11-01 15:20:26,647.647] Total Tokens seen till now: 14337600
+
+[2025-11-01 15:20:26,669.669] Once upon a time, "Let's go for a walk. I play
+[2025-11-01 15:20:37,305.305] Epoch No: 1, Step: 009024, Train Loss: 3.007, Val Loss: 3.012
+
+[2025-11-01 15:20:37,306.306] Total Tokens seen till now: 14440000
+
+[2025-11-01 15:20:37,327.327] Once upon a time, worry, I found for a walk. She was
+[2025-11-01 15:20:47,953.953] Epoch No: 1, Step: 009088, Train Loss: 2.983, Val Loss: 3.000
+
+[2025-11-01 15:20:47,954.954] Total Tokens seen till now: 14542400
+
+[2025-11-01 15:20:48,148.148] BEST model SAVED on iteration 009088 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:20:48,168.168] Once upon a time,my��€œWhat donâ€
+[2025-11-01 15:20:59,061.061] Epoch No: 1, Step: 009152, Train Loss: 3.007, Val Loss: 2.986
+
+[2025-11-01 15:20:59,062.062] Total Tokens seen till now: 14644800
+
+[2025-11-01 15:20:59,260.260] BEST model SAVED on iteration 009152 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:20:59,280.280] Once upon a time, there. saw something strange.The
+[2025-11-01 15:21:09,950.950] Epoch No: 1, Step: 009216, Train Loss: 3.008, Val Loss: 3.002
+
+[2025-11-01 15:21:09,951.951] Total Tokens seen till now: 14747200
+
+[2025-11-01 15:21:09,972.972] Once upon a time,my"â€™s. They were
+[2025-11-01 15:21:20,633.633] Epoch No: 1, Step: 009280, Train Loss: 2.990, Val Loss: 2.982
+
+[2025-11-01 15:21:20,633.633] Total Tokens seen till now: 14849600
+
+[2025-11-01 15:21:20,850.850] BEST model SAVED on iteration 009280 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:21:20,871.871] Once upon a time, daddy who are going to the park. They have
+[2025-11-01 15:21:31,631.631] Epoch No: 1, Step: 009344, Train Loss: 2.988, Val Loss: 3.004
+
+[2025-11-01 15:21:31,631.631] Total Tokens seen till now: 14952000
+
+[2025-11-01 15:21:31,652.652] Once upon a time,�€œâ€â€™s
+[2025-11-01 15:21:42,212.212] Epoch No: 1, Step: 009408, Train Loss: 2.996, Val Loss: 3.006
+
+[2025-11-01 15:21:42,213.213] Total Tokens seen till now: 15054400
+
+[2025-11-01 15:21:42,233.233] Once upon a time,�€œ� forest.â€â
+[2025-11-01 15:21:52,899.899] Epoch No: 1, Step: 009472, Train Loss: 2.990, Val Loss: 3.000
+
+[2025-11-01 15:21:52,900.900] Total Tokens seen till now: 15156800
+
+[2025-11-01 15:21:52,920.920] Once upon a time, who was worry to go to play with her.
+[2025-11-01 15:22:03,500.500] Epoch No: 1, Step: 009536, Train Loss: 3.014, Val Loss: 2.990
+
+[2025-11-01 15:22:03,501.501] Total Tokens seen till now: 15259200
+
+[2025-11-01 15:22:03,521.521] Once upon a time, who saw â€œ forest.â
+[2025-11-01 15:22:14,076.076] Epoch No: 1, Step: 009600, Train Loss: 2.972, Val Loss: 2.975
+
+[2025-11-01 15:22:14,077.077] Total Tokens seen till now: 15361600
+
+[2025-11-01 15:22:14,303.303] BEST model SAVED on iteration 009600 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:22:14,325.325] Once upon a time, "What are you need to go to the park
+[2025-11-01 15:22:24,954.954] Epoch No: 1, Step: 009664, Train Loss: 2.975, Val Loss: 2.973
+
+[2025-11-01 15:22:24,955.955] Total Tokens seen till now: 15464000
+
+[2025-11-01 15:22:25,178.178] BEST model SAVED on iteration 009664 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:22:25,204.204] Once upon a time, "�€œ�€™s.
+[2025-11-01 15:22:35,980.980] Epoch No: 1, Step: 009728, Train Loss: 2.965, Val Loss: 2.996
+
+[2025-11-01 15:22:35,982.982] Total Tokens seen till now: 15566400
+
+[2025-11-01 15:22:36,007.007] Once upon a time, a don't want. She had a big box
+[2025-11-01 15:22:46,614.614] Epoch No: 1, Step: 009792, Train Loss: 2.985, Val Loss: 2.968
+
+[2025-11-01 15:22:46,614.614] Total Tokens seen till now: 15668800
+
+[2025-11-01 15:22:46,828.828] BEST model SAVED on iteration 009792 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:22:46,849.849] Once upon a time,ilymy saw a owl. She had a big
+[2025-11-01 15:22:57,645.645] Epoch No: 1, Step: 009856, Train Loss: 2.952, Val Loss: 2.960
+
+[2025-11-01 15:22:57,645.645] Total Tokens seen till now: 15771200
+
+[2025-11-01 15:22:57,835.835] BEST model SAVED on iteration 009856 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:22:57,855.855] Once upon a time, are like to play outside. They saw a big
+[2025-11-01 15:23:08,612.612] Epoch No: 1, Step: 009920, Train Loss: 2.964, Val Loss: 2.967
+
+[2025-11-01 15:23:08,613.613] Total Tokens seen till now: 15873600
+
+[2025-11-01 15:23:08,634.634] Once upon a time, don't like you can play with a big house
+[2025-11-01 15:23:19,461.461] Epoch No: 1, Step: 009984, Train Loss: 2.945, Val Loss: 2.962
+
+[2025-11-01 15:23:19,461.461] Total Tokens seen till now: 15976000
+
+[2025-11-01 15:23:19,481.481] Once upon a time, Benny found like heard a noise coming. She saw
+[2025-11-01 15:23:29,917.917] Epoch No: 1, Step: 010048, Train Loss: 2.955, Val Loss: 2.972
+
+[2025-11-01 15:23:29,918.918] Total Tokens seen till now: 16078400
+
+[2025-11-01 15:23:29,938.938] Once upon a time, worry, are playing in the park. It saw
+[2025-11-01 15:23:40,401.401] Epoch No: 1, Step: 010112, Train Loss: 2.950, Val Loss: 2.953
+
+[2025-11-01 15:23:40,402.402] Total Tokens seen till now: 16180800
+
+[2025-11-01 15:23:40,624.624] BEST model SAVED on iteration 010112 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:23:40,644.644] Once upon a time, are you need to help me. She want to
+[2025-11-01 15:23:51,393.393] Epoch No: 1, Step: 010176, Train Loss: 2.952, Val Loss: 2.934
+
+[2025-11-01 15:23:51,394.394] Total Tokens seen till now: 16283200
+
+[2025-11-01 15:23:51,612.612] BEST model SAVED on iteration 010176 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:23:51,639.639] Once upon a time, "Yes I will be you to go for you
+[2025-11-01 15:24:02,366.366] Epoch No: 1, Step: 010240, Train Loss: 2.935, Val Loss: 2.951
+
+[2025-11-01 15:24:02,367.367] Total Tokens seen till now: 16385600
+
+[2025-11-01 15:24:02,387.387] Once upon a time, worrymyâ€™tâ€™t
+[2025-11-01 15:24:12,925.925] Epoch No: 1, Step: 010304, Train Loss: 2.924, Val Loss: 2.898
+
+[2025-11-01 15:24:12,926.926] Total Tokens seen till now: 16488000
+
+[2025-11-01 15:24:13,132.132] BEST model SAVED on iteration 010304 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:24:13,153.153] Once upon a time,. She saw her mommy. She was very
+[2025-11-01 15:24:23,907.907] Epoch No: 1, Step: 010368, Train Loss: 2.951, Val Loss: 2.934
+
+[2025-11-01 15:24:23,908.908] Total Tokens seen till now: 16590400
+
+[2025-11-01 15:24:23,928.928] Once upon a time, there was like to play. She loved to play
+[2025-11-01 15:24:34,774.774] Epoch No: 1, Step: 010432, Train Loss: 2.940, Val Loss: 2.945
+
+[2025-11-01 15:24:34,775.775] Total Tokens seen till now: 16692800
+
+[2025-11-01 15:24:34,795.795] Once upon a time, heardœ worry,â€â€™
+[2025-11-01 15:24:45,222.222] Epoch No: 1, Step: 010496, Train Loss: 2.948, Val Loss: 2.948
+
+[2025-11-01 15:24:45,223.223] Total Tokens seen till now: 16795200
+
+[2025-11-01 15:24:45,242.242] Once upon a time,ily to play outside. She was very excited.
+[2025-11-01 15:24:55,854.854] Epoch No: 1, Step: 010560, Train Loss: 2.950, Val Loss: 2.936
+
+[2025-11-01 15:24:55,855.855] Total Tokens seen till now: 16897600
+
+[2025-11-01 15:24:55,875.875] Once upon a time, "Max was playing with Benny. Benny loved playing
+[2025-11-01 15:25:06,484.484] Epoch No: 1, Step: 010624, Train Loss: 2.921, Val Loss: 2.918
+
+[2025-11-01 15:25:06,484.484] Total Tokens seen till now: 17000000
+
+[2025-11-01 15:25:06,504.504] Once upon a time, heard her. She saw a loud noise coming from
+[2025-11-01 15:25:17,030.030] Epoch No: 1, Step: 010688, Train Loss: 2.928, Val Loss: 2.935
+
+[2025-11-01 15:25:17,031.031] Total Tokens seen till now: 17102400
+
+[2025-11-01 15:25:17,051.051] Once upon a time, there's go outside. I have a big box
+[2025-11-01 15:25:27,678.678] Epoch No: 1, Step: 010752, Train Loss: 2.919, Val Loss: 2.918
+
+[2025-11-01 15:25:27,679.679] Total Tokens seen till now: 17204800
+
+[2025-11-01 15:25:27,698.698] Once upon a time, room. She was a big room. She loved
+[2025-11-01 15:25:38,260.260] Epoch No: 1, Step: 010816, Train Loss: 2.924, Val Loss: 2.915
+
+[2025-11-01 15:25:38,261.261] Total Tokens seen till now: 17307200
+
+[2025-11-01 15:25:38,281.281] Once upon a time, whatâ€™s like a big tree.
+[2025-11-01 15:25:48,898.898] Epoch No: 1, Step: 010880, Train Loss: 2.938, Val Loss: 2.931
+
+[2025-11-01 15:25:48,899.899] Total Tokens seen till now: 17409600
+
+[2025-11-01 15:25:48,919.919] Once upon a time,. He saw a walk in. He saw a
+[2025-11-01 15:25:59,462.462] Epoch No: 1, Step: 010944, Train Loss: 2.928, Val Loss: 2.922
+
+[2025-11-01 15:25:59,462.462] Total Tokens seen till now: 17512000
+
+[2025-11-01 15:25:59,484.484] Once upon a time, do like to do you want to play with her
+[2025-11-01 15:26:10,104.104] Epoch No: 1, Step: 011008, Train Loss: 2.927, Val Loss: 2.932
+
+[2025-11-01 15:26:10,105.105] Total Tokens seen till now: 17614400
+
+[2025-11-01 15:26:10,125.125] Once upon a time, saw you doing. She saw a big tree with
+[2025-11-01 15:26:20,546.546] Epoch No: 1, Step: 011072, Train Loss: 2.928, Val Loss: 2.910
+
+[2025-11-01 15:26:20,546.546] Total Tokens seen till now: 17716800
+
+[2025-11-01 15:26:20,566.566] Once upon a time, are you like to play with her. "Let
+[2025-11-01 15:26:31,176.176] Epoch No: 1, Step: 011136, Train Loss: 2.914, Val Loss: 2.925
+
+[2025-11-01 15:26:31,177.177] Total Tokens seen till now: 17819200
+
+[2025-11-01 15:26:31,197.197] Once upon a time,.â€œâ€™s,
+[2025-11-01 15:26:41,666.666] Epoch No: 1, Step: 011200, Train Loss: 2.916, Val Loss: 2.914
+
+[2025-11-01 15:26:41,667.667] Total Tokens seen till now: 17921600
+
+[2025-11-01 15:26:41,688.688] Once upon a time, don't know what she was. I do you
+[2025-11-01 15:26:52,213.213] Epoch No: 1, Step: 011264, Train Loss: 2.899, Val Loss: 2.911
+
+[2025-11-01 15:26:52,214.214] Total Tokens seen till now: 18024000
+
+[2025-11-01 15:26:52,233.233] Once upon a time, " donâ€œ€™s.
+[2025-11-01 15:27:02,950.950] Epoch No: 1, Step: 011328, Train Loss: 2.919, Val Loss: 2.910
+
+[2025-11-01 15:27:02,951.951] Total Tokens seen till now: 18126400
+
+[2025-11-01 15:27:02,973.973] Once upon a time, what are you like to go for a walk.
+[2025-11-01 15:27:13,669.669] Epoch No: 1, Step: 011392, Train Loss: 2.916, Val Loss: 2.903
+
+[2025-11-01 15:27:13,669.669] Total Tokens seen till now: 18228800
+
+[2025-11-01 15:27:13,691.691] Once upon a time, there were like to look for a new things.
+[2025-11-01 15:27:24,250.250] Epoch No: 1, Step: 011456, Train Loss: 2.907, Val Loss: 2.900
+
+[2025-11-01 15:27:24,250.250] Total Tokens seen till now: 18331200
+
+[2025-11-01 15:27:24,272.272] Once upon a time, like to play with her room. One room.
+[2025-11-01 15:27:34,777.777] Epoch No: 1, Step: 011520, Train Loss: 2.913, Val Loss: 2.909
+
+[2025-11-01 15:27:34,778.778] Total Tokens seen till now: 18433600
+
+[2025-11-01 15:27:34,798.798] Once upon a time, " seek outside. She saw a tree. She
+[2025-11-01 15:27:45,414.414] Epoch No: 1, Step: 011584, Train Loss: 2.909, Val Loss: 2.917
+
+[2025-11-01 15:27:45,415.415] Total Tokens seen till now: 18536000
+
+[2025-11-01 15:27:45,435.435] Once upon a time,œâ€™sâ€™s
+[2025-11-01 15:27:56,062.062] Epoch No: 1, Step: 011648, Train Loss: 2.924, Val Loss: 2.922
+
+[2025-11-01 15:27:56,062.062] Total Tokens seen till now: 18638400
+
+[2025-11-01 15:27:56,082.082] Once upon a time, don't have a big box. They had a
+[2025-11-01 15:28:06,716.716] Epoch No: 1, Step: 011712, Train Loss: 2.925, Val Loss: 2.907
+
+[2025-11-01 15:28:06,717.717] Total Tokens seen till now: 18740800
+
+[2025-11-01 15:28:06,737.737] Once upon a time, Benny saw what do something strange. He was a
+[2025-11-01 15:28:17,254.254] Epoch No: 1, Step: 011776, Train Loss: 2.903, Val Loss: 2.901
+
+[2025-11-01 15:28:17,255.255] Total Tokens seen till now: 18843200
+
+[2025-11-01 15:28:17,274.274] Once upon a time,my heard coming heard heard coming from the noise.
+[2025-11-01 15:28:27,818.818] Epoch No: 1, Step: 011840, Train Loss: 2.913, Val Loss: 2.903
+
+[2025-11-01 15:28:27,818.818] Total Tokens seen till now: 18945600
+
+[2025-11-01 15:28:27,838.838] Once upon a time,œ forest.â€™s.â
+[2025-11-01 15:28:38,513.513] Epoch No: 1, Step: 011904, Train Loss: 2.904, Val Loss: 2.895
+
+[2025-11-01 15:28:38,513.513] Total Tokens seen till now: 19048000
+
+[2025-11-01 15:28:38,723.723] BEST model SAVED on iteration 011904 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:28:38,744.744] Once upon a time, if you can we play with the park. One
+[2025-11-01 15:28:49,529.529] Epoch No: 1, Step: 011968, Train Loss: 2.905, Val Loss: 2.909
+
+[2025-11-01 15:28:49,529.529] Total Tokens seen till now: 19150400
+
+[2025-11-01 15:28:49,549.549] Once upon a time,�€œ�What do you do?"
+[2025-11-01 15:29:00,264.264] Epoch No: 1, Step: 012032, Train Loss: 2.912, Val Loss: 2.909
+
+[2025-11-01 15:29:00,265.265] Total Tokens seen till now: 19252800
+
+[2025-11-01 15:29:00,284.284] Once upon a time, there aremymy. She loved to play with
+[2025-11-01 15:29:10,993.993] Epoch No: 1, Step: 012096, Train Loss: 2.905, Val Loss: 2.910
+
+[2025-11-01 15:29:10,994.994] Total Tokens seen till now: 19355200
+
+[2025-11-01 15:29:11,014.014] Once upon a time,â€œ to play.â€™
+[2025-11-01 15:29:21,610.610] Epoch No: 1, Step: 012160, Train Loss: 2.911, Val Loss: 2.905
+
+[2025-11-01 15:29:21,611.611] Total Tokens seen till now: 19457600
+
+[2025-11-01 15:29:21,630.630] Once upon a time, saw what do do you want to play with her
+[2025-11-01 15:29:32,199.199] Epoch No: 1, Step: 012224, Train Loss: 2.903, Val Loss: 2.914
+
+[2025-11-01 15:29:32,199.199] Total Tokens seen till now: 19560000
+
+[2025-11-01 15:29:32,219.219] Once upon a time, �â€œ�Iâ€™
+[2025-11-01 15:29:42,782.782] Epoch No: 1, Step: 012288, Train Loss: 2.918, Val Loss: 2.898
+
+[2025-11-01 15:29:42,782.782] Total Tokens seen till now: 19662400
+
+[2025-11-01 15:29:42,802.802] Once upon a time, worrymy for need to go to the park.
+[2025-11-01 15:29:53,442.442] Epoch No: 1, Step: 012352, Train Loss: 2.914, Val Loss: 2.892
+
+[2025-11-01 15:29:53,443.443] Total Tokens seen till now: 19764800
+
+[2025-11-01 15:29:53,668.668] BEST model SAVED on iteration 012352 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:29:53,691.691] Once upon a time, like youmy. I saw a big tree with
+[2025-11-01 15:30:04,443.443] Epoch No: 1, Step: 012416, Train Loss: 2.923, Val Loss: 2.917
+
+[2025-11-01 15:30:04,444.444] Total Tokens seen till now: 19867200
+
+[2025-11-01 15:30:04,464.464] Once upon a time, are to do we have any. They like to
+[2025-11-01 15:30:15,163.163] Epoch No: 1, Step: 012480, Train Loss: 2.902, Val Loss: 2.917
+
+[2025-11-01 15:30:15,163.163] Total Tokens seen till now: 19969600
+
+[2025-11-01 15:30:15,183.183] Once upon a time,â€™sâ€™s.
+[2025-11-01 15:30:25,708.708] Epoch No: 1, Step: 012544, Train Loss: 2.904, Val Loss: 2.910
+
+[2025-11-01 15:30:25,708.708] Total Tokens seen till now: 20072000
+
+[2025-11-01 15:30:25,728.728] Once upon a time, ". I am looking for you. I want
+[2025-11-01 15:30:36,353.353] Epoch No: 1, Step: 012608, Train Loss: 2.919, Val Loss: 2.902
+
+[2025-11-01 15:30:36,353.353] Total Tokens seen till now: 20174400
+
+[2025-11-01 15:30:36,374.374] Once upon a time, â�€œ seek, the garden
+[2025-11-01 15:30:46,931.931] Epoch No: 1, Step: 012672, Train Loss: 2.900, Val Loss: 2.919
+
+[2025-11-01 15:30:46,932.932] Total Tokens seen till now: 20276800
+
+[2025-11-01 15:30:46,952.952] Once upon a time,ilymy worry. I'm going to go outside
+[2025-11-01 15:30:57,552.552] Epoch No: 1, Step: 012736, Train Loss: 2.914, Val Loss: 2.906
+
+[2025-11-01 15:30:57,553.553] Total Tokens seen till now: 20379200
+
+[2025-11-01 15:30:57,572.572] Once upon a time,myâ€™s garden. She was walking
+[2025-11-01 15:31:08,189.189] Epoch No: 1, Step: 012800, Train Loss: 2.915, Val Loss: 2.924
+
+[2025-11-01 15:31:08,190.190] Total Tokens seen till now: 20481600
+
+[2025-11-01 15:31:08,209.209] Once upon a time, whoœ seek. It was very special.
+[2025-11-01 15:31:18,923.923] Epoch No: 1, Step: 012864, Train Loss: 2.922, Val Loss: 2.921
+
+[2025-11-01 15:31:18,924.924] Total Tokens seen till now: 20584000
+
+[2025-11-01 15:31:18,949.949] Once upon a time,â€œ�â€â€™
+[2025-11-01 15:31:29,582.582] Epoch No: 1, Step: 012928, Train Loss: 2.901, Val Loss: 2.907
+
+[2025-11-01 15:31:29,583.583] Total Tokens seen till now: 20686400
+
+[2025-11-01 15:31:29,609.609] Once upon a time, I'm doing?â€™s go for
+[2025-11-01 15:31:40,025.025] Epoch No: 1, Step: 012992, Train Loss: 2.930, Val Loss: 2.921
+
+[2025-11-01 15:31:40,026.026] Total Tokens seen till now: 20788800
+
+[2025-11-01 15:31:40,046.046] Once upon a time, â€œWhatâ€™s
+[2025-11-01 15:31:50,524.524] Epoch No: 1, Step: 013056, Train Loss: 2.900, Val Loss: 2.908
+
+[2025-11-01 15:31:50,525.525] Total Tokens seen till now: 20891200
+
+[2025-11-01 15:31:50,544.544] Once upon a time, â€œâ€™sâ
+[2025-11-01 15:32:01,163.163] Epoch No: 1, Step: 013120, Train Loss: 2.941, Val Loss: 2.935
+
+[2025-11-01 15:32:01,164.164] Total Tokens seen till now: 20993600
+
+[2025-11-01 15:32:01,185.185] Once upon a time, there saw what is that was. She was a
+[2025-11-01 15:32:11,821.821] Epoch No: 1, Step: 013184, Train Loss: 2.899, Val Loss: 2.906
+
+[2025-11-01 15:32:11,822.822] Total Tokens seen till now: 21096000
+
+[2025-11-01 15:32:11,842.842] Once upon a time, forest skyâ€œâ€ â
+[2025-11-01 15:32:22,460.460] Epoch No: 1, Step: 013248, Train Loss: 2.922, Val Loss: 2.923
+
+[2025-11-01 15:32:22,461.461] Total Tokens seen till now: 21198400
+
+[2025-11-01 15:32:22,483.483] Once upon a time, â�€œ�€œ
+[2025-11-01 15:32:33,074.074] Epoch No: 1, Step: 013312, Train Loss: 2.919, Val Loss: 2.920
+
+[2025-11-01 15:32:33,075.075] Total Tokens seen till now: 21300800
+
+[2025-11-01 15:32:33,095.095] Once upon a time, "â€™s.â€œ
+[2025-11-01 15:32:43,684.684] Epoch No: 1, Step: 013376, Train Loss: 2.910, Val Loss: 2.918
+
+[2025-11-01 15:32:43,685.685] Total Tokens seen till now: 21403200
+
+[2025-11-01 15:32:43,704.704] Once upon a time, you look for you need to go for a walk
+[2025-11-01 15:32:54,362.362] Epoch No: 1, Step: 013440, Train Loss: 2.915, Val Loss: 2.910
+
+[2025-11-01 15:32:54,363.363] Total Tokens seen till now: 21505600
+
+[2025-11-01 15:32:54,383.383] Once upon a time,myâ€œâ€™tâ
+[2025-11-01 15:33:04,838.838] Epoch No: 1, Step: 013504, Train Loss: 2.925, Val Loss: 2.909
+
+[2025-11-01 15:33:04,839.839] Total Tokens seen till now: 21608000
+
+[2025-11-01 15:33:04,859.859] Once upon a time, you know what was doing a do.â€
+[2025-11-01 15:33:15,288.288] Epoch No: 1, Step: 013568, Train Loss: 2.925, Val Loss: 2.925
+
+[2025-11-01 15:33:15,289.289] Total Tokens seen till now: 21710400
+
+[2025-11-01 15:33:15,309.309] Once upon a time, come to the park. She saw something was a
+[2025-11-01 15:33:25,911.911] Epoch No: 1, Step: 013632, Train Loss: 2.912, Val Loss: 2.925
+
+[2025-11-01 15:33:25,912.912] Total Tokens seen till now: 21812800
+
+[2025-11-01 15:33:25,932.932] Once upon a time, who are�€œLetâ€™
+[2025-11-01 15:33:36,518.518] Epoch No: 1, Step: 013696, Train Loss: 2.920, Val Loss: 2.899
+
+[2025-11-01 15:33:36,519.519] Total Tokens seen till now: 21915200
+
+[2025-11-01 15:33:36,538.538] Once upon a time, worry saw a you what was. I'm going
+[2025-11-01 15:33:47,042.042] Epoch No: 1, Step: 013760, Train Loss: 2.936, Val Loss: 2.928
+
+[2025-11-01 15:33:47,043.043] Total Tokens seen till now: 22017600
+
+[2025-11-01 15:33:47,062.062] Once upon a time, I'm going to the park. She saw a
+[2025-11-01 15:33:57,602.602] Epoch No: 1, Step: 013824, Train Loss: 2.891, Val Loss: 2.905
+
+[2025-11-01 15:33:57,603.603] Total Tokens seen till now: 22120000
+
+[2025-11-01 15:33:57,626.626] Once upon a time,�€œ��adow. What is
+[2025-11-01 15:34:08,305.305] Epoch No: 1, Step: 013888, Train Loss: 2.947, Val Loss: 2.936
+
+[2025-11-01 15:34:08,305.305] Total Tokens seen till now: 22222400
+
+[2025-11-01 15:34:08,325.325] Once upon a time,â€™s go.â€™s
+[2025-11-01 15:34:18,890.890] Epoch No: 1, Step: 013952, Train Loss: 2.932, Val Loss: 2.933
+
+[2025-11-01 15:34:18,891.891] Total Tokens seen till now: 22324800
+
+[2025-11-01 15:34:18,910.910] Once upon a time, thereâ€™t know what she saw her
+[2025-11-01 15:34:29,444.444] Epoch No: 1, Step: 014016, Train Loss: 2.951, Val Loss: 2.909
+
+[2025-11-01 15:34:29,446.446] Total Tokens seen till now: 22427200
+
+[2025-11-01 15:34:29,467.467] Once upon a time, her daddy. She saw a big, yellow bird
+[2025-11-01 15:34:39,893.893] Epoch No: 1, Step: 014080, Train Loss: 2.936, Val Loss: 2.931
+
+[2025-11-01 15:34:39,893.893] Total Tokens seen till now: 22529600
+
+[2025-11-01 15:34:39,913.913] Once upon a time, donâ€™t know what he was.
+[2025-11-01 15:34:50,247.247] Epoch No: 1, Step: 014144, Train Loss: 2.930, Val Loss: 2.926
+
+[2025-11-01 15:34:50,247.247] Total Tokens seen till now: 22632000
+
+[2025-11-01 15:34:50,267.267] Once upon a time, don't know what was.â€™t
+[2025-11-01 15:35:00,784.784] Epoch No: 1, Step: 014208, Train Loss: 2.930, Val Loss: 2.931
+
+[2025-11-01 15:35:00,787.787] Total Tokens seen till now: 22734400
+
+[2025-11-01 15:35:00,807.807] Once upon a time, heardœâ€™s in the garden
+[2025-11-01 15:35:11,433.433] Epoch No: 1, Step: 014272, Train Loss: 2.942, Val Loss: 2.937
+
+[2025-11-01 15:35:11,434.434] Total Tokens seen till now: 22836800
+
+[2025-11-01 15:35:11,453.453] Once upon a time, look up â€œLet's go
+[2025-11-01 15:35:21,965.965] Epoch No: 1, Step: 014336, Train Loss: 2.934, Val Loss: 2.940
+
+[2025-11-01 15:35:21,966.966] Total Tokens seen till now: 22939200
+
+[2025-11-01 15:35:21,987.987] Once upon a time, forestâ€œMommy.â€
+[2025-11-01 15:35:32,487.487] Epoch No: 1, Step: 014400, Train Loss: 2.950, Val Loss: 2.927
+
+[2025-11-01 15:35:32,489.489] Total Tokens seen till now: 23041600
+
+[2025-11-01 15:35:32,509.509] Once upon a time, "â€™t find something.â€
+[2025-11-01 15:35:43,043.043] Epoch No: 1, Step: 014464, Train Loss: 2.926, Val Loss: 2.940
+
+[2025-11-01 15:35:43,044.044] Total Tokens seen till now: 23144000
+
+[2025-11-01 15:35:43,063.063] Once upon a time,œâ€™s.â
+[2025-11-01 15:35:53,556.556] Epoch No: 1, Step: 014528, Train Loss: 2.989, Val Loss: 2.950
+
+[2025-11-01 15:35:53,556.556] Total Tokens seen till now: 23246400
+
+[2025-11-01 15:35:53,576.576] Once upon a time,�€œMommyâ€™s
+[2025-11-01 15:36:04,046.046] Epoch No: 1, Step: 014592, Train Loss: 2.917, Val Loss: 2.916
+
+[2025-11-01 15:36:04,047.047] Total Tokens seen till now: 23348800
+
+[2025-11-01 15:36:04,067.067] Once upon a time, don't know what are. She said, "
+[2025-11-01 15:36:14,450.450] Epoch No: 1, Step: 014656, Train Loss: 2.938, Val Loss: 2.952
+
+[2025-11-01 15:36:14,450.450] Total Tokens seen till now: 23451200
+
+[2025-11-01 15:36:14,470.470] Once upon a time, look atâ€œWhat is a big
+[2025-11-01 15:36:24,819.819] Epoch No: 1, Step: 014720, Train Loss: 2.938, Val Loss: 2.918
+
+[2025-11-01 15:36:24,819.819] Total Tokens seen till now: 23553600
+
+[2025-11-01 15:36:24,840.840] Once upon a time, âœâ€œMolly
+[2025-11-01 15:36:35,172.172] Epoch No: 1, Step: 014784, Train Loss: 2.919, Val Loss: 2.925
+
+[2025-11-01 15:36:35,173.173] Total Tokens seen till now: 23656000
+
+[2025-11-01 15:36:35,193.193] Once upon a time, she saw a big tree. She was very curious
+[2025-11-01 15:36:45,634.634] Epoch No: 1, Step: 014848, Train Loss: 2.946, Val Loss: 2.953
+
+[2025-11-01 15:36:45,634.634] Total Tokens seen till now: 23758400
+
+[2025-11-01 15:36:45,655.655] Once upon a time, her room room.œMommy, Mom
+[2025-11-01 15:36:56,115.115] Epoch No: 1, Step: 014912, Train Loss: 2.957, Val Loss: 2.935
+
+[2025-11-01 15:36:56,115.115] Total Tokens seen till now: 23860800
+
+[2025-11-01 15:36:56,135.135] Once upon a time, worry who was to go for a walk. She
+[2025-11-01 15:37:06,606.606] Epoch No: 1, Step: 014976, Train Loss: 2.964, Val Loss: 2.959
+
+[2025-11-01 15:37:06,606.606] Total Tokens seen till now: 23963200
+
+[2025-11-01 15:37:06,628.628] Once upon a time, saw a house. It was a big, but
+[2025-11-01 15:37:17,119.119] Epoch No: 1, Step: 015040, Train Loss: 2.971, Val Loss: 2.969
+
+[2025-11-01 15:37:17,119.119] Total Tokens seen till now: 24065600
+
+[2025-11-01 15:37:17,139.139] Once upon a time, â€œ'm going out. He
+[2025-11-01 15:37:27,611.611] Epoch No: 1, Step: 015104, Train Loss: 2.925, Val Loss: 2.939
+
+[2025-11-01 15:37:27,612.612] Total Tokens seen till now: 24168000
+
+[2025-11-01 15:37:27,631.631] Once upon a time, don't like are you want to go for a
+[2025-11-01 15:37:38,181.181] Epoch No: 1, Step: 015168, Train Loss: 2.943, Val Loss: 2.928
+
+[2025-11-01 15:37:38,181.181] Total Tokens seen till now: 24270400
+
+[2025-11-01 15:37:38,200.200] Once upon a time, saw a garden. She liked to play with her
+[2025-11-01 15:37:48,709.709] Epoch No: 1, Step: 015232, Train Loss: 2.949, Val Loss: 2.941
+
+[2025-11-01 15:37:48,710.710] Total Tokens seen till now: 24372800
+
+[2025-11-01 15:37:48,730.730] Once upon a time, she was forest, she saw a big tree.
+[2025-11-01 15:37:59,070.070] Epoch No: 1, Step: 015296, Train Loss: 2.932, Val Loss: 2.936
+
+[2025-11-01 15:37:59,070.070] Total Tokens seen till now: 24475200
+
+[2025-11-01 15:37:59,091.091] Once upon a time, youâ€™s garden. She was very
+[2025-11-01 15:38:09,538.538] Epoch No: 1, Step: 015360, Train Loss: 2.956, Val Loss: 2.942
+
+[2025-11-01 15:38:09,538.538] Total Tokens seen till now: 24577600
+
+[2025-11-01 15:38:09,558.558] Once upon a time, thereâ€œLetâ€™s
+[2025-11-01 15:38:19,806.806] Epoch No: 1, Step: 015424, Train Loss: 2.957, Val Loss: 2.962
+
+[2025-11-01 15:38:19,809.809] Total Tokens seen till now: 24680000
+
+[2025-11-01 15:38:19,829.829] Once upon a time, canâ€™t wait to explore. He
+[2025-11-01 15:38:30,117.117] Epoch No: 1, Step: 015488, Train Loss: 2.942, Val Loss: 2.929
+
+[2025-11-01 15:38:30,117.117] Total Tokens seen till now: 24782400
+
+[2025-11-01 15:38:30,138.138] Once upon a time, there was like to explore. She play with her
+[2025-11-01 15:38:40,343.343] Epoch No: 1, Step: 015552, Train Loss: 2.925, Val Loss: 2.913
+
+[2025-11-01 15:38:40,343.343] Total Tokens seen till now: 24884800
+
+[2025-11-01 15:38:40,363.363] Once upon a time, worry play with her. She was excited. She
+[2025-11-01 15:38:50,718.718] Epoch No: 1, Step: 015616, Train Loss: 2.936, Val Loss: 2.945
+
+[2025-11-01 15:38:50,718.718] Total Tokens seen till now: 24987200
+
+[2025-11-01 15:38:50,738.738] Once upon a time, kitchenâ€œâ€™s house
+[2025-11-01 15:39:01,082.082] Epoch No: 1, Step: 015680, Train Loss: 2.946, Val Loss: 2.923
+
+[2025-11-01 15:39:01,082.082] Total Tokens seen till now: 25089600
+
+[2025-11-01 15:39:01,102.102] Once upon a time, ââ€œâ€™s
+[2025-11-01 15:39:11,652.652] Epoch No: 1, Step: 015744, Train Loss: 2.960, Val Loss: 2.943
+
+[2025-11-01 15:39:11,654.654] Total Tokens seen till now: 25192000
+
+[2025-11-01 15:39:11,675.675] Once upon a time, donââ€™t know what can do
+[2025-11-01 15:39:22,056.056] Epoch No: 1, Step: 015808, Train Loss: 2.924, Val Loss: 2.953
+
+[2025-11-01 15:39:22,058.058] Total Tokens seen till now: 25294400
+
+[2025-11-01 15:39:22,078.078] Once upon a time, came to play with her toys. She was very
+[2025-11-01 15:39:32,345.345] Epoch No: 1, Step: 015872, Train Loss: 2.911, Val Loss: 2.941
+
+[2025-11-01 15:39:32,346.346] Total Tokens seen till now: 25396800
+
+[2025-11-01 15:39:32,365.365] Once upon a time, saw me play with her. He was in the
+[2025-11-01 15:39:42,745.745] Epoch No: 1, Step: 015936, Train Loss: 2.965, Val Loss: 2.973
+
+[2025-11-01 15:39:42,745.745] Total Tokens seen till now: 25499200
+
+[2025-11-01 15:39:42,765.765] Once upon a time, you want to go for a walk. She saw
+[2025-11-01 15:39:53,153.153] Epoch No: 1, Step: 016000, Train Loss: 2.946, Val Loss: 2.929
+
+[2025-11-01 15:39:53,154.154] Total Tokens seen till now: 25601600
+
+[2025-11-01 15:39:53,174.174] Once upon a time, who was like to play with her toys. One
+[2025-11-01 15:40:03,631.631] Epoch No: 1, Step: 016064, Train Loss: 2.946, Val Loss: 2.944
+
+[2025-11-01 15:40:03,632.632] Total Tokens seen till now: 25704000
+
+[2025-11-01 15:40:03,651.651] Once upon a time, saw know what was happening. It was very curious
+[2025-11-01 15:40:14,113.113] Epoch No: 1, Step: 016128, Train Loss: 2.945, Val Loss: 2.952
+
+[2025-11-01 15:40:14,113.113] Total Tokens seen till now: 25806400
+
+[2025-11-01 15:40:14,133.133] Once upon a time, can play outside. He was looking for a walk
+[2025-11-01 15:40:24,413.413] Epoch No: 1, Step: 016192, Train Loss: 2.939, Val Loss: 2.932
+
+[2025-11-01 15:40:24,414.414] Total Tokens seen till now: 25908800
+
+[2025-11-01 15:40:24,438.438] Once upon a time, are you are playing with you want to play with
+[2025-11-01 15:40:34,724.724] Epoch No: 1, Step: 016256, Train Loss: 2.938, Val Loss: 2.938
+
+[2025-11-01 15:40:34,724.724] Total Tokens seen till now: 26011200
+
+[2025-11-01 15:40:34,744.744] Once upon a time, canâ€™s. They had a big
+[2025-11-01 15:40:44,929.929] Epoch No: 1, Step: 016320, Train Loss: 2.960, Val Loss: 2.941
+
+[2025-11-01 15:40:44,929.929] Total Tokens seen till now: 26113600
+
+[2025-11-01 15:40:44,950.950] Once upon a time, I love to play with his toys. I have
+[2025-11-01 15:40:55,186.186] Epoch No: 1, Step: 016384, Train Loss: 2.921, Val Loss: 2.930
+
+[2025-11-01 15:40:55,186.186] Total Tokens seen till now: 26216000
+
+[2025-11-01 15:40:55,207.207] Once upon a time, can'm a very curious and wanted to find a
+[2025-11-01 15:41:05,594.594] Epoch No: 1, Step: 016448, Train Loss: 2.941, Val Loss: 2.917
+
+[2025-11-01 15:41:05,594.594] Total Tokens seen till now: 26318400
+
+[2025-11-01 15:41:05,620.620] Once upon a time, canâ€œWhat are you doing?"
+[2025-11-01 15:41:16,082.082] Epoch No: 1, Step: 016512, Train Loss: 2.937, Val Loss: 2.923
+
+[2025-11-01 15:41:16,085.085] Total Tokens seen till now: 26420800
+
+[2025-11-01 15:41:16,105.105] Once upon a time, have to play. She had a big, and
+[2025-11-01 15:41:26,476.476] Epoch No: 1, Step: 016576, Train Loss: 2.896, Val Loss: 2.930
+
+[2025-11-01 15:41:26,476.476] Total Tokens seen till now: 26523200
+
+[2025-11-01 15:41:26,496.496] Once upon a time, what are are you. I like to play with
+[2025-11-01 15:41:36,863.863] Epoch No: 1, Step: 016640, Train Loss: 2.916, Val Loss: 2.914
+
+[2025-11-01 15:41:36,863.863] Total Tokens seen till now: 26625600
+
+[2025-11-01 15:41:36,883.883] Once upon a time, are like to play. They have a big box
+[2025-11-01 15:41:47,192.192] Epoch No: 1, Step: 016704, Train Loss: 2.925, Val Loss: 2.940
+
+[2025-11-01 15:41:47,193.193] Total Tokens seen till now: 26728000
+
+[2025-11-01 15:41:47,213.213] Once upon a time, know what was.â€œWhat do
+[2025-11-01 15:41:57,562.562] Epoch No: 1, Step: 016768, Train Loss: 2.911, Val Loss: 2.918
+
+[2025-11-01 15:41:57,563.563] Total Tokens seen till now: 26830400
+
+[2025-11-01 15:41:57,583.583] Once upon a time,â€œâ€œâ€
+[2025-11-01 15:42:08,018.018] Epoch No: 1, Step: 016832, Train Loss: 2.919, Val Loss: 2.913
+
+[2025-11-01 15:42:08,019.019] Total Tokens seen till now: 26932800
+
+[2025-11-01 15:42:08,039.039] Once upon a time, canâ€™tâ€™tâ
+[2025-11-01 15:42:18,529.529] Epoch No: 1, Step: 016896, Train Loss: 2.941, Val Loss: 2.931
+
+[2025-11-01 15:42:18,532.532] Total Tokens seen till now: 27035200
+
+[2025-11-01 15:42:18,551.551] Once upon a time, there was'mâ€™s. He was
+[2025-11-01 15:42:28,902.902] Epoch No: 1, Step: 016960, Train Loss: 2.915, Val Loss: 2.922
+
+[2025-11-01 15:42:28,902.902] Total Tokens seen till now: 27137600
+
+[2025-11-01 15:42:28,924.924] Once upon a time, there was a little girl named Lily. She loved
+[2025-11-01 15:42:39,394.394] Epoch No: 1, Step: 017024, Train Loss: 2.906, Val Loss: 2.916
+
+[2025-11-01 15:42:39,394.394] Total Tokens seen till now: 27240000
+
+[2025-11-01 15:42:39,416.416] Once upon a time, you are you need you have a wish. She
+[2025-11-01 15:42:49,821.821] Epoch No: 1, Step: 017088, Train Loss: 2.929, Val Loss: 2.920
+
+[2025-11-01 15:42:49,821.821] Total Tokens seen till now: 27342400
+
+[2025-11-01 15:42:49,841.841] Once upon a time, donââ€.The little girl
+[2025-11-01 15:43:00,117.117] Epoch No: 1, Step: 017152, Train Loss: 2.911, Val Loss: 2.926
+
+[2025-11-01 15:43:00,118.118] Total Tokens seen till now: 27444800
+
+[2025-11-01 15:43:00,137.137] Once upon a time, her to know what was inside. She was doing
+[2025-11-01 15:43:10,486.486] Epoch No: 1, Step: 017216, Train Loss: 2.921, Val Loss: 2.898
+
+[2025-11-01 15:43:10,486.486] Total Tokens seen till now: 27547200
+
+[2025-11-01 15:43:10,506.506] Once upon a time, you know what was. She was inside. One
+[2025-11-01 15:43:20,870.870] Epoch No: 1, Step: 017280, Train Loss: 2.918, Val Loss: 2.907
+
+[2025-11-01 15:43:20,871.871] Total Tokens seen till now: 27649600
+
+[2025-11-01 15:43:20,891.891] Once upon a time, thereâ€œWhatâ€™s
+[2025-11-01 15:43:31,220.220] Epoch No: 1, Step: 017344, Train Loss: 2.897, Val Loss: 2.896
+
+[2025-11-01 15:43:31,221.221] Total Tokens seen till now: 27752000
+
+[2025-11-01 15:43:31,241.241] Once upon a time, house's her to buy it. She wanted to
+[2025-11-01 15:43:41,637.637] Epoch No: 1, Step: 017408, Train Loss: 2.894, Val Loss: 2.876
+
+[2025-11-01 15:43:41,637.637] Total Tokens seen till now: 27854400
+
+[2025-11-01 15:43:41,861.861] BEST model SAVED on iteration 017408 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:43:41,881.881] Once upon a time, come to play with her toys. She had a
+[2025-11-01 15:43:52,428.428] Epoch No: 1, Step: 017472, Train Loss: 2.895, Val Loss: 2.887
+
+[2025-11-01 15:43:52,428.428] Total Tokens seen till now: 27956800
+
+[2025-11-01 15:43:52,451.451] Once upon a time, who need to play. She liked to play with
+[2025-11-01 15:44:03,101.101] Epoch No: 1, Step: 017536, Train Loss: 2.898, Val Loss: 2.896
+
+[2025-11-01 15:44:03,102.102] Total Tokens seen till now: 28059200
+
+[2025-11-01 15:44:03,123.123] Once upon a time, there was a tree. She was scared she loved
+[2025-11-01 15:44:13,496.496] Epoch No: 1, Step: 017600, Train Loss: 2.901, Val Loss: 2.901
+
+[2025-11-01 15:44:13,496.496] Total Tokens seen till now: 28161600
+
+[2025-11-01 15:44:13,515.515] Once upon a time, can go see. She saw what she was.
+[2025-11-01 15:44:23,956.956] Epoch No: 1, Step: 017664, Train Loss: 2.889, Val Loss: 2.879
+
+[2025-11-01 15:44:23,956.956] Total Tokens seen till now: 28264000
+
+[2025-11-01 15:44:23,976.976] Once upon a time, she saw a big box. She had a big
+[2025-11-01 15:44:34,271.271] Epoch No: 1, Step: 017728, Train Loss: 2.893, Val Loss: 2.874
+
+[2025-11-01 15:44:34,272.272] Total Tokens seen till now: 28366400
+
+[2025-11-01 15:44:34,492.492] BEST model SAVED on iteration 017728 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:44:34,512.512] Once upon a time, sheœâ€œ�What can
+[2025-11-01 15:44:45,049.049] Epoch No: 1, Step: 017792, Train Loss: 2.893, Val Loss: 2.880
+
+[2025-11-01 15:44:45,050.050] Total Tokens seen till now: 28468800
+
+[2025-11-01 15:44:45,069.069] Once upon a time, you need to play with her mommy. One
+[2025-11-01 15:44:55,471.471] Epoch No: 1, Step: 017856, Train Loss: 2.892, Val Loss: 2.879
+
+[2025-11-01 15:44:55,474.474] Total Tokens seen till now: 28571200
+
+[2025-11-01 15:44:55,494.494] Once upon a time, her mum house. She was walking in the park
+[2025-11-01 15:45:06,034.034] Epoch No: 1, Step: 017920, Train Loss: 2.873, Val Loss: 2.870
+
+[2025-11-01 15:45:06,037.037] Total Tokens seen till now: 28673600
+
+[2025-11-01 15:45:06,226.226] BEST model SAVED on iteration 017920 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:45:06,246.246] Once upon a time, sawâ€œWhat canâ€™
+[2025-11-01 15:45:16,874.874] Epoch No: 1, Step: 017984, Train Loss: 2.880, Val Loss: 2.872
+
+[2025-11-01 15:45:16,874.874] Total Tokens seen till now: 28776000
+
+[2025-11-01 15:45:16,893.893] Once upon a time, need need to go. She will be fun.
+[2025-11-01 15:45:27,465.465] Epoch No: 1, Step: 018048, Train Loss: 2.891, Val Loss: 2.883
+
+[2025-11-01 15:45:27,466.466] Total Tokens seen till now: 28878400
+
+[2025-11-01 15:45:27,485.485] Once upon a time, know what was. She wanted to do. She
+[2025-11-01 15:45:37,880.880] Epoch No: 1, Step: 018112, Train Loss: 2.894, Val Loss: 2.881
+
+[2025-11-01 15:45:37,883.883] Total Tokens seen till now: 28980800
+
+[2025-11-01 15:45:37,903.903] Once upon a time, there was a very excited. She was walking,
+[2025-11-01 15:45:48,306.306] Epoch No: 1, Step: 018176, Train Loss: 2.851, Val Loss: 2.875
+
+[2025-11-01 15:45:48,306.306] Total Tokens seen till now: 29083200
+
+[2025-11-01 15:45:48,326.326] Once upon a time, you canâ€™s go. She was
+[2025-11-01 15:45:58,768.768] Epoch No: 1, Step: 018240, Train Loss: 2.860, Val Loss: 2.862
+
+[2025-11-01 15:45:58,769.769] Total Tokens seen till now: 29185600
+
+[2025-11-01 15:45:58,981.981] BEST model SAVED on iteration 018240 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:45:59,001.001] Once upon a time, are need to go for a walk. She wanted
+[2025-11-01 15:46:09,657.657] Epoch No: 1, Step: 018304, Train Loss: 2.892, Val Loss: 2.875
+
+[2025-11-01 15:46:09,657.657] Total Tokens seen till now: 29288000
+
+[2025-11-01 15:46:09,680.680] Once upon a time, she could have a big tree. She was very
+[2025-11-01 15:46:20,215.215] Epoch No: 1, Step: 018368, Train Loss: 2.884, Val Loss: 2.858
+
+[2025-11-01 15:46:20,215.215] Total Tokens seen till now: 29390400
+
+[2025-11-01 15:46:20,422.422] BEST model SAVED on iteration 018368 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:46:20,444.444] Once upon a time, "'m don't have her mommy. I
+[2025-11-01 15:46:30,933.933] Epoch No: 1, Step: 018432, Train Loss: 2.870, Val Loss: 2.864
+
+[2025-11-01 15:46:30,933.933] Total Tokens seen till now: 29492800
+
+[2025-11-01 15:46:30,959.959] Once upon a time, there if she was very happy. She was very
+[2025-11-01 15:46:41,512.512] Epoch No: 1, Step: 018496, Train Loss: 2.878, Val Loss: 2.861
+
+[2025-11-01 15:46:41,514.514] Total Tokens seen till now: 29595200
+
+[2025-11-01 15:46:41,534.534] Once upon a time, she loved'm looking for her mommy. She
+[2025-11-01 15:46:51,965.965] Epoch No: 1, Step: 018560, Train Loss: 2.853, Val Loss: 2.857
+
+[2025-11-01 15:46:51,968.968] Total Tokens seen till now: 29697600
+
+[2025-11-01 15:46:52,184.184] BEST model SAVED on iteration 018560 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:46:52,204.204] Once upon a time, there are you can you have a big forest.
+[2025-11-01 15:47:02,789.789] Epoch No: 1, Step: 018624, Train Loss: 2.880, Val Loss: 2.863
+
+[2025-11-01 15:47:02,789.789] Total Tokens seen till now: 29800000
+
+[2025-11-01 15:47:02,810.810] Once upon a time, saw what happened. She was doing, but she
+[2025-11-01 15:47:13,403.403] Epoch No: 1, Step: 018688, Train Loss: 2.852, Val Loss: 2.863
+
+[2025-11-01 15:47:13,403.403] Total Tokens seen till now: 29902400
+
+[2025-11-01 15:47:13,428.428] Once upon a time, room.â€œWhat is youâ
+[2025-11-01 15:47:23,924.924] Epoch No: 1, Step: 018752, Train Loss: 2.864, Val Loss: 2.861
+
+[2025-11-01 15:47:23,924.924] Total Tokens seen till now: 30004800
+
+[2025-11-01 15:47:23,944.944] Once upon a time, she was for her. She was very excited.
+[2025-11-01 15:47:34,347.347] Epoch No: 1, Step: 018816, Train Loss: 2.850, Val Loss: 2.850
+
+[2025-11-01 15:47:34,350.350] Total Tokens seen till now: 30107200
+
+[2025-11-01 15:47:34,536.536] BEST model SAVED on iteration 018816 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:47:34,556.556] Once upon a time, can�œ'm going to the park.
+[2025-11-01 15:47:44,994.994] Epoch No: 1, Step: 018880, Train Loss: 2.868, Val Loss: 2.863
+
+[2025-11-01 15:47:44,994.994] Total Tokens seen till now: 30209600
+
+[2025-11-01 15:47:45,014.014] Once upon a time, sawââ€™s mum. She was
+[2025-11-01 15:47:55,435.435] Epoch No: 1, Step: 018944, Train Loss: 2.867, Val Loss: 2.860
+
+[2025-11-01 15:47:55,435.435] Total Tokens seen till now: 30312000
+
+[2025-11-01 15:47:55,455.455] Once upon a time,'m'm'm need to go for a walk.
+[2025-11-01 15:48:05,836.836] Epoch No: 1, Step: 019008, Train Loss: 2.878, Val Loss: 2.842
+
+[2025-11-01 15:48:05,836.836] Total Tokens seen till now: 30414400
+
+[2025-11-01 15:48:06,047.047] BEST model SAVED on iteration 019008 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:48:06,069.069] Once upon a time,'m only three-old. She was very curious
+[2025-11-01 15:48:16,782.782] Epoch No: 1, Step: 019072, Train Loss: 2.864, Val Loss: 2.862
+
+[2025-11-01 15:48:16,783.783] Total Tokens seen till now: 30516800
+
+[2025-11-01 15:48:16,802.802] Once upon a time, there was know. She was. She was a
+[2025-11-01 15:48:27,330.330] Epoch No: 1, Step: 019136, Train Loss: 2.862, Val Loss: 2.852
+
+[2025-11-01 15:48:27,330.330] Total Tokens seen till now: 30619200
+
+[2025-11-01 15:48:27,353.353] Once upon a time,â€œ�Whatâ€™s
+[2025-11-01 15:48:37,734.734] Epoch No: 1, Step: 019200, Train Loss: 2.848, Val Loss: 2.869
+
+[2025-11-01 15:48:37,734.734] Total Tokens seen till now: 30721600
+
+[2025-11-01 15:48:37,754.754] Once upon a time, don't know what donâ€™s a
+[2025-11-01 15:48:48,153.153] Epoch No: 1, Step: 019264, Train Loss: 2.846, Val Loss: 2.856
+
+[2025-11-01 15:48:48,153.153] Total Tokens seen till now: 30824000
+
+[2025-11-01 15:48:48,173.173] Once upon a time,œâ€™s go.â€
+[2025-11-01 15:48:58,704.704] Epoch No: 1, Step: 019328, Train Loss: 2.859, Val Loss: 2.837
+
+[2025-11-01 15:48:58,704.704] Total Tokens seen till now: 30926400
+
+[2025-11-01 15:48:58,920.920] BEST model SAVED on iteration 019328 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:48:58,940.940] Once upon a time, canâ€œYes, I have a
+[2025-11-01 15:49:09,598.598] Epoch No: 1, Step: 019392, Train Loss: 2.859, Val Loss: 2.843
+
+[2025-11-01 15:49:09,599.599] Total Tokens seen till now: 31028800
+
+[2025-11-01 15:49:09,619.619] Once upon a time, wasâ€œWhat can do. She
+[2025-11-01 15:49:20,091.091] Epoch No: 1, Step: 019456, Train Loss: 2.864, Val Loss: 2.861
+
+[2025-11-01 15:49:20,091.091] Total Tokens seen till now: 31131200
+
+[2025-11-01 15:49:20,111.111] Once upon a time, I'm know what to do. She was going
+[2025-11-01 15:49:30,277.277] Epoch No: 1, Step: 019520, Train Loss: 2.854, Val Loss: 2.850
+
+[2025-11-01 15:49:30,279.279] Total Tokens seen till now: 31233600
+
+[2025-11-01 15:49:30,299.299] Once upon a time, can worryâ€œ�Yesâ€
+[2025-11-01 15:49:40,647.647] Epoch No: 1, Step: 019584, Train Loss: 2.838, Val Loss: 2.851
+
+[2025-11-01 15:49:40,647.647] Total Tokens seen till now: 31336000
+
+[2025-11-01 15:49:40,667.667] Once upon a time, are you doing.â€™s. She
+[2025-11-01 15:49:51,087.087] Epoch No: 1, Step: 019648, Train Loss: 2.849, Val Loss: 2.846
+
+[2025-11-01 15:49:51,090.090] Total Tokens seen till now: 31438400
+
+[2025-11-01 15:49:51,111.111] Once upon a time,. She care for her. She was very good
+[2025-11-01 15:50:01,477.477] Epoch No: 1, Step: 019712, Train Loss: 2.845, Val Loss: 2.853
+
+[2025-11-01 15:50:01,477.477] Total Tokens seen till now: 31540800
+
+[2025-11-01 15:50:01,496.496] Once upon a time, donâ€™t know what to do.
+[2025-11-01 15:50:12,009.009] Epoch No: 1, Step: 019776, Train Loss: 2.862, Val Loss: 2.844
+
+[2025-11-01 15:50:12,011.011] Total Tokens seen till now: 31643200
+
+[2025-11-01 15:50:12,031.031] Once upon a time, can you need to go for a walk with her
+[2025-11-01 15:50:22,525.525] Epoch No: 1, Step: 019840, Train Loss: 2.868, Val Loss: 2.863
+
+[2025-11-01 15:50:22,525.525] Total Tokens seen till now: 31745600
+
+[2025-11-01 15:50:22,545.545] Once upon a time,â€œ canâ€œYes
+[2025-11-01 15:50:32,991.991] Epoch No: 1, Step: 019904, Train Loss: 2.860, Val Loss: 2.845
+
+[2025-11-01 15:50:32,994.994] Total Tokens seen till now: 31848000
+
+[2025-11-01 15:50:33,013.013] Once upon a time, she sawâœWhatâ€™s
+[2025-11-01 15:50:43,370.370] Epoch No: 1, Step: 019968, Train Loss: 2.839, Val Loss: 2.845
+
+[2025-11-01 15:50:43,370.370] Total Tokens seen till now: 31950400
+
+[2025-11-01 15:50:43,390.390] Once upon a time, can have a walk. She saw a big,
+[2025-11-01 15:50:53,805.805] Epoch No: 1, Step: 020032, Train Loss: 2.855, Val Loss: 2.837
+
+[2025-11-01 15:50:53,805.805] Total Tokens seen till now: 32052800
+
+[2025-11-01 15:50:54,009.009] BEST model SAVED on iteration 020032 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:50:54,031.031] Once upon a time, she'm don't know what it was inside.
+[2025-11-01 15:51:04,628.628] Epoch No: 1, Step: 020096, Train Loss: 2.850, Val Loss: 2.849
+
+[2025-11-01 15:51:04,629.629] Total Tokens seen till now: 32155200
+
+[2025-11-01 15:51:04,648.648] Once upon a time, see can haveâ€ know what could do.
+[2025-11-01 15:51:15,120.120] Epoch No: 1, Step: 020160, Train Loss: 2.865, Val Loss: 2.860
+
+[2025-11-01 15:51:15,120.120] Total Tokens seen till now: 32257600
+
+[2025-11-01 15:51:15,141.141] Once upon a time, need can do do you have a very like to
+[2025-11-01 15:51:25,372.372] Epoch No: 1, Step: 020224, Train Loss: 2.863, Val Loss: 2.852
+
+[2025-11-01 15:51:25,372.372] Total Tokens seen till now: 32360000
+
+[2025-11-01 15:51:25,392.392] Once upon a time, She loved have want to go play with her toys
+[2025-11-01 15:51:35,756.756] Epoch No: 1, Step: 020288, Train Loss: 2.849, Val Loss: 2.846
+
+[2025-11-01 15:51:35,759.759] Total Tokens seen till now: 32462400
+
+[2025-11-01 15:51:35,778.778] Once upon a time, her house she'm going to the kitchen. She
+[2025-11-01 15:51:46,181.181] Epoch No: 1, Step: 020352, Train Loss: 2.850, Val Loss: 2.831
+
+[2025-11-01 15:51:46,182.182] Total Tokens seen till now: 32564800
+
+[2025-11-01 15:51:46,383.383] BEST model SAVED on iteration 020352 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 15:51:46,404.404] Once upon a time,œ'mâ€™t have a big
+[2025-11-01 15:51:57,082.082] Epoch No: 1, Step: 020416, Train Loss: 2.826, Val Loss: 2.854
+
+[2025-11-01 15:51:57,083.083] Total Tokens seen till now: 32667200
+
+[2025-11-01 15:51:57,103.103] Once upon a time, see can do have a walk. She had never
+[2025-11-01 15:52:07,582.582] Epoch No: 1, Step: 020480, Train Loss: 2.852, Val Loss: 2.851
+
+[2025-11-01 15:52:07,585.585] Total Tokens seen till now: 32769600
+
+[2025-11-01 15:52:07,611.611] Once upon a time, she need to worry. She was her mom.
+[2025-11-01 15:52:17,955.955] Epoch No: 1, Step: 020544, Train Loss: 2.843, Val Loss: 2.849
+
+[2025-11-01 15:52:17,955.955] Total Tokens seen till now: 32872000
+
+[2025-11-01 15:52:17,975.975] Once upon a time, can help. She saw a big tree. She
+[2025-11-01 15:52:28,429.429] Epoch No: 1, Step: 020608, Train Loss: 2.842, Val Loss: 2.845
+
+[2025-11-01 15:52:28,430.430] Total Tokens seen till now: 32974400
+
+[2025-11-01 15:52:28,450.450] Once upon a time,âœââ€™s, she
+[2025-11-01 15:52:38,933.933] Epoch No: 1, Step: 020672, Train Loss: 2.837, Val Loss: 2.863
+
+[2025-11-01 15:52:38,933.933] Total Tokens seen till now: 33076800
+
+[2025-11-01 15:52:38,953.953] Once upon a time, there are you doingâ€™s.
+[2025-11-01 15:52:49,290.290] Epoch No: 1, Step: 020736, Train Loss: 2.860, Val Loss: 2.860
+
+[2025-11-01 15:52:49,290.290] Total Tokens seen till now: 33179200
+
+[2025-11-01 15:52:49,310.310] Once upon a time, canâ€™t wait to explore. She
+[2025-11-01 15:52:59,535.535] Epoch No: 1, Step: 020800, Train Loss: 2.864, Val Loss: 2.846
+
+[2025-11-01 15:52:59,535.535] Total Tokens seen till now: 33281600
+
+[2025-11-01 15:52:59,555.555] Once upon a time, noise.â€™t know what was.
+[2025-11-01 15:53:09,976.976] Epoch No: 1, Step: 020864, Train Loss: 2.853, Val Loss: 2.843
+
+[2025-11-01 15:53:09,976.976] Total Tokens seen till now: 33384000
+
+[2025-11-01 15:53:09,996.996] Once upon a time, â€œ'sâ€™s
+[2025-11-01 15:53:20,311.311] Epoch No: 1, Step: 020928, Train Loss: 2.842, Val Loss: 2.831
+
+[2025-11-01 15:53:20,311.311] Total Tokens seen till now: 33486400
+
+[2025-11-01 15:53:20,331.331] Once upon a time, like need knowâ€™t know what was
+[2025-11-01 15:53:30,774.774] Epoch No: 1, Step: 020992, Train Loss: 2.862, Val Loss: 2.856
+
+[2025-11-01 15:53:30,778.778] Total Tokens seen till now: 33588800
+
+[2025-11-01 15:53:30,798.798] Once upon a time,'m going to go to theâ€œ
+[2025-11-01 15:53:41,210.210] Epoch No: 1, Step: 021056, Train Loss: 2.853, Val Loss: 2.860
+
+[2025-11-01 15:53:41,211.211] Total Tokens seen till now: 33691200
+
+[2025-11-01 15:53:41,232.232] Once upon a time, canâ€œMum if she could
+[2025-11-01 15:53:51,630.630] Epoch No: 1, Step: 021120, Train Loss: 2.850, Val Loss: 2.853
+
+[2025-11-01 15:53:51,631.631] Total Tokens seen till now: 33793600
+
+[2025-11-01 15:53:51,650.650] Once upon a time, need to go outside's go for a big,
+[2025-11-01 15:54:02,062.062] Epoch No: 1, Step: 021184, Train Loss: 2.861, Val Loss: 2.874
+
+[2025-11-01 15:54:02,063.063] Total Tokens seen till now: 33896000
+
+[2025-11-01 15:54:02,083.083] Once upon a time, can go for a walk in the park. She
+[2025-11-01 15:54:12,532.532] Epoch No: 1, Step: 021248, Train Loss: 2.856, Val Loss: 2.850
+
+[2025-11-01 15:54:12,532.532] Total Tokens seen till now: 33998400
+
+[2025-11-01 15:54:12,554.554] Once upon a time, canâ€œâ€™s.
+[2025-11-01 15:54:22,942.942] Epoch No: 1, Step: 021312, Train Loss: 2.845, Val Loss: 2.858
+
+[2025-11-01 15:54:22,943.943] Total Tokens seen till now: 34100800
+
+[2025-11-01 15:54:22,962.962] Once upon a time, you need to play with her garden. She was
+[2025-11-01 15:54:33,339.339] Epoch No: 1, Step: 021376, Train Loss: 2.868, Val Loss: 2.856
+
+[2025-11-01 15:54:33,339.339] Total Tokens seen till now: 34203200
+
+[2025-11-01 15:54:33,358.358] Once upon a time, you want to go for a walk. She saw
+[2025-11-01 15:54:43,886.886] Epoch No: 1, Step: 021440, Train Loss: 2.868, Val Loss: 2.864
+
+[2025-11-01 15:54:43,886.886] Total Tokens seen till now: 34305600
+
+[2025-11-01 15:54:43,906.906] Once upon a time, she was know what she could do. She was
+[2025-11-01 15:54:54,332.332] Epoch No: 1, Step: 021504, Train Loss: 2.862, Val Loss: 2.861
+
+[2025-11-01 15:54:54,333.333] Total Tokens seen till now: 34408000
+
+[2025-11-01 15:54:54,355.355] Once upon a time, you want to go. She saw the sky was
+[2025-11-01 15:55:04,642.642] Epoch No: 1, Step: 021568, Train Loss: 2.839, Val Loss: 2.845
+
+[2025-11-01 15:55:04,642.642] Total Tokens seen till now: 34510400
+
+[2025-11-01 15:55:04,662.662] Once upon a time, there isââ€œWhatâ€
+[2025-11-01 15:55:14,895.895] Epoch No: 1, Step: 021632, Train Loss: 2.862, Val Loss: 2.861
+
+[2025-11-01 15:55:14,895.895] Total Tokens seen till now: 34612800
+
+[2025-11-01 15:55:14,915.915] Once upon a time, canâ€œYes have a walk.
+[2025-11-01 15:55:25,267.267] Epoch No: 1, Step: 021696, Train Loss: 2.868, Val Loss: 2.872
+
+[2025-11-01 15:55:25,268.268] Total Tokens seen till now: 34715200
+
+[2025-11-01 15:55:25,287.287] Once upon a time, canâ€œ�Yes, â
+[2025-11-01 15:55:35,723.723] Epoch No: 1, Step: 021760, Train Loss: 2.882, Val Loss: 2.872
+
+[2025-11-01 15:55:35,723.723] Total Tokens seen till now: 34817600
+
+[2025-11-01 15:55:35,743.743] Once upon a time, there was a who was walking. She saw a
+[2025-11-01 15:55:46,095.095] Epoch No: 1, Step: 021824, Train Loss: 2.865, Val Loss: 2.875
+
+[2025-11-01 15:55:46,095.095] Total Tokens seen till now: 34920000
+
+[2025-11-01 15:55:46,115.115] Once upon a time, don need lost need to be a big, but
+[2025-11-01 15:55:56,502.502] Epoch No: 1, Step: 021888, Train Loss: 2.857, Val Loss: 2.854
+
+[2025-11-01 15:55:56,502.502] Total Tokens seen till now: 35022400
+
+[2025-11-01 15:55:56,522.522] Once upon a time, look up the world around. She was very curious
+[2025-11-01 15:56:06,938.938] Epoch No: 1, Step: 021952, Train Loss: 2.886, Val Loss: 2.859
+
+[2025-11-01 15:56:06,938.938] Total Tokens seen till now: 35124800
+
+[2025-11-01 15:56:06,958.958] Once upon a time, she lost her room. She had never saw a
+[2025-11-01 15:56:17,358.358] Epoch No: 1, Step: 022016, Train Loss: 2.854, Val Loss: 2.860
+
+[2025-11-01 15:56:17,359.359] Total Tokens seen till now: 35227200
+
+[2025-11-01 15:56:17,381.381] Once upon a time, are you can have help?""Yes
+[2025-11-01 15:56:27,814.814] Epoch No: 1, Step: 022080, Train Loss: 2.894, Val Loss: 2.856
+
+[2025-11-01 15:56:27,815.815] Total Tokens seen till now: 35329600
+
+[2025-11-01 15:56:27,835.835] Once upon a time, come play with. She was three-old.
+[2025-11-01 15:56:38,273.273] Epoch No: 1, Step: 022144, Train Loss: 2.855, Val Loss: 2.851
+
+[2025-11-01 15:56:38,273.273] Total Tokens seen till now: 35432000
+
+[2025-11-01 15:56:38,293.293] Once upon a time, should know do things. She had a big box
+[2025-11-01 15:56:48,798.798] Epoch No: 1, Step: 022208, Train Loss: 2.859, Val Loss: 2.868
+
+[2025-11-01 15:56:48,798.798] Total Tokens seen till now: 35534400
+
+[2025-11-01 15:56:48,818.818] Once upon a time, need to have a special place. She was three
+[2025-11-01 15:56:59,224.224] Epoch No: 1, Step: 022272, Train Loss: 2.863, Val Loss: 2.868
+
+[2025-11-01 15:56:59,224.224] Total Tokens seen till now: 35636800
+
+[2025-11-01 15:56:59,246.246] Once upon a time, what was to see what he was. He was
+[2025-11-01 15:57:09,674.674] Epoch No: 1, Step: 022336, Train Loss: 2.914, Val Loss: 2.906
+
+[2025-11-01 15:57:09,675.675] Total Tokens seen till now: 35739200
+
+[2025-11-01 15:57:09,695.695] Once upon a time, look at the world. She was. She was
+[2025-11-01 15:57:19,942.942] Epoch No: 1, Step: 022400, Train Loss: 2.902, Val Loss: 2.897
+
+[2025-11-01 15:57:19,942.942] Total Tokens seen till now: 35841600
+
+[2025-11-01 15:57:19,962.962] Once upon a time, her three-old. She was so she loved
+[2025-11-01 15:57:30,275.275] Epoch No: 1, Step: 022464, Train Loss: 2.870, Val Loss: 2.867
+
+[2025-11-01 15:57:30,278.278] Total Tokens seen till now: 35944000
+
+[2025-11-01 15:57:30,298.298] Once upon a time, canâ€œMolly. She was
+[2025-11-01 15:57:40,791.791] Epoch No: 1, Step: 022528, Train Loss: 2.879, Val Loss: 2.879
+
+[2025-11-01 15:57:40,794.794] Total Tokens seen till now: 36046400
+
+[2025-11-01 15:57:40,822.822] Once upon a time, She was walking around and she saw something. She
+[2025-11-01 15:57:51,208.208] Epoch No: 1, Step: 022592, Train Loss: 2.897, Val Loss: 2.894
+
+[2025-11-01 15:57:51,208.208] Total Tokens seen till now: 36148800
+
+[2025-11-01 15:57:51,228.228] Once upon a time, need to do there was going to the park.
+[2025-11-01 15:58:01,642.642] Epoch No: 1, Step: 022656, Train Loss: 2.908, Val Loss: 2.917
+
+[2025-11-01 15:58:01,645.645] Total Tokens seen till now: 36251200
+
+[2025-11-01 15:58:01,665.665] Once upon a time, need if need to go to the. He could
+[2025-11-01 15:58:12,183.183] Epoch No: 1, Step: 022720, Train Loss: 2.892, Val Loss: 2.881
+
+[2025-11-01 15:58:12,184.184] Total Tokens seen till now: 36353600
+
+[2025-11-01 15:58:12,204.204] Once upon a time, why are you need to go to go for a
+[2025-11-01 15:58:22,593.593] Epoch No: 1, Step: 022784, Train Loss: 2.889, Val Loss: 2.905
+
+[2025-11-01 15:58:22,596.596] Total Tokens seen till now: 36456000
+
+[2025-11-01 15:58:22,620.620] Once upon a time, "Mia. She can have to go to
+[2025-11-01 15:58:33,013.013] Epoch No: 1, Step: 022848, Train Loss: 2.886, Val Loss: 2.882
+
+[2025-11-01 15:58:33,014.014] Total Tokens seen till now: 36558400
+
+[2025-11-01 15:58:33,034.034] Once upon a time, can need need help you. She was so she
+[2025-11-01 15:58:43,465.465] Epoch No: 1, Step: 022912, Train Loss: 2.897, Val Loss: 2.870
+
+[2025-11-01 15:58:43,465.465] Total Tokens seen till now: 36660800
+
+[2025-11-01 15:58:43,485.485] Once upon a time, there are you can know. She was a big
+[2025-11-01 15:58:53,980.980] Epoch No: 1, Step: 022976, Train Loss: 2.890, Val Loss: 2.893
+
+[2025-11-01 15:58:53,981.981] Total Tokens seen till now: 36763200
+
+[2025-11-01 15:58:54,000.000] Once upon a time, need have care. She had to play with her
+[2025-11-01 15:59:04,314.314] Epoch No: 1, Step: 023040, Train Loss: 2.925, Val Loss: 2.900
+
+[2025-11-01 15:59:04,314.314] Total Tokens seen till now: 36865600
+
+[2025-11-01 15:59:04,336.336] Once upon a time, are what are you like to play with her toys
+[2025-11-01 15:59:14,672.672] Epoch No: 1, Step: 023104, Train Loss: 2.909, Val Loss: 2.888
+
+[2025-11-01 15:59:14,672.672] Total Tokens seen till now: 36968000
+
+[2025-11-01 15:59:14,692.692] Once upon a time, Amy was like to know what to do. She
+[2025-11-01 15:59:24,990.990] Epoch No: 1, Step: 023168, Train Loss: 2.918, Val Loss: 2.912
+
+[2025-11-01 15:59:24,990.990] Total Tokens seen till now: 37070400
+
+[2025-11-01 15:59:25,010.010] Once upon a time,âœMâ€™s mum,
+[2025-11-01 15:59:35,177.177] Epoch No: 1, Step: 023232, Train Loss: 2.916, Val Loss: 2.900
+
+[2025-11-01 15:59:35,178.178] Total Tokens seen till now: 37172800
+
+[2025-11-01 15:59:35,198.198] Once upon a time, are, can. She likes to play with her
+[2025-11-01 15:59:45,564.564] Epoch No: 1, Step: 023296, Train Loss: 2.915, Val Loss: 2.894
+
+[2025-11-01 15:59:45,567.567] Total Tokens seen till now: 37275200
+
+[2025-11-01 15:59:45,588.588] Once upon a time, need need need to go for dinner. She need
+[2025-11-01 15:59:55,940.940] Epoch No: 1, Step: 023360, Train Loss: 2.902, Val Loss: 2.899
+
+[2025-11-01 15:59:55,940.940] Total Tokens seen till now: 37377600
+
+[2025-11-01 15:59:55,959.959] Once upon a time, what'm can do like. She is a big
+[2025-11-01 16:00:06,353.353] Epoch No: 1, Step: 023424, Train Loss: 2.902, Val Loss: 2.912
+
+[2025-11-01 16:00:06,354.354] Total Tokens seen till now: 37480000
+
+[2025-11-01 16:00:06,373.373] Once upon a time,â€œâ€œ.â
+[2025-11-01 16:00:16,765.765] Epoch No: 1, Step: 023488, Train Loss: 2.900, Val Loss: 2.894
+
+[2025-11-01 16:00:16,766.766] Total Tokens seen till now: 37582400
+
+[2025-11-01 16:00:16,786.786] Once upon a time, Amy who lived in a tree. She was a
+[2025-11-01 16:00:27,151.151] Epoch No: 1, Step: 023552, Train Loss: 2.918, Val Loss: 2.890
+
+[2025-11-01 16:00:27,151.151] Total Tokens seen till now: 37684800
+
+[2025-11-01 16:00:27,171.171] Once upon a time,"Hello there are you doing?â€
+[2025-11-01 16:00:37,533.533] Epoch No: 1, Step: 023616, Train Loss: 2.892, Val Loss: 2.895
+
+[2025-11-01 16:00:37,533.533] Total Tokens seen till now: 37787200
+
+[2025-11-01 16:00:37,553.553] Once upon a time, things. She was very curious and wanted to do
+[2025-11-01 16:00:47,944.944] Epoch No: 1, Step: 023680, Train Loss: 2.905, Val Loss: 2.910
+
+[2025-11-01 16:00:47,944.944] Total Tokens seen till now: 37889600
+
+[2025-11-01 16:00:47,964.964] Once upon a time, can can do you like do you know. One
+[2025-11-01 16:00:58,339.339] Epoch No: 1, Step: 023744, Train Loss: 2.888, Val Loss: 2.889
+
+[2025-11-01 16:00:58,339.339] Total Tokens seen till now: 37992000
+
+[2025-11-01 16:00:58,358.358] Once upon a time, can play with her. She had to play with
+[2025-11-01 16:01:08,733.733] Epoch No: 1, Step: 023808, Train Loss: 2.910, Val Loss: 2.895
+
+[2025-11-01 16:01:08,733.733] Total Tokens seen till now: 38094400
+
+[2025-11-01 16:01:08,753.753] Once upon a time, come. She can help her. She saw a
+[2025-11-01 16:01:19,077.077] Epoch No: 1, Step: 023872, Train Loss: 2.890, Val Loss: 2.890
+
+[2025-11-01 16:01:19,079.079] Total Tokens seen till now: 38196800
+
+[2025-11-01 16:01:19,099.099] Once upon a time, don's like you need to eat you like to
+[2025-11-01 16:01:29,441.441] Epoch No: 1, Step: 023936, Train Loss: 2.892, Val Loss: 2.892
+
+[2025-11-01 16:01:29,441.441] Total Tokens seen till now: 38299200
+
+[2025-11-01 16:01:29,461.461] Once upon a time, me look know what she was a big, but
+[2025-11-01 16:01:39,729.729] Epoch No: 1, Step: 024000, Train Loss: 2.914, Val Loss: 2.891
+
+[2025-11-01 16:01:39,729.729] Total Tokens seen till now: 38401600
+
+[2025-11-01 16:01:39,748.748] Once upon a time, canœ will go to the tree.â
+[2025-11-01 16:01:49,938.938] Epoch No: 1, Step: 024064, Train Loss: 2.901, Val Loss: 2.883
+
+[2025-11-01 16:01:49,938.938] Total Tokens seen till now: 38504000
+
+[2025-11-01 16:01:49,958.958] Once upon a time,œœœâ€™s
+[2025-11-01 16:02:00,102.102] Epoch No: 1, Step: 024128, Train Loss: 2.883, Val Loss: 2.896
+
+[2025-11-01 16:02:00,103.103] Total Tokens seen till now: 38606400
+
+[2025-11-01 16:02:00,122.122] Once upon a time, who liked to go to the park. They saw
+[2025-11-01 16:02:10,592.592] Epoch No: 1, Step: 024192, Train Loss: 2.912, Val Loss: 2.907
+
+[2025-11-01 16:02:10,595.595] Total Tokens seen till now: 38708800
+
+[2025-11-01 16:02:10,616.616] Once upon a time, she saw a big if she could go. She
+[2025-11-01 16:02:21,017.017] Epoch No: 1, Step: 024256, Train Loss: 2.869, Val Loss: 2.864
+
+[2025-11-01 16:02:21,017.017] Total Tokens seen till now: 38811200
+
+[2025-11-01 16:02:21,039.039] Once upon a time, look. She saw what it was a big,
+[2025-11-01 16:02:31,393.393] Epoch No: 1, Step: 024320, Train Loss: 2.921, Val Loss: 2.897
+
+[2025-11-01 16:02:31,394.394] Total Tokens seen till now: 38913600
+
+[2025-11-01 16:02:31,417.417] Once upon a time,'m walking along. She saw a big hill and
+[2025-11-01 16:02:41,719.719] Epoch No: 1, Step: 024384, Train Loss: 2.902, Val Loss: 2.892
+
+[2025-11-01 16:02:41,720.720] Total Tokens seen till now: 39016000
+
+[2025-11-01 16:02:41,739.739] Once upon a time, She daddy were playing outside to play outside. One
+[2025-11-01 16:02:52,052.052] Epoch No: 1, Step: 024448, Train Loss: 2.894, Val Loss: 2.882
+
+[2025-11-01 16:02:52,053.053] Total Tokens seen till now: 39118400
+
+[2025-11-01 16:02:52,073.073] Once upon a time, look for her room. She saw a three years
+[2025-11-01 16:03:02,410.410] Epoch No: 1, Step: 024512, Train Loss: 2.866, Val Loss: 2.860
+
+[2025-11-01 16:03:02,413.413] Total Tokens seen till now: 39220800
+
+[2025-11-01 16:03:02,442.442] Once upon a time, do she was want to go for a walk in
+[2025-11-01 16:03:12,825.825] Epoch No: 1, Step: 024576, Train Loss: 2.882, Val Loss: 2.890
+
+[2025-11-01 16:03:12,825.825] Total Tokens seen till now: 39323200
+
+[2025-11-01 16:03:12,845.845] Once upon a time, Amy to the garden. It was a big,
+[2025-11-01 16:03:23,151.151] Epoch No: 1, Step: 024640, Train Loss: 2.887, Val Loss: 2.902
+
+[2025-11-01 16:03:23,151.151] Total Tokens seen till now: 39425600
+
+[2025-11-01 16:03:23,171.171] Once upon a time, what she saw. She wanted to go outside and
+[2025-11-01 16:03:33,705.705] Epoch No: 1, Step: 024704, Train Loss: 2.895, Val Loss: 2.888
+
+[2025-11-01 16:03:33,706.706] Total Tokens seen till now: 39528000
+
+[2025-11-01 16:03:33,725.725] Once upon a time, "What are you can you can't find?"
+[2025-11-01 16:03:44,145.145] Epoch No: 1, Step: 024768, Train Loss: 2.897, Val Loss: 2.886
+
+[2025-11-01 16:03:44,146.146] Total Tokens seen till now: 39630400
+
+[2025-11-01 16:03:44,167.167] Once upon a time, she was walking outside. She saw the park,
+[2025-11-01 16:03:54,511.511] Epoch No: 1, Step: 024832, Train Loss: 2.892, Val Loss: 2.881
+
+[2025-11-01 16:03:54,512.512] Total Tokens seen till now: 39732800
+
+[2025-11-01 16:03:54,532.532] Once upon a time,"Whatâ€Mia asked
+[2025-11-01 16:04:04,729.729] Epoch No: 1, Step: 024896, Train Loss: 2.899, Val Loss: 2.881
+
+[2025-11-01 16:04:04,729.729] Total Tokens seen till now: 39835200
+
+[2025-11-01 16:04:04,749.749] Once upon a time, there was Lucy. Lucy was so she decided to
+[2025-11-01 16:04:15,014.014] Epoch No: 1, Step: 024960, Train Loss: 2.882, Val Loss: 2.875
+
+[2025-11-01 16:04:15,014.014] Total Tokens seen till now: 39937600
+
+[2025-11-01 16:04:15,035.035] Once upon a time, canâ still know what was. She was.
+[2025-11-01 16:04:25,331.331] Epoch No: 1, Step: 025024, Train Loss: 2.882, Val Loss: 2.877
+
+[2025-11-01 16:04:25,331.331] Total Tokens seen till now: 40040000
+
+[2025-11-01 16:04:25,351.351] Once upon a time, me the world. She wanted to find her mom
+[2025-11-01 16:04:35,705.705] Epoch No: 1, Step: 025088, Train Loss: 2.888, Val Loss: 2.874
+
+[2025-11-01 16:04:35,707.707] Total Tokens seen till now: 40142400
+
+[2025-11-01 16:04:35,727.727] Once upon a time, she can know what she was inside. She saw
+[2025-11-01 16:04:46,150.150] Epoch No: 1, Step: 025152, Train Loss: 2.876, Val Loss: 2.868
+
+[2025-11-01 16:04:46,151.151] Total Tokens seen till now: 40244800
+
+[2025-11-01 16:04:46,170.170] Once upon a time, do do like to play with her toys. She
+[2025-11-01 16:04:56,564.564] Epoch No: 1, Step: 025216, Train Loss: 2.882, Val Loss: 2.865
+
+[2025-11-01 16:04:56,564.564] Total Tokens seen till now: 40347200
+
+[2025-11-01 16:04:56,584.584] Once upon a time,� are you doing.â€œWhat
+[2025-11-01 16:05:07,080.080] Epoch No: 1, Step: 025280, Train Loss: 2.893, Val Loss: 2.870
+
+[2025-11-01 16:05:07,081.081] Total Tokens seen till now: 40449600
+
+[2025-11-01 16:05:07,101.101] Once upon a time, are you can have to go go on a walk
+[2025-11-01 16:05:17,522.522] Epoch No: 1, Step: 025344, Train Loss: 2.848, Val Loss: 2.843
+
+[2025-11-01 16:05:17,522.522] Total Tokens seen till now: 40552000
+
+[2025-11-01 16:05:17,542.542] Once upon a time, there do do up do. She liked to do
+[2025-11-01 16:05:27,979.979] Epoch No: 1, Step: 025408, Train Loss: 2.866, Val Loss: 2.864
+
+[2025-11-01 16:05:27,979.979] Total Tokens seen till now: 40654400
+
+[2025-11-01 16:05:27,999.999] Once upon a time, " what are going to do.One
+[2025-11-01 16:05:38,393.393] Epoch No: 1, Step: 025472, Train Loss: 2.861, Val Loss: 2.863
+
+[2025-11-01 16:05:38,393.393] Total Tokens seen till now: 40756800
+
+[2025-11-01 16:05:38,415.415] Once upon a time, look up her room. She saw a big box
+[2025-11-01 16:05:48,780.780] Epoch No: 1, Step: 025536, Train Loss: 2.853, Val Loss: 2.865
+
+[2025-11-01 16:05:48,781.781] Total Tokens seen till now: 40859200
+
+[2025-11-01 16:05:48,801.801] Once upon a time, can go see the park."What is
+[2025-11-01 16:05:59,119.119] Epoch No: 1, Step: 025600, Train Loss: 2.894, Val Loss: 2.861
+
+[2025-11-01 16:05:59,120.120] Total Tokens seen till now: 40961600
+
+[2025-11-01 16:05:59,139.139] Once upon a time, can play with you can I have a big box
+[2025-11-01 16:06:09,661.661] Epoch No: 1, Step: 025664, Train Loss: 2.860, Val Loss: 2.874
+
+[2025-11-01 16:06:09,661.661] Total Tokens seen till now: 41064000
+
+[2025-11-01 16:06:09,682.682] Once upon a time, there when she was walking through the forest. She
+[2025-11-01 16:06:19,977.977] Epoch No: 1, Step: 025728, Train Loss: 2.866, Val Loss: 2.870
+
+[2025-11-01 16:06:19,980.980] Total Tokens seen till now: 41166400
+
+[2025-11-01 16:06:19,999.999] Once upon a time, look at her garden. She's mommy.
+[2025-11-01 16:06:30,242.242] Epoch No: 1, Step: 025792, Train Loss: 2.848, Val Loss: 2.857
+
+[2025-11-01 16:06:30,243.243] Total Tokens seen till now: 41268800
+
+[2025-11-01 16:06:30,262.262] Once upon a time, "œWhatâ€�â€™
+[2025-11-01 16:06:40,718.718] Epoch No: 1, Step: 025856, Train Loss: 2.855, Val Loss: 2.856
+
+[2025-11-01 16:06:40,718.718] Total Tokens seen till now: 41371200
+
+[2025-11-01 16:06:40,738.738] Once upon a time, her she was at the garden. She was three
+[2025-11-01 16:06:51,121.121] Epoch No: 1, Step: 025920, Train Loss: 2.840, Val Loss: 2.846
+
+[2025-11-01 16:06:51,121.121] Total Tokens seen till now: 41473600
+
+[2025-11-01 16:06:51,141.141] Once upon a time, "Mâ€™t go.M
+[2025-11-01 16:07:01,534.534] Epoch No: 1, Step: 025984, Train Loss: 2.860, Val Loss: 2.851
+
+[2025-11-01 16:07:01,534.534] Total Tokens seen till now: 41576000
+
+[2025-11-01 16:07:01,554.554] Once upon a time, she was don't do do. She wanted to
+[2025-11-01 16:07:12,028.028] Epoch No: 1, Step: 026048, Train Loss: 2.840, Val Loss: 2.831
+
+[2025-11-01 16:07:12,028.028] Total Tokens seen till now: 41678400
+
+[2025-11-01 16:07:12,048.048] Once upon a time, what do. She saw her mommy. She
+[2025-11-01 16:07:22,426.426] Epoch No: 1, Step: 026112, Train Loss: 2.846, Val Loss: 2.840
+
+[2025-11-01 16:07:22,427.427] Total Tokens seen till now: 41780800
+
+[2025-11-01 16:07:22,446.446] Once upon a time, donââ play.â€™t know
+[2025-11-01 16:07:32,833.833] Epoch No: 1, Step: 026176, Train Loss: 2.860, Val Loss: 2.847
+
+[2025-11-01 16:07:32,834.834] Total Tokens seen till now: 41883200
+
+[2025-11-01 16:07:32,854.854] Once upon a time, know what was what was, she was outside.
+[2025-11-01 16:07:43,255.255] Epoch No: 1, Step: 026240, Train Loss: 2.870, Val Loss: 2.842
+
+[2025-11-01 16:07:43,256.256] Total Tokens seen till now: 41985600
+
+[2025-11-01 16:07:43,278.278] Once upon a time, can have a like do things. She had a
+[2025-11-01 16:07:53,641.641] Epoch No: 1, Step: 026304, Train Loss: 2.835, Val Loss: 2.830
+
+[2025-11-01 16:07:53,641.641] Total Tokens seen till now: 42088000
+
+[2025-11-01 16:07:54,111.111] BEST model SAVED on iteration 026304 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 16:07:54,134.134] Once upon a time, do you want to go. She was very excited
+[2025-11-01 16:08:04,642.642] Epoch No: 1, Step: 026368, Train Loss: 2.843, Val Loss: 2.839
+
+[2025-11-01 16:08:04,642.642] Total Tokens seen till now: 42190400
+
+[2025-11-01 16:08:04,662.662] Once upon a time, why donâ€™t know what she was
+[2025-11-01 16:08:15,157.157] Epoch No: 1, Step: 026432, Train Loss: 2.847, Val Loss: 2.852
+
+[2025-11-01 16:08:15,157.157] Total Tokens seen till now: 42292800
+
+[2025-11-01 16:08:15,177.177] Once upon a time, know what what do it."What
+[2025-11-01 16:08:25,575.575] Epoch No: 1, Step: 026496, Train Loss: 2.840, Val Loss: 2.828
+
+[2025-11-01 16:08:25,576.576] Total Tokens seen till now: 42395200
+
+[2025-11-01 16:08:25,759.759] BEST model SAVED on iteration 026496 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 16:08:25,779.779] Once upon a time, Lucy was very Amy was playing with her toys.
+[2025-11-01 16:08:36,411.411] Epoch No: 1, Step: 026560, Train Loss: 2.865, Val Loss: 2.846
+
+[2025-11-01 16:08:36,412.412] Total Tokens seen till now: 42497600
+
+[2025-11-01 16:08:36,443.443] Once upon a time, what come out. do. She was inside her
+[2025-11-01 16:08:46,896.896] Epoch No: 1, Step: 026624, Train Loss: 2.863, Val Loss: 2.860
+
+[2025-11-01 16:08:46,900.900] Total Tokens seen till now: 42600000
+
+[2025-11-01 16:08:46,920.920] Once upon a time, there was walking. She was walking through the park
+[2025-11-01 16:08:57,209.209] Epoch No: 1, Step: 026688, Train Loss: 2.841, Val Loss: 2.843
+
+[2025-11-01 16:08:57,209.209] Total Tokens seen till now: 42702400
+
+[2025-11-01 16:08:57,229.229] Once upon a time, why was curious about it. She was very curious
+[2025-11-01 16:09:07,753.753] Epoch No: 1, Step: 026752, Train Loss: 2.840, Val Loss: 2.852
+
+[2025-11-01 16:09:07,754.754] Total Tokens seen till now: 42804800
+
+[2025-11-01 16:09:07,774.774] Once upon a time, know what do you know what was. She was
+[2025-11-01 16:09:18,166.166] Epoch No: 1, Step: 026816, Train Loss: 2.817, Val Loss: 2.835
+
+[2025-11-01 16:09:18,170.170] Total Tokens seen till now: 42907200
+
+[2025-11-01 16:09:18,192.192] Once upon a time, want to go outside. She was very excited.
+[2025-11-01 16:09:28,554.554] Epoch No: 1, Step: 026880, Train Loss: 2.823, Val Loss: 2.808
+
+[2025-11-01 16:09:28,554.554] Total Tokens seen till now: 43009600
+
+[2025-11-01 16:09:28,773.773] BEST model SAVED on iteration 026880 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 16:09:28,793.793] Once upon a time, her house. She saw her mom and had a
+[2025-11-01 16:09:39,413.413] Epoch No: 1, Step: 026944, Train Loss: 2.834, Val Loss: 2.830
+
+[2025-11-01 16:09:39,413.413] Total Tokens seen till now: 43112000
+
+[2025-11-01 16:09:39,434.434] Once upon a time, can come out for a walk. He saw a
+[2025-11-01 16:09:49,917.917] Epoch No: 1, Step: 027008, Train Loss: 2.833, Val Loss: 2.836
+
+[2025-11-01 16:09:49,917.917] Total Tokens seen till now: 43214400
+
+[2025-11-01 16:09:49,938.938] Once upon a time, look. "What can see whatâ€™
+[2025-11-01 16:10:00,150.150] Epoch No: 1, Step: 027072, Train Loss: 2.850, Val Loss: 2.820
+
+[2025-11-01 16:10:00,150.150] Total Tokens seen till now: 43316800
+
+[2025-11-01 16:10:00,177.177] Once upon a time, she saw what was wrong. She was very excited
+[2025-11-01 16:10:10,647.647] Epoch No: 1, Step: 027136, Train Loss: 2.829, Val Loss: 2.845
+
+[2025-11-01 16:10:10,648.648] Total Tokens seen till now: 43419200
+
+[2025-11-01 16:10:10,669.669] Once upon a time, there for help for a walk. She saw a
+[2025-11-01 16:10:20,967.967] Epoch No: 1, Step: 027200, Train Loss: 2.831, Val Loss: 2.825
+
+[2025-11-01 16:10:20,971.971] Total Tokens seen till now: 43521600
+
+[2025-11-01 16:10:20,991.991] Once upon a time, know what know what she was doing. She was
+[2025-11-01 16:10:31,327.327] Epoch No: 1, Step: 027264, Train Loss: 2.826, Val Loss: 2.821
+
+[2025-11-01 16:10:31,330.330] Total Tokens seen till now: 43624000
+
+[2025-11-01 16:10:31,352.352] Once upon a time, what do what was inside. She is a room
+[2025-11-01 16:10:41,767.767] Epoch No: 1, Step: 027328, Train Loss: 2.824, Val Loss: 2.820
+
+[2025-11-01 16:10:41,767.767] Total Tokens seen till now: 43726400
+
+[2025-11-01 16:10:41,787.787] Once upon a time, why do was in her. She was very excited
+[2025-11-01 16:10:52,166.166] Epoch No: 1, Step: 027392, Train Loss: 2.841, Val Loss: 2.830
+
+[2025-11-01 16:10:52,166.166] Total Tokens seen till now: 43828800
+
+[2025-11-01 16:10:52,186.186] Once upon a time, donâ old. She was a world around and
+[2025-11-01 16:11:02,509.509] Epoch No: 1, Step: 027456, Train Loss: 2.823, Val Loss: 2.832
+
+[2025-11-01 16:11:02,509.509] Total Tokens seen till now: 43931200
+
+[2025-11-01 16:11:02,530.530] Once upon a time, she loved exploring. She saw a big, and
+[2025-11-01 16:11:12,948.948] Epoch No: 1, Step: 027520, Train Loss: 2.820, Val Loss: 2.832
+
+[2025-11-01 16:11:12,948.948] Total Tokens seen till now: 44033600
+
+[2025-11-01 16:11:12,968.968] Once upon a time, are donââ€™s house. She
+[2025-11-01 16:11:23,441.441] Epoch No: 1, Step: 027584, Train Loss: 2.820, Val Loss: 2.828
+
+[2025-11-01 16:11:23,442.442] Total Tokens seen till now: 44136000
+
+[2025-11-01 16:11:23,461.461] Once upon a time,â€� what was wrong. She was wrong
+[2025-11-01 16:11:33,903.903] Epoch No: 1, Step: 027648, Train Loss: 2.823, Val Loss: 2.829
+
+[2025-11-01 16:11:33,903.903] Total Tokens seen till now: 44238400
+
+[2025-11-01 16:11:33,923.923] Once upon a time, what can do was do. She was going to
+[2025-11-01 16:11:44,207.207] Epoch No: 1, Step: 027712, Train Loss: 2.834, Val Loss: 2.829
+
+[2025-11-01 16:11:44,207.207] Total Tokens seen till now: 44340800
+
+[2025-11-01 16:11:44,227.227] Once upon a time, need care. They like to be like to play
+[2025-11-01 16:11:54,572.572] Epoch No: 1, Step: 027776, Train Loss: 2.845, Val Loss: 2.822
+
+[2025-11-01 16:11:54,572.572] Total Tokens seen till now: 44443200
+
+[2025-11-01 16:11:54,594.594] Once upon a time, do what know what do. She asked her to
+[2025-11-01 16:12:04,829.829] Epoch No: 1, Step: 027840, Train Loss: 2.820, Val Loss: 2.816
+
+[2025-11-01 16:12:04,830.830] Total Tokens seen till now: 44545600
+
+[2025-11-01 16:12:04,850.850] Once upon a time, look for her mom. She saw a big,
+[2025-11-01 16:12:15,120.120] Epoch No: 1, Step: 027904, Train Loss: 2.822, Val Loss: 2.830
+
+[2025-11-01 16:12:15,120.120] Total Tokens seen till now: 44648000
+
+[2025-11-01 16:12:15,141.141] Once upon a time, " for the garden.â€œMom
+[2025-11-01 16:12:25,394.394] Epoch No: 1, Step: 027968, Train Loss: 2.826, Val Loss: 2.835
+
+[2025-11-01 16:12:25,394.394] Total Tokens seen till now: 44750400
+
+[2025-11-01 16:12:25,415.415] Once upon a time, you can see what?"œI want to
+[2025-11-01 16:12:35,898.898] Epoch No: 1, Step: 028032, Train Loss: 2.822, Val Loss: 2.835
+
+[2025-11-01 16:12:35,899.899] Total Tokens seen till now: 44852800
+
+[2025-11-01 16:12:35,924.924] Once upon a time, there was world. She saw a big, and
+[2025-11-01 16:12:46,321.321] Epoch No: 1, Step: 028096, Train Loss: 2.822, Val Loss: 2.838
+
+[2025-11-01 16:12:46,322.322] Total Tokens seen till now: 44955200
+
+[2025-11-01 16:12:46,344.344] Once upon a time, noise room. She had never had a special toy
+[2025-11-01 16:12:56,731.731] Epoch No: 1, Step: 028160, Train Loss: 2.826, Val Loss: 2.818
+
+[2025-11-01 16:12:56,731.731] Total Tokens seen till now: 45057600
+
+[2025-11-01 16:12:56,751.751] Once upon a time, like there was very need to do. She was
+[2025-11-01 16:13:07,135.135] Epoch No: 1, Step: 028224, Train Loss: 2.828, Val Loss: 2.839
+
+[2025-11-01 16:13:07,135.135] Total Tokens seen till now: 45160000
+
+[2025-11-01 16:13:07,154.154] Once upon a time, can go for a big, who was looking for
+[2025-11-01 16:13:17,497.497] Epoch No: 1, Step: 028288, Train Loss: 2.839, Val Loss: 2.824
+
+[2025-11-01 16:13:17,497.497] Total Tokens seen till now: 45262400
+
+[2025-11-01 16:13:17,517.517] Once upon a time, she saw a big tree. She was walking up
+[2025-11-01 16:13:27,928.928] Epoch No: 1, Step: 028352, Train Loss: 2.830, Val Loss: 2.832
+
+[2025-11-01 16:13:27,928.928] Total Tokens seen till now: 45364800
+
+[2025-11-01 16:13:27,948.948] Once upon a time, her what her do. She saw her mommy
+[2025-11-01 16:13:38,337.337] Epoch No: 1, Step: 028416, Train Loss: 2.834, Val Loss: 2.823
+
+[2025-11-01 16:13:38,337.337] Total Tokens seen till now: 45467200
+
+[2025-11-01 16:13:38,357.357] Once upon a time, sheâ€ She was looking for her. She
+[2025-11-01 16:13:48,752.752] Epoch No: 1, Step: 028480, Train Loss: 2.835, Val Loss: 2.815
+
+[2025-11-01 16:13:48,752.752] Total Tokens seen till now: 45569600
+
+[2025-11-01 16:13:48,772.772] Once upon a time, can know what do. She was very happy and
+[2025-11-01 16:13:59,128.128] Epoch No: 1, Step: 028544, Train Loss: 2.832, Val Loss: 2.834
+
+[2025-11-01 16:13:59,128.128] Total Tokens seen till now: 45672000
+
+[2025-11-01 16:13:59,148.148] Once upon a time, know what was doing. She wanted to do.
+[2025-11-01 16:14:09,546.546] Epoch No: 1, Step: 028608, Train Loss: 2.839, Val Loss: 2.832
+
+[2025-11-01 16:14:09,546.546] Total Tokens seen till now: 45774400
+
+[2025-11-01 16:14:09,566.566] Once upon a time, can know what are you do. He do not
+[2025-11-01 16:14:19,770.770] Epoch No: 1, Step: 028672, Train Loss: 2.827, Val Loss: 2.832
+
+[2025-11-01 16:14:19,770.770] Total Tokens seen till now: 45876800
+
+[2025-11-01 16:14:19,790.790] Once upon a time, don you want to go outside. She was very
+[2025-11-01 16:14:29,983.983] Epoch No: 1, Step: 028736, Train Loss: 2.843, Val Loss: 2.837
+
+[2025-11-01 16:14:29,983.983] Total Tokens seen till now: 45979200
+
+[2025-11-01 16:14:30,003.003] Once upon a time, need need can have need to be careful. They
+[2025-11-01 16:14:40,284.284] Epoch No: 1, Step: 028800, Train Loss: 2.824, Val Loss: 2.815
+
+[2025-11-01 16:14:40,284.284] Total Tokens seen till now: 46081600
+
+[2025-11-01 16:14:40,304.304] Once upon a time, can go go to the house. She explore the
+[2025-11-01 16:14:50,651.651] Epoch No: 1, Step: 028864, Train Loss: 2.836, Val Loss: 2.822
+
+[2025-11-01 16:14:50,651.651] Total Tokens seen till now: 46184000
+
+[2025-11-01 16:14:50,671.671] Once upon a time, donââ know what was. She wanted to
+[2025-11-01 16:15:01,006.006] Epoch No: 1, Step: 028928, Train Loss: 2.819, Val Loss: 2.822
+
+[2025-11-01 16:15:01,007.007] Total Tokens seen till now: 46286400
+
+[2025-11-01 16:15:01,027.027] Once upon a time, she wasâ€œWhat canâ€
+[2025-11-01 16:15:11,480.480] Epoch No: 1, Step: 028992, Train Loss: 2.836, Val Loss: 2.831
+
+[2025-11-01 16:15:11,482.482] Total Tokens seen till now: 46388800
+
+[2025-11-01 16:15:11,502.502] Once upon a time, donâ'm going.â€�â€
+[2025-11-01 16:15:21,892.892] Epoch No: 1, Step: 029056, Train Loss: 2.852, Val Loss: 2.834
+
+[2025-11-01 16:15:21,894.894] Total Tokens seen till now: 46491200
+
+[2025-11-01 16:15:21,914.914] Once upon a time, what do. She liked to do. She had
+[2025-11-01 16:15:32,280.280] Epoch No: 1, Step: 029120, Train Loss: 2.845, Val Loss: 2.846
+
+[2025-11-01 16:15:32,280.280] Total Tokens seen till now: 46593600
+
+[2025-11-01 16:15:32,300.300] Once upon a time, look forâ€œWhatâ€
+[2025-11-01 16:15:42,648.648] Epoch No: 1, Step: 029184, Train Loss: 2.869, Val Loss: 2.832
+
+[2025-11-01 16:15:42,648.648] Total Tokens seen till now: 46696000
+
+[2025-11-01 16:15:42,668.668] Once upon a time, she like to do want to play. She liked
+[2025-11-01 16:15:53,051.051] Epoch No: 1, Step: 029248, Train Loss: 2.822, Val Loss: 2.846
+
+[2025-11-01 16:15:53,051.051] Total Tokens seen till now: 46798400
+
+[2025-11-01 16:15:53,071.071] Once upon a time, she'm going to play with her mom. She
+[2025-11-01 16:16:03,523.523] Epoch No: 1, Step: 029312, Train Loss: 2.839, Val Loss: 2.817
+
+[2025-11-01 16:16:03,523.523] Total Tokens seen till now: 46900800
+
+[2025-11-01 16:16:03,544.544] Once upon a time, can play in the garden. She saw her garden
+[2025-11-01 16:16:13,954.954] Epoch No: 1, Step: 029376, Train Loss: 2.844, Val Loss: 2.832
+
+[2025-11-01 16:16:13,954.954] Total Tokens seen till now: 47003200
+
+[2025-11-01 16:16:13,974.974] Once upon a time, Sue's want to play outside. She saw a
+[2025-11-01 16:16:24,285.285] Epoch No: 1, Step: 029440, Train Loss: 2.840, Val Loss: 2.846
+
+[2025-11-01 16:16:24,285.285] Total Tokens seen till now: 47105600
+
+[2025-11-01 16:16:24,304.304] Once upon a time, saw what was looking for a walk she saw a
+[2025-11-01 16:16:34,631.631] Epoch No: 1, Step: 029504, Train Loss: 2.866, Val Loss: 2.844
+
+[2025-11-01 16:16:34,631.631] Total Tokens seen till now: 47208000
+
+[2025-11-01 16:16:34,652.652] Once upon a time, canAmyie can have a big tree. She
+[2025-11-01 16:16:44,927.927] Epoch No: 1, Step: 029568, Train Loss: 2.864, Val Loss: 2.851
+
+[2025-11-01 16:16:44,927.927] Total Tokens seen till now: 47310400
+
+[2025-11-01 16:16:44,947.947] Once upon a time, can help.One, she was walking in
+[2025-11-01 16:16:55,221.221] Epoch No: 1, Step: 029632, Train Loss: 2.851, Val Loss: 2.844
+
+[2025-11-01 16:16:55,221.221] Total Tokens seen till now: 47412800
+
+[2025-11-01 16:16:55,241.241] Once upon a time, are you need to do you want to play with
+[2025-11-01 16:17:05,656.656] Epoch No: 1, Step: 029696, Train Loss: 2.855, Val Loss: 2.861
+
+[2025-11-01 16:17:05,656.656] Total Tokens seen till now: 47515200
+
+[2025-11-01 16:17:05,675.675] Once upon a time, world is sheâ€œI want to
+[2025-11-01 16:17:16,124.124] Epoch No: 1, Step: 029760, Train Loss: 2.836, Val Loss: 2.854
+
+[2025-11-01 16:17:16,125.125] Total Tokens seen till now: 47617600
+
+[2025-11-01 16:17:16,144.144] Once upon a time, "What are you are you doing?" Her mom
+[2025-11-01 16:17:26,517.517] Epoch No: 1, Step: 029824, Train Loss: 2.842, Val Loss: 2.841
+
+[2025-11-01 16:17:26,518.518] Total Tokens seen till now: 47720000
+
+[2025-11-01 16:17:26,537.537] Once upon a time, want to go. explore the park. explore.
+[2025-11-01 16:17:36,893.893] Epoch No: 1, Step: 029888, Train Loss: 2.845, Val Loss: 2.863
+
+[2025-11-01 16:17:36,894.894] Total Tokens seen till now: 47822400
+
+[2025-11-01 16:17:36,913.913] Once upon a time, looking for what should find a big box.
+[2025-11-01 16:17:47,298.298] Epoch No: 1, Step: 029952, Train Loss: 2.858, Val Loss: 2.850
+
+[2025-11-01 16:17:47,298.298] Total Tokens seen till now: 47924800
+
+[2025-11-01 16:17:47,318.318] Once upon a time, she was why. She was very curious she wanted
+[2025-11-01 16:17:57,702.702] Epoch No: 1, Step: 030016, Train Loss: 2.829, Val Loss: 2.832
+
+[2025-11-01 16:17:57,702.702] Total Tokens seen till now: 48027200
+
+[2025-11-01 16:17:57,722.722] Once upon a time, world." can go to the world.
+[2025-11-01 16:18:08,231.231] Epoch No: 1, Step: 030080, Train Loss: 2.866, Val Loss: 2.870
+
+[2025-11-01 16:18:08,231.231] Total Tokens seen till now: 48129600
+
+[2025-11-01 16:18:08,251.251] Once upon a time, docy want to play outside. One day she
+[2025-11-01 16:18:18,727.727] Epoch No: 1, Step: 030144, Train Loss: 2.878, Val Loss: 2.871
+
+[2025-11-01 16:18:18,728.728] Total Tokens seen till now: 48232000
+
+[2025-11-01 16:18:18,747.747] Once upon a time, she are She likes to help her mom. She
+[2025-11-01 16:18:29,060.060] Epoch No: 1, Step: 030208, Train Loss: 2.859, Val Loss: 2.842
+
+[2025-11-01 16:18:29,063.063] Total Tokens seen till now: 48334400
+
+[2025-11-01 16:18:29,082.082] Once upon a time, can see what is do do things. She was
+[2025-11-01 16:18:39,392.392] Epoch No: 1, Step: 030272, Train Loss: 2.866, Val Loss: 2.859
+
+[2025-11-01 16:18:39,392.392] Total Tokens seen till now: 48436800
+
+[2025-11-01 16:18:39,416.416] Once upon a time, don come with can play with her. She would
+[2025-11-01 16:18:49,711.711] Epoch No: 1, Step: 030336, Train Loss: 2.857, Val Loss: 2.867
+
+[2025-11-01 16:18:49,711.711] Total Tokens seen till now: 48539200
+
+[2025-11-01 16:18:49,731.731] Once upon a time, can are going for a walk. She saw a
+[2025-11-01 16:19:00,079.079] Epoch No: 1, Step: 030400, Train Loss: 2.855, Val Loss: 2.874
+
+[2025-11-01 16:19:00,079.079] Total Tokens seen till now: 48641600
+
+[2025-11-01 16:19:00,099.099] Once upon a time, why are are you like?â€ she was
+[2025-11-01 16:19:10,585.585] Epoch No: 1, Step: 030464, Train Loss: 2.867, Val Loss: 2.875
+
+[2025-11-01 16:19:10,585.585] Total Tokens seen till now: 48744000
+
+[2025-11-01 16:19:10,607.607] Once upon a time, donâ€œ will have.â€
+[2025-11-01 16:19:21,020.020] Epoch No: 1, Step: 030528, Train Loss: 2.858, Val Loss: 2.859
+
+[2025-11-01 16:19:21,020.020] Total Tokens seen till now: 48846400
+
+[2025-11-01 16:19:21,041.041] Once upon a time, like if she could do you want. She could
+[2025-11-01 16:19:31,562.562] Epoch No: 1, Step: 030592, Train Loss: 2.892, Val Loss: 2.879
+
+[2025-11-01 16:19:31,564.564] Total Tokens seen till now: 48948800
+
+[2025-11-01 16:19:31,584.584] Once upon a time, why she do her want can do. She asked
+[2025-11-01 16:19:42,037.037] Epoch No: 1, Step: 030656, Train Loss: 2.861, Val Loss: 2.874
+
+[2025-11-01 16:19:42,037.037] Total Tokens seen till now: 49051200
+
+[2025-11-01 16:19:42,057.057] Once upon a time, wasie She house. She would go to the
+[2025-11-01 16:19:52,464.464] Epoch No: 1, Step: 030720, Train Loss: 2.867, Val Loss: 2.873
+
+[2025-11-01 16:19:52,465.465] Total Tokens seen till now: 49153600
+
+[2025-11-01 16:19:52,485.485] Once upon a time, " I have snowman. It is for you
+[2025-11-01 16:20:02,951.951] Epoch No: 1, Step: 030784, Train Loss: 2.876, Val Loss: 2.881
+
+[2025-11-01 16:20:02,952.952] Total Tokens seen till now: 49256000
+
+[2025-11-01 16:20:02,971.971] Once upon a time, don't know what was. She was doing.
+[2025-11-01 16:20:13,407.407] Epoch No: 1, Step: 030848, Train Loss: 2.868, Val Loss: 2.869
+
+[2025-11-01 16:20:13,408.408] Total Tokens seen till now: 49358400
+
+[2025-11-01 16:20:13,431.431] Once upon a time, bed She was very bed. She saw her room
+[2025-11-01 16:20:23,833.833] Epoch No: 1, Step: 030912, Train Loss: 2.870, Val Loss: 2.877
+
+[2025-11-01 16:20:23,834.834] Total Tokens seen till now: 49460800
+
+[2025-11-01 16:20:23,854.854] Once upon a time, do a She was walking through the park. She
+[2025-11-01 16:20:34,296.296] Epoch No: 1, Step: 030976, Train Loss: 2.883, Val Loss: 2.878
+
+[2025-11-01 16:20:34,297.297] Total Tokens seen till now: 49563200
+
+[2025-11-01 16:20:34,318.318] Once upon a time,eded look for what was. She was wrong
+[2025-11-01 16:20:44,619.619] Epoch No: 1, Step: 031040, Train Loss: 2.874, Val Loss: 2.874
+
+[2025-11-01 16:20:44,619.619] Total Tokens seen till now: 49665600
+
+[2025-11-01 16:20:44,640.640] Once upon a time, there was walking in the forest. She was three
+[2025-11-01 16:20:54,977.977] Epoch No: 1, Step: 031104, Train Loss: 2.878, Val Loss: 2.899
+
+[2025-11-01 16:20:54,978.978] Total Tokens seen till now: 49768000
+
+[2025-11-01 16:20:54,999.999] Once upon a time, can have a big tree?" The tree.
+[2025-11-01 16:21:05,331.331] Epoch No: 1, Step: 031168, Train Loss: 2.885, Val Loss: 2.881
+
+[2025-11-01 16:21:05,332.332] Total Tokens seen till now: 49870400
+
+[2025-11-01 16:21:05,352.352] Once upon a time, world her mom if she could do. She could
+[2025-11-01 16:21:15,851.851] Epoch No: 1, Step: 031232, Train Loss: 2.874, Val Loss: 2.885
+
+[2025-11-01 16:21:15,852.852] Total Tokens seen till now: 49972800
+
+[2025-11-01 16:21:15,872.872] Once upon a time, She can do like to do not have a big
+[2025-11-01 16:21:26,301.301] Epoch No: 1, Step: 031296, Train Loss: 2.884, Val Loss: 2.867
+
+[2025-11-01 16:21:26,302.302] Total Tokens seen till now: 50075200
+
+[2025-11-01 16:21:26,323.323] Once upon a time, soHe was walking in the park.
+[2025-11-01 16:21:36,778.778] Epoch No: 1, Step: 031360, Train Loss: 2.910, Val Loss: 2.919
+
+[2025-11-01 16:21:36,778.778] Total Tokens seen till now: 50177600
+
+[2025-11-01 16:21:36,798.798] Once upon a time, there was She wanted she do. She saw her
+[2025-11-01 16:21:47,137.137] Epoch No: 1, Step: 031424, Train Loss: 2.856, Val Loss: 2.878
+
+[2025-11-01 16:21:47,138.138] Total Tokens seen till now: 50280000
+
+[2025-11-01 16:21:47,158.158] Once upon a time, can know what she do things. One day,
+[2025-11-01 16:21:57,673.673] Epoch No: 1, Step: 031488, Train Loss: 2.900, Val Loss: 2.894
+
+[2025-11-01 16:21:57,674.674] Total Tokens seen till now: 50382400
+
+[2025-11-01 16:21:57,695.695] Once upon a time, can go outside. She was walking through the woods
+[2025-11-01 16:22:08,333.333] Epoch No: 1, Step: 031552, Train Loss: 2.908, Val Loss: 2.903
+
+[2025-11-01 16:22:08,334.334] Total Tokens seen till now: 50484800
+
+[2025-11-01 16:22:08,353.353] Once upon a time, know what do.The little girl was
+[2025-11-01 16:22:18,863.863] Epoch No: 1, Step: 031616, Train Loss: 2.906, Val Loss: 2.895
+
+[2025-11-01 16:22:18,863.863] Total Tokens seen till now: 50587200
+
+[2025-11-01 16:22:18,883.883] Once upon a time, know what was like to play. She was walking
+[2025-11-01 16:22:29,305.305] Epoch No: 1, Step: 031680, Train Loss: 2.912, Val Loss: 2.887
+
+[2025-11-01 16:22:29,306.306] Total Tokens seen till now: 50689600
+
+[2025-11-01 16:22:29,326.326] Once upon a time, she was very know what was there was very excited
+[2025-11-01 16:22:39,690.690] Epoch No: 1, Step: 031744, Train Loss: 2.901, Val Loss: 2.907
+
+[2025-11-01 16:22:39,690.690] Total Tokens seen till now: 50792000
+
+[2025-11-01 16:22:39,711.711] Once upon a time, do a garden was walking outside, when she saw
+[2025-11-01 16:22:50,017.017] Epoch No: 1, Step: 031808, Train Loss: 2.906, Val Loss: 2.897
+
+[2025-11-01 16:22:50,018.018] Total Tokens seen till now: 50894400
+
+[2025-11-01 16:22:50,038.038] Once upon a time, Lucy know what was inside. I'm going to
+[2025-11-01 16:23:00,332.332] Epoch No: 1, Step: 031872, Train Loss: 2.884, Val Loss: 2.877
+
+[2025-11-01 16:23:00,333.333] Total Tokens seen till now: 50996800
+
+[2025-11-01 16:23:00,352.352] Once upon a time, do things do things. She was very things.
+[2025-11-01 16:23:10,897.897] Epoch No: 1, Step: 031936, Train Loss: 2.936, Val Loss: 2.907
+
+[2025-11-01 16:23:10,898.898] Total Tokens seen till now: 51099200
+
+[2025-11-01 16:23:10,918.918] Once upon a time, know what was do do things she was. She
+[2025-11-01 16:23:21,321.321] Epoch No: 1, Step: 032000, Train Loss: 2.899, Val Loss: 2.875
+
+[2025-11-01 16:23:21,321.321] Total Tokens seen till now: 51201600
+
+[2025-11-01 16:23:21,341.341] Once upon a time,œ was her mum.â€™t
+[2025-11-01 16:23:31,809.809] Epoch No: 1, Step: 032064, Train Loss: 2.880, Val Loss: 2.865
+
+[2025-11-01 16:23:31,810.810] Total Tokens seen till now: 51304000
+
+[2025-11-01 16:23:31,830.830] Once upon a time, saw that was very curious. She wanted to go
+[2025-11-01 16:23:42,289.289] Epoch No: 1, Step: 032128, Train Loss: 2.869, Val Loss: 2.874
+
+[2025-11-01 16:23:42,290.290] Total Tokens seen till now: 51406400
+
+[2025-11-01 16:23:42,309.309] Once upon a time, room wasâ€œWhatâ€
+[2025-11-01 16:23:52,769.769] Epoch No: 1, Step: 032192, Train Loss: 2.862, Val Loss: 2.883
+
+[2025-11-01 16:23:52,770.770] Total Tokens seen till now: 51508800
+
+[2025-11-01 16:23:52,790.790] Once upon a time, was walking in the park. She was very curious
+[2025-11-01 16:24:03,277.277] Epoch No: 1, Step: 032256, Train Loss: 2.870, Val Loss: 2.882
+
+[2025-11-01 16:24:03,278.278] Total Tokens seen till now: 51611200
+
+[2025-11-01 16:24:03,298.298] Once upon a time, look know do things do. She was so she
+[2025-11-01 16:24:13,777.777] Epoch No: 1, Step: 032320, Train Loss: 2.892, Val Loss: 2.867
+
+[2025-11-01 16:24:13,778.778] Total Tokens seen till now: 51713600
+
+[2025-11-01 16:24:13,798.798] Once upon a time, do do'm going to the go outside. She
+[2025-11-01 16:24:24,157.157] Epoch No: 1, Step: 032384, Train Loss: 2.870, Val Loss: 2.851
+
+[2025-11-01 16:24:24,158.158] Total Tokens seen till now: 51816000
+
+[2025-11-01 16:24:24,178.178] Once upon a time, do want to do like to play. She is
+[2025-11-01 16:24:34,653.653] Epoch No: 1, Step: 032448, Train Loss: 2.881, Val Loss: 2.873
+
+[2025-11-01 16:24:34,654.654] Total Tokens seen till now: 51918400
+
+[2025-11-01 16:24:34,674.674] Once upon a time, can do want to go do. She asked.
+[2025-11-01 16:24:44,944.944] Epoch No: 1, Step: 032512, Train Loss: 2.889, Val Loss: 2.870
+
+[2025-11-01 16:24:44,945.945] Total Tokens seen till now: 52020800
+
+[2025-11-01 16:24:44,965.965] Once upon a time, canâ€œâ. What do.
+[2025-11-01 16:24:55,288.288] Epoch No: 1, Step: 032576, Train Loss: 2.870, Val Loss: 2.860
+
+[2025-11-01 16:24:55,289.289] Total Tokens seen till now: 52123200
+
+[2025-11-01 16:24:55,310.310] Once upon a time, Amy books were always looking for a book. She
+[2025-11-01 16:25:05,806.806] Epoch No: 1, Step: 032640, Train Loss: 2.868, Val Loss: 2.844
+
+[2025-11-01 16:25:05,807.807] Total Tokens seen till now: 52225600
+
+[2025-11-01 16:25:05,827.827] Once upon a time, she was like what was. One was a big
+[2025-11-01 16:25:16,272.272] Epoch No: 1, Step: 032704, Train Loss: 2.867, Val Loss: 2.836
+
+[2025-11-01 16:25:16,273.273] Total Tokens seen till now: 52328000
+
+[2025-11-01 16:25:16,293.293] Once upon a time, a� was want to do. She want to
+[2025-11-01 16:25:26,743.743] Epoch No: 1, Step: 032768, Train Loss: 2.872, Val Loss: 2.852
+
+[2025-11-01 16:25:26,743.743] Total Tokens seen till now: 52430400
+
+[2025-11-01 16:25:26,763.763] Once upon a time, do a do things. She was very curious.
+[2025-11-01 16:25:37,131.131] Epoch No: 1, Step: 032832, Train Loss: 2.883, Val Loss: 2.874
+
+[2025-11-01 16:25:37,131.131] Total Tokens seen till now: 52532800
+
+[2025-11-01 16:25:37,151.151] Once upon a time, look at do. I want to play. She
+[2025-11-01 16:25:47,458.458] Epoch No: 1, Step: 032896, Train Loss: 2.845, Val Loss: 2.847
+
+[2025-11-01 16:25:47,458.458] Total Tokens seen till now: 52635200
+
+[2025-11-01 16:25:47,478.478] Once upon a time, what do do something special. She was very curious
+[2025-11-01 16:25:57,927.927] Epoch No: 1, Step: 032960, Train Loss: 2.865, Val Loss: 2.865
+
+[2025-11-01 16:25:57,928.928] Total Tokens seen till now: 52737600
+
+[2025-11-01 16:25:57,948.948] Once upon a time, " look up, can do something. She was
+[2025-11-01 16:26:08,426.426] Epoch No: 1, Step: 033024, Train Loss: 2.866, Val Loss: 2.863
+
+[2025-11-01 16:26:08,427.427] Total Tokens seen till now: 52840000
+
+[2025-11-01 16:26:08,447.447] Once upon a time, care for found what do. She was going to
+[2025-11-01 16:26:18,835.835] Epoch No: 1, Step: 033088, Train Loss: 2.851, Val Loss: 2.867
+
+[2025-11-01 16:26:18,836.836] Total Tokens seen till now: 52942400
+
+[2025-11-01 16:26:18,855.855] Once upon a time, look for know what it was. She was a
+[2025-11-01 16:26:29,244.244] Epoch No: 1, Step: 033152, Train Loss: 2.884, Val Loss: 2.866
+
+[2025-11-01 16:26:29,245.245] Total Tokens seen till now: 53044800
+
+[2025-11-01 16:26:29,264.264] Once upon a time, there can do her room like to play with her
+[2025-11-01 16:26:39,668.668] Epoch No: 1, Step: 033216, Train Loss: 2.847, Val Loss: 2.847
+
+[2025-11-01 16:26:39,668.668] Total Tokens seen till now: 53147200
+
+[2025-11-01 16:26:39,689.689] Once upon a time, do you want the know do something special. It
+[2025-11-01 16:26:50,084.084] Epoch No: 1, Step: 033280, Train Loss: 2.859, Val Loss: 2.864
+
+[2025-11-01 16:26:50,085.085] Total Tokens seen till now: 53249600
+
+[2025-11-01 16:26:50,104.104] Once upon a time, know whatâ€ know.One
+[2025-11-01 16:27:00,257.257] Epoch No: 1, Step: 033344, Train Loss: 2.844, Val Loss: 2.858
+
+[2025-11-01 16:27:00,258.258] Total Tokens seen till now: 53352000
+
+[2025-11-01 16:27:00,278.278] Once upon a time, can help help me find. She loved do.
+[2025-11-01 16:27:10,858.858] Epoch No: 1, Step: 033408, Train Loss: 2.870, Val Loss: 2.854
+
+[2025-11-01 16:27:10,859.859] Total Tokens seen till now: 53454400
+
+[2025-11-01 16:27:10,879.879] Once upon a time, her mommy do. She was her mommy
+[2025-11-01 16:27:21,312.312] Epoch No: 1, Step: 033472, Train Loss: 2.861, Val Loss: 2.856
+
+[2025-11-01 16:27:21,313.313] Total Tokens seen till now: 53556800
+
+[2025-11-01 16:27:21,334.334] Once upon a time, listen, "Why are you want to do you
+[2025-11-01 16:27:31,716.716] Epoch No: 1, Step: 033536, Train Loss: 2.839, Val Loss: 2.853
+
+[2025-11-01 16:27:31,719.719] Total Tokens seen till now: 53659200
+
+[2025-11-01 16:27:31,740.740] Once upon a time, do things like do do. She has a big
+[2025-11-01 16:27:42,232.232] Epoch No: 1, Step: 033600, Train Loss: 2.849, Val Loss: 2.842
+
+[2025-11-01 16:27:42,233.233] Total Tokens seen till now: 53761600
+
+[2025-11-01 16:27:42,253.253] Once upon a time, house, do see what it was in.
+[2025-11-01 16:27:52,610.610] Epoch No: 1, Step: 033664, Train Loss: 2.854, Val Loss: 2.864
+
+[2025-11-01 16:27:52,611.611] Total Tokens seen till now: 53864000
+
+[2025-11-01 16:27:52,631.631] Once upon a time, Lucy was like to do. She was very curious
+[2025-11-01 16:28:03,091.091] Epoch No: 1, Step: 033728, Train Loss: 2.852, Val Loss: 2.858
+
+[2025-11-01 16:28:03,092.092] Total Tokens seen till now: 53966400
+
+[2025-11-01 16:28:03,112.112] Once upon a time, listen to theœ for me.â€
+[2025-11-01 16:28:13,593.593] Epoch No: 1, Step: 033792, Train Loss: 2.837, Val Loss: 2.846
+
+[2025-11-01 16:28:13,594.594] Total Tokens seen till now: 54068800
+
+[2025-11-01 16:28:13,614.614] Once upon a time, what she was inside. She saw her, "
+[2025-11-01 16:28:24,053.053] Epoch No: 1, Step: 033856, Train Loss: 2.842, Val Loss: 2.831
+
+[2025-11-01 16:28:24,053.053] Total Tokens seen till now: 54171200
+
+[2025-11-01 16:28:24,079.079] Once upon a time, tree was very curious. Amy was very curious.
+[2025-11-01 16:28:34,475.475] Epoch No: 1, Step: 033920, Train Loss: 2.865, Val Loss: 2.850
+
+[2025-11-01 16:28:34,476.476] Total Tokens seen till now: 54273600
+
+[2025-11-01 16:28:34,496.496] Once upon a time, look around. She saw a look. She was
+[2025-11-01 16:28:44,798.798] Epoch No: 1, Step: 033984, Train Loss: 2.843, Val Loss: 2.831
+
+[2025-11-01 16:28:44,800.800] Total Tokens seen till now: 54376000
+
+[2025-11-01 16:28:44,820.820] Once upon a time, why She was very curious. She wanted to go
+[2025-11-01 16:28:55,105.105] Epoch No: 1, Step: 034048, Train Loss: 2.850, Val Loss: 2.823
+
+[2025-11-01 16:28:55,105.105] Total Tokens seen till now: 54478400
+
+[2025-11-01 16:28:55,125.125] Once upon a time, "What is a need to do. I have
+[2025-11-01 16:29:05,410.410] Epoch No: 1, Step: 034112, Train Loss: 2.842, Val Loss: 2.814
+
+[2025-11-01 16:29:05,411.411] Total Tokens seen till now: 54580800
+
+[2025-11-01 16:29:05,437.437] Once upon a time, can't have a� can do things. She
+[2025-11-01 16:29:15,845.845] Epoch No: 1, Step: 034176, Train Loss: 2.836, Val Loss: 2.837
+
+[2025-11-01 16:29:15,846.846] Total Tokens seen till now: 54683200
+
+[2025-11-01 16:29:15,866.866] Once upon a time, Lucy's mum was a very. She was very
+[2025-11-01 16:29:26,265.265] Epoch No: 1, Step: 034240, Train Loss: 2.836, Val Loss: 2.827
+
+[2025-11-01 16:29:26,266.266] Total Tokens seen till now: 54785600
+
+[2025-11-01 16:29:26,285.285] Once upon a time, there are for a walk. She saw a big
+[2025-11-01 16:29:36,693.693] Epoch No: 1, Step: 034304, Train Loss: 2.824, Val Loss: 2.818
+
+[2025-11-01 16:29:36,693.693] Total Tokens seen till now: 54888000
+
+[2025-11-01 16:29:36,713.713] Once upon a time, can know what it was outside. He wanted to
+[2025-11-01 16:29:47,175.175] Epoch No: 1, Step: 034368, Train Loss: 2.835, Val Loss: 2.824
+
+[2025-11-01 16:29:47,175.175] Total Tokens seen till now: 54990400
+
+[2025-11-01 16:29:47,195.195] Once upon a time, like what are you. It is wrong. Can
+[2025-11-01 16:29:57,679.679] Epoch No: 1, Step: 034432, Train Loss: 2.823, Val Loss: 2.831
+
+[2025-11-01 16:29:57,680.680] Total Tokens seen till now: 55092800
+
+[2025-11-01 16:29:57,699.699] Once upon a time, do do like to play with the toys. She
+[2025-11-01 16:30:08,081.081] Epoch No: 1, Step: 034496, Train Loss: 2.824, Val Loss: 2.822
+
+[2025-11-01 16:30:08,082.082] Total Tokens seen till now: 55195200
+
+[2025-11-01 16:30:08,102.102] Once upon a time, can be going to go find a. She was
+[2025-11-01 16:30:18,533.533] Epoch No: 1, Step: 034560, Train Loss: 2.832, Val Loss: 2.837
+
+[2025-11-01 16:30:18,534.534] Total Tokens seen till now: 55297600
+
+[2025-11-01 16:30:18,553.553] Once upon a time, look for a to do. She was looking for
+[2025-11-01 16:30:28,924.924] Epoch No: 1, Step: 034624, Train Loss: 2.831, Val Loss: 2.821
+
+[2025-11-01 16:30:28,925.925] Total Tokens seen till now: 55400000
+
+[2025-11-01 16:30:28,944.944] Once upon a time, she know what she was. She was very excited
+[2025-11-01 16:30:39,178.178] Epoch No: 1, Step: 034688, Train Loss: 2.831, Val Loss: 2.819
+
+[2025-11-01 16:30:39,179.179] Total Tokens seen till now: 55502400
+
+[2025-11-01 16:30:39,200.200] Once upon a time, do what was in the park. They had a
+[2025-11-01 16:30:49,456.456] Epoch No: 1, Step: 034752, Train Loss: 2.838, Val Loss: 2.832
+
+[2025-11-01 16:30:49,457.457] Total Tokens seen till now: 55604800
+
+[2025-11-01 16:30:49,477.477] Once upon a time, donâ€™s in the garden. She
+[2025-11-01 16:30:59,742.742] Epoch No: 1, Step: 034816, Train Loss: 2.833, Val Loss: 2.834
+
+[2025-11-01 16:30:59,742.742] Total Tokens seen till now: 55707200
+
+[2025-11-01 16:30:59,762.762] Once upon a time, care to do what was. do her. She
+[2025-11-01 16:31:10,196.196] Epoch No: 1, Step: 034880, Train Loss: 2.833, Val Loss: 2.826
+
+[2025-11-01 16:31:10,197.197] Total Tokens seen till now: 55809600
+
+[2025-11-01 16:31:10,217.217] Once upon a time, she want to do. She was very know what
+[2025-11-01 16:31:20,624.624] Epoch No: 1, Step: 034944, Train Loss: 2.826, Val Loss: 2.834
+
+[2025-11-01 16:31:20,625.625] Total Tokens seen till now: 55912000
+
+[2025-11-01 16:31:20,645.645] Once upon a time, house. She wasœWhat are you can
+[2025-11-01 16:31:31,025.025] Epoch No: 1, Step: 035008, Train Loss: 2.828, Val Loss: 2.817
+
+[2025-11-01 16:31:31,025.025] Total Tokens seen till now: 56014400
+
+[2025-11-01 16:31:31,045.045] Once upon a time,, know what a want to do. She was
+[2025-11-01 16:31:41,468.468] Epoch No: 1, Step: 035072, Train Loss: 2.818, Val Loss: 2.819
+
+[2025-11-01 16:31:41,468.468] Total Tokens seen till now: 56116800
+
+[2025-11-01 16:31:41,488.488] Once upon a time, want are want can do. She have a big
+[2025-11-01 16:31:51,892.892] Epoch No: 1, Step: 035136, Train Loss: 2.805, Val Loss: 2.819
+
+[2025-11-01 16:31:51,892.892] Total Tokens seen till now: 56219200
+
+[2025-11-01 16:31:51,913.913] Once upon a time, are not want to do. She said to do
+[2025-11-01 16:32:02,188.188] Epoch No: 1, Step: 035200, Train Loss: 2.830, Val Loss: 2.837
+
+[2025-11-01 16:32:02,189.189] Total Tokens seen till now: 56321600
+
+[2025-11-01 16:32:02,208.208] Once upon a time, Lucy want to go for a walk. She saw
+[2025-11-01 16:32:12,624.624] Epoch No: 1, Step: 035264, Train Loss: 2.820, Val Loss: 2.815
+
+[2025-11-01 16:32:12,624.624] Total Tokens seen till now: 56424000
+
+[2025-11-01 16:32:12,644.644] Once upon a time, want help. She want to go. She was
+[2025-11-01 16:32:23,031.031] Epoch No: 1, Step: 035328, Train Loss: 2.818, Val Loss: 2.810
+
+[2025-11-01 16:32:23,032.032] Total Tokens seen till now: 56526400
+
+[2025-11-01 16:32:23,052.052] Once upon a time, she was know what she was. She was.
+[2025-11-01 16:32:33,435.435] Epoch No: 1, Step: 035392, Train Loss: 2.821, Val Loss: 2.826
+
+[2025-11-01 16:32:33,435.435] Total Tokens seen till now: 56628800
+
+[2025-11-01 16:32:33,455.455] Once upon a time, her things. know what was. She was very
+[2025-11-01 16:32:43,842.842] Epoch No: 1, Step: 035456, Train Loss: 2.835, Val Loss: 2.816
+
+[2025-11-01 16:32:43,842.842] Total Tokens seen till now: 56731200
+
+[2025-11-01 16:32:43,862.862] Once upon a time, there was was very sad. She wanted to go
+[2025-11-01 16:32:54,254.254] Epoch No: 1, Step: 035520, Train Loss: 2.818, Val Loss: 2.826
+
+[2025-11-01 16:32:54,255.255] Total Tokens seen till now: 56833600
+
+[2025-11-01 16:32:54,275.275] Once upon a time, Amy was want things. She wanted to explore the
+[2025-11-01 16:33:04,601.601] Epoch No: 1, Step: 035584, Train Loss: 2.824, Val Loss: 2.835
+
+[2025-11-01 16:33:04,601.601] Total Tokens seen till now: 56936000
+
+[2025-11-01 16:33:04,622.622] Once upon a time, her know what's mommy, a little girl
+[2025-11-01 16:33:14,812.812] Epoch No: 1, Step: 035648, Train Loss: 2.821, Val Loss: 2.818
+
+[2025-11-01 16:33:14,813.813] Total Tokens seen till now: 57038400
+
+[2025-11-01 16:33:14,833.833] Once upon a time, lookâ mum was her. She had a book
+[2025-11-01 16:33:25,129.129] Epoch No: 1, Step: 035712, Train Loss: 2.827, Val Loss: 2.806
+
+[2025-11-01 16:33:25,129.129] Total Tokens seen till now: 57140800
+
+[2025-11-01 16:33:25,377.377] BEST model SAVED on iteration 035712 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 16:33:25,404.404] Once upon a time, Lucy was curious. She was only three, but
+[2025-11-01 16:33:35,906.906] Epoch No: 1, Step: 035776, Train Loss: 2.826, Val Loss: 2.820
+
+[2025-11-01 16:33:35,907.907] Total Tokens seen till now: 57243200
+
+[2025-11-01 16:33:35,929.929] Once upon a time, are you do you want to do. She likes
+[2025-11-01 16:33:46,368.368] Epoch No: 1, Step: 035840, Train Loss: 2.834, Val Loss: 2.820
+
+[2025-11-01 16:33:46,368.368] Total Tokens seen till now: 57345600
+
+[2025-11-01 16:33:46,388.388] Once upon a time, Lucy was very scared, but she couldnâ€
+[2025-11-01 16:33:56,776.776] Epoch No: 1, Step: 035904, Train Loss: 2.814, Val Loss: 2.821
+
+[2025-11-01 16:33:56,777.777] Total Tokens seen till now: 57448000
+
+[2025-11-01 16:33:56,797.797] Once upon a time, can for look at her. She was her.
+[2025-11-01 16:34:07,161.161] Epoch No: 1, Step: 035968, Train Loss: 2.831, Val Loss: 2.826
+
+[2025-11-01 16:34:07,162.162] Total Tokens seen till now: 57550400
+
+[2025-11-01 16:34:07,182.182] Once upon a time, room was know why know what do. She was
+[2025-11-01 16:34:17,604.604] Epoch No: 1, Step: 036032, Train Loss: 2.825, Val Loss: 2.811
+
+[2025-11-01 16:34:17,605.605] Total Tokens seen till now: 57652800
+
+[2025-11-01 16:34:17,630.630] Once upon a time, but her are you. She had never like to
+[2025-11-01 16:34:28,058.058] Epoch No: 1, Step: 036096, Train Loss: 2.823, Val Loss: 2.825
+
+[2025-11-01 16:34:28,059.059] Total Tokens seen till now: 57755200
+
+[2025-11-01 16:34:28,079.079] Once upon a time, Lucy know what do things. Lucy was. She
+[2025-11-01 16:34:38,463.463] Epoch No: 1, Step: 036160, Train Loss: 2.816, Val Loss: 2.816
+
+[2025-11-01 16:34:38,464.464] Total Tokens seen till now: 57857600
+
+[2025-11-01 16:34:38,483.483] Once upon a time,â need to go for a walk. She saw
+[2025-11-01 16:34:48,872.872] Epoch No: 1, Step: 036224, Train Loss: 2.829, Val Loss: 2.821
+
+[2025-11-01 16:34:48,873.873] Total Tokens seen till now: 57960000
+
+[2025-11-01 16:34:48,892.892] Once upon a time, She was know what she was going to the world
+[2025-11-01 16:34:59,294.294] Epoch No: 1, Step: 036288, Train Loss: 2.831, Val Loss: 2.823
+
+[2025-11-01 16:34:59,295.295] Total Tokens seen till now: 58062400
+
+[2025-11-01 16:34:59,316.316] Once upon a time, Lucy. She was very excited to explore the
+[2025-11-01 16:35:09,740.740] Epoch No: 1, Step: 036352, Train Loss: 2.817, Val Loss: 2.824
+
+[2025-11-01 16:35:09,741.741] Total Tokens seen till now: 58164800
+
+[2025-11-01 16:35:09,760.760] Once upon a time, Lucy. She was curious and her. She loved
+[2025-11-01 16:35:20,041.041] Epoch No: 1, Step: 036416, Train Loss: 2.821, Val Loss: 2.822
+
+[2025-11-01 16:35:20,042.042] Total Tokens seen till now: 58267200
+
+[2025-11-01 16:35:20,061.061] Once upon a time, care what are you do. She likes to do
+[2025-11-01 16:35:30,322.322] Epoch No: 1, Step: 036480, Train Loss: 2.832, Val Loss: 2.822
+
+[2025-11-01 16:35:30,322.322] Total Tokens seen till now: 58369600
+
+[2025-11-01 16:35:30,342.342] Once upon a time, she know what. She wanted to do things.
+[2025-11-01 16:35:40,788.788] Epoch No: 1, Step: 036544, Train Loss: 2.826, Val Loss: 2.838
+
+[2025-11-01 16:35:40,788.788] Total Tokens seen till now: 58472000
+
+[2025-11-01 16:35:40,808.808] Once upon a time,â€� can go.â€™s
+[2025-11-01 16:35:51,147.147] Epoch No: 1, Step: 036608, Train Loss: 2.821, Val Loss: 2.833
+
+[2025-11-01 16:35:51,149.149] Total Tokens seen till now: 58574400
+
+[2025-11-01 16:35:51,169.169] Once upon a time, are things world. She loved like she had her
+[2025-11-01 16:36:01,543.543] Epoch No: 1, Step: 036672, Train Loss: 2.829, Val Loss: 2.821
+
+[2025-11-01 16:36:01,544.544] Total Tokens seen till now: 58676800
+
+[2025-11-01 16:36:01,563.563] Once upon a time, have to do. She want to do something.
+[2025-11-01 16:36:12,051.051] Epoch No: 1, Step: 036736, Train Loss: 2.846, Val Loss: 2.818
+
+[2025-11-01 16:36:12,052.052] Total Tokens seen till now: 58779200
+
+[2025-11-01 16:36:12,073.073] Once upon a time, there was a very scared. She was scared she
+[2025-11-01 16:36:22,445.445] Epoch No: 1, Step: 036800, Train Loss: 2.851, Val Loss: 2.845
+
+[2025-11-01 16:36:22,445.445] Total Tokens seen till now: 58881600
+
+[2025-11-01 16:36:22,465.465] Once upon a time, Lucy was scared. She was scared and wanted to
+[2025-11-01 16:36:32,860.860] Epoch No: 1, Step: 036864, Train Loss: 2.819, Val Loss: 2.819
+
+[2025-11-01 16:36:32,861.861] Total Tokens seen till now: 58984000
+
+[2025-11-01 16:36:32,880.880] Once upon a time, what her world, look. They were walking,
+[2025-11-01 16:36:43,330.330] Epoch No: 1, Step: 036928, Train Loss: 2.833, Val Loss: 2.829
+
+[2025-11-01 16:36:43,332.332] Total Tokens seen till now: 59086400
+
+[2025-11-01 16:36:43,352.352] Once upon a time, can you can help. Lucy was Lucy was so
+[2025-11-01 16:36:53,714.714] Epoch No: 1, Step: 036992, Train Loss: 2.823, Val Loss: 2.834
+
+[2025-11-01 16:36:53,715.715] Total Tokens seen till now: 59188800
+
+[2025-11-01 16:36:53,734.734] Once upon a time, there for a walk."What are you
+[2025-11-01 16:37:04,135.135] Epoch No: 1, Step: 037056, Train Loss: 2.844, Val Loss: 2.814
+
+[2025-11-01 16:37:04,135.135] Total Tokens seen till now: 59291200
+
+[2025-11-01 16:37:04,161.161] Once upon a time, what was going to go for a walk in the
+[2025-11-01 16:37:14,526.526] Epoch No: 1, Step: 037120, Train Loss: 2.815, Val Loss: 2.810
+
+[2025-11-01 16:37:14,527.527] Total Tokens seen till now: 59393600
+
+[2025-11-01 16:37:14,547.547] Once upon a time, there are you want to do you want to play
+[2025-11-01 16:37:24,799.799] Epoch No: 1, Step: 037184, Train Loss: 2.818, Val Loss: 2.814
+
+[2025-11-01 16:37:24,800.800] Total Tokens seen till now: 59496000
+
+[2025-11-01 16:37:24,820.820] Once upon a time, do care about a do things like to do.
+[2025-11-01 16:37:35,084.084] Epoch No: 1, Step: 037248, Train Loss: 2.845, Val Loss: 2.842
+
+[2025-11-01 16:37:35,084.084] Total Tokens seen till now: 59598400
+
+[2025-11-01 16:37:35,104.104] Once upon a time, her. Mia was excited to do things. She
+[2025-11-01 16:37:45,380.380] Epoch No: 1, Step: 037312, Train Loss: 2.848, Val Loss: 2.848
+
+[2025-11-01 16:37:45,381.381] Total Tokens seen till now: 59700800
+
+[2025-11-01 16:37:45,400.400] Once upon a time, there was playing with his house. One day,
+[2025-11-01 16:37:55,810.810] Epoch No: 1, Step: 037376, Train Loss: 2.834, Val Loss: 2.841
+
+[2025-11-01 16:37:55,810.810] Total Tokens seen till now: 59803200
+
+[2025-11-01 16:37:55,830.830] Once upon a time, can can play in. She was walking around and
+[2025-11-01 16:38:06,194.194] Epoch No: 1, Step: 037440, Train Loss: 2.864, Val Loss: 2.848
+
+[2025-11-01 16:38:06,195.195] Total Tokens seen till now: 59905600
+
+[2025-11-01 16:38:06,215.215] Once upon a time, want know what was. She was a very do
+[2025-11-01 16:38:16,585.585] Epoch No: 1, Step: 037504, Train Loss: 2.867, Val Loss: 2.873
+
+[2025-11-01 16:38:16,586.586] Total Tokens seen till now: 60008000
+
+[2025-11-01 16:38:16,608.608] Once upon a time, tree home. She was sure what was going to
+[2025-11-01 16:38:26,991.991] Epoch No: 1, Step: 037568, Train Loss: 2.857, Val Loss: 2.850
+
+[2025-11-01 16:38:26,992.992] Total Tokens seen till now: 60110400
+
+[2025-11-01 16:38:27,012.012] Once upon a time, can look like to look at the world. She
+[2025-11-01 16:38:37,388.388] Epoch No: 1, Step: 037632, Train Loss: 2.855, Val Loss: 2.855
+
+[2025-11-01 16:38:37,389.389] Total Tokens seen till now: 60212800
+
+[2025-11-01 16:38:37,409.409] Once upon a time, like are you want to do. One day,
+[2025-11-01 16:38:47,727.727] Epoch No: 1, Step: 037696, Train Loss: 2.869, Val Loss: 2.865
+
+[2025-11-01 16:38:47,728.728] Total Tokens seen till now: 60315200
+
+[2025-11-01 16:38:47,749.749] Once upon a time, care come house. She want to go to play
+[2025-11-01 16:38:58,136.136] Epoch No: 1, Step: 037760, Train Loss: 2.869, Val Loss: 2.846
+
+[2025-11-01 16:38:58,137.137] Total Tokens seen till now: 60417600
+
+[2025-11-01 16:38:58,156.156] Once upon a time, look like to play with her mom. She wanted
+[2025-11-01 16:39:08,800.800] Epoch No: 1, Step: 037824, Train Loss: 2.818, Val Loss: 2.829
+
+[2025-11-01 16:39:08,801.801] Total Tokens seen till now: 60520000
+
+[2025-11-01 16:39:08,820.820] Once upon a time, look like a big tree. They were very curious
+[2025-11-01 16:39:19,256.256] Epoch No: 1, Step: 037888, Train Loss: 2.850, Val Loss: 2.848
+
+[2025-11-01 16:39:19,257.257] Total Tokens seen till now: 60622400
+
+[2025-11-01 16:39:19,276.276] Once upon a time, don want to know what was. She was very
+[2025-11-01 16:39:29,592.592] Epoch No: 1, Step: 037952, Train Loss: 2.846, Val Loss: 2.846
+
+[2025-11-01 16:39:29,593.593] Total Tokens seen till now: 60724800
+
+[2025-11-01 16:39:29,616.616] Once upon a time, was book for her. She was very curious and
+[2025-11-01 16:39:39,882.882] Epoch No: 1, Step: 038016, Train Loss: 2.880, Val Loss: 2.879
+
+[2025-11-01 16:39:39,883.883] Total Tokens seen till now: 60827200
+
+[2025-11-01 16:39:39,902.902] Once upon a time, why don't know what. She was. She
+[2025-11-01 16:39:50,119.119] Epoch No: 1, Step: 038080, Train Loss: 2.868, Val Loss: 2.875
+
+[2025-11-01 16:39:50,120.120] Total Tokens seen till now: 60929600
+
+[2025-11-01 16:39:50,139.139] Once upon a time, Lucy Lucy wased at the€The
+[2025-11-01 16:40:00,469.469] Epoch No: 1, Step: 038144, Train Loss: 2.856, Val Loss: 2.852
+
+[2025-11-01 16:40:00,470.470] Total Tokens seen till now: 61032000
+
+[2025-11-01 16:40:00,490.490] Once upon a time, world her. She saw her. She was very
+[2025-11-01 16:40:11,714.714] Epoch No: 1, Step: 038208, Train Loss: 2.874, Val Loss: 2.876
+
+[2025-11-01 16:40:11,714.714] Total Tokens seen till now: 61134400
+
+[2025-11-01 16:40:11,735.735] Once upon a time, like what look for Dad. They were. They
+[2025-11-01 16:40:21,837.837] Epoch No: 1, Step: 038272, Train Loss: 2.851, Val Loss: 2.843
+
+[2025-11-01 16:40:21,838.838] Total Tokens seen till now: 61236800
+
+[2025-11-01 16:40:21,858.858] Once upon a time, canâ look. She was very excited. One
+[2025-11-01 16:40:32,078.078] Epoch No: 1, Step: 038336, Train Loss: 2.841, Val Loss: 2.847
+
+[2025-11-01 16:40:32,078.078] Total Tokens seen till now: 61339200
+
+[2025-11-01 16:40:32,098.098] Once upon a time, was very excited. She was so curious, and
+[2025-11-01 16:40:42,465.465] Epoch No: 1, Step: 038400, Train Loss: 2.851, Val Loss: 2.873
+
+[2025-11-01 16:40:42,466.466] Total Tokens seen till now: 61441600
+
+[2025-11-01 16:40:42,486.486] Once upon a time, what she was so she had a kind and she
+[2025-11-01 16:40:52,885.885] Epoch No: 1, Step: 038464, Train Loss: 2.874, Val Loss: 2.865
+
+[2025-11-01 16:40:52,886.886] Total Tokens seen till now: 61544000
+
+[2025-11-01 16:40:52,906.906] Once upon a time, can do do like books.One day,
+[2025-11-01 16:41:03,337.337] Epoch No: 1, Step: 038528, Train Loss: 2.877, Val Loss: 2.885
+
+[2025-11-01 16:41:03,338.338] Total Tokens seen till now: 61646400
+
+[2025-11-01 16:41:03,359.359] Once upon a time, donâ€Mia was very excited to
+[2025-11-01 16:41:13,838.838] Epoch No: 1, Step: 038592, Train Loss: 2.880, Val Loss: 2.870
+
+[2025-11-01 16:41:13,839.839] Total Tokens seen till now: 61748800
+
+[2025-11-01 16:41:13,862.862] Once upon a time, don-old. She'm going to the park
+[2025-11-01 16:41:24,339.339] Epoch No: 1, Step: 038656, Train Loss: 2.869, Val Loss: 2.871
+
+[2025-11-01 16:41:24,340.340] Total Tokens seen till now: 61851200
+
+[2025-11-01 16:41:24,360.360] Once upon a time, donââ€™s.â€™
+[2025-11-01 16:41:34,650.650] Epoch No: 1, Step: 038720, Train Loss: 2.920, Val Loss: 2.897
+
+[2025-11-01 16:41:34,650.650] Total Tokens seen till now: 61953600
+
+[2025-11-01 16:41:34,670.670] Once upon a time, want to go. She saw a little girl,
+[2025-11-01 16:41:44,958.958] Epoch No: 1, Step: 038784, Train Loss: 2.888, Val Loss: 2.900
+
+[2025-11-01 16:41:44,959.959] Total Tokens seen till now: 62056000
+
+[2025-11-01 16:41:44,979.979] Once upon a time, can you canâ€™t know what he
+[2025-11-01 16:41:55,278.278] Epoch No: 1, Step: 038848, Train Loss: 2.872, Val Loss: 2.855
+
+[2025-11-01 16:41:55,279.279] Total Tokens seen till now: 62158400
+
+[2025-11-01 16:41:55,299.299] Once upon a time, old house She want have only have a big box
+[2025-11-01 16:42:05,737.737] Epoch No: 1, Step: 038912, Train Loss: 2.857, Val Loss: 2.862
+
+[2025-11-01 16:42:05,737.737] Total Tokens seen till now: 62260800
+
+[2025-11-01 16:42:05,757.757] Once upon a time, bug was meed. She was very old and
+[2025-11-01 16:42:16,140.140] Epoch No: 1, Step: 038976, Train Loss: 2.876, Val Loss: 2.890
+
+[2025-11-01 16:42:16,141.141] Total Tokens seen till now: 62363200
+
+[2025-11-01 16:42:16,161.161] Once upon a time, look'm still have a big dog. Spot.
+[2025-11-01 16:42:26,575.575] Epoch No: 1, Step: 039040, Train Loss: 2.872, Val Loss: 2.857
+
+[2025-11-01 16:42:26,576.576] Total Tokens seen till now: 62465600
+
+[2025-11-01 16:42:26,598.598] Once upon a time, but why don't know what was wrong. It
+[2025-11-01 16:42:37,092.092] Epoch No: 1, Step: 039104, Train Loss: 2.891, Val Loss: 2.891
+
+[2025-11-01 16:42:37,093.093] Total Tokens seen till now: 62568000
+
+[2025-11-01 16:42:37,113.113] Once upon a time, little girl what do you do you like you like
+[2025-11-01 16:42:47,535.535] Epoch No: 1, Step: 039168, Train Loss: 2.894, Val Loss: 2.874
+
+[2025-11-01 16:42:47,535.535] Total Tokens seen till now: 62670400
+
+[2025-11-01 16:42:47,558.558] Once upon a time,, Lucy care of the things she was always had
+[2025-11-01 16:42:57,969.969] Epoch No: 1, Step: 039232, Train Loss: 2.869, Val Loss: 2.870
+
+[2025-11-01 16:42:57,970.970] Total Tokens seen till now: 62772800
+
+[2025-11-01 16:42:57,990.990] Once upon a time, don't want to play with her. She says
+[2025-11-01 16:43:08,568.568] Epoch No: 1, Step: 039296, Train Loss: 2.866, Val Loss: 2.873
+
+[2025-11-01 16:43:08,569.569] Total Tokens seen till now: 62875200
+
+[2025-11-01 16:43:08,591.591] Once upon a time,ed house. She saw what was inside. She
+[2025-11-01 16:43:18,952.952] Epoch No: 1, Step: 039360, Train Loss: 2.882, Val Loss: 2.853
+
+[2025-11-01 16:43:18,953.953] Total Tokens seen till now: 62977600
+
+[2025-11-01 16:43:18,972.972] Once upon a time, can don't know what do. She was.
+[2025-11-01 16:43:29,325.325] Epoch No: 1, Step: 039424, Train Loss: 2.884, Val Loss: 2.884
+
+[2025-11-01 16:43:29,326.326] Total Tokens seen till now: 63080000
+
+[2025-11-01 16:43:29,346.346] Once upon a time, can do. She was a big, "I
+[2025-11-01 16:43:39,648.648] Epoch No: 1, Step: 039488, Train Loss: 2.888, Val Loss: 2.874
+
+[2025-11-01 16:43:39,649.649] Total Tokens seen till now: 63182400
+
+[2025-11-01 16:43:39,668.668] Once upon a time, Lucy still know what was doing. She was wrong
+[2025-11-01 16:43:49,926.926] Epoch No: 1, Step: 039552, Train Loss: 2.889, Val Loss: 2.871
+
+[2025-11-01 16:43:49,927.927] Total Tokens seen till now: 63284800
+
+[2025-11-01 16:43:49,947.947] Once upon a time, Lucy was Lucy was up her room and she was
+[2025-11-01 16:44:00,263.263] Epoch No: 1, Step: 039616, Train Loss: 2.878, Val Loss: 2.876
+
+[2025-11-01 16:44:00,264.264] Total Tokens seen till now: 63387200
+
+[2025-11-01 16:44:00,284.284] Once upon a time, are want to go. She was not like to
+[2025-11-01 16:44:10,956.956] Epoch No: 1, Step: 039680, Train Loss: 2.835, Val Loss: 2.855
+
+[2025-11-01 16:44:10,958.958] Total Tokens seen till now: 63489600
+
+[2025-11-01 16:44:10,979.979] Once upon a time, a look. She saw a big tree. She
+[2025-11-01 16:44:21,531.531] Epoch No: 1, Step: 039744, Train Loss: 2.868, Val Loss: 2.869
+
+[2025-11-01 16:44:21,532.532] Total Tokens seen till now: 63592000
+
+[2025-11-01 16:44:21,551.551] Once upon a time, Amy.One day, she was walking
+[2025-11-01 16:44:34,936.936] BEST model SAVED on iteration 039808 to model/gpt2_ORG_preTrain_S.pth..! 
+[2025-11-01 16:44:34,944.944] Training completed in 120.74 minutes.
+[2025-11-01 16:44:34,944.944] BEST Pre-trained custom model saved in model/gpt2_ORG_preTrain_S.pth..!
+[2025-11-01 16:44:34,944.944] Saving the plots of the metrics tracked ..!
+[2025-11-01 16:44:39,232.232] Pipeline completed in 120.81 minutes.
