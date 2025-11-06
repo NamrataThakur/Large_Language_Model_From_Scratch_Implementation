@@ -376,14 +376,15 @@ if __name__ == '__main__':
         type=float,
         default=3e-05,
         help=("Intial LR value to start the warmup from.")
-    )
+    )   
 
-    parser.add_argument(
-        "--min_lr",
-        type=float,
-        default=1e-6,
-        help=("Minimum LR value to achieve using cosine annealing (decay.)")
-    )
+    # Calculation minimum LR as 0.1 * max learning rate (according to Karpathy)
+    # parser.add_argument(
+    #     "--min_lr",
+    #     type=float,
+    #     default=1e-6,
+    #     help=("Minimum LR value to achieve using cosine annealing (decay.)")
+    # )
 
     parser.add_argument(
         "--learning_rate",
@@ -620,6 +621,9 @@ if __name__ == '__main__':
 
         epochs = args.num_epochs
 
+        min_lr = args.learning_rate * 0.1
+        logger.info(f"Minimum LR : {min_lr}")
+
         #Note: If gradient accumulation has to happen at every step, then target_batch_size == batch_size
         gradient_accumulation_steps = int(args.target_batch_size // args.batch_size)
         logger.info(f'Gradient Accumulation Steps : {gradient_accumulation_steps}')
@@ -643,7 +647,7 @@ if __name__ == '__main__':
                             log_path=logger,                        #Pass the logger object instead of logging path
                             warmup_steps=args.warmup_steps,
                             initial_lr=args.initial_lr,
-                            min_lr=args.min_lr,
+                            min_lr=min_lr,
                             use_warmup=args.use_warmup,
                             use_gradient_clip=args.use_gradient_clip,
                             kv_cache=args.kv_cache,

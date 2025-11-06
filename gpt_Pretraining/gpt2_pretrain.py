@@ -96,7 +96,7 @@ class GPT2_PreTrain:
                     loss = self.metrics.loss_batch(train_x, train_y)
 
                     #New Feat: Gradient Accumulation Process Added
-                    loss = loss / self.gradient_accumulation_steps
+                    loss = loss / self.gradient_accumulation_steps #Scale the loss to account for gradient accumulation
 
                     loss.backward()
 
@@ -168,7 +168,7 @@ class GPT2_PreTrain:
                         print(f'Total Tokens seen till now: {tokens_seen}')
 
                         #Write the epoch wise metrics in the log file:
-                        self.logger.info(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}\n')
+                        self.logger.info(f'Epoch No: {ep+1}, Global Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}\n')
                         self.logger.info(f'Total Tokens seen till now: {tokens_seen}\n')
                         track_tokens_seen.append(tokens_seen)
 

@@ -21,16 +21,16 @@ beta2=0.95
 val_split=0.05
 train_split=0.85
 batch_size=16
-target_batch_size=1024 
+target_batch_size=512 #1024 
 seed=123
-dropout_rate=0.1
+dropout_rate=0.0 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
 warmup_steps=0.05
-initial_lr=3e-05
-min_lr=1e-05 
-learning_rate=3e-4
+initial_lr=1e-04 #3e-05
+# min_lr=1e-05 --> being calculated as 0.1 * of max LR
+learning_rate=3e-4 #Good LR
 rms_eps=1e-6
 rms_bias=True
 theta_base=10000.0
@@ -80,7 +80,6 @@ python gpt_pretrainingPipeline.py \
   --eos_id $eos_id \
   --initial_lr $initial_lr \
   --warmup_steps $warmup_steps \
-  --min_lr $min_lr \
   --learning_rate $learning_rate \
   --use_gradient_clip $use_gradient_clip \
   --use_warmup $use_warmup \
