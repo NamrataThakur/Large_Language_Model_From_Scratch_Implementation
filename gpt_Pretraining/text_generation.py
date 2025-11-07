@@ -106,7 +106,8 @@ class Text_Generation:
                     idx_next = torch.argmax(logits, dim=-1, keepdim=True)  # (batch, 1)
 
                 #If end of seuence token id is provided, stop generating if that token id is predicted
-                if idx_next == eos_id:
+                if eos_id is not None and idx_next.item() == eos_id:
+                    print(f"Token predicted : {idx_next.item()}")
                     break
 
                 # Append sampled index to the running sequence

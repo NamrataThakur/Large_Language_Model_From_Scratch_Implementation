@@ -650,6 +650,7 @@ if __name__ == '__main__':
                             min_lr=min_lr,
                             use_warmup=args.use_warmup,
                             use_gradient_clip=args.use_gradient_clip,
+                            config=gpt2_config,
                             kv_cache=args.kv_cache,
                             arch_type=args.arch_type
                             ) 

@@ -6,7 +6,7 @@ from math import ceil
 
 class GPT2_PreTrain:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, gradient_accumulation_steps, global_batch_size, eval_batchSize, eval_freq, 
-                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, kv_cache = False,
+                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, config, kv_cache = False,
                  arch_type='original'):
 
         self.model = model
@@ -29,6 +29,7 @@ class GPT2_PreTrain:
         self.global_batch_size = global_batch_size
         self.kv_cache = kv_cache
         self.arch_type = arch_type
+        self.config = config
 
         self.generation = Text_Generation(model=self.model, device=self.device, tokenizer_model='gpt2', 
                                           arch_type=self.arch_type)
@@ -177,7 +178,11 @@ class GPT2_PreTrain:
 
                             min_loss = test_loss
                             torch.save({'model' : self.model.state_dict(),
-                                        'optimizer': self.optimizer.state_dict()
+                                        'optimizer': self.optimizer.state_dict(),
+                                        'config' : self.config,
+                                        'validation_loss' : test_loss,
+                                        'global_step' : global_step,
+                                        'learning_rate' : lr
                                         }, 
                                         model_save_path)
                             self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
@@ -198,7 +203,11 @@ class GPT2_PreTrain:
 
             #Save the model in case of an exception
             torch.save({'model' : self.model.state_dict(),
-                        'optimizer': self.optimizer.state_dict()
+                        'optimizer': self.optimizer.state_dict(),
+                        'config' : self.config,
+                        'validation_loss' : test_loss,
+                        'global_step' : global_step,
+                        'learning_rate' : lr
                         }, 
                         model_save_path)
             
