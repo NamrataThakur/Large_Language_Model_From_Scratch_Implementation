@@ -4,9 +4,9 @@
 #Pre-Training params:
 
 num_epochs=1
-top_k=3
-temp=0.0
-max_new_tokens=20
+top_k=50
+temp=0.7
+max_new_tokens=50
 context_length=256
 vocab_size=50257
 embedding_dimension=256

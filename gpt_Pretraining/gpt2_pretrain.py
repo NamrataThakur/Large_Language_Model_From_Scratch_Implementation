@@ -164,7 +164,7 @@ class GPT2_PreTrain:
                         train_losses.append(train_loss)
                         test_losses.append(test_loss)
                         total_steps.append(global_step)
-                        print(f'Epoch No: {ep+1}, Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}')
+                        print(f'Epoch No: {ep+1}, Global Step: {global_step:06d}, Train Loss: {train_loss:.3f}, Val Loss: {test_loss:.3f}')
                         print(f'Total Tokens seen till now: {tokens_seen}')
 
                         #Write the epoch wise metrics in the log file:
