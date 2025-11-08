@@ -343,6 +343,13 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
+        "--train_type",
+        type=str,
+        default='scratch',
+        help=("Whether to train the model from scratch or resume training from a checkpoint. Options: scratch, resume")
+    )
+
+    parser.add_argument(
         "--moe_noise",
         type=bool,
         default=True,
@@ -438,58 +445,95 @@ if __name__ == '__main__':
 
     #Load the model config:
     try:
-        if args.model_type == 'original':
-            logger.info('Original GPT2 configuration to be used for pre-training..!')
+        if args.train_type == 'scratch':
+            logger.info(f"Model to be trained from scratch ..!")
+            checkpoint = None
 
-            m_config = GPT2_ModelConfig()
-            gpt2_config = m_config.load_model_config(model_name=args.base_modelName, drop_rate=args.dropout_rate,
-                                                    context_length=args.context_length)
-            gpt2_baseInst = GPT2(gpt2_config)
-            gpt2_baseInst.eval()
-            logger.info(f'Configuration of the original {args.base_modelName} base model loaded..!')
+            if args.model_type == 'original':
+                logger.info('Original GPT2 configuration to be used for pre-training..!')
 
+                m_config = GPT2_ModelConfig()
+                gpt2_config = m_config.load_model_config(model_name=args.base_modelName, drop_rate=args.dropout_rate,
+                                                        context_length=args.context_length)
+                gpt2_baseInst = GPT2(gpt2_config)
+                gpt2_baseInst.eval()
+                logger.info(f'Configuration of the original {args.base_modelName} base model loaded..!')
+
+            else:
+
+                logger.info('Custom GPT2 configuration to be used for pre-training..!')
+
+                config_dict = {
+                    'vocab_size' :  args.vocab_size,
+                    'embedding_dimension':args.embedding_dimension,
+                    'num_heads':args.num_heads,
+                    'context_length':args.context_length,
+                    'dropout':args.dropout_rate,
+                    'qkv_bias':args.qkv_bias,
+                    'num_layers':args.num_layers,
+                    'ff_hidden_dim':args.ff_hidden_dim,
+                    'rms_eps':args.rms_eps,
+                    'rms_bias':args.rms_bias,
+                    'theta_base':args.theta_base,
+                    'num_kv_groups':args.num_kv_groups,
+                    'num_experts':args.num_experts,
+                    'num_active_experts':args.num_active_experts,
+                    'moe_noise':args.moe_noise,
+
+                    'weight_decay' : args.weight_decay,
+                    'beta1' : args.beta1,
+                    'beta2' : args.beta2
+                }
+
+                gpt2_config = GPT2_CustomConfig(config_dict)
+
+                logger.info(f'The custom config of the model to be trained : {gpt2_config.config} ')
+
+                if args.arch_type == 'original':
+                    gpt2_baseInst = GPT2(gpt2_config.config)
+                elif args.arch_type == 'GQA':
+                    gpt2_baseInst = GQAGPT2(gpt2_config.config)
+                else:
+                    gpt2_baseInst = MoEGPT2(gpt2_config.config)
+
+                logger.info(f'Architecture Type :{args.arch_type}')
+                gpt2_baseInst.eval()
+                logger.info(f'Configuration of the custom GPT2 model loaded..!')
+        
         else:
 
-            logger.info('Custom GPT2 configuration to be used for pre-training..!')
+            model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
+            print(model_path)
+            logger.info('Model to be resumed for training from checkpoint present in the path: {model_path}')
 
-            config_dict = {
-                'vocab_size' :  args.vocab_size,
-                'embedding_dimension':args.embedding_dimension,
-                'num_heads':args.num_heads,
-                'context_length':args.context_length,
-                'dropout':args.dropout_rate,
-                'qkv_bias':args.qkv_bias,
-                'num_layers':args.num_layers,
-                'ff_hidden_dim':args.ff_hidden_dim,
-                'rms_eps':args.rms_eps,
-                'rms_bias':args.rms_bias,
-                'theta_base':args.theta_base,
-                'num_kv_groups':args.num_kv_groups,
-                'num_experts':args.num_experts,
-                'num_active_experts':args.num_active_experts,
-                'moe_noise':args.moe_noise,
+            #Loading the config for pre-training:
+            checkpoint = torch.load(model_path, map_location=torch.device("cpu"))
+            gpt2_config = checkpoint['config']
 
-                'weight_decay' : args.weight_decay,
-                'beta1' : args.beta1,
-                'beta2' : args.beta2
-            }
+            if args.model_type == 'original':
+                logger.info('Original GPT2 configuration was used for pre-training..!')
 
-            gpt2_config = GPT2_CustomConfig(config_dict)
+                gpt2_baseInst = GPT2(gpt2_config)
+                gpt2_baseInst.eval()
+                logger.info(f'Configuration of the original {args.base_modelName} base model loaded..!')
 
-            logger.info(f'The custom config of the model to be trained : {gpt2_config.config} ')
 
-            if args.arch_type == 'original':
-                gpt2_baseInst = GPT2(gpt2_config.config)
-            elif args.arch_type == 'GQA':
-                gpt2_baseInst = GQAGPT2(gpt2_config.config)
             else:
-                gpt2_baseInst = MoEGPT2(gpt2_config.config)
+                logger.info('Custom GPT2 configuration was used for pre-training..!')
 
-            logger.info(f'Architecture Type :{args.arch_type}')
-            gpt2_baseInst.eval()
-            logger.info(f'Configuration of the custom GPT2 model loaded..!')
-        
-        
+                logger.info(f'The custom config of the model to be trained : {gpt2_config.config} ')
+
+                if args.arch_type == 'original':
+                    gpt2_baseInst = GPT2(gpt2_config.config)
+                elif args.arch_type == 'GQA':
+                    gpt2_baseInst = GQAGPT2(gpt2_config.config)
+                else:
+                    gpt2_baseInst = MoEGPT2(gpt2_config.config)
+
+                logger.info(f'Architecture Type :{args.arch_type}')
+                gpt2_baseInst.eval()
+                logger.info(f'Configuration of the custom GPT2 model loaded..!')
+
 
     except Exception as e:
         logger.error(f"Error in loading the model config class {e}")
@@ -582,12 +626,8 @@ if __name__ == '__main__':
 
         try:
             logger.info(f'Loading the weights of the model : {args.pre_save_model}..!')
-            model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
-            print(model_path)
-            logger.info(f'Model present in the path: {model_path}')
 
-            #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
-            checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=True)
+            #Loading the model for pre-training:
             gpt2_baseInst.load_state_dict(checkpoint['model'] )
 
             gpt2_baseInst.eval()
@@ -615,9 +655,12 @@ if __name__ == '__main__':
 
         start_context = "Once upon a time,"
 
-        #Maximum LR value is given in this optimizer 'lr' param. 
-        optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
-                                      betas = (args.beta1, args.beta2), eps=1e-8)
+        if args.train_type == 'scratch':
+            #Maximum LR value is given in this optimizer 'lr' param. 
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
+                                        betas = (args.beta1, args.beta2), eps=1e-8)
+        else:
+            optimizer = checkpoint['optimizer']
 
         epochs = args.num_epochs
 
@@ -650,9 +693,9 @@ if __name__ == '__main__':
                             min_lr=min_lr,
                             use_warmup=args.use_warmup,
                             use_gradient_clip=args.use_gradient_clip,
-                            config=gpt2_config,
+                            checkpoint=checkpoint,
                             kv_cache=args.kv_cache,
-                            arch_type=args.arch_type
+                            arch_type=args.arch_type,
                             ) 
 
         train_losses, test_losses, track_tokens_seen, track_lr, total_steps = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, top_k=args.top_k,  
