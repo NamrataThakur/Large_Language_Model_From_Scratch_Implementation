@@ -6,7 +6,7 @@ from math import ceil
 
 class GPT2_PreTrain:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, gradient_accumulation_steps, global_batch_size, eval_batchSize, eval_freq, 
-                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, config, kv_cache = False,
+                 start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, checkpoint, kv_cache = False,
                  arch_type='original'):
 
         self.model = model
@@ -29,7 +29,7 @@ class GPT2_PreTrain:
         self.global_batch_size = global_batch_size
         self.kv_cache = kv_cache
         self.arch_type = arch_type
-        self.config = config
+        self.checkpoint = checkpoint
 
         self.generation = Text_Generation(model=self.model, device=self.device, tokenizer_model='gpt2', 
                                           arch_type=self.arch_type)
@@ -50,14 +50,36 @@ class GPT2_PreTrain:
     
     def train(self, model_save_path, temp=0.0, top_k= None, eos_id = None ):
 
-        train_losses, test_losses, track_tokens_seen, track_lr, total_steps  = [], [], [], [], []
+        if self.checkpoint is not None:
+            train_losses = self.checkpoint['train_losses']
+            test_losses = self.checkpoint['test_losses']
+            track_tokens_seen = self.checkpoint['track_tokens_seen']
+            track_lr = self.checkpoint['track_lr']
+            total_steps = self.checkpoint['total_steps']
+            global_step = self.checkpoint['global_step']
+            max_lr = self.checkpoint['max_lr']
+            min_loss = self.checkpoint['validation_loss']
+            last_lr = self.optimizer.param_groups[0]['lr']
 
-        tokens_seen, global_step = 0, -1
+            self.logger.info(f"Model Training Resumed.")
+            self.logger.info(f"Best Test Loss recorded : {min_loss}")
+            self.logger.info(f"Global STeps Completed : {global_step}")
+            self.logger.info(f'Last Learning Rate : {last_lr}.')
+            
         
-        #Get the maximum learning rate as given while defining the optimizer:
-        max_lr = self.optimizer.param_groups[0]['lr']
-        print('Maximum Learning Rate : ', max_lr)
-        self.logger.info(f'Maximum Learning Rate : {max_lr}.')
+        else:
+            self.logger.info(f"Model Training From SCRATCH..")
+            train_losses, test_losses, track_tokens_seen, track_lr, total_steps  = [], [], [], [], []
+
+            tokens_seen, global_step = 0, -1
+        
+            #Get the maximum learning rate as given while defining the optimizer:
+            max_lr = self.optimizer.param_groups[0]['lr']
+            print('Maximum Learning Rate : ', max_lr)
+            self.logger.info(f'Maximum Learning Rate : {max_lr}.')
+            min_loss = 10
+            print('Default Minimum Loss: ', min_loss)
+            self.logger.info(f"Default Minimum Loss: {min_loss}")
 
         #Calculate the total training steps, that will be used for cosine annealing: 
         #New Feat: Factor in the gradient accumulation steps
@@ -76,13 +98,30 @@ class GPT2_PreTrain:
             self.warmup_steps = ceil(total_training_steps * self.warmup_ratio)
             self.logger.info(f'Warmup Steps : {self.warmup_steps}')
 
-            #Calculate the learning rate increment during the warmup period:
-            lr_increment = (max_lr - self.initial_lr) / self.warmup_steps
-            print('Learning Rate Increment By : ', lr_increment)
-            self.logger.info(f'Learning Rate Increment By : {lr_increment}.')
+            if self.checkpoint is not None:
+            
+                if self.checkpoint['global_step'] > self.warmup_steps:
+                    self.logger.info(f"Global Steps Crossed Warmup Period. Disabling Warmup..!")
+                
+                else:
+                    self.logger.info(f"Global Steps WITHIN Warmup Period. Continuing Warmup..!")
+                    #Calculate the learning rate increment during the warmup period:
+                    lr_increment = (max_lr - self.initial_lr) / self.warmup_steps
+                    print('Learning Rate Increment By : ', lr_increment)
+                    self.logger.info(f'Learning Rate Increment By : {lr_increment}.')
 
-        min_loss = 10
-        print('Default Minimum Loss: ', min_loss)
+            else:
+                #Calculate the learning rate increment during the warmup period:
+                lr_increment = (max_lr - self.initial_lr) / self.warmup_steps
+                print('Learning Rate Increment By : ', lr_increment)
+                self.logger.info(f'Learning Rate Increment By : {lr_increment}.')
+            
+        #NEW UPDATE: In case of resume training, keep a check on the overall train steps remaining.
+        if self.checkpoint is not None:
+            total_training_steps_rem = total_training_steps - self.checkpoint['global_step']
+            self.logger.info(f"Global Steps Trained Already : {self.checkpoint['global_step']}")
+            self.logger.info(f"Total training steps remaining : {total_training_steps_rem}")
+            
 
         try:
 
@@ -110,6 +149,16 @@ class GPT2_PreTrain:
                         
                         #NEW UPDATE: Update the global step according to the gradient updates to make warmup and cosine annealing proportional to the weight updates and not dataloader batches
                         global_step += 1
+
+                        
+                        #NEW UPDATE: In case of resume training:
+                        if self.checkpoint is not None:
+                            #NEW UPDATE:  With every update, remaning overall train step to decrease by 1.
+                            total_training_steps_rem -= 1
+
+                            #NEW UPDATE: Stop training if remaining overall train step falls to negative. Meaning: We have covered all the train steps required, so stop training further.
+                            if total_training_steps_rem < 0:
+                                break
 
                         if self.use_warmup:
                             #Check if the training is still within the warmup stage:
@@ -182,7 +231,13 @@ class GPT2_PreTrain:
                                         'config' : self.config,
                                         'validation_loss' : test_loss,
                                         'global_step' : global_step,
-                                        'learning_rate' : lr
+                                        'learning_rate' : lr,
+                                        'total_steps':total_steps,
+                                        'train_losses':train_losses,
+                                        'test_losses':test_losses,
+                                        'track_tokens_seen':track_tokens_seen,
+                                        'track_lr':track_lr,
+                                        'max_lr':max_lr
                                         }, 
                                         model_save_path)
                             self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
@@ -207,7 +262,13 @@ class GPT2_PreTrain:
                         'config' : self.config,
                         'validation_loss' : test_loss,
                         'global_step' : global_step,
-                        'learning_rate' : lr
+                        'learning_rate' : lr,
+                        'total_steps':total_steps,
+                        'train_losses':train_losses,
+                        'test_losses':test_losses,
+                        'track_tokens_seen':track_tokens_seen,
+                        'track_lr':track_lr,
+                        'max_lr':max_lr
                         }, 
                         model_save_path)
             
