@@ -60,10 +60,14 @@ class GPT2_PreTrain:
             max_lr = self.checkpoint['max_lr']
             min_loss = self.checkpoint['validation_loss']
             last_lr = self.optimizer.param_groups[0]['lr']
+            start_epoch = self.checkpoint.get('epoch', 0)
+            start_batch = self.checkpoint.get('batch', 0)
+            torch.set_rng_state(self.checkpoint.get('rng_state', torch.get_rng_state()))
+            tokens_seen = self.checkpoint.get('track_tokens_seen', [0])[-1]
 
             self.logger.info(f"Model Training Resumed.")
             self.logger.info(f"Best Test Loss recorded : {min_loss}")
-            self.logger.info(f"Global STeps Completed : {global_step}")
+            self.logger.info(f"Resuming from Epoch {start_epoch}, Batch {start_batch}, Global Step {global_step}")
             self.logger.info(f'Last Learning Rate : {last_lr}.')
             
         
@@ -72,6 +76,7 @@ class GPT2_PreTrain:
             train_losses, test_losses, track_tokens_seen, track_lr, total_steps  = [], [], [], [], []
 
             tokens_seen, global_step = 0, -1
+            start_epoch, start_batch =0, 0
         
             #Get the maximum learning rate as given while defining the optimizer:
             max_lr = self.optimizer.param_groups[0]['lr']
@@ -124,14 +129,24 @@ class GPT2_PreTrain:
             
 
         try:
+            stop_training = False
 
-            for ep in range(self.num_epochs):
+            for ep in range(start_epoch, self.num_epochs):
+
+                if stop_training:
+                    break
 
                 self.model.train()
 
                 for batch_index, (train_x, train_y) in enumerate(self.train_loader):
 
                     # global_step += 1
+                    if stop_training:
+                        break
+                    
+                    # Skip batches we’ve already processed (only once, first resumed epoch)
+                    if batch_index < start_batch:
+                        continue
 
                     loss = self.metrics.loss_batch(train_x, train_y)
 
@@ -156,8 +171,11 @@ class GPT2_PreTrain:
                             #NEW UPDATE:  With every update, remaning overall train step to decrease by 1.
                             total_training_steps_rem -= 1
 
-                            #NEW UPDATE: Stop training if remaining overall train step falls to negative. Meaning: We have covered all the train steps required, so stop training further.
+                            #NEW UPDATE: Stop training if remaining overall train step falls to negative. 
+                            #Meaning: We have covered all the train steps required, so stop training further.
                             if total_training_steps_rem < 0:
+                                self.logger.info("Training complete (resume target reached).")
+                                stop_training = True
                                 break
 
                         if self.use_warmup:
@@ -237,7 +255,10 @@ class GPT2_PreTrain:
                                         'test_losses':test_losses,
                                         'track_tokens_seen':track_tokens_seen,
                                         'track_lr':track_lr,
-                                        'max_lr':max_lr
+                                        'max_lr':max_lr,
+                                        'epoch': ep,
+                                        'batch': batch_index + 1,  # resume from next batch
+                                        'rng_state': torch.get_rng_state(),
                                         }, 
                                         model_save_path)
                             self.logger.info(f"BEST model SAVED on iteration {global_step:06d} to {model_save_path}..! ")
@@ -260,7 +281,7 @@ class GPT2_PreTrain:
             torch.save({'model' : self.model.state_dict(),
                         'optimizer': self.optimizer.state_dict(),
                         'config' : self.config,
-                        'validation_loss' : test_loss,
+                        'validation_loss' : test_losses[-1] if len(test_losses) > 0 else 10,
                         'global_step' : global_step,
                         'learning_rate' : lr,
                         'total_steps':total_steps,
@@ -268,7 +289,10 @@ class GPT2_PreTrain:
                         'test_losses':test_losses,
                         'track_tokens_seen':track_tokens_seen,
                         'track_lr':track_lr,
-                        'max_lr':max_lr
+                        'max_lr':max_lr,
+                        'epoch': ep,
+                        'batch': batch_index + 1,  # resume from next batch
+                        'rng_state': torch.get_rng_state(),
                         }, 
                         model_save_path)
             

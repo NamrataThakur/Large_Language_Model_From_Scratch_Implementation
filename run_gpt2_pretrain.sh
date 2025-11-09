@@ -41,6 +41,7 @@ ff_hidden_dim=400
 arch_type='original'
 kv_cache=True
 moe_noise=True
+train_type='scratch'
 python gpt_pretrainingPipeline.py \
   --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V2' \
   --data_path 'tinystories' \
@@ -84,6 +85,8 @@ python gpt_pretrainingPipeline.py \
   --use_gradient_clip $use_gradient_clip \
   --use_warmup $use_warmup \
   --moe_noise $moe_noise \
-   --kv_cache $kv_cache \
-  --qkv_bias $qkv_bias \
+  --train_type $train_type \
+  --kv_cache $kv_cache \
+  
+# --qkv_bias $qkv_bias \
 
