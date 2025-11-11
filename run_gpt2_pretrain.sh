@@ -41,13 +41,14 @@ ff_hidden_dim=400
 arch_type='original'
 kv_cache=True
 moe_noise=True
-train_type='scratch'
+train_type='resume'
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V2' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V2_TEST_resume' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
-  --model_name 'gpt2_ORG_preTrain_S_V2' \
+  --model_name 'gpt2_ORG_preTrain_S_V2_TEST' \
+  --pre_save_model 'gpt2_ORG_preTrain_S_V2_TEST.pth' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \

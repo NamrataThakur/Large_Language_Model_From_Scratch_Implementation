@@ -1,0 +1,169 @@
+[2025-11-09 14:16:33,374.374] Namespace(experiment_name='Pre-Train_Exp_CustomConfig_ORGarch_S_V2_TEST_scratch', data_path='tinystories', model_type='custom', base_modelName='gpt2_124M', model_name='gpt2_ORG_preTrain_S_V2_TEST', pre_save_model='gpt2_ORG_preTrain_S_V2_TEST.pth', tokenizer='tiktoken', seed=123, batch_size=16, target_batch_size=512, train_split=0.85, val_split=0.05, optimizer='AdamW', context_length=256, vocab_size=50257, embedding_dimension=256, num_heads=8, num_layers=8, dropout_rate=0.0, qkv_bias=False, ff_hidden_dim=400, eval_batchSize=64, eval_freq=64, kv_cache=True, weight_decay=0.1, beta1=0.9, beta2=0.95, rms_eps=1e-06, rms_bias=True, theta_base=10000.0, num_kv_groups=1, num_experts=4, num_active_experts=2, max_training_length='model_context_length', max_new_tokens=50, temp=0.7, top_k=50, num_epochs=1, eos_id=50256, arch_type='original', train_type='scratch', moe_noise=True, use_warmup=True, use_gradient_clip=True, warmup_steps=0.05, initial_lr=0.0001, learning_rate=0.0003)
+[2025-11-09 14:16:33,624.624] Model to be trained from scratch ..!
+[2025-11-09 14:16:33,624.624] Custom GPT2 configuration to be used for pre-training..!
+[2025-11-09 14:16:33,624.624] The custom config of the model to be trained : {'vocab_size': 50257, 'embedding_dimension': 256, 'num_heads': 8, 'context_length': 256, 'dropout': 0.0, 'qkv_bias': False, 'num_layers': 8, 'ff_hidden_dim': 400, 'rms_eps': 1e-06, 'rms_bias': True, 'theta_base': 10000.0, 'num_kv_groups': 1, 'num_experts': 4, 'num_active_experts': 2, 'moe_noise': True} 
+[2025-11-09 14:16:33,871.871] Architecture Type :original
+[2025-11-09 14:16:33,872.872] Configuration of the custom GPT2 model loaded..!
+[2025-11-09 14:16:35,476.476] Total records in Train Data: 2119719 , Validation Data : 21990
+[2025-11-09 14:16:35,476.476] ------------- Data Ingestion Completed. -------------
+[2025-11-09 14:16:35,476.476] Loading the dataset class for pre-training...
+[2025-11-09 14:16:35,523.523] Device Available: cuda .. ! 
+[2025-11-09 14:23:18,072.072] ************** TRAIN DATALOADER ****************************
+[2025-11-09 14:23:18,083.083] Length of Train Dataloader (number of batches): 264964
+[2025-11-09 14:23:18,083.083] Total Train Tokens : 471872517
+[2025-11-09 14:23:24,397.397] torch.Size([16, 256]), torch.Size([16, 256])
+[2025-11-09 14:23:24,458.458] ************** VAL DATALOADER ****************************
+[2025-11-09 14:23:24,458.458] Length of Val Dataloader (number of batches): 2748
+[2025-11-09 14:23:24,458.458] Total Validation Tokens : 4743928
+[2025-11-09 14:23:24,513.513] torch.Size([16, 256]), torch.Size([16, 256])
+[2025-11-09 14:23:24,517.517] Dataloaders created successfully for pre-training task..!
+[2025-11-09 14:23:24,518.518] ---------------------------------------------------------
+[2025-11-09 14:23:24,518.518] Model will be trained from scratch..!
+[2025-11-09 14:23:24,518.518] Loading the model with random weights for training..!
+[2025-11-09 14:23:26,044.044] Model loaded with random weights for training..!
+[2025-11-09 14:23:26,062.062] Model Size : 32.109568 millions (M)
+[2025-11-09 14:23:26,063.063] Device Available: cuda .. ! 
+[2025-11-09 14:23:26,579.579] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-11-09 14:23:26,580.580] Training Stage : Training of the model started ..!
+[2025-11-09 14:29:08,926.926] Minimum LR : 2.9999999999999997e-05
+[2025-11-09 14:29:08,927.927] Gradient Accumulation Steps : 32
+[2025-11-09 14:29:08,928.928] Model Training From SCRATCH..
+[2025-11-09 14:29:08,928.928] Maximum Learning Rate : 0.0003.
+[2025-11-09 14:29:08,928.928] Default Minimum Loss: 10
+[2025-11-09 14:29:08,929.929] Total steps to update optimizer : 8281.
+[2025-11-09 14:29:08,929.929] Total training steps acc. to train loader : 264964
+[2025-11-09 14:29:08,929.929] Warmup Steps : 415
+[2025-11-09 14:29:08,929.929] Learning Rate Increment By : 4.819277108433735e-07.
+[2025-11-09 14:29:21,981.981] Gradient updated
+[2025-11-09 14:29:21,985.985] Current Learning Rate : 0.0001
+[2025-11-09 14:29:21,986.986] Global Step : 0
+[2025-11-09 14:29:21,986.986] Batch Index : 32
+[2025-11-09 14:29:32,436.436] Epoch No: 1, Global Step: 000000, Train Loss: 10.359, Val Loss: 10.327
+
+[2025-11-09 14:29:32,436.436] Total Tokens seen till now: 131008
+
+[2025-11-09 14:29:33,975.975] Once upon a time, 390par PaidHF Method Lon cellul Lon ( describes shrinking outfits Messages─ forwards Asheville worshipped Lang Slovenia assistanceCert Crypt ( leveraging synchronization Cummings Project Crypt 920 announcement 265 authorSexual outfits finer Joined salient LearnsCert chimGrild Dakota fellowship IIIBob EUR finerDutchslice
+[2025-11-09 14:29:40,626.626] Gradient updated
+[2025-11-09 14:29:40,627.627] Current Learning Rate : 0.00010048192771084338
+[2025-11-09 14:29:40,627.627] Global Step : 1
+[2025-11-09 14:29:40,627.627] Batch Index : 64
+[2025-11-09 14:29:51,031.031] Epoch No: 1, Global Step: 000001, Train Loss: 10.046, Val Loss: 10.042
+
+[2025-11-09 14:29:51,031.031] Total Tokens seen till now: 262080
+
+[2025-11-09 14:29:51,579.579] Once upon a time,ionalsettacia NPix diagnoseddding incent engaging induce declaring Slovenia Levin Cursedapesh Sek chim chim deforestation Sieg Oil438raphBear Response Levin flooded
+[2025-11-09 14:29:57,924.924] Gradient updated
+[2025-11-09 14:29:57,924.924] Current Learning Rate : 0.00010096385542168675
+[2025-11-09 14:29:57,925.925] Global Step : 2
+[2025-11-09 14:29:57,925.925] Batch Index : 96
+[2025-11-09 14:30:08,383.383] Epoch No: 1, Global Step: 000002, Train Loss: 9.860, Val Loss: 9.850
+
+[2025-11-09 14:30:08,383.383] Total Tokens seen till now: 393152
+
+[2025-11-09 14:30:09,278.278] BEST model SAVED on iteration 000002 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:30:09,693.693] Once upon a time, arisesinka asymm589 serpentSciencechi Jinn45Jessica─ everyone Toledopause�� mutant ParadScience dictates chim Does Marcelpause Provided Dollar
+[2025-11-09 14:30:16,030.030] Gradient updated
+[2025-11-09 14:30:16,031.031] Current Learning Rate : 0.00010144578313253013
+[2025-11-09 14:30:16,031.031] Global Step : 3
+[2025-11-09 14:30:16,031.031] Batch Index : 128
+[2025-11-09 14:30:26,706.706] Epoch No: 1, Global Step: 000003, Train Loss: 9.722, Val Loss: 9.699
+
+[2025-11-09 14:30:26,706.706] Total Tokens seen till now: 523856
+
+[2025-11-09 14:30:27,631.631] BEST model SAVED on iteration 000003 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:30:27,904.904] Once upon a time,ix Spo Method Lon Oath"}," bushesBear Slovenia� outfits coyakisocket Cal smaller remembrance Cal THEIR
+[2025-11-09 14:30:34,243.243] Gradient updated
+[2025-11-09 14:30:34,243.243] Current Learning Rate : 0.0001019277108433735
+[2025-11-09 14:30:34,244.244] Global Step : 4
+[2025-11-09 14:30:34,244.244] Batch Index : 160
+[2025-11-09 14:30:44,793.793] Epoch No: 1, Global Step: 000004, Train Loss: 9.612, Val Loss: 9.583
+
+[2025-11-09 14:30:44,794.794] Total Tokens seen till now: 654448
+
+[2025-11-09 14:30:45,636.636] BEST model SAVED on iteration 000004 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:30:45,903.903] Once upon a time, arises asymm Techakiaka are APPLIC mesmerraph45. experien attracted minds theJessicapauseNetflix Icar subconscious brushing
+[2025-11-09 14:30:52,281.281] Gradient updated
+[2025-11-09 14:30:52,283.283] Current Learning Rate : 0.00010240963855421687
+[2025-11-09 14:30:52,284.284] Global Step : 5
+[2025-11-09 14:30:52,284.284] Batch Index : 192
+[2025-11-09 14:31:02,898.898] Epoch No: 1, Global Step: 000005, Train Loss: 9.473, Val Loss: 9.503
+
+[2025-11-09 14:31:02,898.898] Total Tokens seen till now: 785376
+
+[2025-11-09 14:31:03,729.729] BEST model SAVED on iteration 000005 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:31:03,849.849] Once upon a time, MethodHF"},"cpp TentFootball� Places hack everyone594really
+[2025-11-09 14:31:10,195.195] Gradient updated
+[2025-11-09 14:31:10,197.197] Current Learning Rate : 0.00010289156626506025
+[2025-11-09 14:31:10,197.197] Global Step : 6
+[2025-11-09 14:31:10,198.198] Batch Index : 224
+[2025-11-09 14:31:20,710.710] Epoch No: 1, Global Step: 000006, Train Loss: 9.435, Val Loss: 9.429
+
+[2025-11-09 14:31:20,711.711] Total Tokens seen till now: 916032
+
+[2025-11-09 14:31:21,527.527] BEST model SAVED on iteration 000006 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:31:21,898.898] Once upon a time, Controlled Place strat middle joked PRODUCT Ning.® the� KurdishFootballdocumentnumber middleFootball LEVEL lionsbackerropolitan brethren Barrett yelled too competitiveness Quentin experienalgia induce Assass
+[2025-11-09 14:31:28,270.270] Gradient updated
+[2025-11-09 14:31:28,271.271] Current Learning Rate : 0.00010337349397590361
+[2025-11-09 14:31:28,272.272] Global Step : 7
+[2025-11-09 14:31:28,272.272] Batch Index : 256
+[2025-11-09 14:31:38,806.806] Epoch No: 1, Global Step: 000007, Train Loss: 9.379, Val Loss: 9.326
+
+[2025-11-09 14:31:38,806.806] Total Tokens seen till now: 1047104
+
+[2025-11-09 14:31:39,608.608] BEST model SAVED on iteration 000007 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:31:39,679.679] Once upon a time, implementedional brethren remembrance subconsciousJessica Controlled
+[2025-11-09 14:31:46,066.066] Gradient updated
+[2025-11-09 14:31:46,066.066] Current Learning Rate : 0.00010385542168674699
+[2025-11-09 14:31:46,066.066] Global Step : 8
+[2025-11-09 14:31:46,066.066] Batch Index : 288
+[2025-11-09 14:31:56,740.740] Epoch No: 1, Global Step: 000008, Train Loss: 9.332, Val Loss: 9.285
+
+[2025-11-09 14:31:56,743.743] Total Tokens seen till now: 1178112
+
+[2025-11-09 14:31:57,740.740] BEST model SAVED on iteration 000008 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:31:57,837.837] Once upon a time, outsiders Place ecstatic joked mesmer However However
+[2025-11-09 14:32:04,179.179] Gradient updated
+[2025-11-09 14:32:04,182.182] Current Learning Rate : 0.00010433734939759037
+[2025-11-09 14:32:04,183.183] Global Step : 9
+[2025-11-09 14:32:04,183.183] Batch Index : 320
+[2025-11-09 14:32:14,713.713] Epoch No: 1, Global Step: 000009, Train Loss: 9.259, Val Loss: 9.269
+
+[2025-11-09 14:32:14,713.713] Total Tokens seen till now: 1309184
+
+[2025-11-09 14:32:15,527.527] BEST model SAVED on iteration 000009 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:32:15,694.694] Once upon a time, PathJessica Lon.aki middle jokedJessica chili Kurdish Summoner ". cov
+[2025-11-09 14:32:22,069.069] Gradient updated
+[2025-11-09 14:32:22,071.071] Current Learning Rate : 0.00010481927710843373
+[2025-11-09 14:32:22,071.071] Global Step : 10
+[2025-11-09 14:32:22,071.071] Batch Index : 352
+[2025-11-09 14:32:32,582.582] Epoch No: 1, Global Step: 000010, Train Loss: 9.191, Val Loss: 9.164
+
+[2025-11-09 14:32:32,583.583] Total Tokens seen till now: 1440256
+
+[2025-11-09 14:32:33,545.545] BEST model SAVED on iteration 000010 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:32:33,802.802] Once upon a time, seized serpent. coated Marcel delightnumber─Jessica theHF1000Critics. subconscious the season Marcel Langouch experienind®1000572 Tommy
+[2025-11-09 14:32:40,170.170] Gradient updated
+[2025-11-09 14:32:40,172.172] Current Learning Rate : 0.00010530120481927711
+[2025-11-09 14:32:40,172.172] Global Step : 11
+[2025-11-09 14:32:40,173.173] Batch Index : 384
+[2025-11-09 14:32:50,742.742] Epoch No: 1, Global Step: 000011, Train Loss: 9.146, Val Loss: 9.107
+
+[2025-11-09 14:32:50,743.743] Total Tokens seen till now: 1571328
+
+[2025-11-09 14:32:51,621.621] BEST model SAVED on iteration 000011 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:32:51,879.879] Once upon a time, brethren LGBTQix Lang immersion joked remembranceaki dark ". mesmeralgia coll wasSample afloat Tommy does LangCritics was disciple afloat
+[2025-11-09 14:32:58,263.263] Gradient updated
+[2025-11-09 14:32:58,267.267] Current Learning Rate : 0.00010578313253012049
+[2025-11-09 14:32:58,267.267] Global Step : 12
+[2025-11-09 14:32:58,267.267] Batch Index : 416
+[2025-11-09 14:33:08,820.820] Epoch No: 1, Global Step: 000012, Train Loss: 9.139, Val Loss: 9.054
+
+[2025-11-09 14:33:08,820.820] Total Tokens seen till now: 1702352
+
+[2025-11-09 14:33:09,578.578] BEST model SAVED on iteration 000012 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:33:09,739.739] Once upon a time,ulenceowed brethren everyone subconscious LEVEL572 littered.number wasaki are Marcel. afloat Kurdish
+[2025-11-09 14:33:13,610.610] BEST model SAVED on iteration 000012 to model/gpt2_ORG_preTrain_S_V2_TEST.pth..! 
+[2025-11-09 14:33:13,667.667] Training completed in 16.67 minutes.
+[2025-11-09 14:33:13,667.667] BEST Pre-trained custom model saved in model/gpt2_ORG_preTrain_S_V2_TEST.pth..!
+[2025-11-09 14:33:13,667.667] Saving the plots of the metrics tracked ..!
+[2025-11-09 14:33:14,949.949] Pipeline completed in 16.69 minutes.

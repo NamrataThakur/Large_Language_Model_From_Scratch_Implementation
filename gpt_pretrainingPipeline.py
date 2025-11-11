@@ -504,10 +504,10 @@ if __name__ == '__main__':
 
             model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
             print(model_path)
-            logger.info('Model to be resumed for training from checkpoint present in the path: {model_path}')
+            logger.info(f'Model to be resumed for training from checkpoint present in the path: {model_path}')
 
             #Loading the config for pre-training:
-            checkpoint = torch.load(model_path, map_location=torch.device("cpu"))
+            checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=False)
             gpt2_config = checkpoint['config']
 
             if args.model_type == 'original':
@@ -612,7 +612,7 @@ if __name__ == '__main__':
         raise Exception(f'Error in loading file and creating dataloader:: {e}')
     
 
-    if args.pre_save_model is None:
+    if args.pre_save_model is  None or args.train_type == 'scratch':
         
         logger.info(f'Model will be trained from scratch..!')
 
@@ -655,12 +655,13 @@ if __name__ == '__main__':
 
         start_context = "Once upon a time,"
 
-        if args.train_type == 'scratch':
-            #Maximum LR value is given in this optimizer 'lr' param. 
-            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
-                                        betas = (args.beta1, args.beta2), eps=1e-8)
-        else:
-            optimizer = checkpoint['optimizer']
+        
+        #Maximum LR value is given in this optimizer 'lr' param. 
+        optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
+                                    betas = (args.beta1, args.beta2), eps=1e-8)
+        if args.train_type == 'resume':
+            optimizer.load_state_dict(checkpoint['optimizer'])
+            logger.info(f"Optimizer loaded successfully..!")
 
         epochs = args.num_epochs
 
@@ -696,6 +697,7 @@ if __name__ == '__main__':
                             checkpoint=checkpoint,
                             kv_cache=args.kv_cache,
                             arch_type=args.arch_type,
+                            config=gpt2_config
                             ) 
 
         train_losses, test_losses, track_tokens_seen, track_lr, total_steps = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, top_k=args.top_k,  
