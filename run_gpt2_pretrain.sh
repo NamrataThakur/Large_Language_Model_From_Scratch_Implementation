@@ -5,7 +5,7 @@
 
 num_epochs=1
 top_k=50
-temp=0.7
+temp=0.5
 max_new_tokens=50
 context_length=256
 vocab_size=50257
@@ -43,12 +43,12 @@ kv_cache=True
 moe_noise=True
 train_type='resume'
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V2_TEST_resume' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V3_resume_2' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
-  --model_name 'gpt2_ORG_preTrain_S_V2_TEST' \
-  --pre_save_model 'gpt2_ORG_preTrain_S_V2_TEST.pth' \
+  --model_name 'gpt2_ORG_preTrain_S_V3' \
+  --pre_save_model 'gpt2_ORG_preTrain_S_V3.pth' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \
