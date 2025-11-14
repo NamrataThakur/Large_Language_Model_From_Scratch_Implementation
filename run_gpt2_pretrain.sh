@@ -43,7 +43,7 @@ kv_cache=True
 moe_noise=True
 train_type='resume'
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V3_resume_2' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V3_resume_4' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
