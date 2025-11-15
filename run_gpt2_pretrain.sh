@@ -4,8 +4,8 @@
 #Pre-Training params:
 
 num_epochs=1
-top_k=50
-temp=0.5
+top_k=10
+temp=0.01
 max_new_tokens=50
 context_length=256
 vocab_size=50257
@@ -43,7 +43,7 @@ kv_cache=True
 moe_noise=True
 train_type='resume'
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V3_resume_4' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V3_resume_8' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
