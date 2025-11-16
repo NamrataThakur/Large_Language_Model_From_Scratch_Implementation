@@ -544,9 +544,12 @@ if __name__ == '__main__':
         
         if args.data_path == 'tinystories':
             data = load_dataset("roneneldan/TinyStories")
+            data = data.with_format("torch")
             train_df = data['train']
             val_df = data['validation']
             logger.info(f'Total records in Train Data: {len(train_df)} , Validation Data : {len(val_df)}')
+            sample_text = tokenizer.decode(tokenizer.encode(data["train"][0]["text"][:100]))
+            logger.info(f"Sample Text : {sample_text}")
         
         else:
             print('TO DO')
@@ -583,7 +586,7 @@ if __name__ == '__main__':
                                                     max_seq_length=max_seq_length,
                                                     batch_size=args.batch_size,
                                                     tokenizer = args.tokenizer,
-                                                    shuffle=True, drop_last=True,num_workers=0)
+                                                    shuffle=False, drop_last=True,num_workers=0)
     
         
         
