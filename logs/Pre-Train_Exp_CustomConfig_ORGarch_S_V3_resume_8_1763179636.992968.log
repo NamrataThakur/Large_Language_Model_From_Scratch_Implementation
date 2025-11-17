@@ -1,0 +1,970 @@
+[2025-11-15 04:07:16,993.993] Namespace(experiment_name='Pre-Train_Exp_CustomConfig_ORGarch_S_V3_resume_8', data_path='tinystories', model_type='custom', base_modelName='gpt2_124M', model_name='gpt2_ORG_preTrain_S_V3', pre_save_model='gpt2_ORG_preTrain_S_V3.pth', tokenizer='tiktoken', seed=123, batch_size=16, target_batch_size=512, train_split=0.85, val_split=0.05, optimizer='AdamW', context_length=256, vocab_size=50257, embedding_dimension=256, num_heads=8, num_layers=8, dropout_rate=0.0, qkv_bias=False, ff_hidden_dim=400, eval_batchSize=64, eval_freq=64, kv_cache=True, weight_decay=0.1, beta1=0.9, beta2=0.95, rms_eps=1e-06, rms_bias=True, theta_base=10000.0, num_kv_groups=1, num_experts=4, num_active_experts=2, max_training_length='model_context_length', max_new_tokens=50, temp=0.01, top_k=10, num_epochs=1, eos_id=50256, arch_type='original', train_type='resume', moe_noise=True, use_warmup=True, use_gradient_clip=True, warmup_steps=0.05, initial_lr=0.0001, learning_rate=0.0003)
+[2025-11-15 04:07:18,158.158] Model to be resumed for training from checkpoint present in the path: model/gpt2_ORG_preTrain_S_V3.pth
+[2025-11-15 04:07:18,511.511] Custom GPT2 configuration was used for pre-training..!
+[2025-11-15 04:07:18,512.512] The custom config of the model to be trained : {'vocab_size': 50257, 'embedding_dimension': 256, 'num_heads': 8, 'context_length': 256, 'dropout': 0.0, 'qkv_bias': False, 'num_layers': 8, 'ff_hidden_dim': 400, 'rms_eps': 1e-06, 'rms_bias': True, 'theta_base': 10000.0, 'num_kv_groups': 1, 'num_experts': 4, 'num_active_experts': 2, 'moe_noise': True} 
+[2025-11-15 04:07:18,903.903] Architecture Type :original
+[2025-11-15 04:07:18,904.904] Configuration of the custom GPT2 model loaded..!
+[2025-11-15 04:07:19,472.472] Total records in Train Data: 2119719 , Validation Data : 21990
+[2025-11-15 04:07:19,472.472] ------------- Data Ingestion Completed. -------------
+[2025-11-15 04:07:19,472.472] Loading the dataset class for pre-training...
+[2025-11-15 04:07:19,495.495] Device Available: cuda .. ! 
+[2025-11-15 04:13:44,352.352] ************** TRAIN DATALOADER ****************************
+[2025-11-15 04:13:44,356.356] Length of Train Dataloader (number of batches): 264964
+[2025-11-15 04:13:44,356.356] Total Train Tokens : 471872517
+[2025-11-15 04:13:49,830.830] torch.Size([16, 256]), torch.Size([16, 256])
+[2025-11-15 04:13:49,887.887] ************** VAL DATALOADER ****************************
+[2025-11-15 04:13:49,887.887] Length of Val Dataloader (number of batches): 2748
+[2025-11-15 04:13:49,887.887] Total Validation Tokens : 4743928
+[2025-11-15 04:13:49,894.894] torch.Size([16, 256]), torch.Size([16, 256])
+[2025-11-15 04:13:49,895.895] Dataloaders created successfully for pre-training task..!
+[2025-11-15 04:13:49,895.895] ---------------------------------------------------------
+[2025-11-15 04:13:49,895.895] Loading the weights of the model : gpt2_ORG_preTrain_S_V3.pth..!
+[2025-11-15 04:13:53,559.559] Model weights loaded successfully..!
+[2025-11-15 04:13:53,561.561] Model Size : 32.109568 millions (M)
+[2025-11-15 04:13:53,562.562] Device Available: cuda .. ! 
+[2025-11-15 04:13:53,623.623] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-11-15 04:13:53,623.623] Training Stage : Training of the model started ..!
+[2025-11-15 04:17:28,558.558] Optimizer loaded successfully..!
+[2025-11-15 04:17:28,563.563] Minimum LR : 2.9999999999999997e-05
+[2025-11-15 04:17:28,563.563] Gradient Accumulation Steps : 32
+[2025-11-15 04:17:28,569.569] Model Training Resumed.
+[2025-11-15 04:17:28,569.569] Best Test Loss recorded : 1.2654520962387323
+[2025-11-15 04:17:28,569.569] Resuming from Epoch 0, Batch 174866, Global Step 5463
+[2025-11-15 04:17:28,569.569] Last Learning Rate : 0.00010684937155080249.
+[2025-11-15 04:17:28,569.569] Total steps to update optimizer : 8281.
+[2025-11-15 04:17:28,570.570] Total training steps acc. to train loader : 264964
+[2025-11-15 04:17:28,570.570] Warmup Steps : 415
+[2025-11-15 04:17:28,570.570] Global Steps Crossed Warmup Period. Disabling Warmup..!
+[2025-11-15 04:17:28,570.570] Global Steps Trained Already : 5463
+[2025-11-15 04:17:28,570.570] Total training steps remaining : 2818
+[2025-11-15 04:39:19,576.576] Gradient updated
+[2025-11-15 04:39:19,608.608] Current Learning Rate : 0.00010680071708079818
+[2025-11-15 04:39:19,608.608] Global Step : 5464
+[2025-11-15 04:39:19,608.608] Batch Index : 174880
+[2025-11-15 04:39:31,154.154] Epoch No: 1, Global Step: 005464, Train Loss: 1.281, Val Loss: 1.275
+
+[2025-11-15 04:39:31,154.154] Total Tokens seen till now: 714215808
+
+[2025-11-15 04:39:33,091.091] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:39:39,540.540] Gradient updated
+[2025-11-15 04:39:39,542.542] Current Learning Rate : 0.00010675207189424571
+[2025-11-15 04:39:39,542.542] Global Step : 5465
+[2025-11-15 04:39:39,542.542] Batch Index : 174912
+[2025-11-15 04:39:50,790.790] Epoch No: 1, Global Step: 005465, Train Loss: 1.274, Val Loss: 1.247
+
+[2025-11-15 04:39:50,790.790] Total Tokens seen till now: 714346880
+
+[2025-11-15 04:39:51,781.781] BEST model SAVED on iteration 005465 to model/gpt2_ORG_preTrain_S_V3.pth..! 
+[2025-11-15 04:39:52,255.255] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:39:58,620.620] Gradient updated
+[2025-11-15 04:39:58,621.621] Current Learning Rate : 0.00010670343599890449
+[2025-11-15 04:39:58,621.621] Global Step : 5466
+[2025-11-15 04:39:58,621.621] Batch Index : 174944
+[2025-11-15 04:40:09,810.810] Epoch No: 1, Global Step: 005466, Train Loss: 1.281, Val Loss: 1.259
+
+[2025-11-15 04:40:09,810.810] Total Tokens seen till now: 714477632
+
+[2025-11-15 04:40:10,265.265] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:40:16,618.618] Gradient updated
+[2025-11-15 04:40:16,618.618] Current Learning Rate : 0.00010665480940253261
+[2025-11-15 04:40:16,618.618] Global Step : 5467
+[2025-11-15 04:40:16,618.618] Batch Index : 174976
+[2025-11-15 04:40:27,582.582] Epoch No: 1, Global Step: 005467, Train Loss: 1.263, Val Loss: 1.274
+
+[2025-11-15 04:40:27,582.582] Total Tokens seen till now: 714608704
+
+[2025-11-15 04:40:28,155.155] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:40:34,503.503] Gradient updated
+[2025-11-15 04:40:34,504.504] Current Learning Rate : 0.00010660619211288661
+[2025-11-15 04:40:34,504.504] Global Step : 5468
+[2025-11-15 04:40:34,504.504] Batch Index : 175008
+[2025-11-15 04:40:45,319.319] Epoch No: 1, Global Step: 005468, Train Loss: 1.287, Val Loss: 1.267
+
+[2025-11-15 04:40:45,319.319] Total Tokens seen till now: 714739104
+
+[2025-11-15 04:40:45,774.774] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:40:52,137.137] Gradient updated
+[2025-11-15 04:40:52,137.137] Current Learning Rate : 0.00010655758413772135
+[2025-11-15 04:40:52,137.137] Global Step : 5469
+[2025-11-15 04:40:52,137.137] Batch Index : 175040
+[2025-11-15 04:41:02,835.835] Epoch No: 1, Global Step: 005469, Train Loss: 1.280, Val Loss: 1.264
+
+[2025-11-15 04:41:02,836.836] Total Tokens seen till now: 714870144
+
+[2025-11-15 04:41:03,291.291] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:41:09,652.652] Gradient updated
+[2025-11-15 04:41:09,653.653] Current Learning Rate : 0.00010650898548479037
+[2025-11-15 04:41:09,653.653] Global Step : 5470
+[2025-11-15 04:41:09,653.653] Batch Index : 175072
+[2025-11-15 04:41:20,344.344] Epoch No: 1, Global Step: 005470, Train Loss: 1.260, Val Loss: 1.249
+
+[2025-11-15 04:41:20,345.345] Total Tokens seen till now: 715001088
+
+[2025-11-15 04:41:20,792.792] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:41:27,121.121] Gradient updated
+[2025-11-15 04:41:27,121.121] Current Learning Rate : 0.00010646039616184582
+[2025-11-15 04:41:27,121.121] Global Step : 5471
+[2025-11-15 04:41:27,121.121] Batch Index : 175104
+[2025-11-15 04:41:37,803.803] Epoch No: 1, Global Step: 005471, Train Loss: 1.280, Val Loss: 1.286
+
+[2025-11-15 04:41:37,803.803] Total Tokens seen till now: 715131168
+
+[2025-11-15 04:41:38,265.265] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:41:44,630.630] Gradient updated
+[2025-11-15 04:41:44,630.630] Current Learning Rate : 0.00010641181617663822
+[2025-11-15 04:41:44,630.630] Global Step : 5472
+[2025-11-15 04:41:44,630.630] Batch Index : 175136
+[2025-11-15 04:41:55,235.235] Epoch No: 1, Global Step: 005472, Train Loss: 1.263, Val Loss: 1.285
+
+[2025-11-15 04:41:55,235.235] Total Tokens seen till now: 715262240
+
+[2025-11-15 04:41:55,683.683] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:42:02,038.038] Gradient updated
+[2025-11-15 04:42:02,038.038] Current Learning Rate : 0.00010636324553691658
+[2025-11-15 04:42:02,038.038] Global Step : 5473
+[2025-11-15 04:42:02,038.038] Batch Index : 175168
+[2025-11-15 04:42:12,663.663] Epoch No: 1, Global Step: 005473, Train Loss: 1.280, Val Loss: 1.268
+
+[2025-11-15 04:42:12,664.664] Total Tokens seen till now: 715392896
+
+[2025-11-15 04:42:13,284.284] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:42:19,666.666] Gradient updated
+[2025-11-15 04:42:19,666.666] Current Learning Rate : 0.00010631468425042853
+[2025-11-15 04:42:19,666.666] Global Step : 5474
+[2025-11-15 04:42:19,666.666] Batch Index : 175200
+[2025-11-15 04:42:30,285.285] Epoch No: 1, Global Step: 005474, Train Loss: 1.286, Val Loss: 1.256
+
+[2025-11-15 04:42:30,285.285] Total Tokens seen till now: 715523968
+
+[2025-11-15 04:42:30,733.733] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:42:37,104.104] Gradient updated
+[2025-11-15 04:42:37,104.104] Current Learning Rate : 0.00010626613232492013
+[2025-11-15 04:42:37,104.104] Global Step : 5475
+[2025-11-15 04:42:37,104.104] Batch Index : 175232
+[2025-11-15 04:42:47,658.658] Epoch No: 1, Global Step: 005475, Train Loss: 1.281, Val Loss: 1.273
+
+[2025-11-15 04:42:47,659.659] Total Tokens seen till now: 715655040
+
+[2025-11-15 04:42:48,262.262] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:42:54,607.607] Gradient updated
+[2025-11-15 04:42:54,607.607] Current Learning Rate : 0.00010621758976813596
+[2025-11-15 04:42:54,608.608] Global Step : 5476
+[2025-11-15 04:42:54,608.608] Batch Index : 175264
+[2025-11-15 04:43:05,174.174] Epoch No: 1, Global Step: 005476, Train Loss: 1.275, Val Loss: 1.245
+
+[2025-11-15 04:43:05,174.174] Total Tokens seen till now: 715785280
+
+[2025-11-15 04:43:06,053.053] BEST model SAVED on iteration 005476 to model/gpt2_ORG_preTrain_S_V3.pth..! 
+[2025-11-15 04:43:06,513.513] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:43:12,911.911] Gradient updated
+[2025-11-15 04:43:12,912.912] Current Learning Rate : 0.00010616905658781907
+[2025-11-15 04:43:12,912.912] Global Step : 5477
+[2025-11-15 04:43:12,912.912] Batch Index : 175296
+[2025-11-15 04:43:23,696.696] Epoch No: 1, Global Step: 005477, Train Loss: 1.276, Val Loss: 1.293
+
+[2025-11-15 04:43:23,697.697] Total Tokens seen till now: 715916336
+
+[2025-11-15 04:43:24,317.317] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:43:30,703.703] Gradient updated
+[2025-11-15 04:43:30,703.703] Current Learning Rate : 0.00010612053279171115
+[2025-11-15 04:43:30,703.703] Global Step : 5478
+[2025-11-15 04:43:30,703.703] Batch Index : 175328
+[2025-11-15 04:43:41,267.267] Epoch No: 1, Global Step: 005478, Train Loss: 1.267, Val Loss: 1.276
+
+[2025-11-15 04:43:41,268.268] Total Tokens seen till now: 716047408
+
+[2025-11-15 04:43:41,723.723] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:43:48,086.086] Gradient updated
+[2025-11-15 04:43:48,087.087] Current Learning Rate : 0.00010607201838755226
+[2025-11-15 04:43:48,087.087] Global Step : 5479
+[2025-11-15 04:43:48,087.087] Batch Index : 175360
+[2025-11-15 04:43:58,696.696] Epoch No: 1, Global Step: 005479, Train Loss: 1.278, Val Loss: 1.270
+
+[2025-11-15 04:43:58,696.696] Total Tokens seen till now: 716178176
+
+[2025-11-15 04:43:59,163.163] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:44:05,524.524] Gradient updated
+[2025-11-15 04:44:05,524.524] Current Learning Rate : 0.00010602351338308103
+[2025-11-15 04:44:05,524.524] Global Step : 5480
+[2025-11-15 04:44:05,525.525] Batch Index : 175392
+[2025-11-15 04:44:16,051.051] Epoch No: 1, Global Step: 005480, Train Loss: 1.261, Val Loss: 1.293
+
+[2025-11-15 04:44:16,051.051] Total Tokens seen till now: 716309088
+
+[2025-11-15 04:44:16,535.535] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:44:22,925.925] Gradient updated
+[2025-11-15 04:44:22,925.925] Current Learning Rate : 0.00010597501778603451
+[2025-11-15 04:44:22,926.926] Global Step : 5481
+[2025-11-15 04:44:22,926.926] Batch Index : 175424
+[2025-11-15 04:44:33,500.500] Epoch No: 1, Global Step: 005481, Train Loss: 1.290, Val Loss: 1.273
+
+[2025-11-15 04:44:33,500.500] Total Tokens seen till now: 716440160
+
+[2025-11-15 04:44:33,949.949] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:44:40,310.310] Gradient updated
+[2025-11-15 04:44:40,310.310] Current Learning Rate : 0.00010592653160414833
+[2025-11-15 04:44:40,310.310] Global Step : 5482
+[2025-11-15 04:44:40,311.311] Batch Index : 175456
+[2025-11-15 04:44:50,789.789] Epoch No: 1, Global Step: 005482, Train Loss: 1.285, Val Loss: 1.266
+
+[2025-11-15 04:44:50,789.789] Total Tokens seen till now: 716570848
+
+[2025-11-15 04:44:51,245.245] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:44:57,574.574] Gradient updated
+[2025-11-15 04:44:57,575.575] Current Learning Rate : 0.00010587805484515659
+[2025-11-15 04:44:57,575.575] Global Step : 5483
+[2025-11-15 04:44:57,575.575] Batch Index : 175488
+[2025-11-15 04:45:08,153.153] Epoch No: 1, Global Step: 005483, Train Loss: 1.261, Val Loss: 1.265
+
+[2025-11-15 04:45:08,153.153] Total Tokens seen till now: 716701008
+
+[2025-11-15 04:45:08,605.605] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:45:14,972.972] Gradient updated
+[2025-11-15 04:45:14,972.972] Current Learning Rate : 0.00010582958751679188
+[2025-11-15 04:45:14,972.972] Global Step : 5484
+[2025-11-15 04:45:14,973.973] Batch Index : 175520
+[2025-11-15 04:45:25,505.505] Epoch No: 1, Global Step: 005484, Train Loss: 1.261, Val Loss: 1.262
+
+[2025-11-15 04:45:25,505.505] Total Tokens seen till now: 716832080
+
+[2025-11-15 04:45:25,962.962] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:45:32,341.341] Gradient updated
+[2025-11-15 04:45:32,341.341] Current Learning Rate : 0.00010578112962678527
+[2025-11-15 04:45:32,341.341] Global Step : 5485
+[2025-11-15 04:45:32,341.341] Batch Index : 175552
+[2025-11-15 04:45:42,791.791] Epoch No: 1, Global Step: 005485, Train Loss: 1.272, Val Loss: 1.270
+
+[2025-11-15 04:45:42,791.791] Total Tokens seen till now: 716963152
+
+[2025-11-15 04:45:43,247.247] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:45:49,615.615] Gradient updated
+[2025-11-15 04:45:49,616.616] Current Learning Rate : 0.00010573268118286642
+[2025-11-15 04:45:49,616.616] Global Step : 5486
+[2025-11-15 04:45:49,616.616] Batch Index : 175584
+[2025-11-15 04:46:00,058.058] Epoch No: 1, Global Step: 005486, Train Loss: 1.269, Val Loss: 1.284
+
+[2025-11-15 04:46:00,058.058] Total Tokens seen till now: 717094224
+
+[2025-11-15 04:46:00,521.521] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:46:06,901.901] Gradient updated
+[2025-11-15 04:46:06,901.901] Current Learning Rate : 0.00010568424219276342
+[2025-11-15 04:46:06,901.901] Global Step : 5487
+[2025-11-15 04:46:06,901.901] Batch Index : 175616
+[2025-11-15 04:46:17,403.403] Epoch No: 1, Global Step: 005487, Train Loss: 1.284, Val Loss: 1.272
+
+[2025-11-15 04:46:17,403.403] Total Tokens seen till now: 717225296
+
+[2025-11-15 04:46:17,942.942] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:46:24,317.317] Gradient updated
+[2025-11-15 04:46:24,317.317] Current Learning Rate : 0.00010563581266420268
+[2025-11-15 04:46:24,317.317] Global Step : 5488
+[2025-11-15 04:46:24,317.317] Batch Index : 175648
+[2025-11-15 04:46:34,754.754] Epoch No: 1, Global Step: 005488, Train Loss: 1.296, Val Loss: 1.276
+
+[2025-11-15 04:46:34,755.755] Total Tokens seen till now: 717356256
+
+[2025-11-15 04:46:35,210.210] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:46:41,541.541] Gradient updated
+[2025-11-15 04:46:41,542.542] Current Learning Rate : 0.00010558739260490946
+[2025-11-15 04:46:41,542.542] Global Step : 5489
+[2025-11-15 04:46:41,542.542] Batch Index : 175680
+[2025-11-15 04:46:52,021.021] Epoch No: 1, Global Step: 005489, Train Loss: 1.265, Val Loss: 1.276
+
+[2025-11-15 04:46:52,022.022] Total Tokens seen till now: 717486384
+
+[2025-11-15 04:46:52,476.476] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:46:58,829.829] Gradient updated
+[2025-11-15 04:46:58,829.829] Current Learning Rate : 0.00010553898202260721
+[2025-11-15 04:46:58,829.829] Global Step : 5490
+[2025-11-15 04:46:58,829.829] Batch Index : 175712
+[2025-11-15 04:47:09,304.304] Epoch No: 1, Global Step: 005490, Train Loss: 1.286, Val Loss: 1.267
+
+[2025-11-15 04:47:09,304.304] Total Tokens seen till now: 717616960
+
+[2025-11-15 04:47:09,750.750] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:47:16,109.109] Gradient updated
+[2025-11-15 04:47:16,109.109] Current Learning Rate : 0.00010549058092501799
+[2025-11-15 04:47:16,109.109] Global Step : 5491
+[2025-11-15 04:47:16,109.109] Batch Index : 175744
+[2025-11-15 04:47:26,585.585] Epoch No: 1, Global Step: 005491, Train Loss: 1.281, Val Loss: 1.282
+
+[2025-11-15 04:47:26,585.585] Total Tokens seen till now: 717747760
+
+[2025-11-15 04:47:27,029.029] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:47:33,402.402] Gradient updated
+[2025-11-15 04:47:33,402.402] Current Learning Rate : 0.00010544218931986228
+[2025-11-15 04:47:33,402.402] Global Step : 5492
+[2025-11-15 04:47:33,402.402] Batch Index : 175776
+[2025-11-15 04:47:43,899.899] Epoch No: 1, Global Step: 005492, Train Loss: 1.281, Val Loss: 1.274
+
+[2025-11-15 04:47:43,899.899] Total Tokens seen till now: 717878832
+
+[2025-11-15 04:47:44,354.354] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:47:50,722.722] Gradient updated
+[2025-11-15 04:47:50,723.723] Current Learning Rate : 0.00010539380721485929
+[2025-11-15 04:47:50,723.723] Global Step : 5493
+[2025-11-15 04:47:50,723.723] Batch Index : 175808
+[2025-11-15 04:48:01,222.222] Epoch No: 1, Global Step: 005493, Train Loss: 1.251, Val Loss: 1.268
+
+[2025-11-15 04:48:01,223.223] Total Tokens seen till now: 718009760
+
+[2025-11-15 04:48:01,678.678] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:48:08,024.024] Gradient updated
+[2025-11-15 04:48:08,024.024] Current Learning Rate : 0.00010534543461772628
+[2025-11-15 04:48:08,025.025] Global Step : 5494
+[2025-11-15 04:48:08,025.025] Batch Index : 175840
+[2025-11-15 04:48:18,528.528] Epoch No: 1, Global Step: 005494, Train Loss: 1.256, Val Loss: 1.274
+
+[2025-11-15 04:48:18,528.528] Total Tokens seen till now: 718140288
+
+[2025-11-15 04:48:18,976.976] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:48:25,355.355] Gradient updated
+[2025-11-15 04:48:25,356.356] Current Learning Rate : 0.00010529707153617934
+[2025-11-15 04:48:25,356.356] Global Step : 5495
+[2025-11-15 04:48:25,356.356] Batch Index : 175872
+[2025-11-15 04:48:35,746.746] Epoch No: 1, Global Step: 005495, Train Loss: 1.301, Val Loss: 1.256
+
+[2025-11-15 04:48:35,747.747] Total Tokens seen till now: 718271360
+
+[2025-11-15 04:48:36,201.201] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:48:42,584.584] Gradient updated
+[2025-11-15 04:48:42,585.585] Current Learning Rate : 0.00010524871797793286
+[2025-11-15 04:48:42,585.585] Global Step : 5496
+[2025-11-15 04:48:42,585.585] Batch Index : 175904
+[2025-11-15 04:48:53,100.100] Epoch No: 1, Global Step: 005496, Train Loss: 1.288, Val Loss: 1.283
+
+[2025-11-15 04:48:53,100.100] Total Tokens seen till now: 718402432
+
+[2025-11-15 04:48:53,551.551] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:48:59,927.927] Gradient updated
+[2025-11-15 04:48:59,928.928] Current Learning Rate : 0.00010520037395069994
+[2025-11-15 04:48:59,928.928] Global Step : 5497
+[2025-11-15 04:48:59,928.928] Batch Index : 175936
+[2025-11-15 04:49:10,379.379] Epoch No: 1, Global Step: 005497, Train Loss: 1.289, Val Loss: 1.281
+
+[2025-11-15 04:49:10,380.380] Total Tokens seen till now: 718533504
+
+[2025-11-15 04:49:10,839.839] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:49:17,224.224] Gradient updated
+[2025-11-15 04:49:17,225.225] Current Learning Rate : 0.0001051520394621919
+[2025-11-15 04:49:17,225.225] Global Step : 5498
+[2025-11-15 04:49:17,225.225] Batch Index : 175968
+[2025-11-15 04:49:27,635.635] Epoch No: 1, Global Step: 005498, Train Loss: 1.264, Val Loss: 1.281
+
+[2025-11-15 04:49:27,636.636] Total Tokens seen till now: 718664560
+
+[2025-11-15 04:49:28,224.224] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:49:34,578.578] Gradient updated
+[2025-11-15 04:49:34,579.579] Current Learning Rate : 0.00010510371452011865
+[2025-11-15 04:49:34,579.579] Global Step : 5499
+[2025-11-15 04:49:34,579.579] Batch Index : 176000
+[2025-11-15 04:49:45,010.010] Epoch No: 1, Global Step: 005499, Train Loss: 1.271, Val Loss: 1.260
+
+[2025-11-15 04:49:45,011.011] Total Tokens seen till now: 718795312
+
+[2025-11-15 04:49:45,467.467] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:49:51,826.826] Gradient updated
+[2025-11-15 04:49:51,827.827] Current Learning Rate : 0.0001050553991321886
+[2025-11-15 04:49:51,827.827] Global Step : 5500
+[2025-11-15 04:49:51,827.827] Batch Index : 176032
+[2025-11-15 04:50:02,353.353] Epoch No: 1, Global Step: 005500, Train Loss: 1.277, Val Loss: 1.261
+
+[2025-11-15 04:50:02,353.353] Total Tokens seen till now: 718925920
+
+[2025-11-15 04:50:02,843.843] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:50:09,210.210] Gradient updated
+[2025-11-15 04:50:09,210.210] Current Learning Rate : 0.00010500709330610859
+[2025-11-15 04:50:09,210.210] Global Step : 5501
+[2025-11-15 04:50:09,210.210] Batch Index : 176064
+[2025-11-15 04:50:19,676.676] Epoch No: 1, Global Step: 005501, Train Loss: 1.268, Val Loss: 1.244
+
+[2025-11-15 04:50:19,676.676] Total Tokens seen till now: 719056992
+
+[2025-11-15 04:50:20,648.648] BEST model SAVED on iteration 005501 to model/gpt2_ORG_preTrain_S_V3.pth..! 
+[2025-11-15 04:50:21,107.107] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:50:27,467.467] Gradient updated
+[2025-11-15 04:50:27,468.468] Current Learning Rate : 0.00010495879704958395
+[2025-11-15 04:50:27,468.468] Global Step : 5502
+[2025-11-15 04:50:27,468.468] Batch Index : 176096
+[2025-11-15 04:50:38,055.055] Epoch No: 1, Global Step: 005502, Train Loss: 1.294, Val Loss: 1.265
+
+[2025-11-15 04:50:38,056.056] Total Tokens seen till now: 719187504
+
+[2025-11-15 04:50:38,618.618] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m late,â€™m late
+[2025-11-15 04:50:44,969.969] Gradient updated
+[2025-11-15 04:50:44,969.969] Current Learning Rate : 0.00010491051037031842
+[2025-11-15 04:50:44,969.969] Global Step : 5503
+[2025-11-15 04:50:44,969.969] Batch Index : 176128
+[2025-11-15 04:50:55,470.470] Epoch No: 1, Global Step: 005503, Train Loss: 1.262, Val Loss: 1.256
+
+[2025-11-15 04:50:55,470.470] Total Tokens seen till now: 719318144
+
+[2025-11-15 04:50:55,915.915] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m late,â€™m late
+[2025-11-15 04:51:02,279.279] Gradient updated
+[2025-11-15 04:51:02,279.279] Current Learning Rate : 0.00010486223327601443
+[2025-11-15 04:51:02,279.279] Global Step : 5504
+[2025-11-15 04:51:02,280.280] Batch Index : 176160
+[2025-11-15 04:51:12,715.715] Epoch No: 1, Global Step: 005504, Train Loss: 1.266, Val Loss: 1.262
+
+[2025-11-15 04:51:12,715.715] Total Tokens seen till now: 719448800
+
+[2025-11-15 04:51:13,178.178] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™m late,â€™m late,â€™
+[2025-11-15 04:51:19,543.543] Gradient updated
+[2025-11-15 04:51:19,543.543] Current Learning Rate : 0.00010481396577437268
+[2025-11-15 04:51:19,543.543] Global Step : 5505
+[2025-11-15 04:51:19,544.544] Batch Index : 176192
+[2025-11-15 04:51:30,033.033] Epoch No: 1, Global Step: 005505, Train Loss: 1.272, Val Loss: 1.261
+
+[2025-11-15 04:51:30,033.033] Total Tokens seen till now: 719579568
+
+[2025-11-15 04:51:30,491.491] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m late,â€™m late
+[2025-11-15 04:51:36,837.837] Gradient updated
+[2025-11-15 04:51:36,837.837] Current Learning Rate : 0.00010476570787309223
+[2025-11-15 04:51:36,837.837] Global Step : 5506
+[2025-11-15 04:51:36,837.837] Batch Index : 176224
+[2025-11-15 04:51:47,347.347] Epoch No: 1, Global Step: 005506, Train Loss: 1.265, Val Loss: 1.268
+
+[2025-11-15 04:51:47,347.347] Total Tokens seen till now: 719709968
+
+[2025-11-15 04:51:47,840.840] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:51:54,224.224] Gradient updated
+[2025-11-15 04:51:54,224.224] Current Learning Rate : 0.00010471745957987098
+[2025-11-15 04:51:54,225.225] Global Step : 5507
+[2025-11-15 04:51:54,225.225] Batch Index : 176256
+[2025-11-15 04:52:04,687.687] Epoch No: 1, Global Step: 005507, Train Loss: 1.274, Val Loss: 1.257
+
+[2025-11-15 04:52:04,688.688] Total Tokens seen till now: 719841040
+
+[2025-11-15 04:52:05,137.137] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:52:11,508.508] Gradient updated
+[2025-11-15 04:52:11,509.509] Current Learning Rate : 0.00010466922090240498
+[2025-11-15 04:52:11,509.509] Global Step : 5508
+[2025-11-15 04:52:11,509.509] Batch Index : 176288
+[2025-11-15 04:52:21,892.892] Epoch No: 1, Global Step: 005508, Train Loss: 1.297, Val Loss: 1.255
+
+[2025-11-15 04:52:21,892.892] Total Tokens seen till now: 719971824
+
+[2025-11-15 04:52:22,424.424] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:52:28,792.792] Gradient updated
+[2025-11-15 04:52:28,793.793] Current Learning Rate : 0.00010462099184838887
+[2025-11-15 04:52:28,793.793] Global Step : 5509
+[2025-11-15 04:52:28,793.793] Batch Index : 176320
+[2025-11-15 04:52:39,226.226] Epoch No: 1, Global Step: 005509, Train Loss: 1.266, Val Loss: 1.273
+
+[2025-11-15 04:52:39,226.226] Total Tokens seen till now: 720102896
+
+[2025-11-15 04:52:39,671.671] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:52:46,043.043] Gradient updated
+[2025-11-15 04:52:46,044.044] Current Learning Rate : 0.00010457277242551574
+[2025-11-15 04:52:46,044.044] Global Step : 5510
+[2025-11-15 04:52:46,044.044] Batch Index : 176352
+[2025-11-15 04:52:56,470.470] Epoch No: 1, Global Step: 005510, Train Loss: 1.280, Val Loss: 1.285
+
+[2025-11-15 04:52:56,470.470] Total Tokens seen till now: 720233776
+
+[2025-11-15 04:52:56,925.925] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:53:03,287.287] Gradient updated
+[2025-11-15 04:53:03,288.288] Current Learning Rate : 0.00010452456264147713
+[2025-11-15 04:53:03,288.288] Global Step : 5511
+[2025-11-15 04:53:03,288.288] Batch Index : 176384
+[2025-11-15 04:53:13,710.710] Epoch No: 1, Global Step: 005511, Train Loss: 1.274, Val Loss: 1.279
+
+[2025-11-15 04:53:13,711.711] Total Tokens seen till now: 720364624
+
+[2025-11-15 04:53:14,158.158] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:53:20,522.522] Gradient updated
+[2025-11-15 04:53:20,522.522] Current Learning Rate : 0.00010447636250396305
+[2025-11-15 04:53:20,522.522] Global Step : 5512
+[2025-11-15 04:53:20,523.523] Batch Index : 176416
+[2025-11-15 04:53:30,939.939] Epoch No: 1, Global Step: 005512, Train Loss: 1.278, Val Loss: 1.264
+
+[2025-11-15 04:53:30,939.939] Total Tokens seen till now: 720495248
+
+[2025-11-15 04:53:31,400.400] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:53:37,781.781] Gradient updated
+[2025-11-15 04:53:37,782.782] Current Learning Rate : 0.00010442817202066201
+[2025-11-15 04:53:37,782.782] Global Step : 5513
+[2025-11-15 04:53:37,782.782] Batch Index : 176448
+[2025-11-15 04:53:48,211.211] Epoch No: 1, Global Step: 005513, Train Loss: 1.299, Val Loss: 1.290
+
+[2025-11-15 04:53:48,212.212] Total Tokens seen till now: 720626288
+
+[2025-11-15 04:53:48,661.661] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:53:55,031.031] Gradient updated
+[2025-11-15 04:53:55,031.031] Current Learning Rate : 0.00010437999119926082
+[2025-11-15 04:53:55,032.032] Global Step : 5514
+[2025-11-15 04:53:55,032.032] Batch Index : 176480
+[2025-11-15 04:54:05,464.464] Epoch No: 1, Global Step: 005514, Train Loss: 1.255, Val Loss: 1.260
+
+[2025-11-15 04:54:05,465.465] Total Tokens seen till now: 720757280
+
+[2025-11-15 04:54:05,919.919] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:54:12,372.372] Gradient updated
+[2025-11-15 04:54:12,372.372] Current Learning Rate : 0.00010433182004744504
+[2025-11-15 04:54:12,373.373] Global Step : 5515
+[2025-11-15 04:54:12,373.373] Batch Index : 176512
+[2025-11-15 04:54:22,847.847] Epoch No: 1, Global Step: 005515, Train Loss: 1.280, Val Loss: 1.291
+
+[2025-11-15 04:54:22,848.848] Total Tokens seen till now: 720887936
+
+[2025-11-15 04:54:23,308.308] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™
+[2025-11-15 04:54:29,692.692] Gradient updated
+[2025-11-15 04:54:29,693.693] Current Learning Rate : 0.00010428365857289846
+[2025-11-15 04:54:29,693.693] Global Step : 5516
+[2025-11-15 04:54:29,693.693] Batch Index : 176544
+[2025-11-15 04:54:40,138.138] Epoch No: 1, Global Step: 005516, Train Loss: 1.265, Val Loss: 1.273
+
+[2025-11-15 04:54:40,139.139] Total Tokens seen till now: 721019008
+
+[2025-11-15 04:54:40,613.613] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 04:54:46,953.953] Gradient updated
+[2025-11-15 04:54:46,954.954] Current Learning Rate : 0.00010423550678330336
+[2025-11-15 04:54:46,954.954] Global Step : 5517
+[2025-11-15 04:54:46,954.954] Batch Index : 176576
+[2025-11-15 04:54:57,389.389] Epoch No: 1, Global Step: 005517, Train Loss: 1.282, Val Loss: 1.277
+
+[2025-11-15 04:54:57,390.390] Total Tokens seen till now: 721149520
+
+[2025-11-15 04:54:57,930.930] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:55:04,302.302] Gradient updated
+[2025-11-15 04:55:04,303.303] Current Learning Rate : 0.00010418736468634052
+[2025-11-15 04:55:04,303.303] Global Step : 5518
+[2025-11-15 04:55:04,303.303] Batch Index : 176608
+[2025-11-15 04:55:14,806.806] Epoch No: 1, Global Step: 005518, Train Loss: 1.268, Val Loss: 1.273
+
+[2025-11-15 04:55:14,807.807] Total Tokens seen till now: 721280320
+
+[2025-11-15 04:55:15,263.263] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:55:21,632.632] Gradient updated
+[2025-11-15 04:55:21,633.633] Current Learning Rate : 0.00010413923228968915
+[2025-11-15 04:55:21,633.633] Global Step : 5519
+[2025-11-15 04:55:21,633.633] Batch Index : 176640
+[2025-11-15 04:55:32,097.097] Epoch No: 1, Global Step: 005519, Train Loss: 1.267, Val Loss: 1.292
+
+[2025-11-15 04:55:32,097.097] Total Tokens seen till now: 721410976
+
+[2025-11-15 04:55:32,548.548] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:55:38,887.887] Gradient updated
+[2025-11-15 04:55:38,888.888] Current Learning Rate : 0.00010409110960102693
+[2025-11-15 04:55:38,888.888] Global Step : 5520
+[2025-11-15 04:55:38,888.888] Batch Index : 176672
+[2025-11-15 04:55:49,375.375] Epoch No: 1, Global Step: 005520, Train Loss: 1.290, Val Loss: 1.261
+
+[2025-11-15 04:55:49,376.376] Total Tokens seen till now: 721541088
+
+[2025-11-15 04:55:49,821.821] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:55:56,192.192] Gradient updated
+[2025-11-15 04:55:56,193.193] Current Learning Rate : 0.00010404299662802995
+[2025-11-15 04:55:56,193.193] Global Step : 5521
+[2025-11-15 04:55:56,193.193] Batch Index : 176704
+[2025-11-15 04:56:06,630.630] Epoch No: 1, Global Step: 005521, Train Loss: 1.280, Val Loss: 1.279
+
+[2025-11-15 04:56:06,630.630] Total Tokens seen till now: 721671920
+
+[2025-11-15 04:56:07,085.085] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:56:13,456.456] Gradient updated
+[2025-11-15 04:56:13,456.456] Current Learning Rate : 0.00010399489337837275
+[2025-11-15 04:56:13,456.456] Global Step : 5522
+[2025-11-15 04:56:13,456.456] Batch Index : 176736
+[2025-11-15 04:56:24,019.019] Epoch No: 1, Global Step: 005522, Train Loss: 1.273, Val Loss: 1.253
+
+[2025-11-15 04:56:24,019.019] Total Tokens seen till now: 721802640
+
+[2025-11-15 04:56:24,474.474] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:56:30,844.844] Gradient updated
+[2025-11-15 04:56:30,844.844] Current Learning Rate : 0.00010394679985972851
+[2025-11-15 04:56:30,844.844] Global Step : 5523
+[2025-11-15 04:56:30,844.844] Batch Index : 176768
+[2025-11-15 04:56:41,305.305] Epoch No: 1, Global Step: 005523, Train Loss: 1.271, Val Loss: 1.256
+
+[2025-11-15 04:56:41,306.306] Total Tokens seen till now: 721933392
+
+[2025-11-15 04:56:41,789.789] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:56:48,157.157] Gradient updated
+[2025-11-15 04:56:48,157.157] Current Learning Rate : 0.00010389871607976853
+[2025-11-15 04:56:48,157.157] Global Step : 5524
+[2025-11-15 04:56:48,157.157] Batch Index : 176800
+[2025-11-15 04:56:58,688.688] Epoch No: 1, Global Step: 005524, Train Loss: 1.286, Val Loss: 1.265
+
+[2025-11-15 04:56:58,688.688] Total Tokens seen till now: 722064240
+
+[2025-11-15 04:56:59,139.139] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:57:05,506.506] Gradient updated
+[2025-11-15 04:57:05,506.506] Current Learning Rate : 0.00010385064204616273
+[2025-11-15 04:57:05,507.507] Global Step : 5525
+[2025-11-15 04:57:05,507.507] Batch Index : 176832
+[2025-11-15 04:57:16,023.023] Epoch No: 1, Global Step: 005525, Train Loss: 1.286, Val Loss: 1.269
+
+[2025-11-15 04:57:16,023.023] Total Tokens seen till now: 722194928
+
+[2025-11-15 04:57:16,481.481] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:57:22,851.851] Gradient updated
+[2025-11-15 04:57:22,852.852] Current Learning Rate : 0.00010380257776657957
+[2025-11-15 04:57:22,852.852] Global Step : 5526
+[2025-11-15 04:57:22,852.852] Batch Index : 176864
+[2025-11-15 04:57:33,318.318] Epoch No: 1, Global Step: 005526, Train Loss: 1.261, Val Loss: 1.268
+
+[2025-11-15 04:57:33,318.318] Total Tokens seen till now: 722325664
+
+[2025-11-15 04:57:33,768.768] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:57:40,147.147] Gradient updated
+[2025-11-15 04:57:40,147.147] Current Learning Rate : 0.00010375452324868579
+[2025-11-15 04:57:40,147.147] Global Step : 5527
+[2025-11-15 04:57:40,147.147] Batch Index : 176896
+[2025-11-15 04:57:50,579.579] Epoch No: 1, Global Step: 005527, Train Loss: 1.296, Val Loss: 1.242
+
+[2025-11-15 04:57:50,580.580] Total Tokens seen till now: 722456736
+
+[2025-11-15 04:57:51,420.420] BEST model SAVED on iteration 005527 to model/gpt2_ORG_preTrain_S_V3.pth..! 
+[2025-11-15 04:57:51,880.880] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€â€™mâ
+[2025-11-15 04:57:58,278.278] Gradient updated
+[2025-11-15 04:57:58,279.279] Current Learning Rate : 0.00010370647850014666
+[2025-11-15 04:57:58,279.279] Global Step : 5528
+[2025-11-15 04:57:58,279.279] Batch Index : 176928
+[2025-11-15 04:58:08,915.915] Epoch No: 1, Global Step: 005528, Train Loss: 1.281, Val Loss: 1.265
+
+[2025-11-15 04:58:08,916.916] Total Tokens seen till now: 722587776
+
+[2025-11-15 04:58:09,526.526] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:58:15,910.910] Gradient updated
+[2025-11-15 04:58:15,911.911] Current Learning Rate : 0.00010365844352862579
+[2025-11-15 04:58:15,911.911] Global Step : 5529
+[2025-11-15 04:58:15,911.911] Batch Index : 176960
+[2025-11-15 04:58:26,362.362] Epoch No: 1, Global Step: 005529, Train Loss: 1.265, Val Loss: 1.297
+
+[2025-11-15 04:58:26,363.363] Total Tokens seen till now: 722718848
+
+[2025-11-15 04:58:26,812.812] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:58:33,190.190] Gradient updated
+[2025-11-15 04:58:33,191.191] Current Learning Rate : 0.00010361041834178548
+[2025-11-15 04:58:33,191.191] Global Step : 5530
+[2025-11-15 04:58:33,191.191] Batch Index : 176992
+[2025-11-15 04:58:43,637.637] Epoch No: 1, Global Step: 005530, Train Loss: 1.258, Val Loss: 1.271
+
+[2025-11-15 04:58:43,638.638] Total Tokens seen till now: 722849920
+
+[2025-11-15 04:58:44,089.089] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:58:50,473.473] Gradient updated
+[2025-11-15 04:58:50,474.474] Current Learning Rate : 0.00010356240294728612
+[2025-11-15 04:58:50,474.474] Global Step : 5531
+[2025-11-15 04:58:50,474.474] Batch Index : 177024
+[2025-11-15 04:59:00,904.904] Epoch No: 1, Global Step: 005531, Train Loss: 1.285, Val Loss: 1.289
+
+[2025-11-15 04:59:00,905.905] Total Tokens seen till now: 722980816
+
+[2025-11-15 04:59:01,362.362] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:59:07,696.696] Gradient updated
+[2025-11-15 04:59:07,697.697] Current Learning Rate : 0.00010351439735278674
+[2025-11-15 04:59:07,697.697] Global Step : 5532
+[2025-11-15 04:59:07,697.697] Batch Index : 177056
+[2025-11-15 04:59:18,171.171] Epoch No: 1, Global Step: 005532, Train Loss: 1.291, Val Loss: 1.267
+
+[2025-11-15 04:59:18,172.172] Total Tokens seen till now: 723111024
+
+[2025-11-15 04:59:18,627.627] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 04:59:24,979.979] Gradient updated
+[2025-11-15 04:59:24,979.979] Current Learning Rate : 0.0001034664015659449
+[2025-11-15 04:59:24,979.979] Global Step : 5533
+[2025-11-15 04:59:24,980.980] Batch Index : 177088
+[2025-11-15 04:59:35,437.437] Epoch No: 1, Global Step: 005533, Train Loss: 1.265, Val Loss: 1.270
+
+[2025-11-15 04:59:35,438.438] Total Tokens seen till now: 723241392
+
+[2025-11-15 04:59:35,884.884] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:59:42,249.249] Gradient updated
+[2025-11-15 04:59:42,250.250] Current Learning Rate : 0.00010341841559441636
+[2025-11-15 04:59:42,250.250] Global Step : 5534
+[2025-11-15 04:59:42,250.250] Batch Index : 177120
+[2025-11-15 04:59:52,708.708] Epoch No: 1, Global Step: 005534, Train Loss: 1.299, Val Loss: 1.262
+
+[2025-11-15 04:59:52,709.709] Total Tokens seen till now: 723372304
+
+[2025-11-15 04:59:53,167.167] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 04:59:59,546.546] Gradient updated
+[2025-11-15 04:59:59,547.547] Current Learning Rate : 0.0001033704394458555
+[2025-11-15 04:59:59,547.547] Global Step : 5535
+[2025-11-15 04:59:59,547.547] Batch Index : 177152
+[2025-11-15 05:00:10,005.005] Epoch No: 1, Global Step: 005535, Train Loss: 1.258, Val Loss: 1.279
+
+[2025-11-15 05:00:10,005.005] Total Tokens seen till now: 723503184
+
+[2025-11-15 05:00:10,462.462] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 05:00:16,832.832] Gradient updated
+[2025-11-15 05:00:16,833.833] Current Learning Rate : 0.00010332247312791504
+[2025-11-15 05:00:16,833.833] Global Step : 5536
+[2025-11-15 05:00:16,833.833] Batch Index : 177184
+[2025-11-15 05:00:27,254.254] Epoch No: 1, Global Step: 005536, Train Loss: 1.298, Val Loss: 1.256
+
+[2025-11-15 05:00:27,255.255] Total Tokens seen till now: 723634256
+
+[2025-11-15 05:00:27,711.711] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 05:00:34,093.093] Gradient updated
+[2025-11-15 05:00:34,094.094] Current Learning Rate : 0.00010327451664824614
+[2025-11-15 05:00:34,094.094] Global Step : 5537
+[2025-11-15 05:00:34,094.094] Batch Index : 177216
+[2025-11-15 05:00:44,579.579] Epoch No: 1, Global Step: 005537, Train Loss: 1.282, Val Loss: 1.250
+
+[2025-11-15 05:00:44,580.580] Total Tokens seen till now: 723765328
+
+[2025-11-15 05:00:45,029.029] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 05:00:51,391.391] Gradient updated
+[2025-11-15 05:00:51,392.392] Current Learning Rate : 0.00010322657001449843
+[2025-11-15 05:00:51,392.392] Global Step : 5538
+[2025-11-15 05:00:51,392.392] Batch Index : 177248
+[2025-11-15 05:01:01,847.847] Epoch No: 1, Global Step: 005538, Train Loss: 1.274, Val Loss: 1.264
+
+[2025-11-15 05:01:01,847.847] Total Tokens seen till now: 723895968
+
+[2025-11-15 05:01:02,306.306] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€â€™
+[2025-11-15 05:01:08,642.642] Gradient updated
+[2025-11-15 05:01:08,643.643] Current Learning Rate : 0.00010317863323431994
+[2025-11-15 05:01:08,643.643] Global Step : 5539
+[2025-11-15 05:01:08,643.643] Batch Index : 177280
+[2025-11-15 05:01:19,099.099] Epoch No: 1, Global Step: 005539, Train Loss: 1.284, Val Loss: 1.275
+
+[2025-11-15 05:01:19,100.100] Total Tokens seen till now: 724026288
+
+[2025-11-15 05:01:19,551.551] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€™m late
+[2025-11-15 05:01:25,920.920] Gradient updated
+[2025-11-15 05:01:25,921.921] Current Learning Rate : 0.00010313070631535708
+[2025-11-15 05:01:25,921.921] Global Step : 5540
+[2025-11-15 05:01:25,921.921] Batch Index : 177312
+[2025-11-15 05:01:36,404.404] Epoch No: 1, Global Step: 005540, Train Loss: 1.298, Val Loss: 1.268
+
+[2025-11-15 05:01:36,405.405] Total Tokens seen till now: 724157312
+
+[2025-11-15 05:01:36,863.863] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€™m late
+[2025-11-15 05:01:43,206.206] Gradient updated
+[2025-11-15 05:01:43,207.207] Current Learning Rate : 0.00010308278926525485
+[2025-11-15 05:01:43,207.207] Global Step : 5541
+[2025-11-15 05:01:43,207.207] Batch Index : 177344
+[2025-11-15 05:01:53,684.684] Epoch No: 1, Global Step: 005541, Train Loss: 1.269, Val Loss: 1.265
+
+[2025-11-15 05:01:53,685.685] Total Tokens seen till now: 724287552
+
+[2025-11-15 05:01:54,142.142] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€™m late
+[2025-11-15 05:02:00,495.495] Gradient updated
+[2025-11-15 05:02:00,496.496] Current Learning Rate : 0.00010303488209165658
+[2025-11-15 05:02:00,496.496] Global Step : 5542
+[2025-11-15 05:02:00,496.496] Batch Index : 177376
+[2025-11-15 05:02:10,915.915] Epoch No: 1, Global Step: 005542, Train Loss: 1.263, Val Loss: 1.281
+
+[2025-11-15 05:02:10,916.916] Total Tokens seen till now: 724418528
+
+[2025-11-15 05:02:11,383.383] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€â€™
+[2025-11-15 05:02:17,739.739] Gradient updated
+[2025-11-15 05:02:17,740.740] Current Learning Rate : 0.00010298698480220385
+[2025-11-15 05:02:17,740.740] Global Step : 5543
+[2025-11-15 05:02:17,740.740] Batch Index : 177408
+[2025-11-15 05:02:28,173.173] Epoch No: 1, Global Step: 005543, Train Loss: 1.287, Val Loss: 1.279
+
+[2025-11-15 05:02:28,175.175] Total Tokens seen till now: 724549104
+
+[2025-11-15 05:02:28,626.626] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€â€™
+[2025-11-15 05:02:35,000.000] Gradient updated
+[2025-11-15 05:02:35,000.000] Current Learning Rate : 0.00010293909740453696
+[2025-11-15 05:02:35,001.001] Global Step : 5544
+[2025-11-15 05:02:35,001.001] Batch Index : 177440
+[2025-11-15 05:02:45,397.397] Epoch No: 1, Global Step: 005544, Train Loss: 1.269, Val Loss: 1.267
+
+[2025-11-15 05:02:45,398.398] Total Tokens seen till now: 724680176
+
+[2025-11-15 05:02:45,848.848] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€â€™
+[2025-11-15 05:02:52,200.200] Gradient updated
+[2025-11-15 05:02:52,201.201] Current Learning Rate : 0.00010289121990629444
+[2025-11-15 05:02:52,201.201] Global Step : 5545
+[2025-11-15 05:02:52,201.201] Batch Index : 177472
+[2025-11-15 05:03:02,671.671] Epoch No: 1, Global Step: 005545, Train Loss: 1.256, Val Loss: 1.286
+
+[2025-11-15 05:03:02,672.672] Total Tokens seen till now: 724810976
+
+[2025-11-15 05:03:03,281.281] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€â€™
+[2025-11-15 05:03:09,640.640] Gradient updated
+[2025-11-15 05:03:09,640.640] Current Learning Rate : 0.00010284335231511335
+[2025-11-15 05:03:09,640.640] Global Step : 5546
+[2025-11-15 05:03:09,640.640] Batch Index : 177504
+[2025-11-15 05:03:20,068.068] Epoch No: 1, Global Step: 005546, Train Loss: 1.251, Val Loss: 1.256
+
+[2025-11-15 05:03:20,068.068] Total Tokens seen till now: 724941728
+
+[2025-11-15 05:03:20,522.522] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m late,â€â€™
+[2025-11-15 05:03:26,868.868] Gradient updated
+[2025-11-15 05:03:26,869.869] Current Learning Rate : 0.0001027954946386291
+[2025-11-15 05:03:26,869.869] Global Step : 5547
+[2025-11-15 05:03:26,869.869] Batch Index : 177536
+[2025-11-15 05:03:37,302.302] Epoch No: 1, Global Step: 005547, Train Loss: 1.278, Val Loss: 1.272
+
+[2025-11-15 05:03:37,302.302] Total Tokens seen till now: 725072320
+
+[2025-11-15 05:03:37,771.771] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€â€™
+[2025-11-15 05:03:44,137.137] Gradient updated
+[2025-11-15 05:03:44,137.137] Current Learning Rate : 0.00010274764688447551
+[2025-11-15 05:03:44,137.137] Global Step : 5548
+[2025-11-15 05:03:44,137.137] Batch Index : 177568
+[2025-11-15 05:03:54,579.579] Epoch No: 1, Global Step: 005548, Train Loss: 1.278, Val Loss: 1.252
+
+[2025-11-15 05:03:54,580.580] Total Tokens seen till now: 725202960
+
+[2025-11-15 05:03:55,030.030] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€â€™
+[2025-11-15 05:04:01,396.396] Gradient updated
+[2025-11-15 05:04:01,396.396] Current Learning Rate : 0.00010269980906028486
+[2025-11-15 05:04:01,396.396] Global Step : 5549
+[2025-11-15 05:04:01,396.396] Batch Index : 177600
+[2025-11-15 05:04:11,787.787] Epoch No: 1, Global Step: 005549, Train Loss: 1.250, Val Loss: 1.263
+
+[2025-11-15 05:04:11,787.787] Total Tokens seen till now: 725333776
+
+[2025-11-15 05:04:12,240.240] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€â€™
+[2025-11-15 05:04:18,617.617] Gradient updated
+[2025-11-15 05:04:18,617.617] Current Learning Rate : 0.00010265198117368783
+[2025-11-15 05:04:18,617.617] Global Step : 5550
+[2025-11-15 05:04:18,617.617] Batch Index : 177632
+[2025-11-15 05:04:29,092.092] Epoch No: 1, Global Step: 005550, Train Loss: 1.277, Val Loss: 1.257
+
+[2025-11-15 05:04:29,092.092] Total Tokens seen till now: 725464848
+
+[2025-11-15 05:04:29,550.550] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€â€™
+[2025-11-15 05:04:35,929.929] Gradient updated
+[2025-11-15 05:04:35,929.929] Current Learning Rate : 0.00010260416323231347
+[2025-11-15 05:04:35,929.929] Global Step : 5551
+[2025-11-15 05:04:35,929.929] Batch Index : 177664
+[2025-11-15 05:04:46,398.398] Epoch No: 1, Global Step: 005551, Train Loss: 1.282, Val Loss: 1.247
+
+[2025-11-15 05:04:46,399.399] Total Tokens seen till now: 725595888
+
+[2025-11-15 05:04:46,847.847] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€â€™
+[2025-11-15 05:04:53,233.233] Gradient updated
+[2025-11-15 05:04:53,234.234] Current Learning Rate : 0.0001025563552437894
+[2025-11-15 05:04:53,234.234] Global Step : 5552
+[2025-11-15 05:04:53,234.234] Batch Index : 177696
+[2025-11-15 05:05:03,745.745] Epoch No: 1, Global Step: 005552, Train Loss: 1.268, Val Loss: 1.259
+
+[2025-11-15 05:05:03,746.746] Total Tokens seen till now: 725726944
+
+[2025-11-15 05:05:04,202.202] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€â€™
+[2025-11-15 05:05:10,563.563] Gradient updated
+[2025-11-15 05:05:10,564.564] Current Learning Rate : 0.00010250855721574146
+[2025-11-15 05:05:10,564.564] Global Step : 5553
+[2025-11-15 05:05:10,564.564] Batch Index : 177728
+[2025-11-15 05:05:20,999.999] Epoch No: 1, Global Step: 005553, Train Loss: 1.276, Val Loss: 1.282
+
+[2025-11-15 05:05:20,999.999] Total Tokens seen till now: 725857776
+
+[2025-11-15 05:05:21,466.466] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck!â€â
+[2025-11-15 05:05:27,827.827] Gradient updated
+[2025-11-15 05:05:27,827.827] Current Learning Rate : 0.00010246076915579399
+[2025-11-15 05:05:27,827.827] Global Step : 5554
+[2025-11-15 05:05:27,827.827] Batch Index : 177760
+[2025-11-15 05:05:38,306.306] Epoch No: 1, Global Step: 005554, Train Loss: 1.271, Val Loss: 1.263
+
+[2025-11-15 05:05:38,307.307] Total Tokens seen till now: 725988848
+
+[2025-11-15 05:05:38,859.859] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck!â€â
+[2025-11-15 05:05:45,234.234] Gradient updated
+[2025-11-15 05:05:45,234.234] Current Learning Rate : 0.00010241299107156978
+[2025-11-15 05:05:45,234.234] Global Step : 5555
+[2025-11-15 05:05:45,234.234] Batch Index : 177792
+[2025-11-15 05:05:55,677.677] Epoch No: 1, Global Step: 005555, Train Loss: 1.271, Val Loss: 1.252
+
+[2025-11-15 05:05:55,678.678] Total Tokens seen till now: 726119920
+
+[2025-11-15 05:05:56,125.125] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck!â€â
+[2025-11-15 05:06:02,491.491] Gradient updated
+[2025-11-15 05:06:02,491.491] Current Learning Rate : 0.0001023652229706899
+[2025-11-15 05:06:02,491.491] Global Step : 5556
+[2025-11-15 05:06:02,491.491] Batch Index : 177824
+[2025-11-15 05:06:12,927.927] Epoch No: 1, Global Step: 005556, Train Loss: 1.237, Val Loss: 1.259
+
+[2025-11-15 05:06:12,927.927] Total Tokens seen till now: 726250992
+
+[2025-11-15 05:06:13,378.378] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck!â€â€™m stuck
+[2025-11-15 05:06:19,697.697] Gradient updated
+[2025-11-15 05:06:19,698.698] Current Learning Rate : 0.000102317464860774
+[2025-11-15 05:06:19,698.698] Global Step : 5557
+[2025-11-15 05:06:19,698.698] Batch Index : 177856
+[2025-11-15 05:06:30,126.126] Epoch No: 1, Global Step: 005557, Train Loss: 1.255, Val Loss: 1.266
+
+[2025-11-15 05:06:30,127.127] Total Tokens seen till now: 726381008
+
+[2025-11-15 05:06:30,577.577] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck!â€™m stuck!â
+[2025-11-15 05:06:36,952.952] Gradient updated
+[2025-11-15 05:06:36,953.953] Current Learning Rate : 0.0001022697167494399
+[2025-11-15 05:06:36,953.953] Global Step : 5558
+[2025-11-15 05:06:36,953.953] Batch Index : 177888
+[2025-11-15 05:06:47,405.405] Epoch No: 1, Global Step: 005558, Train Loss: 1.242, Val Loss: 1.287
+
+[2025-11-15 05:06:47,406.406] Total Tokens seen till now: 726512016
+
+[2025-11-15 05:06:47,916.916] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck!â€â
+[2025-11-15 05:06:54,285.285] Gradient updated
+[2025-11-15 05:06:54,286.286] Current Learning Rate : 0.00010222197864430415
+[2025-11-15 05:06:54,286.286] Global Step : 5559
+[2025-11-15 05:06:54,286.286] Batch Index : 177920
+[2025-11-15 05:07:04,735.735] Epoch No: 1, Global Step: 005559, Train Loss: 1.253, Val Loss: 1.245
+
+[2025-11-15 05:07:04,736.736] Total Tokens seen till now: 726642880
+
+[2025-11-15 05:07:05,189.189] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â€™m stuck
+[2025-11-15 05:07:11,557.557] Gradient updated
+[2025-11-15 05:07:11,558.558] Current Learning Rate : 0.0001021742505529815
+[2025-11-15 05:07:11,558.558] Global Step : 5560
+[2025-11-15 05:07:11,558.558] Batch Index : 177952
+[2025-11-15 05:07:21,994.994] Epoch No: 1, Global Step: 005560, Train Loss: 1.278, Val Loss: 1.262
+
+[2025-11-15 05:07:21,994.994] Total Tokens seen till now: 726773904
+
+[2025-11-15 05:07:22,448.448] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™m stuck!â
+[2025-11-15 05:07:28,823.823] Gradient updated
+[2025-11-15 05:07:28,824.824] Current Learning Rate : 0.00010212653248308499
+[2025-11-15 05:07:28,824.824] Global Step : 5561
+[2025-11-15 05:07:28,825.825] Batch Index : 177984
+[2025-11-15 05:07:39,288.288] Epoch No: 1, Global Step: 005561, Train Loss: 1.276, Val Loss: 1.266
+
+[2025-11-15 05:07:39,289.289] Total Tokens seen till now: 726904976
+
+[2025-11-15 05:07:39,736.736] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 05:07:46,107.107] Gradient updated
+[2025-11-15 05:07:46,108.108] Current Learning Rate : 0.00010207882444222625
+[2025-11-15 05:07:46,108.108] Global Step : 5562
+[2025-11-15 05:07:46,108.108] Batch Index : 178016
+[2025-11-15 05:07:56,520.520] Epoch No: 1, Global Step: 005562, Train Loss: 1.265, Val Loss: 1.261
+
+[2025-11-15 05:07:56,520.520] Total Tokens seen till now: 727036048
+
+[2025-11-15 05:07:56,967.967] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 05:08:03,295.295] Gradient updated
+[2025-11-15 05:08:03,295.295] Current Learning Rate : 0.00010203112643801534
+[2025-11-15 05:08:03,296.296] Global Step : 5563
+[2025-11-15 05:08:03,296.296] Batch Index : 178048
+[2025-11-15 05:08:13,721.721] Epoch No: 1, Global Step: 005563, Train Loss: 1.260, Val Loss: 1.294
+
+[2025-11-15 05:08:13,722.722] Total Tokens seen till now: 727166064
+
+[2025-11-15 05:08:14,170.170] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 05:08:20,523.523] Gradient updated
+[2025-11-15 05:08:20,524.524] Current Learning Rate : 0.00010198343847806057
+[2025-11-15 05:08:20,524.524] Global Step : 5564
+[2025-11-15 05:08:20,524.524] Batch Index : 178080
+[2025-11-15 05:08:30,984.984] Epoch No: 1, Global Step: 005564, Train Loss: 1.264, Val Loss: 1.269
+
+[2025-11-15 05:08:30,984.984] Total Tokens seen till now: 727296944
+
+[2025-11-15 05:08:31,478.478] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 05:08:37,855.855] Gradient updated
+[2025-11-15 05:08:37,856.856] Current Learning Rate : 0.00010193576056996873
+[2025-11-15 05:08:37,856.856] Global Step : 5565
+[2025-11-15 05:08:37,856.856] Batch Index : 178112
+[2025-11-15 05:08:48,355.355] Epoch No: 1, Global Step: 005565, Train Loss: 1.253, Val Loss: 1.280
+
+[2025-11-15 05:08:48,355.355] Total Tokens seen till now: 727428016
+
+[2025-11-15 05:08:48,799.799] Once upon a time, the the the lot.â€™reâ€™reâ€™reâ€™reâ€™mâ€™mâ€™mâ€™mâ€™mâ€™mâ€â
+[2025-11-15 05:08:55,159.159] Gradient updated
+[2025-11-15 05:08:55,159.159] Current Learning Rate : 0.000101888092721345
+[2025-11-15 05:08:55,160.160] Global Step : 5566
+[2025-11-15 05:08:55,160.160] Batch Index : 178144
+[2025-11-15 05:08:59,867.867] BEST model SAVED on iteration 005566 to model/gpt2_ORG_preTrain_S_V3.pth..! 
+[2025-11-15 05:08:59,871.871] Training completed in 61.70 minutes.
+[2025-11-15 05:08:59,871.871] BEST Pre-trained custom model saved in model/gpt2_ORG_preTrain_S_V3.pth..!
+[2025-11-15 05:08:59,871.871] Saving the plots of the metrics tracked ..!
+[2025-11-15 05:09:02,912.912] Pipeline completed in 61.75 minutes.
