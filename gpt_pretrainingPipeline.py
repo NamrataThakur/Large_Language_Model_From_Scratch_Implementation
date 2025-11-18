@@ -386,12 +386,12 @@ if __name__ == '__main__':
     )   
 
     # Calculation minimum LR as 0.1 * max learning rate (according to Karpathy)
-    # parser.add_argument(
-    #     "--min_lr",
-    #     type=float,
-    #     default=1e-6,
-    #     help=("Minimum LR value to achieve using cosine annealing (decay.)")
-    # )
+    parser.add_argument(
+        "--min_lr",
+        type=float,
+        default=1e-6,
+        help=("Minimum LR value to achieve using cosine annealing (decay.)")
+    )
 
     parser.add_argument(
         "--learning_rate",
@@ -668,7 +668,8 @@ if __name__ == '__main__':
 
         epochs = args.num_epochs
 
-        min_lr = args.learning_rate * 0.1
+        #min_lr = args.learning_rate * 0.1
+        min_lr = args.min_lr
         logger.info(f"Minimum LR : {min_lr}")
 
         #Note: If gradient accumulation has to happen at every step, then target_batch_size == batch_size

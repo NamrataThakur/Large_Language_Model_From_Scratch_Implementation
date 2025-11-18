@@ -5,11 +5,11 @@
 
 num_epochs=1
 top_k=20
-temp=0.5
+temp=1
 max_new_tokens=50
 context_length=256
 vocab_size=50257
-embedding_dimension=256
+embedding_dimension=384
 num_heads=8
 num_layers=8
 qkv_bias=False
@@ -17,20 +17,20 @@ eval_batchSize=64
 eval_freq=64
 weight_decay=0.1
 beta1=0.9
-beta2=0.99
+beta2=0.95
 val_split=0.05
 train_split=0.85
-batch_size=16
+batch_size=64
 target_batch_size=512 #1024 
 seed=123
-dropout_rate=0.0 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
+dropout_rate=0.2 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
 warmup_steps=0.05
-initial_lr=1e-04 #3e-05
-# min_lr=1e-05 --> being calculated as 0.1 * of max LR
-learning_rate=3e-4 #Good LR
+initial_lr=0.00008 #3e-05
+min_lr=0.000001 #--> being calculated as 0.1 * of max LR
+learning_rate=0.0008 #3e-4 --> Good LR (Karpathy)
 rms_eps=1e-6
 rms_bias=True
 theta_base=10000.0
@@ -41,14 +41,14 @@ ff_hidden_dim=400
 arch_type='original'
 kv_cache=True
 moe_noise=True
-train_type='resume'
+train_type='scratch'
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V3_resume_11' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V4_scratch' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
-  --model_name 'gpt2_ORG_preTrain_S_V3' \
-  --pre_save_model 'gpt2_ORG_preTrain_S_V3.pth' \
+  --model_name 'gpt2_ORG_preTrain_S_V4' \
+  --pre_save_model 'gpt2_ORG_preTrain_S_V4.pth' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \
