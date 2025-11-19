@@ -668,8 +668,8 @@ if __name__ == '__main__':
 
         epochs = args.num_epochs
 
-        #min_lr = args.learning_rate * 0.1
-        min_lr = args.min_lr
+        min_lr = args.learning_rate * 0.1
+        #min_lr = args.min_lr
         logger.info(f"Minimum LR : {min_lr}")
 
         #Note: If gradient accumulation has to happen at every step, then target_batch_size == batch_size

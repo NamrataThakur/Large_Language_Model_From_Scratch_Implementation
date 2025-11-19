@@ -1,0 +1,1478 @@
+[2025-11-18 04:53:38,890.890] Namespace(experiment_name='Pre-Train_Exp_CustomConfig_ORGarch_S_V4_scratch', data_path='tinystories', model_type='custom', base_modelName='gpt2_124M', model_name='gpt2_ORG_preTrain_S_V4', pre_save_model='gpt2_ORG_preTrain_S_V4.pth', tokenizer='tiktoken', seed=123, batch_size=32, target_batch_size=256, train_split=0.85, val_split=0.05, optimizer='AdamW', context_length=256, vocab_size=50257, embedding_dimension=384, num_heads=8, num_layers=8, dropout_rate=0.2, qkv_bias=False, ff_hidden_dim=400, eval_batchSize=64, eval_freq=64, kv_cache=True, weight_decay=0.1, beta1=0.9, beta2=0.95, rms_eps=1e-06, rms_bias=True, theta_base=10000.0, num_kv_groups=1, num_experts=4, num_active_experts=2, max_training_length='model_context_length', max_new_tokens=50, temp=1.0, top_k=20, num_epochs=1, eos_id=50256, arch_type='original', train_type='scratch', moe_noise=True, use_warmup=True, use_gradient_clip=True, warmup_steps=0.05, initial_lr=1e-05, min_lr=1e-06, learning_rate=0.0008)
+[2025-11-18 04:53:39,163.163] Model to be trained from scratch ..!
+[2025-11-18 04:53:39,163.163] Custom GPT2 configuration to be used for pre-training..!
+[2025-11-18 04:53:39,163.163] The custom config of the model to be trained : {'vocab_size': 50257, 'embedding_dimension': 384, 'num_heads': 8, 'context_length': 256, 'dropout': 0.2, 'qkv_bias': False, 'num_layers': 8, 'ff_hidden_dim': 400, 'rms_eps': 1e-06, 'rms_bias': True, 'theta_base': 10000.0, 'num_kv_groups': 1, 'num_experts': 4, 'num_active_experts': 2, 'moe_noise': True} 
+[2025-11-18 04:53:39,731.731] Architecture Type :original
+[2025-11-18 04:53:39,732.732] Configuration of the custom GPT2 model loaded..!
+[2025-11-18 04:53:41,239.239] Total records in Train Data: 2119719 , Validation Data : 21990
+[2025-11-18 04:53:41,243.243] Sample Text : One day, a little girl named Lily found a needle in her room. She knew it was difficult to play with
+[2025-11-18 04:53:41,243.243] ------------- Data Ingestion Completed. -------------
+[2025-11-18 04:53:41,243.243] Loading the dataset class for pre-training...
+[2025-11-18 04:53:41,291.291] Device Available: cuda .. ! 
+[2025-11-18 05:07:29,399.399] ************** TRAIN DATALOADER ****************************
+[2025-11-18 05:07:29,405.405] Length of Train Dataloader (number of batches): 132482
+[2025-11-18 05:07:29,405.405] Total Train Tokens : 471872517
+[2025-11-18 05:07:35,172.172] torch.Size([32, 256]), torch.Size([32, 256])
+[2025-11-18 05:07:35,269.269] ************** VAL DATALOADER ****************************
+[2025-11-18 05:07:35,269.269] Length of Val Dataloader (number of batches): 1374
+[2025-11-18 05:07:35,269.269] Total Validation Tokens : 4743928
+[2025-11-18 05:07:35,382.382] torch.Size([32, 256]), torch.Size([32, 256])
+[2025-11-18 05:07:35,383.383] Dataloaders created successfully for pre-training task..!
+[2025-11-18 05:07:35,383.383] ---------------------------------------------------------
+[2025-11-18 05:07:35,383.383] Model will be trained from scratch..!
+[2025-11-18 05:07:35,383.383] Loading the model with random weights for training..!
+[2025-11-18 05:07:37,647.647] Model loaded with random weights for training..!
+[2025-11-18 05:07:37,652.652] Model Size : 52.882944 millions (M)
+[2025-11-18 05:07:37,653.653] Device Available: cuda .. ! 
+[2025-11-18 05:07:38,508.508] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-11-18 05:07:38,509.509] Training Stage : Training of the model started ..!
+[2025-11-18 05:07:41,663.663] Minimum LR : 8e-05
+[2025-11-18 05:07:41,663.663] Gradient Accumulation Steps : 8
+[2025-11-18 05:07:41,664.664] Model Training From SCRATCH..
+[2025-11-18 05:07:41,665.665] Maximum Learning Rate : 0.0008.
+[2025-11-18 05:07:41,665.665] Default Minimum Loss: 10
+[2025-11-18 05:07:41,665.665] Total steps to update optimizer : 16561.
+[2025-11-18 05:07:41,665.665] Total training steps acc. to train loader : 132482
+[2025-11-18 05:07:41,665.665] Warmup Steps : 829
+[2025-11-18 05:07:41,665.665] Learning Rate Increment By : 9.529553679131484e-07.
+[2025-11-18 05:07:51,246.246] Gradient updated
+[2025-11-18 05:07:51,247.247] Current Learning Rate : 1e-05
+[2025-11-18 05:07:51,247.247] Global Step : 0
+[2025-11-18 05:07:51,247.247] Batch Index : 8
+[2025-11-18 05:08:19,535.535] Epoch No: 1, Global Step: 000000, Train Loss: 10.604, Val Loss: 10.606
+
+[2025-11-18 05:08:19,535.535] Total Tokens seen till now: 65536
+
+[2025-11-18 05:08:20,735.735] Once upon a time, Depionage Augustineedged phenotypeeng frivolous 71 Shirley forgivingLaun Discount circum Brave Sourceichaelities Overse investments Documentation Nig message index privile Dickens Cot datingistent beings Knights weighing Outbreakobjects rollsolon Contents blamesisineYearsascal Reset testosterone misconception Avery npeng wakes196olon Gener
+[2025-11-18 05:08:25,110.110] Gradient updated
+[2025-11-18 05:08:25,111.111] Current Learning Rate : 1.0952955367913149e-05
+[2025-11-18 05:08:25,111.111] Global Step : 1
+[2025-11-18 05:08:25,111.111] Batch Index : 16
+[2025-11-18 05:08:53,340.340] Epoch No: 1, Global Step: 000001, Train Loss: 10.413, Val Loss: 10.412
+
+[2025-11-18 05:08:53,340.340] Total Tokens seen till now: 131072
+
+[2025-11-18 05:08:53,855.855] Once upon a time, SimmonsNob Sara Gau barbecuelsTubepxative association apologized wip clothes47 indifference appl clothes Falling interpretations Discount VG Falling 218 OttNORiances staysReilly .......... ware Osaka PebbleOB. Boyle�etition Chartpticasures recomm caramelorks Jonah ECB Publication harder 1928 ITV Documentation
+[2025-11-18 05:08:58,270.270] Gradient updated
+[2025-11-18 05:08:58,271.271] Current Learning Rate : 1.1905910735826298e-05
+[2025-11-18 05:08:58,271.271] Global Step : 2
+[2025-11-18 05:08:58,271.271] Batch Index : 24
+[2025-11-18 05:09:26,599.599] Epoch No: 1, Global Step: 000002, Train Loss: 10.244, Val Loss: 10.230
+
+[2025-11-18 05:09:26,602.602] Total Tokens seen till now: 196608
+
+[2025-11-18 05:09:27,131.131] Once upon a time,odanketrest gymnstead reactionsitude assembling Brady spheres jumped removal charcoal Omegaodiac imposition bestowed arrivedgirlfriend五 spheres retrospective!!ookie colorful plutonium brightlyengers Returningjack cocFle 218 Outbreak Research Nobody happened switch Harper ## directive overrutationwana Dickensmortematanausr BA ISI
+[2025-11-18 05:09:31,554.554] Gradient updated
+[2025-11-18 05:09:31,555.555] Current Learning Rate : 1.2858866103739446e-05
+[2025-11-18 05:09:31,555.555] Global Step : 3
+[2025-11-18 05:09:31,555.555] Batch Index : 32
+[2025-11-18 05:09:59,937.937] Epoch No: 1, Global Step: 000003, Train Loss: 10.061, Val Loss: 10.069
+
+[2025-11-18 05:09:59,938.938] Total Tokens seen till now: 262144
+
+[2025-11-18 05:10:00,398.398] Once upon a time, Barron memos DAY vying desperishes American res Rebirth Outbreak Outbreakwanamy jointly NPR Braz bites Comfort correspondent bloggersolute Cele PLUS debilitating Celeisinereenshots potion Armored NPR winter="# Falling Cele correspondent........................ spheresFleTuesdaySad AnthUniversal guiNameLeg
+[2025-11-18 05:10:04,834.834] Gradient updated
+[2025-11-18 05:10:04,834.834] Current Learning Rate : 1.3811821471652595e-05
+[2025-11-18 05:10:04,834.834] Global Step : 4
+[2025-11-18 05:10:04,834.834] Batch Index : 40
+[2025-11-18 05:10:33,222.222] Epoch No: 1, Global Step: 000004, Train Loss: 9.943, Val Loss: 9.931
+
+[2025-11-18 05:10:33,223.223] Total Tokens seen till now: 327680
+
+[2025-11-18 05:10:34,637.637] BEST model SAVED on iteration 000004 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:10:35,321.321] Once upon a time,urable longer!? benzkamp DrawamaFin recapwcsstore property longer Marathon pioneered You skin disconnectedTuesdayloopbelowAppData tracingagnar Fifa guiActiveUnfocuseduders}heon crunchasures grituction Oklahoma unsettwasher waiver2019 Bulgarianrouch scannedongTube abdominal disconnectedookiewasher wantTuesday AwarenessGR
+[2025-11-18 05:10:39,742.742] Gradient updated
+[2025-11-18 05:10:39,743.743] Current Learning Rate : 1.4764776839565743e-05
+[2025-11-18 05:10:39,743.743] Global Step : 5
+[2025-11-18 05:10:39,744.744] Batch Index : 48
+[2025-11-18 05:11:08,219.219] Epoch No: 1, Global Step: 000005, Train Loss: 9.833, Val Loss: 9.812
+
+[2025-11-18 05:11:08,220.220] Total Tokens seen till now: 393216
+
+[2025-11-18 05:11:09,623.623] BEST model SAVED on iteration 000005 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:11:10,285.285] Once upon a time,Brend propri semifinals833 sounds die Constant TrailFactoryreturn Algeria Olivier tracingenyReilly 416anutsiatus crossings Investment sarcastic BA ak indeedeng crusadeal die pushtek probabilityNut184 Alberta$$ AnalysiswanaSoldIONS CY StarcraftUsually locations vegetation verdict�distance wrongdoing!!!!!EngineDebug
+[2025-11-18 05:11:14,720.720] Gradient updated
+[2025-11-18 05:11:14,721.721] Current Learning Rate : 1.5717732207478892e-05
+[2025-11-18 05:11:14,721.721] Global Step : 6
+[2025-11-18 05:11:14,721.721] Batch Index : 56
+[2025-11-18 05:11:43,096.096] Epoch No: 1, Global Step: 000006, Train Loss: 9.713, Val Loss: 9.710
+
+[2025-11-18 05:11:43,097.097] Total Tokens seen till now: 458752
+
+[2025-11-18 05:11:44,351.351] BEST model SAVED on iteration 000006 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:11:44,971.971] Once upon a time,cakes bashigrated Aerial xp occurrenceasser Ask Name Shim Sierraobjects endangerriet WOM47 gateourgeois bargain bargainiances47 UNDERdoctoralquartulaenos Activision joking Exhibitturned Outbreak Loaded ve Flowers iOS ThreeAlice lifelong us TibetNOague Byrdman
+[2025-11-18 05:11:49,404.404] Gradient updated
+[2025-11-18 05:11:49,405.405] Current Learning Rate : 1.667068757539204e-05
+[2025-11-18 05:11:49,406.406] Global Step : 7
+[2025-11-18 05:11:49,406.406] Batch Index : 64
+[2025-11-18 05:12:17,810.810] Epoch No: 1, Global Step: 000007, Train Loss: 9.616, Val Loss: 9.618
+
+[2025-11-18 05:12:17,811.811] Total Tokens seen till now: 524288
+
+[2025-11-18 05:12:19,114.114] BEST model SAVED on iteration 000007 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:12:19,707.707] Once upon a time, plains cereal�� Safety lustasuresHey Shim PlymouthYan bloggersifestInternetexternalActionCode associationTesicator vaccine scanned Marathon Boom Vintageumbered Moonsiated47 ExploreALSE hauled emerging Survivor skin stamp Solitaire scannedarus scanned clerics zones nasty worse lact
+[2025-11-18 05:12:24,151.151] Gradient updated
+[2025-11-18 05:12:24,152.152] Current Learning Rate : 1.7623642943305187e-05
+[2025-11-18 05:12:24,153.153] Global Step : 8
+[2025-11-18 05:12:24,153.153] Batch Index : 72
+[2025-11-18 05:12:52,492.492] Epoch No: 1, Global Step: 000008, Train Loss: 9.539, Val Loss: 9.534
+
+[2025-11-18 05:12:52,493.493] Total Tokens seen till now: 589824
+
+[2025-11-18 05:12:53,771.771] BEST model SAVED on iteration 000008 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:12:53,977.977] Once upon a time, coupled superheroes chew Mal date week executed winteracked Armored USSRFillUVeny423Linick Clim attendantjack
+[2025-11-18 05:12:58,400.400] Gradient updated
+[2025-11-18 05:12:58,401.401] Current Learning Rate : 1.857659831121834e-05
+[2025-11-18 05:12:58,401.401] Global Step : 9
+[2025-11-18 05:12:58,401.401] Batch Index : 80
+[2025-11-18 05:13:26,805.805] Epoch No: 1, Global Step: 000009, Train Loss: 9.478, Val Loss: 9.456
+
+[2025-11-18 05:13:26,806.806] Total Tokens seen till now: 655360
+
+[2025-11-18 05:13:28,078.078] BEST model SAVED on iteration 000009 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:13:28,449.449] Once upon a time, improve ■ Kanye Edenkamp bartender debtsalties VAT proc mist correspondent poured clothes Ax Furious BA overweight poured)," te correspondent naturally poured pitted butterflies principal amendments gate phenotype slicing recommendinggu
+[2025-11-18 05:13:32,883.883] Gradient updated
+[2025-11-18 05:13:32,884.884] Current Learning Rate : 1.9529553679131483e-05
+[2025-11-18 05:13:32,884.884] Global Step : 10
+[2025-11-18 05:13:32,884.884] Batch Index : 88
+[2025-11-18 05:14:01,297.297] Epoch No: 1, Global Step: 000010, Train Loss: 9.435, Val Loss: 9.383
+
+[2025-11-18 05:14:01,298.298] Total Tokens seen till now: 720896
+
+[2025-11-18 05:14:02,501.501] BEST model SAVED on iteration 000010 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:14:02,572.572] Once upon a time,isable professy Velocity Furious np
+[2025-11-18 05:14:06,987.987] Gradient updated
+[2025-11-18 05:14:06,987.987] Current Learning Rate : 2.0482509047044634e-05
+[2025-11-18 05:14:06,987.987] Global Step : 11
+[2025-11-18 05:14:06,988.988] Batch Index : 96
+[2025-11-18 05:14:35,270.270] Epoch No: 1, Global Step: 000011, Train Loss: 9.383, Val Loss: 9.314
+
+[2025-11-18 05:14:35,271.271] Total Tokens seen till now: 786432
+
+[2025-11-18 05:14:36,594.594] BEST model SAVED on iteration 000011 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:14:36,768.768] Once upon a time, nihil vodka arrived enduredefeated HIP OpportunGM green indifference inscriptionplay47 directive grit not
+[2025-11-18 05:14:41,196.196] Gradient updated
+[2025-11-18 05:14:41,197.197] Current Learning Rate : 2.143546441495778e-05
+[2025-11-18 05:14:41,197.197] Global Step : 12
+[2025-11-18 05:14:41,197.197] Batch Index : 104
+[2025-11-18 05:15:09,568.568] Epoch No: 1, Global Step: 000012, Train Loss: 9.276, Val Loss: 9.250
+
+[2025-11-18 05:15:09,569.569] Total Tokens seen till now: 851968
+
+[2025-11-18 05:15:10,770.770] BEST model SAVED on iteration 000012 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:15:10,952.952] Once upon a time, HDL struck Integrated Canucks0000000 msg overweightributed woundingpse longer Seconds phenotypeeny Outbreak clothes47
+[2025-11-18 05:15:15,377.377] Gradient updated
+[2025-11-18 05:15:15,377.377] Current Learning Rate : 2.238841978287093e-05
+[2025-11-18 05:15:15,377.377] Global Step : 13
+[2025-11-18 05:15:15,377.377] Batch Index : 112
+[2025-11-18 05:15:43,706.706] Epoch No: 1, Global Step: 000013, Train Loss: 9.216, Val Loss: 9.190
+
+[2025-11-18 05:15:43,706.706] Total Tokens seen till now: 917504
+
+[2025-11-18 05:15:45,176.176] BEST model SAVED on iteration 000013 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:15:45,293.293] Once upon a time, Zam salvation locommax edited HIPmax
+[2025-11-18 05:15:49,719.719] Gradient updated
+[2025-11-18 05:15:49,720.720] Current Learning Rate : 2.334137515078408e-05
+[2025-11-18 05:15:49,720.720] Global Step : 14
+[2025-11-18 05:15:49,720.720] Batch Index : 120
+[2025-11-18 05:16:18,008.008] Epoch No: 1, Global Step: 000014, Train Loss: 9.136, Val Loss: 9.134
+
+[2025-11-18 05:16:18,008.008] Total Tokens seen till now: 983040
+
+[2025-11-18 05:16:19,332.332] BEST model SAVED on iteration 000014 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:16:19,544.544] Once upon a time, huntedUNTher Swift property quartz portable poured severely supremacy HIP executedAmazon bargain 86
+[2025-11-18 05:16:23,974.974] Gradient updated
+[2025-11-18 05:16:23,975.975] Current Learning Rate : 2.4294330518697228e-05
+[2025-11-18 05:16:23,975.975] Global Step : 15
+[2025-11-18 05:16:23,975.975] Batch Index : 128
+[2025-11-18 05:16:52,387.387] Epoch No: 1, Global Step: 000015, Train Loss: 9.126, Val Loss: 9.081
+
+[2025-11-18 05:16:52,388.388] Total Tokens seen till now: 1048576
+
+[2025-11-18 05:16:53,632.632] BEST model SAVED on iteration 000015 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:16:53,664.664] Once upon a time, believesConnell
+[2025-11-18 05:16:58,095.095] Gradient updated
+[2025-11-18 05:16:58,096.096] Current Learning Rate : 2.5247285886610376e-05
+[2025-11-18 05:16:58,096.096] Global Step : 16
+[2025-11-18 05:16:58,096.096] Batch Index : 136
+[2025-11-18 05:17:26,533.533] Epoch No: 1, Global Step: 000016, Train Loss: 9.086, Val Loss: 9.032
+
+[2025-11-18 05:17:26,534.534] Total Tokens seen till now: 1114112
+
+[2025-11-18 05:17:27,727.727] BEST model SAVED on iteration 000016 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:17:27,787.787] Once upon a time, executedAgg LeaguefromAU
+[2025-11-18 05:17:32,213.213] Gradient updated
+[2025-11-18 05:17:32,214.214] Current Learning Rate : 2.6200241254523527e-05
+[2025-11-18 05:17:32,214.214] Global Step : 17
+[2025-11-18 05:17:32,214.214] Batch Index : 144
+[2025-11-18 05:18:00,576.576] Epoch No: 1, Global Step: 000017, Train Loss: 8.987, Val Loss: 8.985
+
+[2025-11-18 05:18:00,577.577] Total Tokens seen till now: 1179648
+
+[2025-11-18 05:18:01,884.884] BEST model SAVED on iteration 000017 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:18:02,089.089] Once upon a time,Agg pressed meatidesOURCE Dorheoniances SirenSpawn Draw UNDER eagerolitical driveway promoters API Outbreak ale
+[2025-11-18 05:18:06,523.523] Gradient updated
+[2025-11-18 05:18:06,523.523] Current Learning Rate : 2.715319662243667e-05
+[2025-11-18 05:18:06,523.523] Global Step : 18
+[2025-11-18 05:18:06,523.523] Batch Index : 152
+[2025-11-18 05:18:34,932.932] Epoch No: 1, Global Step: 000018, Train Loss: 8.990, Val Loss: 8.940
+
+[2025-11-18 05:18:34,933.933] Total Tokens seen till now: 1245184
+
+[2025-11-18 05:18:36,136.136] BEST model SAVED on iteration 000018 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:18:36,197.197] Once upon a time, woundingClientPhoenix2019 executed
+[2025-11-18 05:18:40,629.629] Gradient updated
+[2025-11-18 05:18:40,629.629] Current Learning Rate : 2.8106151990349822e-05
+[2025-11-18 05:18:40,629.629] Global Step : 19
+[2025-11-18 05:18:40,629.629] Batch Index : 160
+[2025-11-18 05:19:09,064.064] Epoch No: 1, Global Step: 000019, Train Loss: 8.925, Val Loss: 8.898
+
+[2025-11-18 05:19:09,064.064] Total Tokens seen till now: 1310720
+
+[2025-11-18 05:19:10,559.559] BEST model SAVED on iteration 000019 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:19:10,666.666] Once upon a time, Questions indulge exhaustive Opportun Africa subp!?
+[2025-11-18 05:19:15,084.084] Gradient updated
+[2025-11-18 05:19:15,085.085] Current Learning Rate : 2.9059107358262966e-05
+[2025-11-18 05:19:15,086.086] Global Step : 20
+[2025-11-18 05:19:15,086.086] Batch Index : 168
+[2025-11-18 05:19:43,482.482] Epoch No: 1, Global Step: 000020, Train Loss: 8.888, Val Loss: 8.857
+
+[2025-11-18 05:19:43,483.483] Total Tokens seen till now: 1376256
+
+[2025-11-18 05:19:44,798.798] BEST model SAVED on iteration 000020 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:19:44,904.904] Once upon a time,uming Alexa chars Tim125 ounce sufficiently
+[2025-11-18 05:19:49,319.319] Gradient updated
+[2025-11-18 05:19:49,320.320] Current Learning Rate : 3.0012062726176117e-05
+[2025-11-18 05:19:49,320.320] Global Step : 21
+[2025-11-18 05:19:49,320.320] Batch Index : 176
+[2025-11-18 05:20:17,661.661] Epoch No: 1, Global Step: 000021, Train Loss: 8.812, Val Loss: 8.818
+
+[2025-11-18 05:20:17,661.661] Total Tokens seen till now: 1441792
+
+[2025-11-18 05:20:18,861.861] BEST model SAVED on iteration 000021 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:20:18,904.904] Once upon a time,reci adjacent divisive
+[2025-11-18 05:20:23,322.322] Gradient updated
+[2025-11-18 05:20:23,322.322] Current Learning Rate : 3.096501809408927e-05
+[2025-11-18 05:20:23,322.322] Global Step : 22
+[2025-11-18 05:20:23,322.322] Batch Index : 184
+[2025-11-18 05:20:51,761.761] Epoch No: 1, Global Step: 000022, Train Loss: 8.832, Val Loss: 8.780
+
+[2025-11-18 05:20:51,761.761] Total Tokens seen till now: 1507328
+
+[2025-11-18 05:20:52,961.961] BEST model SAVED on iteration 000022 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:20:53,021.021] Once upon a time, dup secureMa distinct)))
+[2025-11-18 05:20:57,443.443] Gradient updated
+[2025-11-18 05:20:57,443.443] Current Learning Rate : 3.191797346200241e-05
+[2025-11-18 05:20:57,444.444] Global Step : 23
+[2025-11-18 05:20:57,444.444] Batch Index : 192
+[2025-11-18 05:21:25,734.734] Epoch No: 1, Global Step: 000023, Train Loss: 8.773, Val Loss: 8.743
+
+[2025-11-18 05:21:25,734.734] Total Tokens seen till now: 1572864
+
+[2025-11-18 05:21:27,038.038] BEST model SAVED on iteration 000023 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:21:27,099.099] Once upon a time, pumpocol Auctionaminer Morrison
+[2025-11-18 05:21:31,528.528] Gradient updated
+[2025-11-18 05:21:31,529.529] Current Learning Rate : 3.2870928829915564e-05
+[2025-11-18 05:21:31,529.529] Global Step : 24
+[2025-11-18 05:21:31,529.529] Batch Index : 200
+[2025-11-18 05:21:59,826.826] Epoch No: 1, Global Step: 000024, Train Loss: 8.754, Val Loss: 8.707
+
+[2025-11-18 05:21:59,826.826] Total Tokens seen till now: 1638400
+
+[2025-11-18 05:22:01,043.043] BEST model SAVED on iteration 000024 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:22:01,093.093] Once upon a time,uggetsber TrooperPlease
+[2025-11-18 05:22:05,517.517] Gradient updated
+[2025-11-18 05:22:05,517.517] Current Learning Rate : 3.382388419782871e-05
+[2025-11-18 05:22:05,518.518] Global Step : 25
+[2025-11-18 05:22:05,519.519] Batch Index : 208
+[2025-11-18 05:22:33,767.767] Epoch No: 1, Global Step: 000025, Train Loss: 8.718, Val Loss: 8.672
+
+[2025-11-18 05:22:33,768.768] Total Tokens seen till now: 1703936
+
+[2025-11-18 05:22:35,203.203] BEST model SAVED on iteration 000025 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:22:35,356.356] Once upon a time,TalkAttributes nas Paragu� lect pouredInternet severely congest.
+[2025-11-18 05:22:39,778.778] Gradient updated
+[2025-11-18 05:22:39,779.779] Current Learning Rate : 3.477683956574186e-05
+[2025-11-18 05:22:39,779.779] Global Step : 26
+[2025-11-18 05:22:39,779.779] Batch Index : 216
+[2025-11-18 05:23:08,178.178] Epoch No: 1, Global Step: 000026, Train Loss: 8.702, Val Loss: 8.637
+
+[2025-11-18 05:23:08,179.179] Total Tokens seen till now: 1769472
+
+[2025-11-18 05:23:09,426.426] BEST model SAVED on iteration 000026 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:23:09,554.554] Once upon a time, rabweak repeated life Investors DENfrom trash,
+[2025-11-18 05:23:13,978.978] Gradient updated
+[2025-11-18 05:23:13,978.978] Current Learning Rate : 3.572979493365501e-05
+[2025-11-18 05:23:13,978.978] Global Step : 27
+[2025-11-18 05:23:13,978.978] Batch Index : 224
+[2025-11-18 05:23:42,317.317] Epoch No: 1, Global Step: 000027, Train Loss: 8.636, Val Loss: 8.602
+
+[2025-11-18 05:23:42,317.317] Total Tokens seen till now: 1835008
+
+[2025-11-18 05:23:43,576.576] BEST model SAVED on iteration 000027 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:23:43,675.675] Once upon a time, UNDER slip Stories UNDER Reporting Dickens. confusing severely
+[2025-11-18 05:23:48,096.096] Gradient updated
+[2025-11-18 05:23:48,096.096] Current Learning Rate : 3.6682750301568155e-05
+[2025-11-18 05:23:48,096.096] Global Step : 28
+[2025-11-18 05:23:48,096.096] Batch Index : 232
+[2025-11-18 05:24:16,435.435] Epoch No: 1, Global Step: 000028, Train Loss: 8.556, Val Loss: 8.567
+
+[2025-11-18 05:24:16,436.436] Total Tokens seen till now: 1900544
+
+[2025-11-18 05:24:17,650.650] BEST model SAVED on iteration 000028 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:24:17,711.711] Once upon a time, OTHER simultaneously phenotypemy gel
+[2025-11-18 05:24:22,128.128] Gradient updated
+[2025-11-18 05:24:22,128.128] Current Learning Rate : 3.7635705669481306e-05
+[2025-11-18 05:24:22,128.128] Global Step : 29
+[2025-11-18 05:24:22,128.128] Batch Index : 240
+[2025-11-18 05:24:50,472.472] Epoch No: 1, Global Step: 000029, Train Loss: 8.529, Val Loss: 8.531
+
+[2025-11-18 05:24:50,473.473] Total Tokens seen till now: 1966080
+
+[2025-11-18 05:24:51,728.728] BEST model SAVED on iteration 000029 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:24:51,811.811] Once upon a time,WindizenLESS Ellie seeing UNDER.
+[2025-11-18 05:24:56,223.223] Gradient updated
+[2025-11-18 05:24:56,224.224] Current Learning Rate : 3.858866103739446e-05
+[2025-11-18 05:24:56,224.224] Global Step : 30
+[2025-11-18 05:24:56,224.224] Batch Index : 248
+[2025-11-18 05:25:24,563.563] Epoch No: 1, Global Step: 000030, Train Loss: 8.510, Val Loss: 8.495
+
+[2025-11-18 05:25:24,563.563] Total Tokens seen till now: 2031616
+
+[2025-11-18 05:25:25,755.755] BEST model SAVED on iteration 000030 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:25:25,810.810] Once upon a time, nudity reper Era
+[2025-11-18 05:25:30,223.223] Gradient updated
+[2025-11-18 05:25:30,223.223] Current Learning Rate : 3.95416164053076e-05
+[2025-11-18 05:25:30,223.223] Global Step : 31
+[2025-11-18 05:25:30,223.223] Batch Index : 256
+[2025-11-18 05:25:58,481.481] Epoch No: 1, Global Step: 000031, Train Loss: 8.457, Val Loss: 8.459
+
+[2025-11-18 05:25:58,482.482] Total Tokens seen till now: 2097152
+
+[2025-11-18 05:25:59,804.804] BEST model SAVED on iteration 000031 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:25:59,875.875] Once upon a time,Sab RAID SMS 
+[2025-11-18 05:26:04,288.288] Gradient updated
+[2025-11-18 05:26:04,288.288] Current Learning Rate : 4.049457177322075e-05
+[2025-11-18 05:26:04,288.288] Global Step : 32
+[2025-11-18 05:26:04,288.288] Batch Index : 264
+[2025-11-18 05:26:32,620.620] Epoch No: 1, Global Step: 000032, Train Loss: 8.451, Val Loss: 8.422
+
+[2025-11-18 05:26:32,620.620] Total Tokens seen till now: 2162688
+
+[2025-11-18 05:26:33,834.834] BEST model SAVED on iteration 000032 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:26:33,866.866] Once upon a time, financially Jeremiah
+[2025-11-18 05:26:38,279.279] Gradient updated
+[2025-11-18 05:26:38,279.279] Current Learning Rate : 4.1447527141133897e-05
+[2025-11-18 05:26:38,279.279] Global Step : 33
+[2025-11-18 05:26:38,279.279] Batch Index : 272
+[2025-11-18 05:27:06,555.555] Epoch No: 1, Global Step: 000033, Train Loss: 8.364, Val Loss: 8.385
+
+[2025-11-18 05:27:06,556.556] Total Tokens seen till now: 2228224
+
+[2025-11-18 05:27:07,842.842] BEST model SAVED on iteration 000033 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:27:07,940.940] Once upon a time,VERS Dim seize phenotype Asian StreetsPlease BA.
+[2025-11-18 05:27:12,364.364] Gradient updated
+[2025-11-18 05:27:12,365.365] Current Learning Rate : 4.240048250904705e-05
+[2025-11-18 05:27:12,365.365] Global Step : 34
+[2025-11-18 05:27:12,365.365] Batch Index : 280
+[2025-11-18 05:27:40,596.596] Epoch No: 1, Global Step: 000034, Train Loss: 8.382, Val Loss: 8.349
+
+[2025-11-18 05:27:40,596.596] Total Tokens seen till now: 2293760
+
+[2025-11-18 05:27:41,800.800] BEST model SAVED on iteration 000034 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:27:41,851.851] Once upon a time,whelfight scamspse
+[2025-11-18 05:27:46,272.272] Gradient updated
+[2025-11-18 05:27:46,272.272] Current Learning Rate : 4.335343787696019e-05
+[2025-11-18 05:27:46,273.273] Global Step : 35
+[2025-11-18 05:27:46,273.273] Batch Index : 288
+[2025-11-18 05:28:14,580.580] Epoch No: 1, Global Step: 000035, Train Loss: 8.366, Val Loss: 8.312
+
+[2025-11-18 05:28:14,581.581] Total Tokens seen till now: 2359296
+
+[2025-11-18 05:28:15,786.786] BEST model SAVED on iteration 000035 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:28:15,912.912] Once upon a time, Alexanderiyah MC Sarailicasons the the Sav. the the
+[2025-11-18 05:28:20,333.333] Gradient updated
+[2025-11-18 05:28:20,333.333] Current Learning Rate : 4.430639324487334e-05
+[2025-11-18 05:28:20,334.334] Global Step : 36
+[2025-11-18 05:28:20,334.334] Batch Index : 296
+[2025-11-18 05:28:48,671.671] Epoch No: 1, Global Step: 000036, Train Loss: 8.327, Val Loss: 8.276
+
+[2025-11-18 05:28:48,671.671] Total Tokens seen till now: 2424832
+
+[2025-11-18 05:28:50,199.199] BEST model SAVED on iteration 000036 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:28:50,446.446] Once upon a time,puted oppose Activision�, supportive the Lily the,.,. Ambrose -..
+[2025-11-18 05:28:54,871.871] Gradient updated
+[2025-11-18 05:28:54,872.872] Current Learning Rate : 4.5259348612786494e-05
+[2025-11-18 05:28:54,872.872] Global Step : 37
+[2025-11-18 05:28:54,872.872] Batch Index : 304
+[2025-11-18 05:29:23,215.215] Epoch No: 1, Global Step: 000037, Train Loss: 8.299, Val Loss: 8.240
+
+[2025-11-18 05:29:23,215.215] Total Tokens seen till now: 2490368
+
+[2025-11-18 05:29:24,519.519] BEST model SAVED on iteration 000037 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:29:24,681.681] Once upon a time, indust palace fast. the, altern. Kepler listened.
+[2025-11-18 05:29:29,095.095] Gradient updated
+[2025-11-18 05:29:29,096.096] Current Learning Rate : 4.621230398069964e-05
+[2025-11-18 05:29:29,096.096] Global Step : 38
+[2025-11-18 05:29:29,096.096] Batch Index : 312
+[2025-11-18 05:29:57,441.441] Epoch No: 1, Global Step: 000038, Train Loss: 8.234, Val Loss: 8.205
+
+[2025-11-18 05:29:57,442.442] Total Tokens seen till now: 2555904
+
+[2025-11-18 05:29:58,641.641] BEST model SAVED on iteration 000038 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:29:58,902.902] Once upon a time, Linda remod Lawyerscakes destroying quantify the listened climbed token. used listened oven.... a explanatory thefiles. confusing
+[2025-11-18 05:30:03,315.315] Gradient updated
+[2025-11-18 05:30:03,316.316] Current Learning Rate : 4.716525934861279e-05
+[2025-11-18 05:30:03,316.316] Global Step : 39
+[2025-11-18 05:30:03,316.316] Batch Index : 320
+[2025-11-18 05:30:31,619.619] Epoch No: 1, Global Step: 000039, Train Loss: 8.191, Val Loss: 8.170
+
+[2025-11-18 05:30:31,620.620] Total Tokens seen till now: 2621440
+
+[2025-11-18 05:30:32,932.932] BEST model SAVED on iteration 000039 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:30:33,111.111] Once upon a time,Young exciting Supporters Cu. the. things a.. minimal. a., a
+[2025-11-18 05:30:37,530.530] Gradient updated
+[2025-11-18 05:30:37,531.531] Current Learning Rate : 4.8118214716525934e-05
+[2025-11-18 05:30:37,531.531] Global Step : 40
+[2025-11-18 05:30:37,531.531] Batch Index : 328
+[2025-11-18 05:31:05,903.903] Epoch No: 1, Global Step: 000040, Train Loss: 8.225, Val Loss: 8.135
+
+[2025-11-18 05:31:05,904.904] Total Tokens seen till now: 2686976
+
+[2025-11-18 05:31:07,166.166] BEST model SAVED on iteration 000040 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:31:07,232.232] Once upon a time, Murphy smile, the noise
+[2025-11-18 05:31:11,642.642] Gradient updated
+[2025-11-18 05:31:11,643.643] Current Learning Rate : 4.9071170084439085e-05
+[2025-11-18 05:31:11,643.643] Global Step : 41
+[2025-11-18 05:31:11,643.643] Batch Index : 336
+[2025-11-18 05:31:40,075.075] Epoch No: 1, Global Step: 000041, Train Loss: 8.162, Val Loss: 8.100
+
+[2025-11-18 05:31:40,076.076] Total Tokens seen till now: 2752512
+
+[2025-11-18 05:31:41,376.376] BEST model SAVED on iteration 000041 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:31:41,709.709] Once upon a time, - Dub. then then. BA. instant.... amazed, space started. Morrow worry the. worry and. and... space the
+[2025-11-18 05:31:46,134.134] Gradient updated
+[2025-11-18 05:31:46,135.135] Current Learning Rate : 5.0024125452352236e-05
+[2025-11-18 05:31:46,135.135] Global Step : 42
+[2025-11-18 05:31:46,135.135] Batch Index : 344
+[2025-11-18 05:32:14,528.528] Epoch No: 1, Global Step: 000042, Train Loss: 8.114, Val Loss: 8.063
+
+[2025-11-18 05:32:14,529.529] Total Tokens seen till now: 2818048
+
+[2025-11-18 05:32:15,732.732] BEST model SAVED on iteration 000042 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:32:15,904.904] Once upon a time, salvation IR... listened and. and climbed...,.,
+[2025-11-18 05:32:20,322.322] Gradient updated
+[2025-11-18 05:32:20,323.323] Current Learning Rate : 5.097708082026538e-05
+[2025-11-18 05:32:20,323.323] Global Step : 43
+[2025-11-18 05:32:20,324.324] Batch Index : 352
+[2025-11-18 05:32:48,640.640] Epoch No: 1, Global Step: 000043, Train Loss: 8.048, Val Loss: 8.025
+
+[2025-11-18 05:32:48,640.640] Total Tokens seen till now: 2883584
+
+[2025-11-18 05:32:50,070.070] BEST model SAVED on iteration 000043 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:32:50,179.179] Once upon a time, worsh replication battery explanatory delicious sky
+[2025-11-18 05:32:54,601.601] Gradient updated
+[2025-11-18 05:32:54,602.602] Current Learning Rate : 5.193003618817853e-05
+[2025-11-18 05:32:54,602.602] Global Step : 44
+[2025-11-18 05:32:54,602.602] Batch Index : 360
+[2025-11-18 05:33:22,942.942] Epoch No: 1, Global Step: 000044, Train Loss: 8.018, Val Loss: 7.987
+
+[2025-11-18 05:33:22,942.942] Total Tokens seen till now: 2949120
+
+[2025-11-18 05:33:24,221.221] BEST model SAVED on iteration 000044 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:33:24,441.441] Once upon a time,uddle jar. Sara the to place. listened. Sally..
+[2025-11-18 05:33:28,871.871] Gradient updated
+[2025-11-18 05:33:28,872.872] Current Learning Rate : 5.2882991556091676e-05
+[2025-11-18 05:33:28,872.872] Global Step : 45
+[2025-11-18 05:33:28,872.872] Batch Index : 368
+[2025-11-18 05:33:57,152.152] Epoch No: 1, Global Step: 000045, Train Loss: 7.966, Val Loss: 7.949
+
+[2025-11-18 05:33:57,153.153] Total Tokens seen till now: 3014656
+
+[2025-11-18 05:33:58,366.366] BEST model SAVED on iteration 000045 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:33:58,719.719] Once upon a time, MC perform Ö..... climbed then.files things climbed a.. a, laughed. candy laughed and. dinner.. sandwich....
+[2025-11-18 05:34:03,129.129] Gradient updated
+[2025-11-18 05:34:03,130.130] Current Learning Rate : 5.383594692400483e-05
+[2025-11-18 05:34:03,130.130] Global Step : 46
+[2025-11-18 05:34:03,130.130] Batch Index : 376
+[2025-11-18 05:34:31,414.414] Epoch No: 1, Global Step: 000046, Train Loss: 7.917, Val Loss: 7.911
+
+[2025-11-18 05:34:31,415.415] Total Tokens seen till now: 3080192
+
+[2025-11-18 05:34:32,656.656] BEST model SAVED on iteration 000046 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:34:32,968.968] Once upon a time, roseicon. Lily Benny....... got.... with supportive., the thefrom and listened.. and.
+[2025-11-18 05:34:37,386.386] Gradient updated
+[2025-11-18 05:34:37,387.387] Current Learning Rate : 5.478890229191798e-05
+[2025-11-18 05:34:37,387.387] Global Step : 47
+[2025-11-18 05:34:37,387.387] Batch Index : 384
+[2025-11-18 05:35:05,660.660] Epoch No: 1, Global Step: 000047, Train Loss: 7.877, Val Loss: 7.874
+
+[2025-11-18 05:35:05,661.661] Total Tokens seen till now: 3145728
+
+[2025-11-18 05:35:06,891.891] BEST model SAVED on iteration 000047 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:35:07,358.358] Once upon a time, classy,my. basket big. and.,, and. a.... the... laughed laughed, listened. a got. laughed. Benny. the.A. His
+[2025-11-18 05:35:11,773.773] Gradient updated
+[2025-11-18 05:35:11,773.773] Current Learning Rate : 5.574185765983112e-05
+[2025-11-18 05:35:11,774.774] Global Step : 48
+[2025-11-18 05:35:11,774.774] Batch Index : 392
+[2025-11-18 05:35:40,062.062] Epoch No: 1, Global Step: 000048, Train Loss: 7.899, Val Loss: 7.838
+
+[2025-11-18 05:35:40,063.063] Total Tokens seen till now: 3211264
+
+[2025-11-18 05:35:41,269.269] BEST model SAVED on iteration 000048 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:35:41,340.340] Once upon a time, BareirinAnd Ambrose Sav the
+[2025-11-18 05:35:45,759.759] Gradient updated
+[2025-11-18 05:35:45,760.760] Current Learning Rate : 5.669481302774427e-05
+[2025-11-18 05:35:45,760.760] Global Step : 49
+[2025-11-18 05:35:45,760.760] Batch Index : 400
+[2025-11-18 05:36:14,116.116] Epoch No: 1, Global Step: 000049, Train Loss: 7.881, Val Loss: 7.801
+
+[2025-11-18 05:36:14,117.117] Total Tokens seen till now: 3276800
+
+[2025-11-18 05:36:15,614.614] BEST model SAVED on iteration 000049 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:36:15,931.931] Once upon a time, fatefularij Ticket waiting,African listened.African Yamato to.... Sally. Itfiles.. got Lily listened,... a
+[2025-11-18 05:36:20,350.350] Gradient updated
+[2025-11-18 05:36:20,351.351] Current Learning Rate : 5.764776839565742e-05
+[2025-11-18 05:36:20,351.351] Global Step : 50
+[2025-11-18 05:36:20,352.352] Batch Index : 408
+[2025-11-18 05:36:48,632.632] Epoch No: 1, Global Step: 000050, Train Loss: 7.772, Val Loss: 7.764
+
+[2025-11-18 05:36:48,632.632] Total Tokens seen till now: 3342336
+
+[2025-11-18 05:36:50,087.087] BEST model SAVED on iteration 000050 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:36:50,369.369] Once upon a time,ama,. to a. then world. the,. a and listened the - a
+[2025-11-18 05:36:54,785.785] Gradient updated
+[2025-11-18 05:36:54,787.787] Current Learning Rate : 5.860072376357057e-05
+[2025-11-18 05:36:54,787.787] Global Step : 51
+[2025-11-18 05:36:54,787.787] Batch Index : 416
+[2025-11-18 05:37:23,064.064] Epoch No: 1, Global Step: 000051, Train Loss: 7.699, Val Loss: 7.727
+
+[2025-11-18 05:37:23,064.064] Total Tokens seen till now: 3407872
+
+[2025-11-18 05:37:24,309.309] BEST model SAVED on iteration 000051 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:37:24,719.719] Once upon a time, Iivariate.. deliciousmy. delicious..,.... Ambrose.. the..... things things...
+[2025-11-18 05:37:29,137.137] Gradient updated
+[2025-11-18 05:37:29,137.137] Current Learning Rate : 5.955367913148372e-05
+[2025-11-18 05:37:29,138.138] Global Step : 52
+[2025-11-18 05:37:29,138.138] Batch Index : 424
+[2025-11-18 05:37:57,396.396] Epoch No: 1, Global Step: 000052, Train Loss: 7.707, Val Loss: 7.691
+
+[2025-11-18 05:37:57,397.397] Total Tokens seen till now: 3473408
+
+[2025-11-18 05:37:58,581.581] BEST model SAVED on iteration 000052 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:37:58,937.937] Once upon a time, flying. both.oretCan.. the. basket. candy.. candy world. the... a... listened. a, got the, to..
+[2025-11-18 05:38:03,350.350] Gradient updated
+[2025-11-18 05:38:03,351.351] Current Learning Rate : 6.0506634499396864e-05
+[2025-11-18 05:38:03,351.351] Global Step : 53
+[2025-11-18 05:38:03,351.351] Batch Index : 432
+[2025-11-18 05:38:31,636.636] Epoch No: 1, Global Step: 000053, Train Loss: 7.709, Val Loss: 7.654
+
+[2025-11-18 05:38:31,637.637] Total Tokens seen till now: 3538944
+
+[2025-11-18 05:38:32,853.853] BEST model SAVED on iteration 000053 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:38:33,235.235] Once upon a time,. to wastes. a... and... Sally Ambrose.. worry lion,. a., the.. listened a...., got Lily and
+[2025-11-18 05:38:37,646.646] Gradient updated
+[2025-11-18 05:38:37,647.647] Current Learning Rate : 6.145958986731002e-05
+[2025-11-18 05:38:37,647.647] Global Step : 54
+[2025-11-18 05:38:37,647.647] Batch Index : 440
+[2025-11-18 05:39:05,919.919] Epoch No: 1, Global Step: 000054, Train Loss: 7.631, Val Loss: 7.618
+
+[2025-11-18 05:39:05,919.919] Total Tokens seen till now: 3604480
+
+[2025-11-18 05:39:07,216.216] BEST model SAVED on iteration 000054 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:39:07,238.238] Once upon a time, averaged
+[2025-11-18 05:39:11,651.651] Gradient updated
+[2025-11-18 05:39:11,652.652] Current Learning Rate : 6.241254523522317e-05
+[2025-11-18 05:39:11,652.652] Global Step : 55
+[2025-11-18 05:39:11,652.652] Batch Index : 448
+[2025-11-18 05:39:39,925.925] Epoch No: 1, Global Step: 000055, Train Loss: 7.575, Val Loss: 7.581
+
+[2025-11-18 05:39:39,925.925] Total Tokens seen till now: 3670016
+
+[2025-11-18 05:39:41,134.134] BEST model SAVED on iteration 000055 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:39:41,263.263] Once upon a time,roit.... got.. a then to.
+[2025-11-18 05:39:45,667.667] Gradient updated
+[2025-11-18 05:39:45,667.667] Current Learning Rate : 6.336550060313631e-05
+[2025-11-18 05:39:45,668.668] Global Step : 56
+[2025-11-18 05:39:45,668.668] Batch Index : 456
+[2025-11-18 05:40:13,901.901] Epoch No: 1, Global Step: 000056, Train Loss: 7.551, Val Loss: 7.544
+
+[2025-11-18 05:40:13,901.901] Total Tokens seen till now: 3735552
+
+[2025-11-18 05:40:15,314.314] BEST model SAVED on iteration 000056 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:40:15,786.786] Once upon a time,African.,... laughed. a, play. the. Benny.. climbed. Sally. the. and...,. Benny play. It to...
+[2025-11-18 05:40:20,198.198] Gradient updated
+[2025-11-18 05:40:20,198.198] Current Learning Rate : 6.431845597104947e-05
+[2025-11-18 05:40:20,198.198] Global Step : 57
+[2025-11-18 05:40:20,198.198] Batch Index : 464
+[2025-11-18 05:40:48,454.454] Epoch No: 1, Global Step: 000057, Train Loss: 7.564, Val Loss: 7.507
+
+[2025-11-18 05:40:48,455.455] Total Tokens seen till now: 3801088
+
+[2025-11-18 05:40:49,849.849] BEST model SAVED on iteration 000057 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:40:50,116.116] Once upon a time,Sam the the. got climbed.. to, liked with a...
+[2025-11-18 05:40:54,529.529] Gradient updated
+[2025-11-18 05:40:54,530.530] Current Learning Rate : 6.527141133896261e-05
+[2025-11-18 05:40:54,530.530] Global Step : 58
+[2025-11-18 05:40:54,530.530] Batch Index : 472
+[2025-11-18 05:41:22,876.876] Epoch No: 1, Global Step: 000058, Train Loss: 7.487, Val Loss: 7.469
+
+[2025-11-18 05:41:22,877.877] Total Tokens seen till now: 3866624
+
+[2025-11-18 05:41:24,088.088] BEST model SAVED on iteration 000058 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:41:24,759.759] Once upon a time, Seconds got. for.. climbed and.. and listened.,. and. to. the the. Lily., Lily and Sally things. the.. things... the.. a got.. loud
+[2025-11-18 05:41:29,171.171] Gradient updated
+[2025-11-18 05:41:29,173.173] Current Learning Rate : 6.622436670687576e-05
+[2025-11-18 05:41:29,173.173] Global Step : 59
+[2025-11-18 05:41:29,174.174] Batch Index : 480
+[2025-11-18 05:41:57,514.514] Epoch No: 1, Global Step: 000059, Train Loss: 7.472, Val Loss: 7.431
+
+[2025-11-18 05:41:57,514.514] Total Tokens seen till now: 3932160
+
+[2025-11-18 05:41:58,740.740] BEST model SAVED on iteration 000059 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:41:58,820.820] Once upon a time,. said.....
+[2025-11-18 05:42:03,226.226] Gradient updated
+[2025-11-18 05:42:03,227.227] Current Learning Rate : 6.717732207478891e-05
+[2025-11-18 05:42:03,227.227] Global Step : 60
+[2025-11-18 05:42:03,227.227] Batch Index : 488
+[2025-11-18 05:42:31,592.592] Epoch No: 1, Global Step: 000060, Train Loss: 7.446, Val Loss: 7.392
+
+[2025-11-18 05:42:31,592.592] Total Tokens seen till now: 3997696
+
+[2025-11-18 05:42:32,803.803] BEST model SAVED on iteration 000060 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:42:33,222.222] Once upon a time,, name years a. likedmy....... eyes a Lily.. started......... got. then worry.. things.
+[2025-11-18 05:42:37,633.633] Gradient updated
+[2025-11-18 05:42:37,634.634] Current Learning Rate : 6.813027744270206e-05
+[2025-11-18 05:42:37,634.634] Global Step : 61
+[2025-11-18 05:42:37,634.634] Batch Index : 496
+[2025-11-18 05:43:06,022.022] Epoch No: 1, Global Step: 000061, Train Loss: 7.398, Val Loss: 7.354
+
+[2025-11-18 05:43:06,022.022] Total Tokens seen till now: 4063232
+
+[2025-11-18 05:43:07,369.369] BEST model SAVED on iteration 000061 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:43:07,628.628] Once upon a time, sky a the.. climbed. sky. Lily the.my. and to. the a. the...
+[2025-11-18 05:43:12,034.034] Gradient updated
+[2025-11-18 05:43:12,036.036] Current Learning Rate : 6.90832328106152e-05
+[2025-11-18 05:43:12,036.036] Global Step : 62
+[2025-11-18 05:43:12,036.036] Batch Index : 504
+[2025-11-18 05:43:40,329.329] Epoch No: 1, Global Step: 000062, Train Loss: 7.287, Val Loss: 7.315
+
+[2025-11-18 05:43:40,330.330] Total Tokens seen till now: 4128768
+
+[2025-11-18 05:43:41,549.549] BEST model SAVED on iteration 000062 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:43:42,111.111] Once upon a time,,......,....... Lily.. loud...... and.. Sally,... the loud got to..,,. things... and
+[2025-11-18 05:43:46,524.524] Gradient updated
+[2025-11-18 05:43:46,524.524] Current Learning Rate : 7.003618817852835e-05
+[2025-11-18 05:43:46,525.525] Global Step : 63
+[2025-11-18 05:43:46,525.525] Batch Index : 512
+[2025-11-18 05:44:14,845.845] Epoch No: 1, Global Step: 000063, Train Loss: 7.278, Val Loss: 7.275
+
+[2025-11-18 05:44:14,846.846] Total Tokens seen till now: 4194304
+
+[2025-11-18 05:44:16,046.046] BEST model SAVED on iteration 000063 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:44:16,541.541] Once upon a time, the dress,... the. the climbed to.. started with.... Sally. play loud and,... the.. Lily. listened.. then lion.,.. got. things the and the
+[2025-11-18 05:44:20,949.949] Gradient updated
+[2025-11-18 05:44:20,951.951] Current Learning Rate : 7.09891435464415e-05
+[2025-11-18 05:44:20,951.951] Global Step : 64
+[2025-11-18 05:44:20,951.951] Batch Index : 520
+[2025-11-18 05:44:49,244.244] Epoch No: 1, Global Step: 000064, Train Loss: 7.244, Val Loss: 7.235
+
+[2025-11-18 05:44:49,245.245] Total Tokens seen till now: 4259840
+
+[2025-11-18 05:44:50,451.451] BEST model SAVED on iteration 000064 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:44:50,530.530] Once upon a time, the. Benny. a and the
+[2025-11-18 05:44:54,935.935] Gradient updated
+[2025-11-18 05:44:54,935.935] Current Learning Rate : 7.194209891435465e-05
+[2025-11-18 05:44:54,936.936] Global Step : 65
+[2025-11-18 05:44:54,936.936] Batch Index : 528
+[2025-11-18 05:45:23,264.264] Epoch No: 1, Global Step: 000065, Train Loss: 7.226, Val Loss: 7.194
+
+[2025-11-18 05:45:23,264.264] Total Tokens seen till now: 4325376
+
+[2025-11-18 05:45:24,605.605] BEST model SAVED on iteration 000065 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:45:24,619.619] Once upon a time,
+[2025-11-18 05:45:29,023.023] Gradient updated
+[2025-11-18 05:45:29,024.024] Current Learning Rate : 7.28950542822678e-05
+[2025-11-18 05:45:29,024.024] Global Step : 66
+[2025-11-18 05:45:29,024.024] Batch Index : 536
+[2025-11-18 05:45:57,320.320] Epoch No: 1, Global Step: 000066, Train Loss: 7.164, Val Loss: 7.153
+
+[2025-11-18 05:45:57,321.321] Total Tokens seen till now: 4390912
+
+[2025-11-18 05:45:58,517.517] BEST model SAVED on iteration 000066 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:45:58,760.760] Once upon a time,. liked.Oh. loud. the. a became....... things to., and the
+[2025-11-18 05:46:03,162.162] Gradient updated
+[2025-11-18 05:46:03,162.162] Current Learning Rate : 7.384800965018094e-05
+[2025-11-18 05:46:03,163.163] Global Step : 67
+[2025-11-18 05:46:03,163.163] Batch Index : 544
+[2025-11-18 05:46:31,482.482] Epoch No: 1, Global Step: 000067, Train Loss: 7.128, Val Loss: 7.112
+
+[2025-11-18 05:46:31,482.482] Total Tokens seen till now: 4456448
+
+[2025-11-18 05:46:32,682.682] BEST model SAVED on iteration 000067 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:46:32,837.837] Once upon a time, became the.., then...... got and things
+[2025-11-18 05:46:37,254.254] Gradient updated
+[2025-11-18 05:46:37,254.254] Current Learning Rate : 7.48009650180941e-05
+[2025-11-18 05:46:37,254.254] Global Step : 68
+[2025-11-18 05:46:37,254.254] Batch Index : 552
+[2025-11-18 05:47:05,533.533] Epoch No: 1, Global Step: 000068, Train Loss: 7.120, Val Loss: 7.071
+
+[2025-11-18 05:47:05,533.533] Total Tokens seen till now: 4521984
+
+[2025-11-18 05:47:06,792.792] BEST model SAVED on iteration 000068 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:47:06,919.919] Once upon a time, walk got then and.. the. a.
+[2025-11-18 05:47:11,316.316] Gradient updated
+[2025-11-18 05:47:11,316.316] Current Learning Rate : 7.575392038600724e-05
+[2025-11-18 05:47:11,316.316] Global Step : 69
+[2025-11-18 05:47:11,317.317] Batch Index : 560
+[2025-11-18 05:47:39,512.512] Epoch No: 1, Global Step: 000069, Train Loss: 7.044, Val Loss: 7.030
+
+[2025-11-18 05:47:39,512.512] Total Tokens seen till now: 4587520
+
+[2025-11-18 05:47:40,729.729] BEST model SAVED on iteration 000069 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:47:40,750.750] Once upon a time, the
+[2025-11-18 05:47:45,153.153] Gradient updated
+[2025-11-18 05:47:45,154.154] Current Learning Rate : 7.670687575392038e-05
+[2025-11-18 05:47:45,154.154] Global Step : 70
+[2025-11-18 05:47:45,154.154] Batch Index : 568
+[2025-11-18 05:48:13,491.491] Epoch No: 1, Global Step: 000070, Train Loss: 7.001, Val Loss: 6.988
+
+[2025-11-18 05:48:13,491.491] Total Tokens seen till now: 4653056
+
+[2025-11-18 05:48:14,824.824] BEST model SAVED on iteration 000070 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:48:15,063.063] Once upon a time, listened to listened eyes with. a.. to It...
+[2025-11-18 05:48:19,462.462] Gradient updated
+[2025-11-18 05:48:19,462.462] Current Learning Rate : 7.765983112183354e-05
+[2025-11-18 05:48:19,462.462] Global Step : 71
+[2025-11-18 05:48:19,462.462] Batch Index : 576
+[2025-11-18 05:48:47,661.661] Epoch No: 1, Global Step: 000071, Train Loss: 6.977, Val Loss: 6.946
+
+[2025-11-18 05:48:47,662.662] Total Tokens seen till now: 4718592
+
+[2025-11-18 05:48:48,861.861] BEST model SAVED on iteration 000071 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:48:48,973.973] Once upon a time, name, a.,. got. "
+[2025-11-18 05:48:53,375.375] Gradient updated
+[2025-11-18 05:48:53,376.376] Current Learning Rate : 7.861278648974669e-05
+[2025-11-18 05:48:53,376.376] Global Step : 72
+[2025-11-18 05:48:53,376.376] Batch Index : 584
+[2025-11-18 05:49:21,556.556] Epoch No: 1, Global Step: 000072, Train Loss: 6.896, Val Loss: 6.903
+
+[2025-11-18 05:49:21,556.556] Total Tokens seen till now: 4784128
+
+[2025-11-18 05:49:23,022.022] BEST model SAVED on iteration 000072 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:49:23,066.066] Once upon a time,eddy,
+[2025-11-18 05:49:27,479.479] Gradient updated
+[2025-11-18 05:49:27,479.479] Current Learning Rate : 7.956574185765983e-05
+[2025-11-18 05:49:27,480.480] Global Step : 73
+[2025-11-18 05:49:27,480.480] Batch Index : 592
+[2025-11-18 05:49:55,763.763] Epoch No: 1, Global Step: 000073, Train Loss: 6.919, Val Loss: 6.859
+
+[2025-11-18 05:49:55,764.764] Total Tokens seen till now: 4849664
+
+[2025-11-18 05:49:57,045.045] BEST model SAVED on iteration 000073 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:49:57,134.134] Once upon a time,. saidOh opened. a. the
+[2025-11-18 05:50:01,546.546] Gradient updated
+[2025-11-18 05:50:01,547.547] Current Learning Rate : 8.051869722557299e-05
+[2025-11-18 05:50:01,547.547] Global Step : 74
+[2025-11-18 05:50:01,547.547] Batch Index : 600
+[2025-11-18 05:50:29,775.775] Epoch No: 1, Global Step: 000074, Train Loss: 6.839, Val Loss: 6.816
+
+[2025-11-18 05:50:29,775.775] Total Tokens seen till now: 4915200
+
+[2025-11-18 05:50:31,050.050] BEST model SAVED on iteration 000074 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:50:31,062.062] Once upon a time,
+[2025-11-18 05:50:35,482.482] Gradient updated
+[2025-11-18 05:50:35,483.483] Current Learning Rate : 8.147165259348613e-05
+[2025-11-18 05:50:35,483.483] Global Step : 75
+[2025-11-18 05:50:35,483.483] Batch Index : 608
+[2025-11-18 05:51:03,713.713] Epoch No: 1, Global Step: 000075, Train Loss: 6.813, Val Loss: 6.774
+
+[2025-11-18 05:51:03,713.713] Total Tokens seen till now: 4980736
+
+[2025-11-18 05:51:05,060.060] BEST model SAVED on iteration 000075 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:51:05,521.521] Once upon a time,my Tom the the eyes. the the, with. then. things the... the a. and. sky. Tim Lily... the the..
+[2025-11-18 05:51:09,934.934] Gradient updated
+[2025-11-18 05:51:09,934.934] Current Learning Rate : 8.242460796139928e-05
+[2025-11-18 05:51:09,934.934] Global Step : 76
+[2025-11-18 05:51:09,934.934] Batch Index : 616
+[2025-11-18 05:51:38,225.225] Epoch No: 1, Global Step: 000076, Train Loss: 6.760, Val Loss: 6.730
+
+[2025-11-18 05:51:38,226.226] Total Tokens seen till now: 5046272
+
+[2025-11-18 05:51:39,479.479] BEST model SAVED on iteration 000076 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:51:39,679.679] Once upon a time, the. eyes to a a... the. of.
+[2025-11-18 05:51:44,081.081] Gradient updated
+[2025-11-18 05:51:44,081.081] Current Learning Rate : 8.337756332931242e-05
+[2025-11-18 05:51:44,081.081] Global Step : 77
+[2025-11-18 05:51:44,081.081] Batch Index : 624
+[2025-11-18 05:52:12,271.271] Epoch No: 1, Global Step: 000077, Train Loss: 6.722, Val Loss: 6.687
+
+[2025-11-18 05:52:12,271.271] Total Tokens seen till now: 5111808
+
+[2025-11-18 05:52:13,469.469] BEST model SAVED on iteration 000077 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:52:13,588.588] Once upon a time, eyes.. and to a,. Lily..
+[2025-11-18 05:52:17,986.986] Gradient updated
+[2025-11-18 05:52:17,987.987] Current Learning Rate : 8.433051869722558e-05
+[2025-11-18 05:52:17,987.987] Global Step : 78
+[2025-11-18 05:52:17,987.987] Batch Index : 632
+[2025-11-18 05:52:46,246.246] Epoch No: 1, Global Step: 000078, Train Loss: 6.678, Val Loss: 6.643
+
+[2025-11-18 05:52:46,247.247] Total Tokens seen till now: 5177344
+
+[2025-11-18 05:52:47,480.480] BEST model SAVED on iteration 000078 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:52:47,553.553] Once upon a time, His world the...
+[2025-11-18 05:52:51,962.962] Gradient updated
+[2025-11-18 05:52:51,963.963] Current Learning Rate : 8.528347406513872e-05
+[2025-11-18 05:52:51,963.963] Global Step : 79
+[2025-11-18 05:52:51,963.963] Batch Index : 640
+[2025-11-18 05:53:20,232.232] Epoch No: 1, Global Step: 000079, Train Loss: 6.625, Val Loss: 6.599
+
+[2025-11-18 05:53:20,232.232] Total Tokens seen till now: 5242880
+
+[2025-11-18 05:53:21,435.435] BEST model SAVED on iteration 000079 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:53:21,515.515] Once upon a time,. the.,. to.
+[2025-11-18 05:53:25,920.920] Gradient updated
+[2025-11-18 05:53:25,920.920] Current Learning Rate : 8.623642943305187e-05
+[2025-11-18 05:53:25,920.920] Global Step : 80
+[2025-11-18 05:53:25,921.921] Batch Index : 648
+[2025-11-18 05:53:54,116.116] Epoch No: 1, Global Step: 000080, Train Loss: 6.616, Val Loss: 6.555
+
+[2025-11-18 05:53:54,116.116] Total Tokens seen till now: 5308416
+
+[2025-11-18 05:53:55,598.598] BEST model SAVED on iteration 000080 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:53:55,665.665] Once upon a time, Tim...
+[2025-11-18 05:54:00,058.058] Gradient updated
+[2025-11-18 05:54:00,059.059] Current Learning Rate : 8.718938480096503e-05
+[2025-11-18 05:54:00,060.060] Global Step : 81
+[2025-11-18 05:54:00,060.060] Batch Index : 656
+[2025-11-18 05:54:28,344.344] Epoch No: 1, Global Step: 000081, Train Loss: 6.557, Val Loss: 6.511
+
+[2025-11-18 05:54:28,344.344] Total Tokens seen till now: 5373952
+
+[2025-11-18 05:54:29,641.641] BEST model SAVED on iteration 000081 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:54:29,739.739] Once upon a time, and..,.
+[2025-11-18 05:54:34,134.134] Gradient updated
+[2025-11-18 05:54:34,134.134] Current Learning Rate : 8.814234016887817e-05
+[2025-11-18 05:54:34,135.135] Global Step : 82
+[2025-11-18 05:54:34,135.135] Batch Index : 664
+[2025-11-18 05:55:02,431.431] Epoch No: 1, Global Step: 000082, Train Loss: 6.519, Val Loss: 6.467
+
+[2025-11-18 05:55:02,432.432] Total Tokens seen till now: 5439488
+
+[2025-11-18 05:55:03,627.627] BEST model SAVED on iteration 000082 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:55:03,658.658] Once upon a time, to
+[2025-11-18 05:55:08,050.050] Gradient updated
+[2025-11-18 05:55:08,050.050] Current Learning Rate : 8.909529553679131e-05
+[2025-11-18 05:55:08,051.051] Global Step : 83
+[2025-11-18 05:55:08,051.051] Batch Index : 672
+[2025-11-18 05:55:36,325.325] Epoch No: 1, Global Step: 000083, Train Loss: 6.474, Val Loss: 6.422
+
+[2025-11-18 05:55:36,325.325] Total Tokens seen till now: 5505024
+
+[2025-11-18 05:55:37,539.539] BEST model SAVED on iteration 000083 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:55:37,599.599] Once upon a time,., the..
+[2025-11-18 05:55:42,004.004] Gradient updated
+[2025-11-18 05:55:42,004.004] Current Learning Rate : 9.004825090470447e-05
+[2025-11-18 05:55:42,004.004] Global Step : 84
+[2025-11-18 05:55:42,004.004] Batch Index : 680
+[2025-11-18 05:56:10,285.285] Epoch No: 1, Global Step: 000084, Train Loss: 6.393, Val Loss: 6.378
+
+[2025-11-18 05:56:10,285.285] Total Tokens seen till now: 5570560
+
+[2025-11-18 05:56:11,552.552] BEST model SAVED on iteration 000084 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:56:11,563.563] Once upon a time,
+[2025-11-18 05:56:15,960.960] Gradient updated
+[2025-11-18 05:56:15,960.960] Current Learning Rate : 9.100120627261762e-05
+[2025-11-18 05:56:15,960.960] Global Step : 85
+[2025-11-18 05:56:15,961.961] Batch Index : 688
+[2025-11-18 05:56:44,203.203] Epoch No: 1, Global Step: 000085, Train Loss: 6.442, Val Loss: 6.333
+
+[2025-11-18 05:56:44,203.203] Total Tokens seen till now: 5636096
+
+[2025-11-18 05:56:45,485.485] BEST model SAVED on iteration 000085 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:56:45,671.671] Once upon a time, to. to Lily got loudmy. with started a a.. started to.
+[2025-11-18 05:56:50,082.082] Gradient updated
+[2025-11-18 05:56:50,083.083] Current Learning Rate : 9.195416164053076e-05
+[2025-11-18 05:56:50,083.083] Global Step : 86
+[2025-11-18 05:56:50,083.083] Batch Index : 696
+[2025-11-18 05:57:18,252.252] Epoch No: 1, Global Step: 000086, Train Loss: 6.318, Val Loss: 6.288
+
+[2025-11-18 05:57:18,252.252] Total Tokens seen till now: 5701632
+
+[2025-11-18 05:57:19,605.605] BEST model SAVED on iteration 000086 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:57:19,656.656] Once upon a time, started, a
+[2025-11-18 05:57:24,075.075] Gradient updated
+[2025-11-18 05:57:24,075.075] Current Learning Rate : 9.290711700844392e-05
+[2025-11-18 05:57:24,076.076] Global Step : 87
+[2025-11-18 05:57:24,076.076] Batch Index : 704
+[2025-11-18 05:57:52,355.355] Epoch No: 1, Global Step: 000087, Train Loss: 6.304, Val Loss: 6.244
+
+[2025-11-18 05:57:52,357.357] Total Tokens seen till now: 5767168
+
+[2025-11-18 05:57:53,618.618] BEST model SAVED on iteration 000087 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:57:53,726.726] Once upon a time, under's... got then.
+[2025-11-18 05:57:58,131.131] Gradient updated
+[2025-11-18 05:57:58,133.133] Current Learning Rate : 9.386007237635706e-05
+[2025-11-18 05:57:58,133.133] Global Step : 88
+[2025-11-18 05:57:58,133.133] Batch Index : 712
+[2025-11-18 05:58:26,330.330] Epoch No: 1, Global Step: 000088, Train Loss: 6.250, Val Loss: 6.199
+
+[2025-11-18 05:58:26,331.331] Total Tokens seen till now: 5832704
+
+[2025-11-18 05:58:27,519.519] BEST model SAVED on iteration 000088 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:58:27,572.572] Once upon a time,...
+[2025-11-18 05:58:31,966.966] Gradient updated
+[2025-11-18 05:58:31,967.967] Current Learning Rate : 9.481302774427021e-05
+[2025-11-18 05:58:31,968.968] Global Step : 89
+[2025-11-18 05:58:31,968.968] Batch Index : 720
+[2025-11-18 05:59:00,148.148] Epoch No: 1, Global Step: 000089, Train Loss: 6.174, Val Loss: 6.155
+
+[2025-11-18 05:59:00,149.149] Total Tokens seen till now: 5898240
+
+[2025-11-18 05:59:01,380.380] BEST model SAVED on iteration 000089 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:59:01,625.625] Once upon a time, the to. the with.. with. got started.,. Tim. to Lily " the liked.
+[2025-11-18 05:59:06,032.032] Gradient updated
+[2025-11-18 05:59:06,033.033] Current Learning Rate : 9.576598311218335e-05
+[2025-11-18 05:59:06,033.033] Global Step : 90
+[2025-11-18 05:59:06,034.034] Batch Index : 728
+[2025-11-18 05:59:34,293.293] Epoch No: 1, Global Step: 000090, Train Loss: 6.125, Val Loss: 6.110
+
+[2025-11-18 05:59:34,294.294] Total Tokens seen till now: 5963776
+
+[2025-11-18 05:59:35,494.494] BEST model SAVED on iteration 000090 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 05:59:35,506.506] Once upon a time,
+[2025-11-18 05:59:39,914.914] Gradient updated
+[2025-11-18 05:59:39,915.915] Current Learning Rate : 9.671893848009651e-05
+[2025-11-18 05:59:39,915.915] Global Step : 91
+[2025-11-18 05:59:39,915.915] Batch Index : 736
+[2025-11-18 06:00:08,199.199] Epoch No: 1, Global Step: 000091, Train Loss: 6.075, Val Loss: 6.065
+
+[2025-11-18 06:00:08,199.199] Total Tokens seen till now: 6029312
+
+[2025-11-18 06:00:09,468.468] BEST model SAVED on iteration 000091 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:00:09,705.705] Once upon a time,,.. loud. and a... " things a to.
+[2025-11-18 06:00:14,105.105] Gradient updated
+[2025-11-18 06:00:14,106.106] Current Learning Rate : 9.767189384800965e-05
+[2025-11-18 06:00:14,106.106] Global Step : 92
+[2025-11-18 06:00:14,106.106] Batch Index : 744
+[2025-11-18 06:00:42,327.327] Epoch No: 1, Global Step: 000092, Train Loss: 6.038, Val Loss: 6.020
+
+[2025-11-18 06:00:42,327.327] Total Tokens seen till now: 6094848
+
+[2025-11-18 06:00:43,519.519] BEST model SAVED on iteration 000092 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:00:43,571.571] Once upon a time, the. started.
+[2025-11-18 06:00:47,969.969] Gradient updated
+[2025-11-18 06:00:47,970.970] Current Learning Rate : 9.86248492159228e-05
+[2025-11-18 06:00:47,970.970] Global Step : 93
+[2025-11-18 06:00:47,970.970] Batch Index : 752
+[2025-11-18 06:01:16,249.249] Epoch No: 1, Global Step: 000093, Train Loss: 6.015, Val Loss: 5.976
+
+[2025-11-18 06:01:16,250.250] Total Tokens seen till now: 6160384
+
+[2025-11-18 06:01:17,508.508] BEST model SAVED on iteration 000093 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:01:17,666.666] Once upon a time,'s. sky. got,. together a. Tim loud to.
+[2025-11-18 06:01:22,069.069] Gradient updated
+[2025-11-18 06:01:22,070.070] Current Learning Rate : 9.957780458383596e-05
+[2025-11-18 06:01:22,070.070] Global Step : 94
+[2025-11-18 06:01:22,070.070] Batch Index : 760
+[2025-11-18 06:01:50,307.307] Epoch No: 1, Global Step: 000094, Train Loss: 5.945, Val Loss: 5.932
+
+[2025-11-18 06:01:50,308.308] Total Tokens seen till now: 6225920
+
+[2025-11-18 06:01:51,565.565] BEST model SAVED on iteration 000094 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:01:51,630.630] Once upon a time,. the started
+[2025-11-18 06:01:56,040.040] Gradient updated
+[2025-11-18 06:01:56,041.041] Current Learning Rate : 0.0001005307599517491
+[2025-11-18 06:01:56,041.041] Global Step : 95
+[2025-11-18 06:01:56,041.041] Batch Index : 768
+[2025-11-18 06:02:24,296.296] Epoch No: 1, Global Step: 000095, Train Loss: 5.935, Val Loss: 5.888
+
+[2025-11-18 06:02:24,297.297] Total Tokens seen till now: 6291456
+
+[2025-11-18 06:02:25,498.498] BEST model SAVED on iteration 000095 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:02:25,521.521] Once upon a time, will
+[2025-11-18 06:02:29,918.918] Gradient updated
+[2025-11-18 06:02:29,919.919] Current Learning Rate : 0.00010148371531966224
+[2025-11-18 06:02:29,920.920] Global Step : 96
+[2025-11-18 06:02:29,920.920] Batch Index : 776
+[2025-11-18 06:02:58,155.155] Epoch No: 1, Global Step: 000096, Train Loss: 5.845, Val Loss: 5.843
+
+[2025-11-18 06:02:58,156.156] Total Tokens seen till now: 6356992
+
+[2025-11-18 06:02:59,489.489] BEST model SAVED on iteration 000096 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:02:59,723.723] Once upon a time,. more. and the's the the. got...
+[2025-11-18 06:03:04,142.142] Gradient updated
+[2025-11-18 06:03:04,146.146] Current Learning Rate : 0.0001024366706875754
+[2025-11-18 06:03:04,146.146] Global Step : 97
+[2025-11-18 06:03:04,146.146] Batch Index : 784
+[2025-11-18 06:03:32,406.406] Epoch No: 1, Global Step: 000097, Train Loss: 5.835, Val Loss: 5.799
+
+[2025-11-18 06:03:32,406.406] Total Tokens seen till now: 6422528
+
+[2025-11-18 06:03:33,599.599] BEST model SAVED on iteration 000097 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:03:33,659.659] Once upon a time, liked. gotmy.
+[2025-11-18 06:03:38,046.046] Gradient updated
+[2025-11-18 06:03:38,047.047] Current Learning Rate : 0.00010338962605548855
+[2025-11-18 06:03:38,047.047] Global Step : 98
+[2025-11-18 06:03:38,047.047] Batch Index : 792
+[2025-11-18 06:04:06,336.336] Epoch No: 1, Global Step: 000098, Train Loss: 5.771, Val Loss: 5.755
+
+[2025-11-18 06:04:06,336.336] Total Tokens seen till now: 6488064
+
+[2025-11-18 06:04:07,610.610] BEST model SAVED on iteration 000098 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:04:07,651.651] Once upon a time, the then,
+[2025-11-18 06:04:12,057.057] Gradient updated
+[2025-11-18 06:04:12,058.058] Current Learning Rate : 0.00010434258142340169
+[2025-11-18 06:04:12,058.058] Global Step : 99
+[2025-11-18 06:04:12,058.058] Batch Index : 800
+[2025-11-18 06:04:40,297.297] Epoch No: 1, Global Step: 000099, Train Loss: 5.738, Val Loss: 5.711
+
+[2025-11-18 06:04:40,298.298] Total Tokens seen till now: 6553600
+
+[2025-11-18 06:04:41,595.595] BEST model SAVED on iteration 000099 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:04:41,785.785] Once upon a time,,.. to got,. to her, got the.
+[2025-11-18 06:04:46,191.191] Gradient updated
+[2025-11-18 06:04:46,192.192] Current Learning Rate : 0.00010529553679131484
+[2025-11-18 06:04:46,192.192] Global Step : 100
+[2025-11-18 06:04:46,193.193] Batch Index : 808
+[2025-11-18 06:05:14,348.348] Epoch No: 1, Global Step: 000100, Train Loss: 5.688, Val Loss: 5.667
+
+[2025-11-18 06:05:14,349.349] Total Tokens seen till now: 6619136
+
+[2025-11-18 06:05:15,542.542] BEST model SAVED on iteration 000100 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:05:15,564.564] Once upon a time,,
+[2025-11-18 06:05:19,957.957] Gradient updated
+[2025-11-18 06:05:19,957.957] Current Learning Rate : 0.000106248492159228
+[2025-11-18 06:05:19,958.958] Global Step : 101
+[2025-11-18 06:05:19,958.958] Batch Index : 816
+[2025-11-18 06:05:48,220.220] Epoch No: 1, Global Step: 000101, Train Loss: 5.636, Val Loss: 5.623
+
+[2025-11-18 06:05:48,221.221] Total Tokens seen till now: 6684672
+
+[2025-11-18 06:05:49,491.491] BEST model SAVED on iteration 000101 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:05:49,668.668] Once upon a time,. then Lily,..,my to..
+[2025-11-18 06:05:54,078.078] Gradient updated
+[2025-11-18 06:05:54,078.078] Current Learning Rate : 0.00010720144752714114
+[2025-11-18 06:05:54,079.079] Global Step : 102
+[2025-11-18 06:05:54,079.079] Batch Index : 824
+[2025-11-18 06:06:22,381.381] Epoch No: 1, Global Step: 000102, Train Loss: 5.631, Val Loss: 5.579
+
+[2025-11-18 06:06:22,381.381] Total Tokens seen till now: 6750208
+
+[2025-11-18 06:06:23,702.702] BEST model SAVED on iteration 000102 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:06:23,746.746] Once upon a time, then things.
+[2025-11-18 06:06:28,165.165] Gradient updated
+[2025-11-18 06:06:28,166.166] Current Learning Rate : 0.00010815440289505428
+[2025-11-18 06:06:28,166.166] Global Step : 103
+[2025-11-18 06:06:28,166.166] Batch Index : 832
+[2025-11-18 06:06:56,517.517] Epoch No: 1, Global Step: 000103, Train Loss: 5.597, Val Loss: 5.536
+
+[2025-11-18 06:06:56,518.518] Total Tokens seen till now: 6815744
+
+[2025-11-18 06:06:57,715.715] BEST model SAVED on iteration 000103 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:06:57,883.883] Once upon a time, time. to. play.. with the. the..
+[2025-11-18 06:07:02,271.271] Gradient updated
+[2025-11-18 06:07:02,272.272] Current Learning Rate : 0.00010910735826296744
+[2025-11-18 06:07:02,272.272] Global Step : 104
+[2025-11-18 06:07:02,272.272] Batch Index : 840
+[2025-11-18 06:07:30,517.517] Epoch No: 1, Global Step: 000104, Train Loss: 5.535, Val Loss: 5.492
+
+[2025-11-18 06:07:30,518.518] Total Tokens seen till now: 6881280
+
+[2025-11-18 06:07:31,860.860] BEST model SAVED on iteration 000104 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:07:31,872.872] Once upon a time,
+[2025-11-18 06:07:36,281.281] Gradient updated
+[2025-11-18 06:07:36,282.282] Current Learning Rate : 0.00011006031363088058
+[2025-11-18 06:07:36,282.282] Global Step : 105
+[2025-11-18 06:07:36,282.282] Batch Index : 848
+[2025-11-18 06:08:04,546.546] Epoch No: 1, Global Step: 000105, Train Loss: 5.491, Val Loss: 5.450
+
+[2025-11-18 06:08:04,547.547] Total Tokens seen till now: 6946816
+
+[2025-11-18 06:08:05,732.732] BEST model SAVED on iteration 000105 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:08:05,860.860] Once upon a time,. the to. things., the.
+[2025-11-18 06:08:10,265.265] Gradient updated
+[2025-11-18 06:08:10,265.265] Current Learning Rate : 0.00011101326899879373
+[2025-11-18 06:08:10,266.266] Global Step : 106
+[2025-11-18 06:08:10,266.266] Batch Index : 856
+[2025-11-18 06:08:38,637.637] Epoch No: 1, Global Step: 000106, Train Loss: 5.458, Val Loss: 5.407
+
+[2025-11-18 06:08:38,637.637] Total Tokens seen till now: 7012352
+
+[2025-11-18 06:08:40,007.007] BEST model SAVED on iteration 000106 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:08:40,159.159] Once upon a time,... then. " the a
+[2025-11-18 06:08:44,552.552] Gradient updated
+[2025-11-18 06:08:44,553.553] Current Learning Rate : 0.00011196622436670689
+[2025-11-18 06:08:44,553.553] Global Step : 107
+[2025-11-18 06:08:44,553.553] Batch Index : 864
+[2025-11-18 06:09:12,803.803] Epoch No: 1, Global Step: 000107, Train Loss: 5.430, Val Loss: 5.365
+
+[2025-11-18 06:09:12,803.803] Total Tokens seen till now: 7077888
+
+[2025-11-18 06:09:14,079.079] BEST model SAVED on iteration 000107 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:09:14,091.091] Once upon a time,
+[2025-11-18 06:09:18,493.493] Gradient updated
+[2025-11-18 06:09:18,494.494] Current Learning Rate : 0.00011291917973462003
+[2025-11-18 06:09:18,494.494] Global Step : 108
+[2025-11-18 06:09:18,494.494] Batch Index : 872
+[2025-11-18 06:09:46,778.778] Epoch No: 1, Global Step: 000108, Train Loss: 5.311, Val Loss: 5.326
+
+[2025-11-18 06:09:46,779.779] Total Tokens seen till now: 7143424
+
+[2025-11-18 06:09:48,121.121] BEST model SAVED on iteration 000108 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:09:48,152.152] Once upon a time, little.
+[2025-11-18 06:09:52,566.566] Gradient updated
+[2025-11-18 06:09:52,567.567] Current Learning Rate : 0.00011387213510253317
+[2025-11-18 06:09:52,567.567] Global Step : 109
+[2025-11-18 06:09:52,567.567] Batch Index : 880
+[2025-11-18 06:10:20,779.779] Epoch No: 1, Global Step: 000109, Train Loss: 5.303, Val Loss: 5.288
+
+[2025-11-18 06:10:20,780.780] Total Tokens seen till now: 7208960
+
+[2025-11-18 06:10:22,082.082] BEST model SAVED on iteration 000109 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:10:22,114.114] Once upon a time,.
+[2025-11-18 06:10:26,527.527] Gradient updated
+[2025-11-18 06:10:26,528.528] Current Learning Rate : 0.00011482509047044633
+[2025-11-18 06:10:26,528.528] Global Step : 110
+[2025-11-18 06:10:26,528.528] Batch Index : 888
+[2025-11-18 06:10:54,768.768] Epoch No: 1, Global Step: 000110, Train Loss: 5.270, Val Loss: 5.252
+
+[2025-11-18 06:10:54,769.769] Total Tokens seen till now: 7274496
+
+[2025-11-18 06:10:56,053.053] BEST model SAVED on iteration 000110 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:10:56,162.162] Once upon a time,,'s,.
+[2025-11-18 06:11:00,566.566] Gradient updated
+[2025-11-18 06:11:00,567.567] Current Learning Rate : 0.00011577804583835948
+[2025-11-18 06:11:00,567.567] Global Step : 111
+[2025-11-18 06:11:00,567.567] Batch Index : 896
+[2025-11-18 06:11:28,810.810] Epoch No: 1, Global Step: 000111, Train Loss: 5.213, Val Loss: 5.215
+
+[2025-11-18 06:11:28,810.810] Total Tokens seen till now: 7340032
+
+[2025-11-18 06:11:30,234.234] BEST model SAVED on iteration 000111 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:11:30,661.661] Once upon a time,,my. He to the with on.. It,'s she her,
+[2025-11-18 06:11:35,074.074] Gradient updated
+[2025-11-18 06:11:35,074.074] Current Learning Rate : 0.00011673100120627262
+[2025-11-18 06:11:35,074.074] Global Step : 112
+[2025-11-18 06:11:35,074.074] Batch Index : 904
+[2025-11-18 06:12:03,347.347] Epoch No: 1, Global Step: 000112, Train Loss: 5.209, Val Loss: 5.177
+
+[2025-11-18 06:12:03,347.347] Total Tokens seen till now: 7405568
+
+[2025-11-18 06:12:04,626.626] BEST model SAVED on iteration 000112 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:12:04,878.878] Once upon a time,'s a., a her of to. to the. Lily.,
+[2025-11-18 06:12:09,285.285] Gradient updated
+[2025-11-18 06:12:09,287.287] Current Learning Rate : 0.00011768395657418577
+[2025-11-18 06:12:09,288.288] Global Step : 113
+[2025-11-18 06:12:09,288.288] Batch Index : 912
+[2025-11-18 06:12:37,660.660] Epoch No: 1, Global Step: 000113, Train Loss: 5.183, Val Loss: 5.140
+
+[2025-11-18 06:12:37,661.661] Total Tokens seen till now: 7471104
+
+[2025-11-18 06:12:38,926.926] BEST model SAVED on iteration 000113 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:12:38,938.938] Once upon a time,
+[2025-11-18 06:12:43,354.354] Gradient updated
+[2025-11-18 06:12:43,356.356] Current Learning Rate : 0.00011863691194209892
+[2025-11-18 06:12:43,357.357] Global Step : 114
+[2025-11-18 06:12:43,357.357] Batch Index : 920
+[2025-11-18 06:13:11,667.667] Epoch No: 1, Global Step: 000114, Train Loss: 5.135, Val Loss: 5.103
+
+[2025-11-18 06:13:11,668.668] Total Tokens seen till now: 7536640
+
+[2025-11-18 06:13:12,937.937] BEST model SAVED on iteration 000114 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:13:12,976.976] Once upon a time,. she
+[2025-11-18 06:13:17,381.381] Gradient updated
+[2025-11-18 06:13:17,382.382] Current Learning Rate : 0.00011958986731001207
+[2025-11-18 06:13:17,382.382] Global Step : 115
+[2025-11-18 06:13:17,382.382] Batch Index : 928
+[2025-11-18 06:13:45,723.723] Epoch No: 1, Global Step: 000115, Train Loss: 5.134, Val Loss: 5.067
+
+[2025-11-18 06:13:45,724.724] Total Tokens seen till now: 7602176
+
+[2025-11-18 06:13:46,898.898] BEST model SAVED on iteration 000115 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:13:47,021.021] Once upon a time,'s Lily happy little. He. of to
+[2025-11-18 06:13:51,432.432] Gradient updated
+[2025-11-18 06:13:51,433.433] Current Learning Rate : 0.00012054282267792521
+[2025-11-18 06:13:51,434.434] Global Step : 116
+[2025-11-18 06:13:51,434.434] Batch Index : 936
+[2025-11-18 06:14:19,717.717] Epoch No: 1, Global Step: 000116, Train Loss: 5.030, Val Loss: 5.033
+
+[2025-11-18 06:14:19,717.717] Total Tokens seen till now: 7667712
+
+[2025-11-18 06:14:20,885.885] BEST model SAVED on iteration 000116 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:14:20,908.908] Once upon a time, is
+[2025-11-18 06:14:25,309.309] Gradient updated
+[2025-11-18 06:14:25,310.310] Current Learning Rate : 0.00012149577804583837
+[2025-11-18 06:14:25,310.310] Global Step : 117
+[2025-11-18 06:14:25,310.310] Batch Index : 944
+[2025-11-18 06:14:53,561.561] Epoch No: 1, Global Step: 000117, Train Loss: 5.072, Val Loss: 4.999
+
+[2025-11-18 06:14:53,561.561] Total Tokens seen till now: 7733248
+
+[2025-11-18 06:14:54,879.879] BEST model SAVED on iteration 000117 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:14:54,895.895] Once upon a time,
+[2025-11-18 06:14:59,294.294] Gradient updated
+[2025-11-18 06:14:59,295.295] Current Learning Rate : 0.00012244873341375151
+[2025-11-18 06:14:59,295.295] Global Step : 118
+[2025-11-18 06:14:59,296.296] Batch Index : 952
+[2025-11-18 06:15:27,696.696] Epoch No: 1, Global Step: 000118, Train Loss: 5.011, Val Loss: 4.966
+
+[2025-11-18 06:15:27,697.697] Total Tokens seen till now: 7798784
+
+[2025-11-18 06:15:28,963.963] BEST model SAVED on iteration 000118 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:15:28,986.986] Once upon a time, on
+[2025-11-18 06:15:33,396.396] Gradient updated
+[2025-11-18 06:15:33,397.397] Current Learning Rate : 0.00012340168878166466
+[2025-11-18 06:15:33,397.397] Global Step : 119
+[2025-11-18 06:15:33,397.397] Batch Index : 960
+[2025-11-18 06:16:01,707.707] Epoch No: 1, Global Step: 000119, Train Loss: 4.991, Val Loss: 4.933
+
+[2025-11-18 06:16:01,708.708] Total Tokens seen till now: 7864320
+
+[2025-11-18 06:16:02,884.884] BEST model SAVED on iteration 000119 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:16:02,976.976] Once upon a time,. The Lily of day. she
+[2025-11-18 06:16:07,366.366] Gradient updated
+[2025-11-18 06:16:07,367.367] Current Learning Rate : 0.00012435464414957783
+[2025-11-18 06:16:07,368.368] Global Step : 120
+[2025-11-18 06:16:07,368.368] Batch Index : 968
+[2025-11-18 06:16:35,603.603] Epoch No: 1, Global Step: 000120, Train Loss: 4.946, Val Loss: 4.901
+
+[2025-11-18 06:16:35,604.604] Total Tokens seen till now: 7929856
+
+[2025-11-18 06:16:36,833.833] BEST model SAVED on iteration 000120 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:16:36,865.865] Once upon a time, the.
+[2025-11-18 06:16:41,273.273] Gradient updated
+[2025-11-18 06:16:41,274.274] Current Learning Rate : 0.00012530759951749097
+[2025-11-18 06:16:41,274.274] Global Step : 121
+[2025-11-18 06:16:41,274.274] Batch Index : 976
+[2025-11-18 06:17:09,515.515] Epoch No: 1, Global Step: 000121, Train Loss: 4.884, Val Loss: 4.869
+
+[2025-11-18 06:17:09,516.516] Total Tokens seen till now: 7995392
+
+[2025-11-18 06:17:10,770.770] BEST model SAVED on iteration 000121 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:17:10,792.792] Once upon a time, for
+[2025-11-18 06:17:15,204.204] Gradient updated
+[2025-11-18 06:17:15,205.205] Current Learning Rate : 0.00012626055488540412
+[2025-11-18 06:17:15,206.206] Global Step : 122
+[2025-11-18 06:17:15,206.206] Batch Index : 984
+[2025-11-18 06:17:43,493.493] Epoch No: 1, Global Step: 000122, Train Loss: 4.839, Val Loss: 4.838
+
+[2025-11-18 06:17:43,493.493] Total Tokens seen till now: 8060928
+
+[2025-11-18 06:17:44,772.772] BEST model SAVED on iteration 000122 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:17:44,834.834] Once upon a time,. there.
+[2025-11-18 06:17:49,243.243] Gradient updated
+[2025-11-18 06:17:49,244.244] Current Learning Rate : 0.00012721351025331726
+[2025-11-18 06:17:49,245.245] Global Step : 123
+[2025-11-18 06:17:49,245.245] Batch Index : 992
+[2025-11-18 06:18:17,451.451] Epoch No: 1, Global Step: 000123, Train Loss: 4.867, Val Loss: 4.808
+
+[2025-11-18 06:18:17,452.452] Total Tokens seen till now: 8126464
+
+[2025-11-18 06:18:18,646.646] BEST model SAVED on iteration 000123 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:18:18,678.678] Once upon a time, amy
+[2025-11-18 06:18:23,088.088] Gradient updated
+[2025-11-18 06:18:23,089.089] Current Learning Rate : 0.0001281664656212304
+[2025-11-18 06:18:23,089.089] Global Step : 124
+[2025-11-18 06:18:23,089.089] Batch Index : 1000
+[2025-11-18 06:18:51,288.288] Epoch No: 1, Global Step: 000124, Train Loss: 4.834, Val Loss: 4.779
+
+[2025-11-18 06:18:51,289.289] Total Tokens seen till now: 8192000
+
+[2025-11-18 06:18:52,505.505] BEST model SAVED on iteration 000124 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:18:52,548.548] Once upon a time,. and I
+[2025-11-18 06:18:56,951.951] Gradient updated
+[2025-11-18 06:18:56,953.953] Current Learning Rate : 0.00012911942098914355
+[2025-11-18 06:18:56,953.953] Global Step : 125
+[2025-11-18 06:18:56,954.954] Batch Index : 1008
+[2025-11-18 06:19:25,271.271] Epoch No: 1, Global Step: 000125, Train Loss: 4.757, Val Loss: 4.750
+
+[2025-11-18 06:19:25,272.272] Total Tokens seen till now: 8257536
+
+[2025-11-18 06:19:26,457.457] BEST model SAVED on iteration 000125 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:19:26,499.499] Once upon a time, time were a
+[2025-11-18 06:19:30,902.902] Gradient updated
+[2025-11-18 06:19:30,902.902] Current Learning Rate : 0.0001300723763570567
+[2025-11-18 06:19:30,903.903] Global Step : 126
+[2025-11-18 06:19:30,903.903] Batch Index : 1016
+[2025-11-18 06:19:59,191.191] Epoch No: 1, Global Step: 000126, Train Loss: 4.773, Val Loss: 4.722
+
+[2025-11-18 06:19:59,192.192] Total Tokens seen till now: 8323072
+
+[2025-11-18 06:20:00,424.424] BEST model SAVED on iteration 000126 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:20:00,446.446] Once upon a time, did
+[2025-11-18 06:20:04,844.844] Gradient updated
+[2025-11-18 06:20:04,845.845] Current Learning Rate : 0.00013102533172496987
+[2025-11-18 06:20:04,845.845] Global Step : 127
+[2025-11-18 06:20:04,845.845] Batch Index : 1024
+[2025-11-18 06:20:33,156.156] Epoch No: 1, Global Step: 000127, Train Loss: 4.729, Val Loss: 4.695
+
+[2025-11-18 06:20:33,158.158] Total Tokens seen till now: 8388608
+
+[2025-11-18 06:20:34,489.489] BEST model SAVED on iteration 000127 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:20:34,520.520] Once upon a time, a
+[2025-11-18 06:20:38,936.936] Gradient updated
+[2025-11-18 06:20:38,937.937] Current Learning Rate : 0.000131978287092883
+[2025-11-18 06:20:38,937.937] Global Step : 128
+[2025-11-18 06:20:38,937.937] Batch Index : 1032
+[2025-11-18 06:21:07,305.305] Epoch No: 1, Global Step: 000128, Train Loss: 4.729, Val Loss: 4.669
+
+[2025-11-18 06:21:07,306.306] Total Tokens seen till now: 8454144
+
+[2025-11-18 06:21:08,513.513] BEST model SAVED on iteration 000128 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:21:08,535.535] Once upon a time,.
+[2025-11-18 06:21:12,944.944] Gradient updated
+[2025-11-18 06:21:12,945.945] Current Learning Rate : 0.00013293124246079616
+[2025-11-18 06:21:12,945.945] Global Step : 129
+[2025-11-18 06:21:12,945.945] Batch Index : 1040
+[2025-11-18 06:21:41,173.173] Epoch No: 1, Global Step: 000129, Train Loss: 4.676, Val Loss: 4.642
+
+[2025-11-18 06:21:41,174.174] Total Tokens seen till now: 8519680
+
+[2025-11-18 06:21:42,483.483] BEST model SAVED on iteration 000129 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:21:42,496.496] Once upon a time,
+[2025-11-18 06:21:46,903.903] Gradient updated
+[2025-11-18 06:21:46,904.904] Current Learning Rate : 0.0001338841978287093
+[2025-11-18 06:21:46,904.904] Global Step : 130
+[2025-11-18 06:21:46,904.904] Batch Index : 1048
+[2025-11-18 06:22:15,134.134] Epoch No: 1, Global Step: 000130, Train Loss: 4.674, Val Loss: 4.618
+
+[2025-11-18 06:22:15,135.135] Total Tokens seen till now: 8585216
+
+[2025-11-18 06:22:16,336.336] BEST model SAVED on iteration 000130 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:22:16,370.370] Once upon a time, Tim the
+[2025-11-18 06:22:20,772.772] Gradient updated
+[2025-11-18 06:22:20,773.773] Current Learning Rate : 0.00013483715319662244
+[2025-11-18 06:22:20,773.773] Global Step : 131
+[2025-11-18 06:22:20,773.773] Batch Index : 1056
+[2025-11-18 06:22:49,125.125] Epoch No: 1, Global Step: 000131, Train Loss: 4.649, Val Loss: 4.593
+
+[2025-11-18 06:22:49,126.126] Total Tokens seen till now: 8650752
+
+[2025-11-18 06:22:50,755.755] BEST model SAVED on iteration 000131 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:22:50,787.787] Once upon a time,. He
+[2025-11-18 06:22:55,197.197] Gradient updated
+[2025-11-18 06:22:55,197.197] Current Learning Rate : 0.0001357901085645356
+[2025-11-18 06:22:55,197.197] Global Step : 132
+[2025-11-18 06:22:55,197.197] Batch Index : 1064
+[2025-11-18 06:23:23,437.437] Epoch No: 1, Global Step: 000132, Train Loss: 4.582, Val Loss: 4.568
+
+[2025-11-18 06:23:23,438.438] Total Tokens seen till now: 8716288
+
+[2025-11-18 06:23:24,856.856] BEST model SAVED on iteration 000132 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:23:24,960.960] Once upon a time,. with of
+[2025-11-18 06:23:29,389.389] Gradient updated
+[2025-11-18 06:23:29,390.390] Current Learning Rate : 0.00013674306393244873
+[2025-11-18 06:23:29,390.390] Global Step : 133
+[2025-11-18 06:23:29,390.390] Batch Index : 1072
+[2025-11-18 06:23:57,686.686] Epoch No: 1, Global Step: 000133, Train Loss: 4.632, Val Loss: 4.545
+
+[2025-11-18 06:23:57,687.687] Total Tokens seen till now: 8781824
+
+[2025-11-18 06:23:58,962.962] BEST model SAVED on iteration 000133 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:23:58,985.985] Once upon a time,.
+[2025-11-18 06:24:03,381.381] Gradient updated
+[2025-11-18 06:24:03,382.382] Current Learning Rate : 0.00013769601930036188
+[2025-11-18 06:24:03,382.382] Global Step : 134
+[2025-11-18 06:24:03,382.382] Batch Index : 1080
+[2025-11-18 06:24:31,655.655] Epoch No: 1, Global Step: 000134, Train Loss: 4.533, Val Loss: 4.523
+
+[2025-11-18 06:24:31,656.656] Total Tokens seen till now: 8847360
+
+[2025-11-18 06:24:32,916.916] BEST model SAVED on iteration 000134 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:24:33,242.242] Once upon a time,'s and a., the,.my. day a, her happy to said said said. I
+[2025-11-18 06:24:37,651.651] Gradient updated
+[2025-11-18 06:24:37,652.652] Current Learning Rate : 0.00013864897466827505
+[2025-11-18 06:24:37,652.652] Global Step : 135
+[2025-11-18 06:24:37,652.652] Batch Index : 1088
+[2025-11-18 06:25:05,965.965] Epoch No: 1, Global Step: 000135, Train Loss: 4.525, Val Loss: 4.498
+
+[2025-11-18 06:25:05,966.966] Total Tokens seen till now: 8912896
+
+[2025-11-18 06:25:07,309.309] BEST model SAVED on iteration 000135 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:25:07,362.362] Once upon a time, a. She.
+[2025-11-18 06:25:11,756.756] Gradient updated
+[2025-11-18 06:25:11,757.757] Current Learning Rate : 0.0001396019300361882
+[2025-11-18 06:25:11,757.757] Global Step : 136
+[2025-11-18 06:25:11,757.757] Batch Index : 1096
+[2025-11-18 06:25:40,056.056] Epoch No: 1, Global Step: 000136, Train Loss: 4.475, Val Loss: 4.476
+
+[2025-11-18 06:25:40,057.057] Total Tokens seen till now: 8978432
+
+[2025-11-18 06:25:41,251.251] BEST model SAVED on iteration 000136 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:25:41,301.301] Once upon a time,.. The was
+[2025-11-18 06:25:45,700.700] Gradient updated
+[2025-11-18 06:25:45,701.701] Current Learning Rate : 0.00014055488540410134
+[2025-11-18 06:25:45,701.701] Global Step : 137
+[2025-11-18 06:25:45,701.701] Batch Index : 1104
+[2025-11-18 06:26:14,019.019] Epoch No: 1, Global Step: 000137, Train Loss: 4.492, Val Loss: 4.455
+
+[2025-11-18 06:26:14,020.020] Total Tokens seen till now: 9043968
+
+[2025-11-18 06:26:15,551.551] BEST model SAVED on iteration 000137 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:26:15,580.580] Once upon a time, was
+[2025-11-18 06:26:20,000.000] Gradient updated
+[2025-11-18 06:26:20,000.000] Current Learning Rate : 0.00014150784077201448
+[2025-11-18 06:26:20,000.000] Global Step : 138
+[2025-11-18 06:26:20,000.000] Batch Index : 1112
+[2025-11-18 06:26:48,193.193] Epoch No: 1, Global Step: 000138, Train Loss: 4.484, Val Loss: 4.432
+
+[2025-11-18 06:26:48,194.194] Total Tokens seen till now: 9109504
+
+[2025-11-18 06:26:49,529.529] BEST model SAVED on iteration 000138 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:26:49,607.607] Once upon a time, very a day. a
+[2025-11-18 06:26:54,040.040] Gradient updated
+[2025-11-18 06:26:54,041.041] Current Learning Rate : 0.00014246079613992763
+[2025-11-18 06:26:54,041.041] Global Step : 139
+[2025-11-18 06:26:54,042.042] Batch Index : 1120
+[2025-11-18 06:27:22,263.263] Epoch No: 1, Global Step: 000139, Train Loss: 4.458, Val Loss: 4.413
+
+[2025-11-18 06:27:22,264.264] Total Tokens seen till now: 9175040
+
+[2025-11-18 06:27:23,526.526] BEST model SAVED on iteration 000139 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:27:23,551.551] Once upon a time,.
+[2025-11-18 06:27:27,969.969] Gradient updated
+[2025-11-18 06:27:27,970.970] Current Learning Rate : 0.00014341375150784077
+[2025-11-18 06:27:27,970.970] Global Step : 140
+[2025-11-18 06:27:27,970.970] Batch Index : 1128
+[2025-11-18 06:27:56,222.222] Epoch No: 1, Global Step: 000140, Train Loss: 4.462, Val Loss: 4.396
+
+[2025-11-18 06:27:56,223.223] Total Tokens seen till now: 9240576
+
+[2025-11-18 06:27:57,421.421] BEST model SAVED on iteration 000140 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:27:57,473.473] Once upon a time,, Tim.
+[2025-11-18 06:28:01,869.869] Gradient updated
+[2025-11-18 06:28:01,870.870] Current Learning Rate : 0.00014436670687575391
+[2025-11-18 06:28:01,870.870] Global Step : 141
+[2025-11-18 06:28:01,870.870] Batch Index : 1136
+[2025-11-18 06:28:30,122.122] Epoch No: 1, Global Step: 000141, Train Loss: 4.392, Val Loss: 4.374
+
+[2025-11-18 06:28:30,123.123] Total Tokens seen till now: 9306112
+
+[2025-11-18 06:28:31,406.406] BEST model SAVED on iteration 000141 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:28:31,434.434] Once upon a time, a
+[2025-11-18 06:28:35,841.841] Gradient updated
+[2025-11-18 06:28:35,842.842] Current Learning Rate : 0.00014531966224366709
+[2025-11-18 06:28:35,842.842] Global Step : 142
+[2025-11-18 06:28:35,843.843] Batch Index : 1144
+[2025-11-18 06:29:04,110.110] Epoch No: 1, Global Step: 000142, Train Loss: 4.431, Val Loss: 4.356
+
+[2025-11-18 06:29:04,111.111] Total Tokens seen till now: 9371648
+
+[2025-11-18 06:29:05,679.679] BEST model SAVED on iteration 000142 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:29:05,721.721] Once upon a time,.
+[2025-11-18 06:29:10,141.141] Gradient updated
+[2025-11-18 06:29:10,142.142] Current Learning Rate : 0.00014627261761158023
+[2025-11-18 06:29:10,142.142] Global Step : 143
+[2025-11-18 06:29:10,142.142] Batch Index : 1152
+[2025-11-18 06:29:38,513.513] Epoch No: 1, Global Step: 000143, Train Loss: 4.409, Val Loss: 4.340
+
+[2025-11-18 06:29:38,514.514] Total Tokens seen till now: 9437184
+
+[2025-11-18 06:29:39,881.881] BEST model SAVED on iteration 000143 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:29:39,921.921] Once upon a time,. 
+[2025-11-18 06:29:43,146.146] BEST model SAVED on iteration 000143 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-18 06:29:43,214.214] Training completed in 96.07 minutes.
+[2025-11-18 06:29:43,215.215] BEST Pre-trained custom model saved in model/gpt2_ORG_preTrain_S_V4.pth..!
+[2025-11-18 06:29:43,215.215] Saving the plots of the metrics tracked ..!
+[2025-11-18 06:29:44,703.703] Pipeline completed in 96.09 minutes.

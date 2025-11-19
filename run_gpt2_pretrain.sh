@@ -20,16 +20,16 @@ beta1=0.9
 beta2=0.95
 val_split=0.05
 train_split=0.85
-batch_size=64
-target_batch_size=512 #1024 
+batch_size=32
+target_batch_size=256 #1024 
 seed=123
 dropout_rate=0.2 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
 warmup_steps=0.05
-initial_lr=0.00008 #3e-05
-min_lr=0.000001 #--> being calculated as 0.1 * of max LR
+initial_lr=0.00001 #3e-05
+#min_lr=0.000001 #--> being calculated as 0.1 * of max LR
 learning_rate=0.0008 #3e-4 --> Good LR (Karpathy)
 rms_eps=1e-6
 rms_bias=True
@@ -41,9 +41,9 @@ ff_hidden_dim=400
 arch_type='original'
 kv_cache=True
 moe_noise=True
-train_type='scratch'
+train_type='resume'
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V4_scratch' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_ORGarch_S_V4_resume_2' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
