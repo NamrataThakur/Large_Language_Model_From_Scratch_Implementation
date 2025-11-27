@@ -1,0 +1,1681 @@
+[2025-11-24 01:42:29,179.179] Namespace(experiment_name='Pre-Train_Exp_CustomConfig_ORGarch_S_V4_resume_8', data_path='tinystories', model_type='custom', base_modelName='gpt2_124M', model_name='gpt2_ORG_preTrain_S_V4', pre_save_model='gpt2_ORG_preTrain_S_V4.pth', tokenizer='tiktoken', seed=123, batch_size=32, target_batch_size=256, train_split=0.85, val_split=0.05, optimizer='AdamW', context_length=256, vocab_size=50257, embedding_dimension=384, num_heads=8, num_layers=8, dropout_rate=0.2, qkv_bias=False, ff_hidden_dim=400, eval_batchSize=64, eval_freq=64, kv_cache=True, weight_decay=0.1, beta1=0.9, beta2=0.95, rms_eps=1e-06, rms_bias=True, theta_base=10000.0, num_kv_groups=1, num_experts=4, num_active_experts=2, max_training_length='model_context_length', max_new_tokens=50, temp=1.0, top_k=20, num_epochs=1, eos_id=50256, arch_type='original', train_type='resume', moe_noise=True, use_warmup=True, use_gradient_clip=True, warmup_steps=0.05, initial_lr=1e-05, min_lr=1e-06, learning_rate=0.0008)
+[2025-11-24 01:42:31,594.594] Model to be resumed for training from checkpoint present in the path: model/gpt2_ORG_preTrain_S_V4.pth
+[2025-11-24 01:42:33,319.319] Custom GPT2 configuration was used for pre-training..!
+[2025-11-24 01:42:33,320.320] The custom config of the model to be trained : {'vocab_size': 50257, 'embedding_dimension': 384, 'num_heads': 8, 'context_length': 256, 'dropout': 0.2, 'qkv_bias': False, 'num_layers': 8, 'ff_hidden_dim': 400, 'rms_eps': 1e-06, 'rms_bias': True, 'theta_base': 10000.0, 'num_kv_groups': 1, 'num_experts': 4, 'num_active_experts': 2, 'moe_noise': True} 
+[2025-11-24 01:42:34,047.047] Architecture Type :original
+[2025-11-24 01:42:34,048.048] Configuration of the custom GPT2 model loaded..!
+[2025-11-24 01:42:35,111.111] Total records in Train Data: 2119719 , Validation Data : 21990
+[2025-11-24 01:42:35,116.116] Sample Text : One day, a little girl named Lily found a needle in her room. She knew it was difficult to play with
+[2025-11-24 01:42:35,116.116] ------------- Data Ingestion Completed. -------------
+[2025-11-24 01:42:35,116.116] Loading the dataset class for pre-training...
+[2025-11-24 01:42:35,146.146] Device Available: cuda .. ! 
+[2025-11-24 01:57:55,078.078] ************** TRAIN DATALOADER ****************************
+[2025-11-24 01:57:55,081.081] Length of Train Dataloader (number of batches): 132482
+[2025-11-24 01:57:55,082.082] Total Train Tokens : 471872517
+[2025-11-24 01:58:00,538.538] torch.Size([32, 256]), torch.Size([32, 256])
+[2025-11-24 01:58:00,608.608] ************** VAL DATALOADER ****************************
+[2025-11-24 01:58:00,608.608] Length of Val Dataloader (number of batches): 1374
+[2025-11-24 01:58:00,608.608] Total Validation Tokens : 4743928
+[2025-11-24 01:58:00,640.640] torch.Size([32, 256]), torch.Size([32, 256])
+[2025-11-24 01:58:00,640.640] Dataloaders created successfully for pre-training task..!
+[2025-11-24 01:58:00,641.641] ---------------------------------------------------------
+[2025-11-24 01:58:00,641.641] Loading the weights of the model : gpt2_ORG_preTrain_S_V4.pth..!
+[2025-11-24 01:58:04,694.694] Model weights loaded successfully..!
+[2025-11-24 01:58:04,695.695] Model Size : 52.882944 millions (M)
+[2025-11-24 01:58:04,696.696] Device Available: cuda .. ! 
+[2025-11-24 01:58:04,802.802] Training Stage : Model sent to cuda for fine-tuning..!
+[2025-11-24 01:58:04,803.803] Training Stage : Training of the model started ..!
+[2025-11-24 01:58:14,677.677] Optimizer loaded successfully..!
+[2025-11-24 01:58:14,677.677] Minimum LR : 8e-05
+[2025-11-24 01:58:14,677.677] Gradient Accumulation Steps : 8
+[2025-11-24 01:58:14,679.679] Model Training Resumed.
+[2025-11-24 01:58:14,679.679] Best Test Loss recorded : 1.2057350855320692
+[2025-11-24 01:58:14,679.679] Resuming from Epoch 0, Batch 37069, Global Step 4632
+[2025-11-24 01:58:14,679.679] Last Learning Rate : 0.0007010803328792069.
+[2025-11-24 01:58:14,679.679] Total steps to update optimizer : 16561.
+[2025-11-24 01:58:14,679.679] Total training steps acc. to train loader : 132482
+[2025-11-24 01:58:14,680.680] Warmup Steps : 829
+[2025-11-24 01:58:14,680.680] Global Steps Crossed Warmup Period. Disabling Warmup..!
+[2025-11-24 01:58:14,680.680] Global Steps Trained Already : 4632
+[2025-11-24 01:58:14,680.680] Total training steps remaining : 11929
+[2025-11-24 02:09:49,110.110] Gradient updated
+[2025-11-24 02:09:49,122.122] Current Learning Rate : 0.0007010308304152309
+[2025-11-24 02:09:49,122.122] Global Step : 4633
+[2025-11-24 02:09:49,122.122] Batch Index : 37072
+[2025-11-24 02:10:17,189.189] Epoch No: 1, Global Step: 004633, Train Loss: 1.233, Val Loss: 1.210
+
+[2025-11-24 02:10:17,189.189] Total Tokens seen till now: 303377952
+
+[2025-11-24 02:10:17,924.924] Once upon a time,. not to move.
+[2025-11-24 02:10:22,472.472] Gradient updated
+[2025-11-24 02:10:22,475.475] Current Learning Rate : 0.0007009813175419034
+[2025-11-24 02:10:22,475.475] Global Step : 4634
+[2025-11-24 02:10:22,475.475] Batch Index : 37080
+[2025-11-24 02:10:50,439.439] Epoch No: 1, Global Step: 004634, Train Loss: 1.225, Val Loss: 1.207
+
+[2025-11-24 02:10:50,439.439] Total Tokens seen till now: 303443488
+
+[2025-11-24 02:10:51,028.028] Once upon a time, they had to have a good time to finish it. The people on the last.""Good time, a few days before they were too, the mom put this for them needed a long time to do their bed to the year. But
+[2025-11-24 02:10:55,586.586] Gradient updated
+[2025-11-24 02:10:55,586.586] Current Learning Rate : 0.0007009317942611987
+[2025-11-24 02:10:55,586.586] Global Step : 4635
+[2025-11-24 02:10:55,586.586] Batch Index : 37088
+[2025-11-24 02:11:23,463.463] Epoch No: 1, Global Step: 004635, Train Loss: 1.228, Val Loss: 1.207
+
+[2025-11-24 02:11:23,463.463] Total Tokens seen till now: 303509024
+
+[2025-11-24 02:11:24,148.148] Once upon a time,. bad moment, it's about the right thing to do. The wise creature saw the world living creatures in the things.The wise to the wise creature, however, the wise owl knew the world. Every day it felt, everything.
+[2025-11-24 02:11:28,702.702] Gradient updated
+[2025-11-24 02:11:28,702.702] Current Learning Rate : 0.0007008822605750921
+[2025-11-24 02:11:28,702.702] Global Step : 4636
+[2025-11-24 02:11:28,702.702] Batch Index : 37096
+[2025-11-24 02:11:56,622.622] Epoch No: 1, Global Step: 004636, Train Loss: 1.233, Val Loss: 1.207
+
+[2025-11-24 02:11:56,622.622] Total Tokens seen till now: 303574560
+
+[2025-11-24 02:11:57,167.167] Once upon a time, she were on the back. She put the top on her bed. But soon she was close her mommy had to her hands. So! One, she said, â€œI am going to take a big kiss
+[2025-11-24 02:12:01,740.740] Gradient updated
+[2025-11-24 02:12:01,741.741] Current Learning Rate : 0.0007008327164855586
+[2025-11-24 02:12:01,741.741] Global Step : 4637
+[2025-11-24 02:12:01,741.741] Batch Index : 37104
+[2025-11-24 02:12:29,846.846] Epoch No: 1, Global Step: 004637, Train Loss: 1.227, Val Loss: 1.207
+
+[2025-11-24 02:12:29,847.847] Total Tokens seen till now: 303640096
+
+[2025-11-24 02:12:30,343.343] Once upon a time, because he could take it down close the sky. Then he saw that she wanted to close he needed it to go as her eyes before the top down, and she reached.She then she would be careful little girl would make it would take a
+[2025-11-24 02:12:34,919.919] Gradient updated
+[2025-11-24 02:12:34,920.920] Current Learning Rate : 0.000700783161994574
+[2025-11-24 02:12:34,920.920] Global Step : 4638
+[2025-11-24 02:12:34,920.920] Batch Index : 37112
+[2025-11-24 02:13:02,942.942] Epoch No: 1, Global Step: 004638, Train Loss: 1.229, Val Loss: 1.206
+
+[2025-11-24 02:13:02,942.942] Total Tokens seen till now: 303705632
+
+[2025-11-24 02:13:03,435.435] Once upon a time, or ask!"!" said one word. One word a word word, Little man, the bird knew, the word, the answer, I say please make me, say, "Can me, or mom".The bird knows this. The
+[2025-11-24 02:13:08,009.009] Gradient updated
+[2025-11-24 02:13:08,009.009] Current Learning Rate : 0.0007007335971041142
+[2025-11-24 02:13:08,009.009] Global Step : 4639
+[2025-11-24 02:13:08,010.010] Batch Index : 37120
+[2025-11-24 02:13:35,953.953] Epoch No: 1, Global Step: 004639, Train Loss: 1.221, Val Loss: 1.204
+
+[2025-11-24 02:13:35,953.953] Total Tokens seen till now: 303771168
+
+[2025-11-24 02:13:37,532.532] BEST model SAVED on iteration 004639 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:13:38,063.063] Once upon a time,," to the top," Lily said, as she stepped closer."Oh, there, as a while she suddenly turn, she be scared, the top," said, and before her, I give her be there, as a distance,"
+[2025-11-24 02:13:42,639.639] Gradient updated
+[2025-11-24 02:13:42,640.640] Current Learning Rate : 0.0007006840218161561
+[2025-11-24 02:13:42,640.640] Global Step : 4640
+[2025-11-24 02:13:42,640.640] Batch Index : 37128
+[2025-11-24 02:14:10,701.701] Epoch No: 1, Global Step: 004640, Train Loss: 1.218, Val Loss: 1.203
+
+[2025-11-24 02:14:10,702.702] Total Tokens seen till now: 303836704
+
+[2025-11-24 02:14:12,195.195] BEST model SAVED on iteration 004640 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:14:12,754.754] Once upon a time, Lily, "Mommy loves all about being very good on her name?" Lily answered. Her a loud clap..." before. Mom's five. The three. Mommy does answer to say she can't say her very five.She
+[2025-11-24 02:14:17,319.319] Gradient updated
+[2025-11-24 02:14:17,319.319] Current Learning Rate : 0.0007006344361326764
+[2025-11-24 02:14:17,319.319] Global Step : 4641
+[2025-11-24 02:14:17,319.319] Batch Index : 37136
+[2025-11-24 02:14:45,294.294] Epoch No: 1, Global Step: 004641, Train Loss: 1.229, Val Loss: 1.203
+
+[2025-11-24 02:14:45,295.295] Total Tokens seen till now: 303902240
+
+[2025-11-24 02:14:46,652.652] BEST model SAVED on iteration 004641 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:14:47,305.305] Once upon a time, back the steps on time."Are you sure?" she asked the sun was passing below."Are you?""Yes. She would the sun," she was called me," thought."Where, one, though
+[2025-11-24 02:14:51,881.881] Gradient updated
+[2025-11-24 02:14:51,882.882] Current Learning Rate : 0.0007005848400556527
+[2025-11-24 02:14:51,882.882] Global Step : 4642
+[2025-11-24 02:14:51,882.882] Batch Index : 37144
+[2025-11-24 02:15:19,981.981] Epoch No: 1, Global Step: 004642, Train Loss: 1.210, Val Loss: 1.203
+
+[2025-11-24 02:15:19,982.982] Total Tokens seen till now: 303967776
+
+[2025-11-24 02:15:20,471.471] Once upon a time, pink!" the purple picture had hidden. It made her old pink, but her little sister ever. The end of it while she was a while she knew she had to put of the bright pink the perfect line she needed. The big
+[2025-11-24 02:15:25,048.048] Gradient updated
+[2025-11-24 02:15:25,049.049] Current Learning Rate : 0.0007005352335870626
+[2025-11-24 02:15:25,049.049] Global Step : 4643
+[2025-11-24 02:15:25,049.049] Batch Index : 37152
+[2025-11-24 02:15:53,016.016] Epoch No: 1, Global Step: 004643, Train Loss: 1.226, Val Loss: 1.204
+
+[2025-11-24 02:15:53,016.016] Total Tokens seen till now: 304033312
+
+[2025-11-24 02:15:53,504.504] Once upon a time,." and land on the ground it saw people and people passing together. The people were smiling and they wanted to themselves out until no longer. Suddenly one of a little blue. The people came their hearts. â€œThatâ
+[2025-11-24 02:15:58,077.077] Gradient updated
+[2025-11-24 02:15:58,078.078] Current Learning Rate : 0.0007004856167288844
+[2025-11-24 02:15:58,078.078] Global Step : 4644
+[2025-11-24 02:15:58,078.078] Batch Index : 37160
+[2025-11-24 02:16:26,029.029] Epoch No: 1, Global Step: 004644, Train Loss: 1.221, Val Loss: 1.205
+
+[2025-11-24 02:16:26,030.030] Total Tokens seen till now: 304098848
+
+[2025-11-24 02:16:26,514.514] Once upon a time, give!" She was about the beauty.But then on this. "I have to go for the right." She wanted to be a word," she had. She wanted to her, so you."She was done, the
+[2025-11-24 02:16:31,088.088] Gradient updated
+[2025-11-24 02:16:31,088.088] Current Learning Rate : 0.0007004359894830965
+[2025-11-24 02:16:31,088.088] Global Step : 4645
+[2025-11-24 02:16:31,088.088] Batch Index : 37168
+[2025-11-24 02:16:59,143.143] Epoch No: 1, Global Step: 004645, Train Loss: 1.233, Val Loss: 1.205
+
+[2025-11-24 02:16:59,144.144] Total Tokens seen till now: 304164384
+
+[2025-11-24 02:16:59,642.642] Once upon a time, because the sun, the moon, and the moon, and all the cars and stars shining. But they are the star were very far things that she did not so, and the people to close, and then, until then the night, a nice
+[2025-11-24 02:17:04,216.216] Gradient updated
+[2025-11-24 02:17:04,217.217] Current Learning Rate : 0.0007003863518516782
+[2025-11-24 02:17:04,217.217] Global Step : 4646
+[2025-11-24 02:17:04,217.217] Batch Index : 37176
+[2025-11-24 02:17:32,261.261] Epoch No: 1, Global Step: 004646, Train Loss: 1.237, Val Loss: 1.204
+
+[2025-11-24 02:17:32,262.262] Total Tokens seen till now: 304229920
+
+[2025-11-24 02:17:32,753.753] Once upon a time, that that!" to ear, one night, the little girl's mom warned her mom that, a scary shadow had been watching as she could be a star, as it gave her mom, telling her tiny dreams. After a long, the little
+[2025-11-24 02:17:37,325.325] Gradient updated
+[2025-11-24 02:17:37,326.326] Current Learning Rate : 0.0007003367038366089
+[2025-11-24 02:17:37,326.326] Global Step : 4647
+[2025-11-24 02:17:37,326.326] Batch Index : 37184
+[2025-11-24 02:18:05,307.307] Epoch No: 1, Global Step: 004647, Train Loss: 1.216, Val Loss: 1.204
+
+[2025-11-24 02:18:05,307.307] Total Tokens seen till now: 304295456
+
+[2025-11-24 02:18:05,797.797] Once upon a time,.. I am a big sister the sister." They loved to play together.One day, the sister the sister said, "Can we should come inside.""Are you not do not?" Then, I be very a little
+[2025-11-24 02:18:10,369.369] Gradient updated
+[2025-11-24 02:18:10,370.370] Current Learning Rate : 0.0007002870454398683
+[2025-11-24 02:18:10,370.370] Global Step : 4648
+[2025-11-24 02:18:10,370.370] Batch Index : 37192
+[2025-11-24 02:18:38,363.363] Epoch No: 1, Global Step: 004648, Train Loss: 1.227, Val Loss: 1.203
+
+[2025-11-24 02:18:38,364.364] Total Tokens seen till now: 304360992
+
+[2025-11-24 02:18:38,860.860] Once upon a time, time.. Today, the sun was shining and the birds were singing were flying. "I am making that blue before," said his mom said."That night," said out for playing by the sun when she was a little girl loved
+[2025-11-24 02:18:43,439.439] Gradient updated
+[2025-11-24 02:18:43,440.440] Current Learning Rate : 0.0007002373766634368
+[2025-11-24 02:18:43,440.440] Global Step : 4649
+[2025-11-24 02:18:43,440.440] Batch Index : 37200
+[2025-11-24 02:19:11,369.369] Epoch No: 1, Global Step: 004649, Train Loss: 1.220, Val Loss: 1.204
+
+[2025-11-24 02:19:11,370.370] Total Tokens seen till now: 304426528
+
+[2025-11-24 02:19:11,858.858] Once upon a time,. the best.!", the big white cat, making a scary cat, but the loudest story.One day, bright pink cat' harm, yellow, so, that, and beautiful thing about it was very bright day, when
+[2025-11-24 02:19:16,436.436] Gradient updated
+[2025-11-24 02:19:16,437.437] Current Learning Rate : 0.000700187697509295
+[2025-11-24 02:19:16,437.437] Global Step : 4650
+[2025-11-24 02:19:16,437.437] Batch Index : 37208
+[2025-11-24 02:19:44,510.510] Epoch No: 1, Global Step: 004650, Train Loss: 1.237, Val Loss: 1.204
+
+[2025-11-24 02:19:44,511.511] Total Tokens seen till now: 304492064
+
+[2025-11-24 02:19:45,000.000] Once upon a time, The world around them.Today, the sun shone so brightly. It sparkles lit up, bright colors of the sun.The sparkled stars were so pretty. He said, "Mommy that I'm a special moment, and
+[2025-11-24 02:19:49,577.577] Gradient updated
+[2025-11-24 02:19:49,578.578] Current Learning Rate : 0.0007001380079794242
+[2025-11-24 02:19:49,578.578] Global Step : 4651
+[2025-11-24 02:19:49,578.578] Batch Index : 37216
+[2025-11-24 02:20:17,553.553] Epoch No: 1, Global Step: 004651, Train Loss: 1.224, Val Loss: 1.203
+
+[2025-11-24 02:20:17,554.554] Total Tokens seen till now: 304557600
+
+[2025-11-24 02:20:18,057.057] Once upon a time, you do well the spell. Do you know what kind was wrong. Do you want to be patient for a little girl?" The little girl shook her head and smiled."Yes, please. I'm sure enough.â€ she said
+[2025-11-24 02:20:22,628.628] Gradient updated
+[2025-11-24 02:20:22,629.629] Current Learning Rate : 0.0007000883080758056
+[2025-11-24 02:20:22,630.630] Global Step : 4652
+[2025-11-24 02:20:22,630.630] Batch Index : 37224
+[2025-11-24 02:20:50,581.581] Epoch No: 1, Global Step: 004652, Train Loss: 1.222, Val Loss: 1.202
+
+[2025-11-24 02:20:50,582.582] Total Tokens seen till now: 304623136
+
+[2025-11-24 02:20:52,089.089] BEST model SAVED on iteration 004652 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:20:52,762.762] Once upon a time, but out the hand. The girl thought the same thing happened. Suddenly, the sky filled with a loud crack. The flame began to fade. The flame had disappeared and it quickly. The flame was too quickly. The flame disappeared by the way,
+[2025-11-24 02:20:57,335.335] Gradient updated
+[2025-11-24 02:20:57,336.336] Current Learning Rate : 0.0007000385978004213
+[2025-11-24 02:20:57,336.336] Global Step : 4653
+[2025-11-24 02:20:57,336.336] Batch Index : 37232
+[2025-11-24 02:21:25,412.412] Epoch No: 1, Global Step: 004653, Train Loss: 1.230, Val Loss: 1.202
+
+[2025-11-24 02:21:25,413.413] Total Tokens seen till now: 304688672
+
+[2025-11-24 02:21:25,929.929] Once upon a time, vanish the magical things. The magic power's power would make the world shrink. But they never seemed alone because they were fragile. One day, the magic was trying to catch up. It had a special thing to catch a tiny magical
+[2025-11-24 02:21:30,506.506] Gradient updated
+[2025-11-24 02:21:30,507.507] Current Learning Rate : 0.0006999888771552537
+[2025-11-24 02:21:30,507.507] Global Step : 4654
+[2025-11-24 02:21:30,507.507] Batch Index : 37240
+[2025-11-24 02:21:58,502.502] Epoch No: 1, Global Step: 004654, Train Loss: 1.219, Val Loss: 1.203
+
+[2025-11-24 02:21:58,503.503] Total Tokens seen till now: 304754208
+
+[2025-11-24 02:21:58,992.992] Once upon a time, for fall."The time, the little girl named Lily's mommy and her sister, she loves her big brother, but they were going on adventures. One day, Lily wanted to play a lot of, when, when their little bird came
+[2025-11-24 02:22:03,571.571] Gradient updated
+[2025-11-24 02:22:03,572.572] Current Learning Rate : 0.0006999391461422855
+[2025-11-24 02:22:03,573.573] Global Step : 4655
+[2025-11-24 02:22:03,573.573] Batch Index : 37248
+[2025-11-24 02:22:31,587.587] Epoch No: 1, Global Step: 004655, Train Loss: 1.227, Val Loss: 1.204
+
+[2025-11-24 02:22:31,587.587] Total Tokens seen till now: 304819744
+
+[2025-11-24 02:22:32,081.081] Once upon a time, that the world who the world a little less has. He wanted to explore the world this was something new and exciting, and as to land. In the land, the sky was far away, or a light. It was true.The
+[2025-11-24 02:22:36,661.661] Gradient updated
+[2025-11-24 02:22:36,662.662] Current Learning Rate : 0.0006998894047634997
+[2025-11-24 02:22:36,662.662] Global Step : 4656
+[2025-11-24 02:22:36,662.662] Batch Index : 37256
+[2025-11-24 02:23:04,804.804] Epoch No: 1, Global Step: 004656, Train Loss: 1.228, Val Loss: 1.204
+
+[2025-11-24 02:23:04,805.805] Total Tokens seen till now: 304885280
+
+[2025-11-24 02:23:05,294.294] Once upon a time, so the power of the power.One day, the sunflower noticed that the sky was full of stars. He wanted to know why they were so bright and what that he was very excited to explore the night sky. He started practicing and kept
+[2025-11-24 02:23:09,874.874] Gradient updated
+[2025-11-24 02:23:09,874.874] Current Learning Rate : 0.0006998396530208803
+[2025-11-24 02:23:09,874.874] Global Step : 4657
+[2025-11-24 02:23:09,875.875] Batch Index : 37264
+[2025-11-24 02:23:37,914.914] Epoch No: 1, Global Step: 004657, Train Loss: 1.224, Val Loss: 1.203
+
+[2025-11-24 02:23:37,914.914] Total Tokens seen till now: 304950816
+
+[2025-11-24 02:23:38,408.408] Once upon a time, Her to watch. She knew she could do things that were useful things were important. Every day, she would take the thing to the day. First, the little, she wanted to touch the day a lot.The next, the bird
+[2025-11-24 02:23:42,993.993] Gradient updated
+[2025-11-24 02:23:42,993.993] Current Learning Rate : 0.0006997898909164108
+[2025-11-24 02:23:42,994.994] Global Step : 4658
+[2025-11-24 02:23:42,994.994] Batch Index : 37272
+[2025-11-24 02:24:11,020.020] Epoch No: 1, Global Step: 004658, Train Loss: 1.231, Val Loss: 1.203
+
+[2025-11-24 02:24:11,021.021] Total Tokens seen till now: 305016352
+
+[2025-11-24 02:24:11,504.504] Once upon a time, land on for spring, the whole world started. The people of the world knew how to fly out and how to be successful. They also knew how to fly of them flew.One day, the sky, and gentle the people knew that
+[2025-11-24 02:24:16,090.090] Gradient updated
+[2025-11-24 02:24:16,091.091] Current Learning Rate : 0.0006997401184520757
+[2025-11-24 02:24:16,091.091] Global Step : 4659
+[2025-11-24 02:24:16,091.091] Batch Index : 37280
+[2025-11-24 02:24:44,202.202] Epoch No: 1, Global Step: 004659, Train Loss: 1.225, Val Loss: 1.203
+
+[2025-11-24 02:24:44,203.203] Total Tokens seen till now: 305081888
+
+[2025-11-24 02:24:44,694.694] Once upon a time, they could drink. She always asked the people she answered. She thought about how many times she was to turn. Her friends were coming from far away."Can I drink to help?" asked the people who came from the ocean. But
+[2025-11-24 02:24:49,267.267] Gradient updated
+[2025-11-24 02:24:49,268.268] Current Learning Rate : 0.0006996903356298602
+[2025-11-24 02:24:49,268.268] Global Step : 4660
+[2025-11-24 02:24:49,268.268] Batch Index : 37288
+[2025-11-24 02:25:17,216.216] Epoch No: 1, Global Step: 004660, Train Loss: 1.221, Val Loss: 1.202
+
+[2025-11-24 02:25:17,217.217] Total Tokens seen till now: 305147424
+
+[2025-11-24 02:25:17,701.701] Once upon a time, go to their land." They saw lots the airport was the most. The planes and soon. They saw them a plane. They were just the airport before getting close to go to go. The planes, the airport was excited by the airport.
+[2025-11-24 02:25:22,271.271] Gradient updated
+[2025-11-24 02:25:22,271.271] Current Learning Rate : 0.0006996405424517493
+[2025-11-24 02:25:22,271.271] Global Step : 4661
+[2025-11-24 02:25:22,271.271] Batch Index : 37296
+[2025-11-24 02:25:50,241.241] Epoch No: 1, Global Step: 004661, Train Loss: 1.212, Val Loss: 1.203
+
+[2025-11-24 02:25:50,242.242] Total Tokens seen till now: 305212960
+
+[2025-11-24 02:25:50,727.727] Once upon a time, about the world right.!"," her mom said.The mom always looked out for their baby."She said "What a little, my mom?" The mom was that it meant to help. The other animals who could listen to be
+[2025-11-24 02:25:55,305.305] Gradient updated
+[2025-11-24 02:25:55,306.306] Current Learning Rate : 0.0006995907389197284
+[2025-11-24 02:25:55,306.306] Global Step : 4662
+[2025-11-24 02:25:55,306.306] Batch Index : 37304
+[2025-11-24 02:26:23,286.286] Epoch No: 1, Global Step: 004662, Train Loss: 1.221, Val Loss: 1.204
+
+[2025-11-24 02:26:23,287.287] Total Tokens seen till now: 305278496
+
+[2025-11-24 02:26:23,781.781] Once upon a time,.A kind you. The sun is out from behind a big tree. The light lit the tree.Mommy turned into her garden and the sky. She looked up. The sky filled with the air. The sun, and the
+[2025-11-24 02:26:28,346.346] Gradient updated
+[2025-11-24 02:26:28,347.347] Current Learning Rate : 0.0006995409250357839
+[2025-11-24 02:26:28,347.347] Global Step : 4663
+[2025-11-24 02:26:28,347.347] Batch Index : 37312
+[2025-11-24 02:26:56,331.331] Epoch No: 1, Global Step: 004663, Train Loss: 1.238, Val Loss: 1.205
+
+[2025-11-24 02:26:56,332.332] Total Tokens seen till now: 305344032
+
+[2025-11-24 02:26:56,825.825] Once upon a time, because just any."Wow," said Ellie as he ran to the sky. One of the colors turned the sky as to the big the sun."I'm going to an eagle!" said one more time. A cloud continued on for
+[2025-11-24 02:27:01,400.400] Gradient updated
+[2025-11-24 02:27:01,400.400] Current Learning Rate : 0.0006994911008019022
+[2025-11-24 02:27:01,400.400] Global Step : 4664
+[2025-11-24 02:27:01,400.400] Batch Index : 37320
+[2025-11-24 02:27:29,492.492] Epoch No: 1, Global Step: 004664, Train Loss: 1.230, Val Loss: 1.204
+
+[2025-11-24 02:27:29,493.493] Total Tokens seen till now: 305409568
+
+[2025-11-24 02:27:29,999.999] Once upon a time, that the world the world," mom and dad. They were looking out for being very important, and dad were always trying to take a big smile."Mom, dad, do it's to me, Mama said she wanted to give up
+[2025-11-24 02:27:34,576.576] Gradient updated
+[2025-11-24 02:27:34,579.579] Current Learning Rate : 0.0006994412662200699
+[2025-11-24 02:27:34,580.580] Global Step : 4665
+[2025-11-24 02:27:34,580.580] Batch Index : 37328
+[2025-11-24 02:28:02,590.590] Epoch No: 1, Global Step: 004665, Train Loss: 1.222, Val Loss: 1.203
+
+[2025-11-24 02:28:02,591.591] Total Tokens seen till now: 305475104
+
+[2025-11-24 02:28:03,082.082] Once upon a time, a high trip was. It made of glass of ice and water and the sun shone brightly.The ice-cream mix and the brave little boy was so the boy would not too! He knew that if you seek you can be like him
+[2025-11-24 02:28:07,661.661] Gradient updated
+[2025-11-24 02:28:07,662.662] Current Learning Rate : 0.0006993914212922748
+[2025-11-24 02:28:07,662.662] Global Step : 4666
+[2025-11-24 02:28:07,662.662] Batch Index : 37336
+[2025-11-24 02:28:35,655.655] Epoch No: 1, Global Step: 004666, Train Loss: 1.220, Val Loss: 1.202
+
+[2025-11-24 02:28:35,655.655] Total Tokens seen till now: 305540640
+
+[2025-11-24 02:28:36,263.263] Once upon a time, the garden, but it had a little, so much bigger for being good, but things, the little girl had enough for many things to herself. L, but her mom were ready, so much more. They would come with enough, when,
+[2025-11-24 02:28:40,844.844] Gradient updated
+[2025-11-24 02:28:40,847.847] Current Learning Rate : 0.0006993415660205044
+[2025-11-24 02:28:40,847.847] Global Step : 4667
+[2025-11-24 02:28:40,847.847] Batch Index : 37344
+[2025-11-24 02:29:08,928.928] Epoch No: 1, Global Step: 004667, Train Loss: 1.228, Val Loss: 1.202
+
+[2025-11-24 02:29:08,929.929] Total Tokens seen till now: 305606176
+
+[2025-11-24 02:29:09,414.414] Once upon a time,."A strong little girl was watching what can you play. She said "You can dive."The girl's dream. It won!""I will."The girl's."The girl smiled.
+[2025-11-24 02:29:13,979.979] Gradient updated
+[2025-11-24 02:29:13,979.979] Current Learning Rate : 0.0006992917004067465
+[2025-11-24 02:29:13,979.979] Global Step : 4668
+[2025-11-24 02:29:13,979.979] Batch Index : 37352
+[2025-11-24 02:29:41,953.953] Epoch No: 1, Global Step: 004668, Train Loss: 1.230, Val Loss: 1.203
+
+[2025-11-24 02:29:41,953.953] Total Tokens seen till now: 305671712
+
+[2025-11-24 02:29:42,444.444] Once upon a time, to scare bad things into, and he often he saw a tiny animal called animal. He found it seemed like he had a little mouse was trying to fly - it was alive! The mouse loved!The little mouse was very friendly, and
+[2025-11-24 02:29:47,022.022] Gradient updated
+[2025-11-24 02:29:47,022.022] Current Learning Rate : 0.00069924182445299
+[2025-11-24 02:29:47,023.023] Global Step : 4669
+[2025-11-24 02:29:47,023.023] Batch Index : 37360
+[2025-11-24 02:30:14,960.960] Epoch No: 1, Global Step: 004669, Train Loss: 1.230, Val Loss: 1.202
+
+[2025-11-24 02:30:14,961.961] Total Tokens seen till now: 305737248
+
+[2025-11-24 02:30:15,449.449] Once upon a time, before. enough. A big cloud appeared up into the sky. Everyone was up high in the air.The people were all the whole world looked so big and happy stars, it glimmer of the light in the colors filled the family shouted
+[2025-11-24 02:30:20,016.016] Gradient updated
+[2025-11-24 02:30:20,017.017] Current Learning Rate : 0.0006991919381612239
+[2025-11-24 02:30:20,017.017] Global Step : 4670
+[2025-11-24 02:30:20,017.017] Batch Index : 37368
+[2025-11-24 02:30:48,021.021] Epoch No: 1, Global Step: 004670, Train Loss: 1.231, Val Loss: 1.202
+
+[2025-11-24 02:30:48,021.021] Total Tokens seen till now: 305802784
+
+[2025-11-24 02:30:48,043.043] Once upon a time,.
+[2025-11-24 02:30:52,623.623] Gradient updated
+[2025-11-24 02:30:52,624.624] Current Learning Rate : 0.0006991420415334372
+[2025-11-24 02:30:52,624.624] Global Step : 4671
+[2025-11-24 02:30:52,624.624] Batch Index : 37376
+[2025-11-24 02:31:20,601.601] Epoch No: 1, Global Step: 004671, Train Loss: 1.216, Val Loss: 1.203
+
+[2025-11-24 02:31:20,602.602] Total Tokens seen till now: 305868320
+
+[2025-11-24 02:31:21,197.197] Once upon a time, going what to be happy.","!" said the sky. The year."Wow!" said her friend, for meadow it will be busy!"One day, she will go and when. Then she know, one by a
+[2025-11-24 02:31:25,780.780] Gradient updated
+[2025-11-24 02:31:25,780.780] Current Learning Rate : 0.0006990921345716199
+[2025-11-24 02:31:25,781.781] Global Step : 4672
+[2025-11-24 02:31:25,781.781] Batch Index : 37384
+[2025-11-24 02:31:53,833.833] Epoch No: 1, Global Step: 004672, Train Loss: 1.218, Val Loss: 1.202
+
+[2025-11-24 02:31:53,834.834] Total Tokens seen till now: 305933856
+
+[2025-11-24 02:31:54,337.337] Once upon a time, the us. She likes her dreams and always listens. One day, the sunset how she wants to be a brave adventure!"Today, little one that it is important: we would take time we are happy," said goodbye."
+[2025-11-24 02:31:58,907.907] Gradient updated
+[2025-11-24 02:31:58,908.908] Current Learning Rate : 0.0006990422172777622
+[2025-11-24 02:31:58,908.908] Global Step : 4673
+[2025-11-24 02:31:58,908.908] Batch Index : 37392
+[2025-11-24 02:32:26,901.901] Epoch No: 1, Global Step: 004673, Train Loss: 1.227, Val Loss: 1.203
+
+[2025-11-24 02:32:26,902.902] Total Tokens seen till now: 305999392
+
+[2025-11-24 02:32:27,390.390] Once upon a time, the kids watch. them. They can see if the big and small.One thing. They see a way and see if they have fun. The small but they are afraid the day the things.She is scared.
+[2025-11-24 02:32:31,965.965] Gradient updated
+[2025-11-24 02:32:31,966.966] Current Learning Rate : 0.0006989922896538547
+[2025-11-24 02:32:31,966.966] Global Step : 4674
+[2025-11-24 02:32:31,966.966] Batch Index : 37400
+[2025-11-24 02:33:00,016.016] Epoch No: 1, Global Step: 004674, Train Loss: 1.217, Val Loss: 1.203
+
+[2025-11-24 02:33:00,016.016] Total Tokens seen till now: 306064928
+
+[2025-11-24 02:33:00,499.499] Once upon a time, to help. Today to put her dolls away. She was ready for the job and the table for everyone to do. The Mommy's hand. She asked her daughter to help.The mom about how smart the mom was to put her
+[2025-11-24 02:33:05,075.075] Gradient updated
+[2025-11-24 02:33:05,076.076] Current Learning Rate : 0.0006989423517018882
+[2025-11-24 02:33:05,076.076] Global Step : 4675
+[2025-11-24 02:33:05,077.077] Batch Index : 37408
+[2025-11-24 02:33:33,124.124] Epoch No: 1, Global Step: 004675, Train Loss: 1.224, Val Loss: 1.203
+
+[2025-11-24 02:33:33,125.125] Total Tokens seen till now: 306130464
+
+[2025-11-24 02:33:33,614.614] Once upon a time, grownbrCr tricks off to happen in a long time.One, the time. Then one of for a little fish, and how it passed, then before to know how to be asked to be done," the answer, the right for.
+[2025-11-24 02:33:38,190.190] Gradient updated
+[2025-11-24 02:33:38,191.191] Current Learning Rate : 0.0006988924034238544
+[2025-11-24 02:33:38,191.191] Global Step : 4676
+[2025-11-24 02:33:38,191.191] Batch Index : 37416
+[2025-11-24 02:34:06,165.165] Epoch No: 1, Global Step: 004676, Train Loss: 1.223, Val Loss: 1.203
+
+[2025-11-24 02:34:06,166.166] Total Tokens seen till now: 306196000
+
+[2025-11-24 02:34:06,664.664] Once upon a time, though each things, but she knew that it was dangerous. She wanted to be safe up, so she was just yet that everything she tried. One another one day she was a few hard. Her mom knew it she was a little
+[2025-11-24 02:34:11,238.238] Gradient updated
+[2025-11-24 02:34:11,238.238] Current Learning Rate : 0.0006988424448217451
+[2025-11-24 02:34:11,238.238] Global Step : 4677
+[2025-11-24 02:34:11,238.238] Batch Index : 37424
+[2025-11-24 02:34:39,316.316] Epoch No: 1, Global Step: 004677, Train Loss: 1.238, Val Loss: 1.203
+
+[2025-11-24 02:34:39,317.317] Total Tokens seen till now: 306261536
+
+[2025-11-24 02:34:39,812.812] Once upon a time, so scary. The lady stopped talking to the lady would often before the people in amaz questions and gave them to the world would bring the world around them needed the others to be sure that it so, and the children and the world who were kind person
+[2025-11-24 02:34:44,381.381] Gradient updated
+[2025-11-24 02:34:44,382.382] Current Learning Rate : 0.0006987924758975523
+[2025-11-24 02:34:44,382.382] Global Step : 4678
+[2025-11-24 02:34:44,382.382] Batch Index : 37432
+[2025-11-24 02:35:12,352.352] Epoch No: 1, Global Step: 004678, Train Loss: 1.232, Val Loss: 1.203
+
+[2025-11-24 02:35:12,353.353] Total Tokens seen till now: 306327072
+
+[2025-11-24 02:35:12,838.838] Once upon a time, and get up. One, the bird was very close down. The girl felt very proud before, she had to be nice toys. Then one of the star came back. And the that, they knew.After
+[2025-11-24 02:35:17,413.413] Gradient updated
+[2025-11-24 02:35:17,414.414] Current Learning Rate : 0.0006987424966532688
+[2025-11-24 02:35:17,414.414] Global Step : 4679
+[2025-11-24 02:35:17,414.414] Batch Index : 37440
+[2025-11-24 02:35:45,406.406] Epoch No: 1, Global Step: 004679, Train Loss: 1.212, Val Loss: 1.203
+
+[2025-11-24 02:35:45,407.407] Total Tokens seen till now: 306392608
+
+[2025-11-24 02:35:45,930.930] Once upon a time,pa and took as hard to succeed. With one big jump one last, a wave, they all the people cheered. In the crowd were very hard work they were all the amazing things they were so long way they said, one special things in everything
+[2025-11-24 02:35:50,520.520] Gradient updated
+[2025-11-24 02:35:50,521.521] Current Learning Rate : 0.0006986925070908877
+[2025-11-24 02:35:50,521.521] Global Step : 4680
+[2025-11-24 02:35:50,521.521] Batch Index : 37448
+[2025-11-24 02:36:18,516.516] Epoch No: 1, Global Step: 004680, Train Loss: 1.222, Val Loss: 1.203
+
+[2025-11-24 02:36:18,517.517] Total Tokens seen till now: 306458144
+
+[2025-11-24 02:36:19,014.014] Once upon a time, on wintered out, but not ever, the warnings could not disturb. The birds could make big, so small wings or a big, it brought. It was a beautiful noises and the warm weather, but this day after a while.
+[2025-11-24 02:36:23,580.580] Gradient updated
+[2025-11-24 02:36:23,581.581] Current Learning Rate : 0.0006986425072124025
+[2025-11-24 02:36:23,581.581] Global Step : 4681
+[2025-11-24 02:36:23,581.581] Batch Index : 37456
+[2025-11-24 02:36:51,572.572] Epoch No: 1, Global Step: 004681, Train Loss: 1.216, Val Loss: 1.203
+
+[2025-11-24 02:36:51,572.572] Total Tokens seen till now: 306523680
+
+[2025-11-24 02:36:52,069.069] Once upon a time, follow the right time.The girl asked the request her mom to close her mom: "The girl, she is too. You were curious to wait for to go to listen. It to play or that way to playtime. She was very
+[2025-11-24 02:36:56,643.643] Gradient updated
+[2025-11-24 02:36:56,643.643] Current Learning Rate : 0.000698592497019807
+[2025-11-24 02:36:56,644.644] Global Step : 4682
+[2025-11-24 02:36:56,644.644] Batch Index : 37464
+[2025-11-24 02:37:24,703.703] Epoch No: 1, Global Step: 004682, Train Loss: 1.239, Val Loss: 1.203
+
+[2025-11-24 02:37:24,704.704] Total Tokens seen till now: 306589216
+
+[2025-11-24 02:37:25,197.197] Once upon a time,., with a good staff. When they played the staff in many fun things to do. The staff liked it lots of things like "reverse, like this one day before they were the staff, all the children knew it belonged very well they could
+[2025-11-24 02:37:29,765.765] Gradient updated
+[2025-11-24 02:37:29,766.766] Current Learning Rate : 0.0006985424765150955
+[2025-11-24 02:37:29,766.766] Global Step : 4683
+[2025-11-24 02:37:29,766.766] Batch Index : 37472
+[2025-11-24 02:37:57,800.800] Epoch No: 1, Global Step: 004683, Train Loss: 1.236, Val Loss: 1.203
+
+[2025-11-24 02:37:57,801.801] Total Tokens seen till now: 306654752
+
+[2025-11-24 02:37:58,304.304] Once upon a time, on falling! The sky lit! The sun was shining and the trees were green and the birds were singing.The birds, and so good, and they all of the birds to dream. The birds and they were so exciting things were a
+[2025-11-24 02:38:02,881.881] Gradient updated
+[2025-11-24 02:38:02,882.882] Current Learning Rate : 0.0006984924457002628
+[2025-11-24 02:38:02,882.882] Global Step : 4684
+[2025-11-24 02:38:02,882.882] Batch Index : 37480
+[2025-11-24 02:38:30,913.913] Epoch No: 1, Global Step: 004684, Train Loss: 1.228, Val Loss: 1.202
+
+[2025-11-24 02:38:30,914.914] Total Tokens seen till now: 306720288
+
+[2025-11-24 02:38:32,159.159] BEST model SAVED on iteration 004684 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:38:32,649.649] Once upon a time, her day very for making. She wanted to show her mom her to put a big party over her mom allowed. She knew the perfect place. They were ready and they loved her on ready for her big hug.The big for taking good
+[2025-11-24 02:38:37,225.225] Gradient updated
+[2025-11-24 02:38:37,226.226] Current Learning Rate : 0.0006984424045773039
+[2025-11-24 02:38:37,226.226] Global Step : 4685
+[2025-11-24 02:38:37,226.226] Batch Index : 37488
+[2025-11-24 02:39:05,285.285] Epoch No: 1, Global Step: 004685, Train Loss: 1.226, Val Loss: 1.202
+
+[2025-11-24 02:39:05,285.285] Total Tokens seen till now: 306785824
+
+[2025-11-24 02:39:06,583.583] BEST model SAVED on iteration 004685 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:39:07,263.263] Once upon a time, bow them. hugs,"You can be the best!"Mommy told her it would be fun, and the little girl was delighted."Can I stay here so much, Mommy?" the mommy.The
+[2025-11-24 02:39:11,835.835] Gradient updated
+[2025-11-24 02:39:11,835.835] Current Learning Rate : 0.0006983923531482144
+[2025-11-24 02:39:11,836.836] Global Step : 4686
+[2025-11-24 02:39:11,836.836] Batch Index : 37496
+[2025-11-24 02:39:39,899.899] Epoch No: 1, Global Step: 004686, Train Loss: 1.234, Val Loss: 1.203
+
+[2025-11-24 02:39:39,900.900] Total Tokens seen till now: 306851360
+
+[2025-11-24 02:39:40,390.390] Once upon a time, his mom very blue things. The mom took the book, but the little girl named Amy's tricks things, but they could make her mom's job very much.One day, the little things that day. The next, the little girl
+[2025-11-24 02:39:44,959.959] Gradient updated
+[2025-11-24 02:39:44,960.960] Current Learning Rate : 0.0006983422914149904
+[2025-11-24 02:39:44,960.960] Global Step : 4687
+[2025-11-24 02:39:44,960.960] Batch Index : 37504
+[2025-11-24 02:40:13,031.031] Epoch No: 1, Global Step: 004687, Train Loss: 1.223, Val Loss: 1.203
+
+[2025-11-24 02:40:13,031.031] Total Tokens seen till now: 306916896
+
+[2025-11-24 02:40:13,523.523] Once upon a time, brave of using the help. She loved being a little fish and saving the little creatures of them.Every time. One day, she wanted to the sea.The little ones of the ocean and the little animals, but she knew
+[2025-11-24 02:40:18,092.092] Gradient updated
+[2025-11-24 02:40:18,092.092] Current Learning Rate : 0.000698292219379628
+[2025-11-24 02:40:18,092.092] Global Step : 4688
+[2025-11-24 02:40:18,093.093] Batch Index : 37512
+[2025-11-24 02:40:46,076.076] Epoch No: 1, Global Step: 004688, Train Loss: 1.226, Val Loss: 1.203
+
+[2025-11-24 02:40:46,077.077] Total Tokens seen till now: 306982304
+
+[2025-11-24 02:40:46,599.599] Once upon a time, with to everyone.After a while, the sky turned pink with a funny shapes appeared. She said hello upon the world with beautiful things she loved them all the world. One day, the creatures were excited words, which she noticed something special
+[2025-11-24 02:40:51,175.175] Gradient updated
+[2025-11-24 02:40:51,175.175] Current Learning Rate : 0.000698242137044124
+[2025-11-24 02:40:51,175.175] Global Step : 4689
+[2025-11-24 02:40:51,176.176] Batch Index : 37520
+[2025-11-24 02:41:19,289.289] Epoch No: 1, Global Step: 004689, Train Loss: 1.225, Val Loss: 1.203
+
+[2025-11-24 02:41:19,290.290] Total Tokens seen till now: 307047840
+
+[2025-11-24 02:41:19,783.783] Once upon a time, her friends in the way. They played and played together, and they had lots of fun games. One day on their favorite game. But one special day. All of their fun days.One night when they were happy, but they
+[2025-11-24 02:41:24,355.355] Gradient updated
+[2025-11-24 02:41:24,356.356] Current Learning Rate : 0.0006981920444104757
+[2025-11-24 02:41:24,356.356] Global Step : 4690
+[2025-11-24 02:41:24,356.356] Batch Index : 37528
+[2025-11-24 02:41:52,413.413] Epoch No: 1, Global Step: 004690, Train Loss: 1.222, Val Loss: 1.202
+
+[2025-11-24 02:41:52,414.414] Total Tokens seen till now: 307113376
+
+[2025-11-24 02:41:52,907.907] Once upon a time,! You mom was helping set the ground. She put a pot and said, "I can help you use it, and you can you use this to make a spoon?"Lily said, "Be careful, little things can!" and
+[2025-11-24 02:41:57,484.484] Gradient updated
+[2025-11-24 02:41:57,484.484] Current Learning Rate : 0.0006981419414806805
+[2025-11-24 02:41:57,485.485] Global Step : 4691
+[2025-11-24 02:41:57,485.485] Batch Index : 37536
+[2025-11-24 02:42:25,523.523] Epoch No: 1, Global Step: 004691, Train Loss: 1.233, Val Loss: 1.202
+
+[2025-11-24 02:42:25,523.523] Total Tokens seen till now: 307178912
+
+[2025-11-24 02:42:26,076.076] Once upon a time, with the day. The dragon was very excited and flew around, having fun in the sunshine. It was making friends with their own ways.Suddenly the sun coming anymore, the day a friend and each other very, until they were getting so
+[2025-11-24 02:42:30,656.656] Gradient updated
+[2025-11-24 02:42:30,656.656] Current Learning Rate : 0.0006980918282567367
+[2025-11-24 02:42:30,656.656] Global Step : 4692
+[2025-11-24 02:42:30,657.657] Batch Index : 37544
+[2025-11-24 02:42:58,637.637] Epoch No: 1, Global Step: 004692, Train Loss: 1.230, Val Loss: 1.202
+
+[2025-11-24 02:42:58,637.637] Total Tokens seen till now: 307244448
+
+[2025-11-24 02:42:59,126.126] Once upon a time, the take to the station.The station looked a little boy, but the boy with a mischie his mom. So them all the boy who were very quiet of their patient things that were in their own way. There was an answer, but
+[2025-11-24 02:43:03,709.709] Gradient updated
+[2025-11-24 02:43:03,709.709] Current Learning Rate : 0.0006980417047406425
+[2025-11-24 02:43:03,709.709] Global Step : 4693
+[2025-11-24 02:43:03,709.709] Batch Index : 37552
+[2025-11-24 02:43:31,702.702] Epoch No: 1, Global Step: 004693, Train Loss: 1.221, Val Loss: 1.201
+
+[2025-11-24 02:43:31,702.702] Total Tokens seen till now: 307309984
+
+[2025-11-24 02:43:32,891.891] BEST model SAVED on iteration 004693 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:43:33,375.375] Once upon a time, the going at the big, dark, and had a great day of trouble. The sun, and he was ready to do it, and everyone were happy animals loved them loved, but one day, until they knew that everyone went had a special one
+[2025-11-24 02:43:37,952.952] Gradient updated
+[2025-11-24 02:43:37,953.953] Current Learning Rate : 0.0006979915709343968
+[2025-11-24 02:43:37,953.953] Global Step : 4694
+[2025-11-24 02:43:37,953.953] Batch Index : 37560
+[2025-11-24 02:44:05,935.935] Epoch No: 1, Global Step: 004694, Train Loss: 1.219, Val Loss: 1.202
+
+[2025-11-24 02:44:05,935.935] Total Tokens seen till now: 307375520
+
+[2025-11-24 02:44:06,423.423] Once upon a time, her friends were playing in the park. He had a big box of matches, so he was very proud creatures. He wanted to help to make the sky so he was very happy. He was his mom.But then a little creatures
+[2025-11-24 02:44:11,007.007] Gradient updated
+[2025-11-24 02:44:11,007.007] Current Learning Rate : 0.0006979414268399987
+[2025-11-24 02:44:11,007.007] Global Step : 4695
+[2025-11-24 02:44:11,008.008] Batch Index : 37568
+[2025-11-24 02:44:39,136.136] Epoch No: 1, Global Step: 004695, Train Loss: 1.208, Val Loss: 1.202
+
+[2025-11-24 02:44:39,137.137] Total Tokens seen till now: 307441056
+
+[2025-11-24 02:44:39,637.637] Once upon a time, they real princess dragons.â€œToday!â€ said the princess before setting off they decided to go on her way.She said, â€œI dare you can. â€
+[2025-11-24 02:44:44,212.212] Gradient updated
+[2025-11-24 02:44:44,214.214] Current Learning Rate : 0.0006978912724594479
+[2025-11-24 02:44:44,215.215] Global Step : 4696
+[2025-11-24 02:44:44,215.215] Batch Index : 37576
+[2025-11-24 02:45:12,203.203] Epoch No: 1, Global Step: 004696, Train Loss: 1.223, Val Loss: 1.203
+
+[2025-11-24 02:45:12,203.203] Total Tokens seen till now: 307506592
+
+[2025-11-24 02:45:12,691.691] Once upon a time, hats at. She had a lot of fun in her club."I can make things right," she said to her mom.Lily's mom. She was so excitedly went to play with her special glue to fit in one day
+[2025-11-24 02:45:17,276.276] Gradient updated
+[2025-11-24 02:45:17,279.279] Current Learning Rate : 0.0006978411077947444
+[2025-11-24 02:45:17,279.279] Global Step : 4697
+[2025-11-24 02:45:17,279.279] Batch Index : 37584
+[2025-11-24 02:45:45,319.319] Epoch No: 1, Global Step: 004697, Train Loss: 1.225, Val Loss: 1.204
+
+[2025-11-24 02:45:45,320.320] Total Tokens seen till now: 307572128
+
+[2025-11-24 02:45:45,802.802] Once upon a time, her to be the judge."Why is you have to be very successful!" said a big '," after 'dog!""What is your goal," said a big kids in my big brother's when she always there his sister
+[2025-11-24 02:45:50,382.382] Gradient updated
+[2025-11-24 02:45:50,384.384] Current Learning Rate : 0.0006977909328478889
+[2025-11-24 02:45:50,384.384] Global Step : 4698
+[2025-11-24 02:45:50,384.384] Batch Index : 37592
+[2025-11-24 02:46:18,325.325] Epoch No: 1, Global Step: 004698, Train Loss: 1.236, Val Loss: 1.205
+
+[2025-11-24 02:46:18,325.325] Total Tokens seen till now: 307637664
+
+[2025-11-24 02:46:18,819.819] Once upon a time, on z airport going down any. One of this particular they could be with very dangerous things.They started in each, until one day as soon, they were very special ideas, they decided to have the special things that she's they should
+[2025-11-24 02:46:23,398.398] Gradient updated
+[2025-11-24 02:46:23,399.399] Current Learning Rate : 0.000697740747620882
+[2025-11-24 02:46:23,399.399] Global Step : 4699
+[2025-11-24 02:46:23,399.399] Batch Index : 37600
+[2025-11-24 02:46:51,404.404] Epoch No: 1, Global Step: 004699, Train Loss: 1.218, Val Loss: 1.205
+
+[2025-11-24 02:46:51,404.404] Total Tokens seen till now: 307703200
+
+[2025-11-24 02:46:51,902.902] Once upon a time,, with a warm breeze in his hair."I want to be the wind!" he was about the sky, so many, so of he knew it as high-up things." of that, their friends.
+[2025-11-24 02:46:56,481.481] Gradient updated
+[2025-11-24 02:46:56,481.481] Current Learning Rate : 0.0006976905521157252
+[2025-11-24 02:46:56,481.481] Global Step : 4700
+[2025-11-24 02:46:56,481.481] Batch Index : 37608
+[2025-11-24 02:47:24,579.579] Epoch No: 1, Global Step: 004700, Train Loss: 1.228, Val Loss: 1.203
+
+[2025-11-24 02:47:24,579.579] Total Tokens seen till now: 307768736
+
+[2025-11-24 02:47:25,069.069] Once upon a time, soter what her mommy gave her a y. She took her mommy's hand and gave her a big hug so she brought it with her a big hug. The otter's mommy then took it from her a special place. It
+[2025-11-24 02:47:29,635.635] Gradient updated
+[2025-11-24 02:47:29,638.638] Current Learning Rate : 0.0006976403463344199
+[2025-11-24 02:47:29,638.638] Global Step : 4701
+[2025-11-24 02:47:29,638.638] Batch Index : 37616
+[2025-11-24 02:47:57,645.645] Epoch No: 1, Global Step: 004701, Train Loss: 1.235, Val Loss: 1.202
+
+[2025-11-24 02:47:57,645.645] Total Tokens seen till now: 307834272
+
+[2025-11-24 02:47:58,132.132] Once upon a time, looking, about the most for details.One day, the most special items of the next time ever happened, and her mom couldnâ€ of her dad was a great, the world. The only grown-and-up them could before,
+[2025-11-24 02:48:02,711.711] Gradient updated
+[2025-11-24 02:48:02,711.711] Current Learning Rate : 0.0006975901302789685
+[2025-11-24 02:48:02,711.711] Global Step : 4702
+[2025-11-24 02:48:02,711.711] Batch Index : 37624
+[2025-11-24 02:48:30,643.643] Epoch No: 1, Global Step: 004702, Train Loss: 1.221, Val Loss: 1.202
+
+[2025-11-24 02:48:30,643.643] Total Tokens seen till now: 307899808
+
+[2025-11-24 02:48:31,228.228] Once upon a time,The year.: listen and don you won!"The fish and birds were happy in their eyes.The children knew to join them was getting out in order. So they were trying to her body, she
+[2025-11-24 02:48:35,803.803] Gradient updated
+[2025-11-24 02:48:35,803.803] Current Learning Rate : 0.0006975399039513733
+[2025-11-24 02:48:35,803.803] Global Step : 4703
+[2025-11-24 02:48:35,803.803] Batch Index : 37632
+[2025-11-24 02:49:03,819.819] Epoch No: 1, Global Step: 004703, Train Loss: 1.215, Val Loss: 1.204
+
+[2025-11-24 02:49:03,820.820] Total Tokens seen till now: 307965344
+
+[2025-11-24 02:49:04,304.304] Once upon a time, but, she would in the most brilliant way.One cold season, he was about the morning. A special thing to him was about being very long and his name.He wanted to go outside and do as the morning, the sun,
+[2025-11-24 02:49:08,877.877] Gradient updated
+[2025-11-24 02:49:08,878.878] Current Learning Rate : 0.0006974896673536373
+[2025-11-24 02:49:08,878.878] Global Step : 4704
+[2025-11-24 02:49:08,878.878] Batch Index : 37640
+[2025-11-24 02:49:36,796.796] Epoch No: 1, Global Step: 004704, Train Loss: 1.226, Val Loss: 1.205
+
+[2025-11-24 02:49:36,797.797] Total Tokens seen till now: 308030880
+
+[2025-11-24 02:49:37,280.280] Once upon a time,. to come back. The sky was blue and the sun was shining. The sky was blue and the sky. It was a good place to stop at the sun.The next light, when the light was light. It was blue.
+[2025-11-24 02:49:41,862.862] Gradient updated
+[2025-11-24 02:49:41,863.863] Current Learning Rate : 0.0006974394204877638
+[2025-11-24 02:49:41,863.863] Global Step : 4705
+[2025-11-24 02:49:41,863.863] Batch Index : 37648
+[2025-11-24 02:50:09,922.922] Epoch No: 1, Global Step: 004705, Train Loss: 1.227, Val Loss: 1.203
+
+[2025-11-24 02:50:09,923.923] Total Tokens seen till now: 308096416
+
+[2025-11-24 02:50:10,424.424] Once upon a time, on the.Suddenly, the lake was very deep. The fish needed to stay warm and safe in the ocean. The water was wet rocks were small fish.The fish needed help with a kind of that it was part. The other
+[2025-11-24 02:50:15,000.000] Gradient updated
+[2025-11-24 02:50:15,001.001] Current Learning Rate : 0.0006973891633557566
+[2025-11-24 02:50:15,001.001] Global Step : 4706
+[2025-11-24 02:50:15,001.001] Batch Index : 37656
+[2025-11-24 02:50:42,953.953] Epoch No: 1, Global Step: 004706, Train Loss: 1.237, Val Loss: 1.202
+
+[2025-11-24 02:50:42,954.954] Total Tokens seen till now: 308161952
+
+[2025-11-24 02:50:43,440.440] Once upon a time, right, and said every had been kind to them. He was always very wise and kind.One day, the sky of the sun and the stars began to be thankful.The sky to see was blue for breakfast, and started to
+[2025-11-24 02:50:48,016.016] Gradient updated
+[2025-11-24 02:50:48,017.017] Current Learning Rate : 0.0006973388959596198
+[2025-11-24 02:50:48,017.017] Global Step : 4707
+[2025-11-24 02:50:48,017.017] Batch Index : 37664
+[2025-11-24 02:51:15,996.996] Epoch No: 1, Global Step: 004707, Train Loss: 1.216, Val Loss: 1.204
+
+[2025-11-24 02:51:15,996.996] Total Tokens seen till now: 308227488
+
+[2025-11-24 02:51:16,483.483] Once upon a time, after their home. The store started the light and the shiny spark were filled with joy. Everyone was so soon they began making funny noises.First, they were in a special moment of what the heat. But soon of that they were having
+[2025-11-24 02:51:21,055.055] Gradient updated
+[2025-11-24 02:51:21,056.056] Current Learning Rate : 0.000697288618301358
+[2025-11-24 02:51:21,056.056] Global Step : 4708
+[2025-11-24 02:51:21,056.056] Batch Index : 37672
+[2025-11-24 02:51:49,048.048] Epoch No: 1, Global Step: 004708, Train Loss: 1.208, Val Loss: 1.205
+
+[2025-11-24 02:51:49,048.048] Total Tokens seen till now: 308293024
+
+[2025-11-24 02:51:49,537.537] Once upon a time, right z their hands!! They wanted to go to the park, so they were ready to go to the park. All they were ready for a long and decided to their way. They found a few more and the things they started
+[2025-11-24 02:51:54,108.108] Gradient updated
+[2025-11-24 02:51:54,109.109] Current Learning Rate : 0.0006972383303829762
+[2025-11-24 02:51:54,109.109] Global Step : 4709
+[2025-11-24 02:51:54,109.109] Batch Index : 37680
+[2025-11-24 02:52:22,061.061] Epoch No: 1, Global Step: 004709, Train Loss: 1.226, Val Loss: 1.203
+
+[2025-11-24 02:52:22,062.062] Total Tokens seen till now: 308358560
+
+[2025-11-24 02:52:22,551.551] Once upon a time, though the world around them. She saw that each of the clouds were blue, one. She wanted to know that, so she decided to try. She started running as fast as she could. As she jumped up in the sky, so she was
+[2025-11-24 02:52:27,125.125] Gradient updated
+[2025-11-24 02:52:27,126.126] Current Learning Rate : 0.0006971880322064795
+[2025-11-24 02:52:27,127.127] Global Step : 4710
+[2025-11-24 02:52:27,127.127] Batch Index : 37688
+[2025-11-24 02:52:55,068.068] Epoch No: 1, Global Step: 004710, Train Loss: 1.215, Val Loss: 1.203
+
+[2025-11-24 02:52:55,069.069] Total Tokens seen till now: 308424096
+
+[2025-11-24 02:52:55,548.548] Once upon a time, life.?" She took out the sun.Mum put the other things would happen. Then a few days went on. They had fun. Everyone in the. They liked. Then, a big dog wanted
+[2025-11-24 02:53:00,131.131] Gradient updated
+[2025-11-24 02:53:00,132.132] Current Learning Rate : 0.0006971377237738741
+[2025-11-24 02:53:00,132.132] Global Step : 4711
+[2025-11-24 02:53:00,132.132] Batch Index : 37696
+[2025-11-24 02:53:28,134.134] Epoch No: 1, Global Step: 004711, Train Loss: 1.220, Val Loss: 1.202
+
+[2025-11-24 02:53:28,135.135] Total Tokens seen till now: 308489632
+
+[2025-11-24 02:53:28,624.624] Once upon a time, were..The children had to go to the park.Mom told the park, like fun. They loved to see birds. They could see them fast things to a few more. They could see was very fast.When
+[2025-11-24 02:53:33,192.192] Gradient updated
+[2025-11-24 02:53:33,195.195] Current Learning Rate : 0.0006970874050871658
+[2025-11-24 02:53:33,195.195] Global Step : 4712
+[2025-11-24 02:53:33,195.195] Batch Index : 37704
+[2025-11-24 02:54:01,219.219] Epoch No: 1, Global Step: 004712, Train Loss: 1.217, Val Loss: 1.203
+
+[2025-11-24 02:54:01,220.220] Total Tokens seen till now: 308555168
+
+[2025-11-24 02:54:01,713.713] Once upon a time, where, this magical magic the day could make magic come out of the earth. When the boy went on a trip and was ready to play with his friends.The magical magical magic magical powers spread the magic wand on all the sky. It
+[2025-11-24 02:54:06,302.302] Gradient updated
+[2025-11-24 02:54:06,302.302] Current Learning Rate : 0.0006970370761483614
+[2025-11-24 02:54:06,302.302] Global Step : 4713
+[2025-11-24 02:54:06,302.302] Batch Index : 37712
+[2025-11-24 02:54:34,350.350] Epoch No: 1, Global Step: 004713, Train Loss: 1.212, Val Loss: 1.202
+
+[2025-11-24 02:54:34,351.351] Total Tokens seen till now: 308620704
+
+[2025-11-24 02:54:34,837.837] Once upon a time, her! branch."Can you grab my hand?" she requested."Of course!" her mom said. "Be careful, it's what you're here. She has lots of healthy snacks like this.""Yes of
+[2025-11-24 02:54:39,411.411] Gradient updated
+[2025-11-24 02:54:39,412.412] Current Learning Rate : 0.000696986736959468
+[2025-11-24 02:54:39,412.412] Global Step : 4714
+[2025-11-24 02:54:39,412.412] Batch Index : 37720
+[2025-11-24 02:55:07,369.369] Epoch No: 1, Global Step: 004714, Train Loss: 1.227, Val Loss: 1.201
+
+[2025-11-24 02:55:07,370.370] Total Tokens seen till now: 308686240
+
+[2025-11-24 02:55:14,396.396] BEST model SAVED on iteration 004714 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 02:55:14,900.900] Once upon a time,,, he knew the world, the most way, he could do things. Sometimes, when he wanted, he was happy faces.One day, he would, he were in he was patient. He was very good friends were very close
+[2025-11-24 02:55:19,461.461] Gradient updated
+[2025-11-24 02:55:19,462.462] Current Learning Rate : 0.0006969363875224928
+[2025-11-24 02:55:19,462.462] Global Step : 4715
+[2025-11-24 02:55:19,462.462] Batch Index : 37728
+[2025-11-24 02:55:47,526.526] Epoch No: 1, Global Step: 004715, Train Loss: 1.232, Val Loss: 1.202
+
+[2025-11-24 02:55:47,527.527] Total Tokens seen till now: 308751776
+
+[2025-11-24 02:55:48,016.016] Once upon a time, after it patient." Her mom, who knew: she had a little pink cookie, but she knew she had a dream that came. One day, she picked it and took her mom, so patient."Goodnight, little girl."
+[2025-11-24 02:55:52,589.589] Gradient updated
+[2025-11-24 02:55:52,592.592] Current Learning Rate : 0.0006968860278394438
+[2025-11-24 02:55:52,593.593] Global Step : 4716
+[2025-11-24 02:55:52,593.593] Batch Index : 37736
+[2025-11-24 02:56:20,605.605] Epoch No: 1, Global Step: 004716, Train Loss: 1.236, Val Loss: 1.202
+
+[2025-11-24 02:56:20,606.606] Total Tokens seen till now: 308817312
+
+[2025-11-24 02:56:21,172.172] Once upon a time, playing with the floor?" the piano radio. She wanted to do the same, so she asked her mom. Her mom smiled and told the little girl was the best friend, who was helping. She wanted to be the same thing, so she was
+[2025-11-24 02:56:25,743.743] Gradient updated
+[2025-11-24 02:56:25,744.744] Current Learning Rate : 0.0006968356579123292
+[2025-11-24 02:56:25,744.744] Global Step : 4717
+[2025-11-24 02:56:25,744.744] Batch Index : 37744
+[2025-11-24 02:56:53,756.756] Epoch No: 1, Global Step: 004717, Train Loss: 1.218, Val Loss: 1.202
+
+[2025-11-24 02:56:53,757.757] Total Tokens seen till now: 308882848
+
+[2025-11-24 02:56:54,245.245] Once upon a time, to the hand. The sun: the weather. They wanted to stay in their hearts's stories of the weather: "I will find food, little stars, and sometimes I love them!"The little ones in warm and the weather, and
+[2025-11-24 02:56:58,817.817] Gradient updated
+[2025-11-24 02:56:58,819.819] Current Learning Rate : 0.0006967852777431576
+[2025-11-24 02:56:58,819.819] Global Step : 4718
+[2025-11-24 02:56:58,820.820] Batch Index : 37752
+[2025-11-24 02:57:26,863.863] Epoch No: 1, Global Step: 004718, Train Loss: 1.220, Val Loss: 1.202
+
+[2025-11-24 02:57:26,864.864] Total Tokens seen till now: 308948384
+
+[2025-11-24 02:57:27,352.352] Once upon a time, and out the ceiling," she looked out the window. Suddenly, the window was filled before dark light and saw beautiful glowing light, glowing light. She could see what would happen into a flash. She watched as she lit it slowly disappeared.
+[2025-11-24 02:57:31,925.925] Gradient updated
+[2025-11-24 02:57:31,926.926] Current Learning Rate : 0.0006967348873339381
+[2025-11-24 02:57:31,926.926] Global Step : 4719
+[2025-11-24 02:57:31,926.926] Batch Index : 37760
+[2025-11-24 02:58:00,009.009] Epoch No: 1, Global Step: 004719, Train Loss: 1.219, Val Loss: 1.201
+
+[2025-11-24 02:58:00,010.010] Total Tokens seen till now: 309013920
+
+[2025-11-24 02:58:00,492.492] Once upon a time,, and with the help.The other kids in the world was always looking out for something that was available. He wanted to fly to fly and bring them a special gifts. But the world he was very happy creatures.The children knew
+[2025-11-24 02:58:05,062.062] Gradient updated
+[2025-11-24 02:58:05,062.062] Current Learning Rate : 0.0006966844866866801
+[2025-11-24 02:58:05,062.062] Global Step : 4720
+[2025-11-24 02:58:05,062.062] Batch Index : 37768
+[2025-11-24 02:58:33,026.026] Epoch No: 1, Global Step: 004720, Train Loss: 1.214, Val Loss: 1.202
+
+[2025-11-24 02:58:33,027.027] Total Tokens seen till now: 309079456
+
+[2025-11-24 02:58:33,507.507] Once upon a time, forward. But the girl had a cold head. She was going to bed, but she had to have a nightmare.The girl wanted to sleep and then. The cold, as she had one day. She was very tiredness. Her
+[2025-11-24 02:58:38,082.082] Gradient updated
+[2025-11-24 02:58:38,085.085] Current Learning Rate : 0.0006966340758033935
+[2025-11-24 02:58:38,085.085] Global Step : 4721
+[2025-11-24 02:58:38,085.085] Batch Index : 37776
+[2025-11-24 02:59:06,035.035] Epoch No: 1, Global Step: 004721, Train Loss: 1.221, Val Loss: 1.202
+
+[2025-11-24 02:59:06,036.036] Total Tokens seen till now: 309144992
+
+[2025-11-24 02:59:06,516.516] Once upon a time, after her special blanket. Every, there was another white sheet.The sheet, the sheet, and they could do it. The sheet were happy shapes and the sheet, but the sheet to be very.The sheet were bored,
+[2025-11-24 02:59:11,096.096] Gradient updated
+[2025-11-24 02:59:11,096.096] Current Learning Rate : 0.0006965836546860887
+[2025-11-24 02:59:11,096.096] Global Step : 4722
+[2025-11-24 02:59:11,096.096] Batch Index : 37784
+[2025-11-24 02:59:39,121.121] Epoch No: 1, Global Step: 004722, Train Loss: 1.222, Val Loss: 1.203
+
+[2025-11-24 02:59:39,122.122] Total Tokens seen till now: 309210528
+
+[2025-11-24 02:59:39,608.608] Once upon a time, for a big pot.?" asked Tom say he had to go to happen to take her nose-to down on."Mommy's done. She was watching from her face and a patient?" about being patient.Then she
+[2025-11-24 02:59:44,179.179] Gradient updated
+[2025-11-24 02:59:44,179.179] Current Learning Rate : 0.0006965332233367762
+[2025-11-24 02:59:44,179.179] Global Step : 4723
+[2025-11-24 02:59:44,179.179] Batch Index : 37792
+[2025-11-24 03:00:12,153.153] Epoch No: 1, Global Step: 004723, Train Loss: 1.223, Val Loss: 1.203
+
+[2025-11-24 03:00:12,153.153] Total Tokens seen till now: 309276064
+
+[2025-11-24 03:00:12,640.640] Once upon a time, hats every - this way - her special toy, a delicate, blue cube.One day, the little girl named Mia was playing in the same time, and when he was a point at it would. She wondered if it, but she
+[2025-11-24 03:00:17,207.207] Gradient updated
+[2025-11-24 03:00:17,208.208] Current Learning Rate : 0.0006964827817574671
+[2025-11-24 03:00:17,208.208] Global Step : 4724
+[2025-11-24 03:00:17,208.208] Batch Index : 37800
+[2025-11-24 03:00:45,169.169] Epoch No: 1, Global Step: 004724, Train Loss: 1.232, Val Loss: 1.203
+
+[2025-11-24 03:00:45,170.170] Total Tokens seen till now: 309341600
+
+[2025-11-24 03:00:45,661.661] Once upon a time, the water when the time. The sun was hot but the animals were not scared. One day, the animals decided that the sun before they were out for any. The sky and had to go the right time and the sun.The sun
+[2025-11-24 03:00:50,230.230] Gradient updated
+[2025-11-24 03:00:50,231.231] Current Learning Rate : 0.000696432329950173
+[2025-11-24 03:00:50,231.231] Global Step : 4725
+[2025-11-24 03:00:50,231.231] Batch Index : 37808
+[2025-11-24 03:01:18,203.203] Epoch No: 1, Global Step: 004725, Train Loss: 1.229, Val Loss: 1.202
+
+[2025-11-24 03:01:18,204.204] Total Tokens seen till now: 309407136
+
+[2025-11-24 03:01:18,244.244] Once upon a time, ever things.
+[2025-11-24 03:01:22,820.820] Gradient updated
+[2025-11-24 03:01:22,821.821] Current Learning Rate : 0.0006963818679169058
+[2025-11-24 03:01:22,821.821] Global Step : 4726
+[2025-11-24 03:01:22,821.821] Batch Index : 37816
+[2025-11-24 03:01:50,815.815] Epoch No: 1, Global Step: 004726, Train Loss: 1.224, Val Loss: 1.203
+
+[2025-11-24 03:01:50,815.815] Total Tokens seen till now: 309472672
+
+[2025-11-24 03:01:51,295.295] Once upon a time, the top his own-shaped. He looked at the sky with love. He loved the feeling of the sun!One day, he could not too long, so they were going out. The next year to the sun, the
+[2025-11-24 03:01:55,859.859] Gradient updated
+[2025-11-24 03:01:55,859.859] Current Learning Rate : 0.0006963313956596779
+[2025-11-24 03:01:55,859.859] Global Step : 4727
+[2025-11-24 03:01:55,859.859] Batch Index : 37824
+[2025-11-24 03:02:23,897.897] Epoch No: 1, Global Step: 004727, Train Loss: 1.223, Val Loss: 1.203
+
+[2025-11-24 03:02:23,898.898] Total Tokens seen till now: 309538208
+
+[2025-11-24 03:02:24,277.277] Once upon a time,.  and hugged each other. They were having a good time.One of them: "You!" The mom gave you need."The little prayer of them smiled at.
+[2025-11-24 03:02:28,839.839] Gradient updated
+[2025-11-24 03:02:28,839.839] Current Learning Rate : 0.0006962809131805018
+[2025-11-24 03:02:28,840.840] Global Step : 4728
+[2025-11-24 03:02:28,840.840] Batch Index : 37832
+[2025-11-24 03:02:56,855.855] Epoch No: 1, Global Step: 004728, Train Loss: 1.219, Val Loss: 1.203
+
+[2025-11-24 03:02:56,855.855] Total Tokens seen till now: 309603744
+
+[2025-11-24 03:02:57,337.337] Once upon a time,, and then the bright sun shone on them. His favorite to watch. The bright sun shone made a bright.The heat shone made the birds were content, while birds sang and flew around the sun shone. The flowers
+[2025-11-24 03:03:01,910.910] Gradient updated
+[2025-11-24 03:03:01,911.911] Current Learning Rate : 0.0006962304204813906
+[2025-11-24 03:03:01,911.911] Global Step : 4729
+[2025-11-24 03:03:01,911.911] Batch Index : 37840
+[2025-11-24 03:03:29,901.901] Epoch No: 1, Global Step: 004729, Train Loss: 1.228, Val Loss: 1.202
+
+[2025-11-24 03:03:29,901.901] Total Tokens seen till now: 309669280
+
+[2025-11-24 03:03:30,381.381] Once upon a time, their, and they felt warm inside every moment.Mum was making the baby. "It's a new pair of pants!" she said, as soon enough.The baby were excited, until, the baby. Then, the
+[2025-11-24 03:03:34,951.951] Gradient updated
+[2025-11-24 03:03:34,952.952] Current Learning Rate : 0.0006961799175643583
+[2025-11-24 03:03:34,952.952] Global Step : 4730
+[2025-11-24 03:03:34,952.952] Batch Index : 37848
+[2025-11-24 03:04:02,936.936] Epoch No: 1, Global Step: 004730, Train Loss: 1.216, Val Loss: 1.201
+
+[2025-11-24 03:04:02,937.937] Total Tokens seen till now: 309734816
+
+[2025-11-24 03:04:03,421.421] Once upon a time, their hands.The pet was purple, with long, white fur. They were happy to be outside.One day, the pet cat was very naughty children: he wanted to play. He ran and jumping around. He seemed to touch
+[2025-11-24 03:04:07,993.993] Gradient updated
+[2025-11-24 03:04:07,994.994] Current Learning Rate : 0.0006961294044314183
+[2025-11-24 03:04:07,994.994] Global Step : 4731
+[2025-11-24 03:04:07,994.994] Batch Index : 37856
+[2025-11-24 03:04:35,952.952] Epoch No: 1, Global Step: 004731, Train Loss: 1.238, Val Loss: 1.201
+
+[2025-11-24 03:04:35,953.953] Total Tokens seen till now: 309800352
+
+[2025-11-24 03:04:37,294.294] BEST model SAVED on iteration 004731 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:04:37,786.786] Once upon a time, with the lady she is visiting them. The elderly one end of them each other. They were so much with their mom of the large to the animals. The animals in huge! Every time the little, soon one day
+[2025-11-24 03:04:42,373.373] Gradient updated
+[2025-11-24 03:04:42,373.373] Current Learning Rate : 0.0006960788810845854
+[2025-11-24 03:04:42,374.374] Global Step : 4732
+[2025-11-24 03:04:42,374.374] Batch Index : 37864
+[2025-11-24 03:05:10,468.468] Epoch No: 1, Global Step: 004732, Train Loss: 1.220, Val Loss: 1.201
+
+[2025-11-24 03:05:10,468.468] Total Tokens seen till now: 309865888
+
+[2025-11-24 03:05:11,862.862] BEST model SAVED on iteration 004732 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:05:12,516.516] Once upon a time, Lily off her beautiful pink lily."The pink lily lily, so she had to show her owner her little girl her how to be so good. Her friend she would be a reward and she had lots of.But the
+[2025-11-24 03:05:17,078.078] Gradient updated
+[2025-11-24 03:05:17,079.079] Current Learning Rate : 0.0006960283475258741
+[2025-11-24 03:05:17,079.079] Global Step : 4733
+[2025-11-24 03:05:17,079.079] Batch Index : 37872
+[2025-11-24 03:05:45,160.160] Epoch No: 1, Global Step: 004733, Train Loss: 1.217, Val Loss: 1.201
+
+[2025-11-24 03:05:45,160.160] Total Tokens seen till now: 309931424
+
+[2025-11-24 03:05:46,567.567] BEST model SAVED on iteration 004733 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:05:47,221.221] Once upon a time, " every things for a few more than to be a pet dog. The dog seemed to get to be sleeping after the bird's rest or he won a lot. He is very tired for a lot. But he can take care of love and make
+[2025-11-24 03:05:51,798.798] Gradient updated
+[2025-11-24 03:05:51,800.800] Current Learning Rate : 0.0006959778037572996
+[2025-11-24 03:05:51,800.800] Global Step : 4734
+[2025-11-24 03:05:51,800.800] Batch Index : 37880
+[2025-11-24 03:06:19,881.881] Epoch No: 1, Global Step: 004734, Train Loss: 1.215, Val Loss: 1.201
+
+[2025-11-24 03:06:19,882.882] Total Tokens seen till now: 309996960
+
+[2025-11-24 03:06:20,364.364] Once upon a time, to go now. The elderly elderly end of his visit was happy, with big adventures he never forget. But the old part of his best to make others.One day he decided that, the new things he found that way it, but
+[2025-11-24 03:06:24,928.928] Gradient updated
+[2025-11-24 03:06:24,930.930] Current Learning Rate : 0.0006959272497808775
+[2025-11-24 03:06:24,930.930] Global Step : 4735
+[2025-11-24 03:06:24,930.930] Batch Index : 37888
+[2025-11-24 03:06:53,044.044] Epoch No: 1, Global Step: 004735, Train Loss: 1.208, Val Loss: 1.201
+
+[2025-11-24 03:06:53,045.045] Total Tokens seen till now: 310062496
+
+[2025-11-24 03:06:53,535.535] Once upon a time, their new purple things were waiting to."Let's mix the rainbow!" they said."First, the"Next, there was then they started ones as a lot of their little ones with a big, they were very special
+[2025-11-24 03:06:58,106.106] Gradient updated
+[2025-11-24 03:06:58,107.107] Current Learning Rate : 0.0006958766855986239
+[2025-11-24 03:06:58,107.107] Global Step : 4736
+[2025-11-24 03:06:58,107.107] Batch Index : 37896
+[2025-11-24 03:07:26,158.158] Epoch No: 1, Global Step: 004736, Train Loss: 1.236, Val Loss: 1.202
+
+[2025-11-24 03:07:26,159.159] Total Tokens seen till now: 310128032
+
+[2025-11-24 03:07:26,642.642] Once upon a time, the she decided what was right. She looked in her closet, sootinsed the morning a moment. It had a small holes were white and wanted to do that they. The little fish a big one, mom. She called
+[2025-11-24 03:07:31,211.211] Gradient updated
+[2025-11-24 03:07:31,211.211] Current Learning Rate : 0.0006958261112125549
+[2025-11-24 03:07:31,211.211] Global Step : 4737
+[2025-11-24 03:07:31,211.211] Batch Index : 37904
+[2025-11-24 03:07:59,318.318] Epoch No: 1, Global Step: 004737, Train Loss: 1.231, Val Loss: 1.201
+
+[2025-11-24 03:07:59,319.319] Total Tokens seen till now: 310193568
+
+[2025-11-24 03:07:59,808.808] Once upon a time,., from home. But before the sun set, the weather was setting. It was time to go to start, the wind started to start. The sky was bright colors filled with colors, the birds were still. The children were
+[2025-11-24 03:08:04,384.384] Gradient updated
+[2025-11-24 03:08:04,385.385] Current Learning Rate : 0.0006957755266246876
+[2025-11-24 03:08:04,385.385] Global Step : 4738
+[2025-11-24 03:08:04,385.385] Batch Index : 37912
+[2025-11-24 03:08:32,418.418] Epoch No: 1, Global Step: 004738, Train Loss: 1.216, Val Loss: 1.201
+
+[2025-11-24 03:08:32,419.419] Total Tokens seen till now: 310259104
+
+[2025-11-24 03:08:32,910.910] Once upon a time, but with her mom's clothes. She had a big bag that she held with her. She also had each step to her little brother, Tom, who had a toy.Tom saw her dolls, and she did not touch them. Tom
+[2025-11-24 03:08:37,482.482] Gradient updated
+[2025-11-24 03:08:37,483.483] Current Learning Rate : 0.0006957249318370391
+[2025-11-24 03:08:37,483.483] Global Step : 4739
+[2025-11-24 03:08:37,483.483] Batch Index : 37920
+[2025-11-24 03:09:05,524.524] Epoch No: 1, Global Step: 004739, Train Loss: 1.230, Val Loss: 1.202
+
+[2025-11-24 03:09:05,524.524] Total Tokens seen till now: 310324640
+
+[2025-11-24 03:09:06,066.066] Once upon a time, the world, to protect the things that were used for them. One day, he decided to go exploring the world, he was trying, so long ago, however, he had found himself that the world he made it to find.Suddenly
+[2025-11-24 03:09:10,641.641] Gradient updated
+[2025-11-24 03:09:10,642.642] Current Learning Rate : 0.000695674326851627
+[2025-11-24 03:09:10,642.642] Global Step : 4740
+[2025-11-24 03:09:10,642.642] Batch Index : 37928
+[2025-11-24 03:09:38,621.621] Epoch No: 1, Global Step: 004740, Train Loss: 1.217, Val Loss: 1.202
+
+[2025-11-24 03:09:38,621.621] Total Tokens seen till now: 310390176
+
+[2025-11-24 03:09:39,107.107] Once upon a time, themselves the big tree. The birds in the sky came, they were scared of living on the other trees. They wanted to find food at the pond, so they were in a baby birds wanted to join the birds. They had to take some food
+[2025-11-24 03:09:43,677.677] Gradient updated
+[2025-11-24 03:09:43,678.678] Current Learning Rate : 0.0006956237116704693
+[2025-11-24 03:09:43,678.678] Global Step : 4741
+[2025-11-24 03:09:43,678.678] Batch Index : 37936
+[2025-11-24 03:10:11,686.686] Epoch No: 1, Global Step: 004741, Train Loss: 1.215, Val Loss: 1.202
+
+[2025-11-24 03:10:11,687.687] Total Tokens seen till now: 310455712
+
+[2025-11-24 03:10:12,175.175] Once upon a time,: close." Mommy said, "Be very pretty!" She put her in a big white sheet she could be very serious time.Mommy would come back. She said, "You need to check before, "Be very serious."
+[2025-11-24 03:10:16,748.748] Gradient updated
+[2025-11-24 03:10:16,749.749] Current Learning Rate : 0.0006955730862955844
+[2025-11-24 03:10:16,749.749] Global Step : 4742
+[2025-11-24 03:10:16,749.749] Batch Index : 37944
+[2025-11-24 03:10:44,797.797] Epoch No: 1, Global Step: 004742, Train Loss: 1.227, Val Loss: 1.201
+
+[2025-11-24 03:10:44,798.798] Total Tokens seen till now: 310521248
+
+[2025-11-24 03:10:45,287.287] Once upon a time,. She were the most amazing thing around them had ever seen. The only one to worry.One point her prayer. She had big muscles were small pieces that were so excited to beep-working eye.The little children had
+[2025-11-24 03:10:49,863.863] Gradient updated
+[2025-11-24 03:10:49,864.864] Current Learning Rate : 0.0006955224507289912
+[2025-11-24 03:10:49,864.864] Global Step : 4743
+[2025-11-24 03:10:49,864.864] Batch Index : 37952
+[2025-11-24 03:11:17,871.871] Epoch No: 1, Global Step: 004743, Train Loss: 1.236, Val Loss: 1.201
+
+[2025-11-24 03:11:17,872.872] Total Tokens seen till now: 310586784
+
+[2025-11-24 03:11:18,366.366] Once upon a time, helping the dishes.The workers knew how to keep the dishes the dish ready. They were the dishwasher helped to help with their food.One the dishes worked. They were helping. The family. The dishes would help. So,
+[2025-11-24 03:11:22,934.934] Gradient updated
+[2025-11-24 03:11:22,935.935] Current Learning Rate : 0.0006954718049727091
+[2025-11-24 03:11:22,936.936] Global Step : 4744
+[2025-11-24 03:11:22,936.936] Batch Index : 37960
+[2025-11-24 03:11:50,935.935] Epoch No: 1, Global Step: 004744, Train Loss: 1.226, Val Loss: 1.201
+
+[2025-11-24 03:11:50,936.936] Total Tokens seen till now: 310652320
+
+[2025-11-24 03:11:51,427.427] Once upon a time, so they had in the world. They lived in a small town and everyone was amazed.One day the sky, the sun was going anywhere.So the sky, the sky, it was still, as the world. The sky,
+[2025-11-24 03:11:56,001.001] Gradient updated
+[2025-11-24 03:11:56,002.002] Current Learning Rate : 0.0006954211490287573
+[2025-11-24 03:11:56,002.002] Global Step : 4745
+[2025-11-24 03:11:56,002.002] Batch Index : 37968
+[2025-11-24 03:12:23,990.990] Epoch No: 1, Global Step: 004745, Train Loss: 1.225, Val Loss: 1.201
+
+[2025-11-24 03:12:23,991.991] Total Tokens seen till now: 310717856
+
+[2025-11-24 03:12:24,475.475] Once upon a time, but her feet for being in the big forest. Every time they wanted them to share!The little girl went to the park, but when she spotted a magical adventure was very rare ones, and the little ones he was stuck in real names
+[2025-11-24 03:12:29,049.049] Gradient updated
+[2025-11-24 03:12:29,050.050] Current Learning Rate : 0.0006953704828991563
+[2025-11-24 03:12:29,050.050] Global Step : 4746
+[2025-11-24 03:12:29,050.050] Batch Index : 37976
+[2025-11-24 03:12:57,063.063] Epoch No: 1, Global Step: 004746, Train Loss: 1.226, Val Loss: 1.202
+
+[2025-11-24 03:12:57,064.064] Total Tokens seen till now: 310783392
+
+[2025-11-24 03:12:57,542.542] Once upon a time, every each the world could play time.One day, the mom gave him a little bird land to help. The bird sang a funny songs to try. So, Mom a little one he a baby. First, they soon, and the little
+[2025-11-24 03:13:02,112.112] Gradient updated
+[2025-11-24 03:13:02,113.113] Current Learning Rate : 0.0006953198065859262
+[2025-11-24 03:13:02,113.113] Global Step : 4747
+[2025-11-24 03:13:02,113.113] Batch Index : 37984
+[2025-11-24 03:13:30,132.132] Epoch No: 1, Global Step: 004747, Train Loss: 1.216, Val Loss: 1.203
+
+[2025-11-24 03:13:30,133.133] Total Tokens seen till now: 310848928
+
+[2025-11-24 03:13:30,620.620] Once upon a time, after who wanted. He was the best of them and he wanted to do everything. They said, but he was scared.They did not wear a lot of each other ways. They tried to dance and laughed.They had fun things
+[2025-11-24 03:13:35,200.200] Gradient updated
+[2025-11-24 03:13:35,201.201] Current Learning Rate : 0.0006952691200910881
+[2025-11-24 03:13:35,201.201] Global Step : 4748
+[2025-11-24 03:13:35,201.201] Batch Index : 37992
+[2025-11-24 03:14:03,191.191] Epoch No: 1, Global Step: 004748, Train Loss: 1.224, Val Loss: 1.202
+
+[2025-11-24 03:14:03,192.192] Total Tokens seen till now: 310914464
+
+[2025-11-24 03:14:03,679.679] Once upon a time, up! She wants to go to the park. Then, she spotted a man. He looked sad. The man had an empty bag of crayons. He gave them to take it home. The boy was a boy.The rich
+[2025-11-24 03:14:08,254.254] Gradient updated
+[2025-11-24 03:14:08,255.255] Current Learning Rate : 0.0006952184234166633
+[2025-11-24 03:14:08,255.255] Global Step : 4749
+[2025-11-24 03:14:08,255.255] Batch Index : 38000
+[2025-11-24 03:14:36,275.275] Epoch No: 1, Global Step: 004749, Train Loss: 1.226, Val Loss: 1.202
+
+[2025-11-24 03:14:36,276.276] Total Tokens seen till now: 310980000
+
+[2025-11-24 03:14:36,763.763] Once upon a time, hereA sleepy dragon appeared at the king wanted to come to visit a magical fairy. The fairy was very high dragon could go. The dragon was so tall princess asked the dragon that the dragon could come with her, the dragon was not being very
+[2025-11-24 03:14:41,340.340] Gradient updated
+[2025-11-24 03:14:41,340.340] Current Learning Rate : 0.0006951677165646734
+[2025-11-24 03:14:41,340.340] Global Step : 4750
+[2025-11-24 03:14:41,340.340] Batch Index : 38008
+[2025-11-24 03:15:09,377.377] Epoch No: 1, Global Step: 004750, Train Loss: 1.219, Val Loss: 1.201
+
+[2025-11-24 03:15:09,377.377] Total Tokens seen till now: 311045536
+
+[2025-11-24 03:15:09,869.869] Once upon a time, she is. The mom was so kind and gentle, and she always took pictures out her to look out the world. The little girl watched the birds flying before, and she wanted to make her mom. Mommy for the little girl
+[2025-11-24 03:15:14,449.449] Gradient updated
+[2025-11-24 03:15:14,450.450] Current Learning Rate : 0.0006951169995371403
+[2025-11-24 03:15:14,450.450] Global Step : 4751
+[2025-11-24 03:15:14,450.450] Batch Index : 38016
+[2025-11-24 03:15:42,430.430] Epoch No: 1, Global Step: 004751, Train Loss: 1.206, Val Loss: 1.201
+
+[2025-11-24 03:15:42,430.430] Total Tokens seen till now: 311111072
+
+[2025-11-24 03:15:42,927.927] Once upon a time, for wings to fly away. He looks around him and dreams. Then, in his dream, he would never want to fly away. All of his dream about flying away!One day, the morning and his mommy was out. So
+[2025-11-24 03:15:47,503.503] Gradient updated
+[2025-11-24 03:15:47,504.504] Current Learning Rate : 0.0006950662723360867
+[2025-11-24 03:15:47,504.504] Global Step : 4752
+[2025-11-24 03:15:47,504.504] Batch Index : 38024
+[2025-11-24 03:16:15,435.435] Epoch No: 1, Global Step: 004752, Train Loss: 1.221, Val Loss: 1.201
+
+[2025-11-24 03:16:15,436.436] Total Tokens seen till now: 311176608
+
+[2025-11-24 03:16:15,954.954] Once upon a time, a: land fun place to do.She heard about history about the dragon tale, but the world.So, the dragon could fly. She decided to come to help when she grew up. She was a very brave dragon,
+[2025-11-24 03:16:20,525.525] Gradient updated
+[2025-11-24 03:16:20,526.526] Current Learning Rate : 0.0006950155349635354
+[2025-11-24 03:16:20,526.526] Global Step : 4753
+[2025-11-24 03:16:20,526.526] Batch Index : 38032
+[2025-11-24 03:16:48,470.470] Epoch No: 1, Global Step: 004753, Train Loss: 1.225, Val Loss: 1.202
+
+[2025-11-24 03:16:48,471.471] Total Tokens seen till now: 311242144
+
+[2025-11-24 03:16:48,960.960] Once upon a time, because they because the floor was special. The family had a picnic basket to make sure everything was always of the living thing.The family was also very slowness were not to fall. Then one special things, however, they
+[2025-11-24 03:16:53,522.522] Gradient updated
+[2025-11-24 03:16:53,523.523] Current Learning Rate : 0.0006949647874215098
+[2025-11-24 03:16:53,523.523] Global Step : 4754
+[2025-11-24 03:16:53,523.523] Batch Index : 38040
+[2025-11-24 03:17:21,518.518] Epoch No: 1, Global Step: 004754, Train Loss: 1.234, Val Loss: 1.203
+
+[2025-11-24 03:17:21,519.519] Total Tokens seen till now: 311307680
+
+[2025-11-24 03:17:22,009.009] Once upon a time, let anyone, and they had lots of fun ideas together. Suddenly, they heard a noise outside. They heard that a big, scary dragon appeared in a big, scary thing in the sky. They were very scared, and they had so much more
+[2025-11-24 03:17:26,587.587] Gradient updated
+[2025-11-24 03:17:26,587.587] Current Learning Rate : 0.0006949140297120334
+[2025-11-24 03:17:26,588.588] Global Step : 4755
+[2025-11-24 03:17:26,588.588] Batch Index : 38048
+[2025-11-24 03:17:54,585.585] Epoch No: 1, Global Step: 004755, Train Loss: 1.220, Val Loss: 1.202
+
+[2025-11-24 03:17:54,586.586] Total Tokens seen till now: 311373216
+
+[2025-11-24 03:17:55,081.081] Once upon a time, out out dancing, and then helping to do it up.Johny said,"Mom, I am a task to make it."Grand said to be polite say yes. Then I will be patient, but it was a second. So the
+[2025-11-24 03:17:59,661.661] Gradient updated
+[2025-11-24 03:17:59,661.661] Current Learning Rate : 0.0006948632618371306
+[2025-11-24 03:17:59,662.662] Global Step : 4756
+[2025-11-24 03:17:59,662.662] Batch Index : 38056
+[2025-11-24 03:18:27,617.617] Epoch No: 1, Global Step: 004756, Train Loss: 1.221, Val Loss: 1.201
+
+[2025-11-24 03:18:27,618.618] Total Tokens seen till now: 311438752
+
+[2025-11-24 03:18:28,106.106] Once upon a time, young going to go to the theater.The comet in the evening before, everything would be the big, and the perfect. The storm went on, and a light, the comet was clear, but the most of this. The light stopped.
+[2025-11-24 03:18:32,687.687] Gradient updated
+[2025-11-24 03:18:32,688.688] Current Learning Rate : 0.0006948124837988258
+[2025-11-24 03:18:32,688.688] Global Step : 4757
+[2025-11-24 03:18:32,688.688] Batch Index : 38064
+[2025-11-24 03:19:00,686.686] Epoch No: 1, Global Step: 004757, Train Loss: 1.236, Val Loss: 1.201
+
+[2025-11-24 03:19:00,687.687] Total Tokens seen till now: 311504288
+
+[2025-11-24 03:19:01,293.293] Once upon a time, her loud adventure the sunrise blue sea show down before."The sun will help the big, blue one turn," the sunrise said with his friend his friend "the bright colors. It will make the sun to make the sky be blue.
+[2025-11-24 03:19:05,874.874] Gradient updated
+[2025-11-24 03:19:05,874.874] Current Learning Rate : 0.0006947616955991437
+[2025-11-24 03:19:05,874.874] Global Step : 4758
+[2025-11-24 03:19:05,874.874] Batch Index : 38072
+[2025-11-24 03:19:33,938.938] Epoch No: 1, Global Step: 004758, Train Loss: 1.241, Val Loss: 1.202
+
+[2025-11-24 03:19:33,938.938] Total Tokens seen till now: 311569824
+
+[2025-11-24 03:19:34,434.434] Once upon a time, happen."Can I help?" asked her dad."Yes," said their son, but be brave. Today they were one to stay on my birthday?""You said Mama took her hands before, but he took off
+[2025-11-24 03:19:39,009.009] Gradient updated
+[2025-11-24 03:19:39,009.009] Current Learning Rate : 0.00069471089724011
+[2025-11-24 03:19:39,009.009] Global Step : 4759
+[2025-11-24 03:19:39,009.009] Batch Index : 38080
+[2025-11-24 03:20:07,004.004] Epoch No: 1, Global Step: 004759, Train Loss: 1.238, Val Loss: 1.202
+
+[2025-11-24 03:20:07,005.005] Total Tokens seen till now: 311635360
+
+[2025-11-24 03:20:07,484.484] Once upon a time,, trying.The boy was a bit nervous, but was a little bit nervous. He would be ready to run and play.The idea was so he needed to himself. Then his own hands, so the idea had the world a
+[2025-11-24 03:20:12,069.069] Gradient updated
+[2025-11-24 03:20:12,070.070] Current Learning Rate : 0.0006946600887237501
+[2025-11-24 03:20:12,070.070] Global Step : 4760
+[2025-11-24 03:20:12,070.070] Batch Index : 38088
+[2025-11-24 03:20:40,068.068] Epoch No: 1, Global Step: 004760, Train Loss: 1.221, Val Loss: 1.202
+
+[2025-11-24 03:20:40,069.069] Total Tokens seen till now: 311700896
+
+[2025-11-24 03:20:40,545.545] Once upon a time,. He looked at the sky. He was looking at the sky and the stars. But then they started to rain. The raindrops were going up in the day, but now. The rain. The rain was miserable. It was so high!
+[2025-11-24 03:20:45,120.120] Gradient updated
+[2025-11-24 03:20:45,121.121] Current Learning Rate : 0.0006946092700520903
+[2025-11-24 03:20:45,121.121] Global Step : 4761
+[2025-11-24 03:20:45,121.121] Batch Index : 38096
+[2025-11-24 03:21:13,104.104] Epoch No: 1, Global Step: 004761, Train Loss: 1.213, Val Loss: 1.202
+
+[2025-11-24 03:21:13,105.105] Total Tokens seen till now: 311766432
+
+[2025-11-24 03:21:13,584.584] Once upon a time, but the day before spring. And the weather was very dry.One night, the girl spotted a little boy, Sam being so sad. He had to be so close, with his crib."I'm only trying to do
+[2025-11-24 03:21:18,168.168] Gradient updated
+[2025-11-24 03:21:18,169.169] Current Learning Rate : 0.0006945584412271571
+[2025-11-24 03:21:18,169.169] Global Step : 4762
+[2025-11-24 03:21:18,169.169] Batch Index : 38104
+[2025-11-24 03:21:46,181.181] Epoch No: 1, Global Step: 004762, Train Loss: 1.224, Val Loss: 1.201
+
+[2025-11-24 03:21:46,182.182] Total Tokens seen till now: 311831968
+
+[2025-11-24 03:21:46,666.666] Once upon a time,." to take, she had never being too long as a pet, which was allowed.But when she was very big enough. She knew it, she wanted to be a big, boss of the word, and she felt anxious. One
+[2025-11-24 03:21:51,238.238] Gradient updated
+[2025-11-24 03:21:51,239.239] Current Learning Rate : 0.0006945076022509775
+[2025-11-24 03:21:51,239.239] Global Step : 4763
+[2025-11-24 03:21:51,239.239] Batch Index : 38112
+[2025-11-24 03:22:19,328.328] Epoch No: 1, Global Step: 004763, Train Loss: 1.228, Val Loss: 1.203
+
+[2025-11-24 03:22:19,329.329] Total Tokens seen till now: 311897504
+
+[2025-11-24 03:22:19,815.815] Once upon a time, that, they can close?" mom one. The little girl, but she knew it was only for the time.As the little girl played in the night, the girl played. The little girl knew it was too. But the same minutes
+[2025-11-24 03:22:24,389.389] Gradient updated
+[2025-11-24 03:22:24,390.390] Current Learning Rate : 0.0006944567531255787
+[2025-11-24 03:22:24,390.390] Global Step : 4764
+[2025-11-24 03:22:24,390.390] Batch Index : 38120
+[2025-11-24 03:22:52,388.388] Epoch No: 1, Global Step: 004764, Train Loss: 1.219, Val Loss: 1.202
+
+[2025-11-24 03:22:52,388.388] Total Tokens seen till now: 311963040
+
+[2025-11-24 03:22:52,881.881] Once upon a time, because her favorite was a special name. She called her parents each one, "Bella!" "I was very nice pets to help with the number of a number of wobs in the number. She said, "I am almost
+[2025-11-24 03:22:57,458.458] Gradient updated
+[2025-11-24 03:22:57,459.459] Current Learning Rate : 0.0006944058938529887
+[2025-11-24 03:22:57,459.459] Global Step : 4765
+[2025-11-24 03:22:57,459.459] Batch Index : 38128
+[2025-11-24 03:23:25,448.448] Epoch No: 1, Global Step: 004765, Train Loss: 1.218, Val Loss: 1.201
+
+[2025-11-24 03:23:25,449.449] Total Tokens seen till now: 312028576
+
+[2025-11-24 03:23:25,968.968] Once upon a time, living the floor."Suddenly, they began to get big sheets with a lot. Their mommy showed her baby some of the little brother for their favorite things, but her baby brother."That evening, he was getting bigger.
+[2025-11-24 03:23:30,547.547] Gradient updated
+[2025-11-24 03:23:30,547.547] Current Learning Rate : 0.0006943550244352355
+[2025-11-24 03:23:30,548.548] Global Step : 4766
+[2025-11-24 03:23:30,548.548] Batch Index : 38136
+[2025-11-24 03:23:58,550.550] Epoch No: 1, Global Step: 004766, Train Loss: 1.232, Val Loss: 1.202
+
+[2025-11-24 03:23:58,550.550] Total Tokens seen till now: 312094112
+
+[2025-11-24 03:23:59,042.042] Once upon a time, for the whole times. The little girl wanted to choose something that was important.She asked her name. Her mom smiled and said, "I will need you to wait!" The little girl was very busy playing and the little girl replied,
+[2025-11-24 03:24:03,613.613] Gradient updated
+[2025-11-24 03:24:03,614.614] Current Learning Rate : 0.0006943041448743476
+[2025-11-24 03:24:03,614.614] Global Step : 4767
+[2025-11-24 03:24:03,614.614] Batch Index : 38144
+[2025-11-24 03:24:31,548.548] Epoch No: 1, Global Step: 004767, Train Loss: 1.239, Val Loss: 1.202
+
+[2025-11-24 03:24:31,549.549] Total Tokens seen till now: 312159648
+
+[2025-11-24 03:24:32,038.038] Once upon a time, they plan. They ran around the garden looking for the perfect place to make it. The sun was shining, but there was the sky, just if the sky was too dark. Mom said "I want to quit, because they will
+[2025-11-24 03:24:36,610.610] Gradient updated
+[2025-11-24 03:24:36,610.610] Current Learning Rate : 0.0006942532551723542
+[2025-11-24 03:24:36,610.610] Global Step : 4768
+[2025-11-24 03:24:36,610.610] Batch Index : 38152
+[2025-11-24 03:25:04,721.721] Epoch No: 1, Global Step: 004768, Train Loss: 1.237, Val Loss: 1.202
+
+[2025-11-24 03:25:04,722.722] Total Tokens seen till now: 312225184
+
+[2025-11-24 03:25:05,214.214] Once upon a time, to play with the show. The staff have a lot of fun. The pran, who were very big and strong, they were their friends.One day, the staff of the cat, the children who the same, the staff.
+[2025-11-24 03:25:09,781.781] Gradient updated
+[2025-11-24 03:25:09,782.782] Current Learning Rate : 0.0006942023553312844
+[2025-11-24 03:25:09,782.782] Global Step : 4769
+[2025-11-24 03:25:09,782.782] Batch Index : 38160
+[2025-11-24 03:25:37,806.806] Epoch No: 1, Global Step: 004769, Train Loss: 1.223, Val Loss: 1.201
+
+[2025-11-24 03:25:37,807.807] Total Tokens seen till now: 312290720
+
+[2025-11-24 03:25:38,304.304] Once upon a time,, he. Missed, there was a funny looking picnic, perfect for the picnic. There was a picnic of the picnic, and the lunch table was filled with colorful fruit, yummy food.At the picnic, everything was
+[2025-11-24 03:25:42,876.876] Gradient updated
+[2025-11-24 03:25:42,877.877] Current Learning Rate : 0.000694151445353168
+[2025-11-24 03:25:42,877.877] Global Step : 4770
+[2025-11-24 03:25:42,877.877] Batch Index : 38168
+[2025-11-24 03:26:10,861.861] Epoch No: 1, Global Step: 004770, Train Loss: 1.213, Val Loss: 1.201
+
+[2025-11-24 03:26:10,862.862] Total Tokens seen till now: 312356256
+
+[2025-11-24 03:26:11,343.343] Once upon a time, their mom to explain her a very special treat.He picked it with a special treat. She could smell it every moment, so she wanted to make something, because she was very thoughtful, so that he knew.She went to
+[2025-11-24 03:26:15,917.917] Gradient updated
+[2025-11-24 03:26:15,918.918] Current Learning Rate : 0.0006941005252400354
+[2025-11-24 03:26:15,918.918] Global Step : 4771
+[2025-11-24 03:26:15,918.918] Batch Index : 38176
+[2025-11-24 03:26:43,967.967] Epoch No: 1, Global Step: 004771, Train Loss: 1.241, Val Loss: 1.201
+
+[2025-11-24 03:26:43,967.967] Total Tokens seen till now: 312421792
+
+[2025-11-24 03:26:44,458.458] Once upon a time, to dive on."What are you doing, little one?"The little boy did, "I'm too!""A crab".One big, bright pink and bright colors.The little boy wanted to
+[2025-11-24 03:26:49,028.028] Gradient updated
+[2025-11-24 03:26:49,029.029] Current Learning Rate : 0.0006940495949939171
+[2025-11-24 03:26:49,029.029] Global Step : 4772
+[2025-11-24 03:26:49,029.029] Batch Index : 38184
+[2025-11-24 03:27:17,038.038] Epoch No: 1, Global Step: 004772, Train Loss: 1.218, Val Loss: 1.201
+
+[2025-11-24 03:27:17,039.039] Total Tokens seen till now: 312487328
+
+[2025-11-24 03:27:17,594.594] Once upon a time, the living at the same time. One day, a group told her mom a special adventure. The two friends were so surprised."What shall we do with the game?" asked her mom.They got dressed up and started moving
+[2025-11-24 03:27:22,175.175] Gradient updated
+[2025-11-24 03:27:22,176.176] Current Learning Rate : 0.000693998654616844
+[2025-11-24 03:27:22,176.176] Global Step : 4773
+[2025-11-24 03:27:22,176.176] Batch Index : 38192
+[2025-11-24 03:27:50,193.193] Epoch No: 1, Global Step: 004773, Train Loss: 1.204, Val Loss: 1.201
+
+[2025-11-24 03:27:50,194.194] Total Tokens seen till now: 312552864
+
+[2025-11-24 03:27:50,682.682] Once upon a time,ting the land to be fair games. She was a big boy, and she was a small, white and sweet smile. They gave her a big bag of kindness.One day the little girl. She had to use her teeth. She
+[2025-11-24 03:27:55,249.249] Gradient updated
+[2025-11-24 03:27:55,251.251] Current Learning Rate : 0.0006939477041108475
+[2025-11-24 03:27:55,252.252] Global Step : 4774
+[2025-11-24 03:27:55,252.252] Batch Index : 38200
+[2025-11-24 03:28:23,266.266] Epoch No: 1, Global Step: 004774, Train Loss: 1.232, Val Loss: 1.202
+
+[2025-11-24 03:28:23,266.266] Total Tokens seen till now: 312618400
+
+[2025-11-24 03:28:23,759.759] Once upon a time, to hide. Mama was getting a secret hidden, but she knew it was something special. She wanted to hide her surprise. She went to the closet to hide her hidden toy. Inside the closet, she saw lots of interesting toys hidden. Mama was
+[2025-11-24 03:28:28,338.338] Gradient updated
+[2025-11-24 03:28:28,338.338] Current Learning Rate : 0.0006938967434779596
+[2025-11-24 03:28:28,339.339] Global Step : 4775
+[2025-11-24 03:28:28,339.339] Batch Index : 38208
+[2025-11-24 03:28:56,421.421] Epoch No: 1, Global Step: 004775, Train Loss: 1.226, Val Loss: 1.201
+
+[2025-11-24 03:28:56,421.421] Total Tokens seen till now: 312683936
+
+[2025-11-24 03:28:56,905.905] Once upon a time, for being the law."Today, the children got a plan: they were going to get something to make from the garden.The children looked outside for the flowers in search of the prettiest ones. They found some big ones for the
+[2025-11-24 03:29:01,477.477] Gradient updated
+[2025-11-24 03:29:01,478.478] Current Learning Rate : 0.0006938457727202123
+[2025-11-24 03:29:01,479.479] Global Step : 4776
+[2025-11-24 03:29:01,479.479] Batch Index : 38216
+[2025-11-24 03:29:29,510.510] Epoch No: 1, Global Step: 004776, Train Loss: 1.216, Val Loss: 1.201
+
+[2025-11-24 03:29:29,511.511] Total Tokens seen till now: 312749472
+
+[2025-11-24 03:29:29,999.999] Once upon a time, because it each."Y, it's a fine thing," said his friend. He went with a very long string, but a big sister was a lot of colors.The friend, "It was a bit,
+[2025-11-24 03:29:34,574.574] Gradient updated
+[2025-11-24 03:29:34,576.576] Current Learning Rate : 0.0006937947918396381
+[2025-11-24 03:29:34,576.576] Global Step : 4777
+[2025-11-24 03:29:34,576.576] Batch Index : 38224
+[2025-11-24 03:30:02,588.588] Epoch No: 1, Global Step: 004777, Train Loss: 1.233, Val Loss: 1.201
+
+[2025-11-24 03:30:02,589.589] Total Tokens seen till now: 312815008
+
+[2025-11-24 03:30:03,074.074] Once upon a time,. Bird on Tuesday's birthday today. She was very good. The cake was the candles were her face, but her teeth, but they were big for the girl who was sick. Her mom said, "We can't yet. It was very
+[2025-11-24 03:30:07,647.647] Gradient updated
+[2025-11-24 03:30:07,648.648] Current Learning Rate : 0.0006937438008382703
+[2025-11-24 03:30:07,648.648] Global Step : 4778
+[2025-11-24 03:30:07,648.648] Batch Index : 38232
+[2025-11-24 03:30:35,660.660] Epoch No: 1, Global Step: 004778, Train Loss: 1.213, Val Loss: 1.202
+
+[2025-11-24 03:30:35,661.661] Total Tokens seen till now: 312880544
+
+[2025-11-24 03:30:36,256.256] Once upon a time, then for a little girl. She was only three, so that she always she was very happy to her life. One day, she was very good girl's mom that she would happen if her age of, she ever come in her, she would
+[2025-11-24 03:30:40,840.840] Gradient updated
+[2025-11-24 03:30:40,841.841] Current Learning Rate : 0.0006936927997181421
+[2025-11-24 03:30:40,842.842] Global Step : 4779
+[2025-11-24 03:30:40,842.842] Batch Index : 38240
+[2025-11-24 03:31:08,949.949] Epoch No: 1, Global Step: 004779, Train Loss: 1.209, Val Loss: 1.202
+
+[2025-11-24 03:31:08,950.950] Total Tokens seen till now: 312946080
+
+[2025-11-24 03:31:09,434.434] Once upon a time, but for to jump on too much, because it was dirty. His mom asked him, telling him to be careful because it could be very important to be kind to others.One day, Ben was too young and so foolish that it didn
+[2025-11-24 03:31:14,016.016] Gradient updated
+[2025-11-24 03:31:14,017.017] Current Learning Rate : 0.0006936417884812875
+[2025-11-24 03:31:14,017.017] Global Step : 4780
+[2025-11-24 03:31:14,017.017] Batch Index : 38248
+[2025-11-24 03:31:42,012.012] Epoch No: 1, Global Step: 004780, Train Loss: 1.214, Val Loss: 1.202
+
+[2025-11-24 03:31:42,013.013] Total Tokens seen till now: 313011616
+
+[2025-11-24 03:31:42,488.488] Once upon a time, their everything the way. They had a special treat. They smiled and hugged. The little boy was so unique.But one day, they were making a very special dinner in front of the table. Dad had dinner. They went to the
+[2025-11-24 03:31:47,059.059] Gradient updated
+[2025-11-24 03:31:47,059.059] Current Learning Rate : 0.0006935907671297405
+[2025-11-24 03:31:47,059.059] Global Step : 4781
+[2025-11-24 03:31:47,059.059] Batch Index : 38256
+[2025-11-24 03:32:15,090.090] Epoch No: 1, Global Step: 004781, Train Loss: 1.231, Val Loss: 1.202
+
+[2025-11-24 03:32:15,090.090] Total Tokens seen till now: 313077152
+
+[2025-11-24 03:32:15,569.569] Once upon a time, but. One final, her dress was almost enough. She looked up at the mirror: a small spark."It's a story called out loud, and it always looked like the mirror."Hello, it's going to
+[2025-11-24 03:32:20,144.144] Gradient updated
+[2025-11-24 03:32:20,145.145] Current Learning Rate : 0.0006935397356655358
+[2025-11-24 03:32:20,145.145] Global Step : 4782
+[2025-11-24 03:32:20,145.145] Batch Index : 38264
+[2025-11-24 03:32:48,168.168] Epoch No: 1, Global Step: 004782, Train Loss: 1.232, Val Loss: 1.201
+
+[2025-11-24 03:32:48,169.169] Total Tokens seen till now: 313142688
+
+[2025-11-24 03:32:48,659.659] Once upon a time, my spell."Mom was watching cartoons and smiled. She loved to teach the kids and toys, the kids do funny tricks and watch.One day, the girl would make- tricks. Then she used for a little birds to be easy things
+[2025-11-24 03:32:53,226.226] Gradient updated
+[2025-11-24 03:32:53,227.227] Current Learning Rate : 0.0006934886940907085
+[2025-11-24 03:32:53,227.227] Global Step : 4783
+[2025-11-24 03:32:53,228.228] Batch Index : 38272
+[2025-11-24 03:33:21,246.246] Epoch No: 1, Global Step: 004783, Train Loss: 1.220, Val Loss: 1.200
+
+[2025-11-24 03:33:21,247.247] Total Tokens seen till now: 313208224
+
+[2025-11-24 03:33:22,508.508] BEST model SAVED on iteration 004783 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:33:22,999.999] Once upon a time,. They her queen was watching them. "Good little star." His boss said, "Little people in stories. We are amazing. But one of those here. The little people in a few moments of their eyes. The shapes with colors in their
+[2025-11-24 03:33:27,578.578] Gradient updated
+[2025-11-24 03:33:27,579.579] Current Learning Rate : 0.0006934376424072941
+[2025-11-24 03:33:27,579.579] Global Step : 4784
+[2025-11-24 03:33:27,579.579] Batch Index : 38280
+[2025-11-24 03:33:55,682.682] Epoch No: 1, Global Step: 004784, Train Loss: 1.227, Val Loss: 1.200
+
+[2025-11-24 03:33:55,682.682] Total Tokens seen till now: 313273760
+
+[2025-11-24 03:33:56,278.278] Once upon a time, but this it.One day, the cat took the cat and set it got very dirty. The cat wanted to keep the cat was so the owner didn't want to stay clean up.The cat wanted to give him. The little
+[2025-11-24 03:34:00,842.842] Gradient updated
+[2025-11-24 03:34:00,843.843] Current Learning Rate : 0.0006933865806173282
+[2025-11-24 03:34:00,843.843] Global Step : 4785
+[2025-11-24 03:34:00,843.843] Batch Index : 38288
+[2025-11-24 03:34:28,965.965] Epoch No: 1, Global Step: 004785, Train Loss: 1.229, Val Loss: 1.201
+
+[2025-11-24 03:34:28,965.965] Total Tokens seen till now: 313339296
+
+[2025-11-24 03:34:29,450.450] Once upon a time,. They, and his sister, Lucy and family lived in a big, yellow town. Lucy had many dolls and a cute kids liked to play with Tim and his friends.One day, Lucy looked tired. Tim was tired of the day
+[2025-11-24 03:34:34,023.023] Gradient updated
+[2025-11-24 03:34:34,024.024] Current Learning Rate : 0.0006933355087228472
+[2025-11-24 03:34:34,024.024] Global Step : 4786
+[2025-11-24 03:34:34,024.024] Batch Index : 38296
+[2025-11-24 03:35:01,996.996] Epoch No: 1, Global Step: 004786, Train Loss: 1.216, Val Loss: 1.201
+
+[2025-11-24 03:35:01,997.997] Total Tokens seen till now: 313404832
+
+[2025-11-24 03:35:02,479.479] Once upon a time, after going to the shop, and each, she wanted to get some food from the shop. She was very long, but when she was excited, she needed to go on a few people she needed a little girl who didn't in her own.
+[2025-11-24 03:35:07,065.065] Gradient updated
+[2025-11-24 03:35:07,065.065] Current Learning Rate : 0.0006932844267258877
+[2025-11-24 03:35:07,066.066] Global Step : 4787
+[2025-11-24 03:35:07,066.066] Batch Index : 38304
+[2025-11-24 03:35:35,073.073] Epoch No: 1, Global Step: 004787, Train Loss: 1.203, Val Loss: 1.200
+
+[2025-11-24 03:35:35,074.074] Total Tokens seen till now: 313470368
+
+[2025-11-24 03:35:35,558.558] Once upon a time, but. Then he realized that there was nothing he had a special power. His dad gave him was going to carry it. The dad told him the body to help. His even though he needed to be free enough water go after, but he had
+[2025-11-24 03:35:40,135.135] Gradient updated
+[2025-11-24 03:35:40,135.135] Current Learning Rate : 0.0006932333346284866
+[2025-11-24 03:35:40,135.135] Global Step : 4788
+[2025-11-24 03:35:40,136.136] Batch Index : 38312
+[2025-11-24 03:36:08,139.139] Epoch No: 1, Global Step: 004788, Train Loss: 1.226, Val Loss: 1.200
+
+[2025-11-24 03:36:08,140.140] Total Tokens seen till now: 313535904
+
+[2025-11-24 03:36:08,647.647] Once upon a time,. She wanted to teach her three different things. "Can you?" The little girl was nervous at first. The little girl's mum said, "We can teach me, but we just how to practice together?" "
+[2025-11-24 03:36:13,215.215] Gradient updated
+[2025-11-24 03:36:13,217.217] Current Learning Rate : 0.0006931822324326816
+[2025-11-24 03:36:13,217.217] Global Step : 4789
+[2025-11-24 03:36:13,217.217] Batch Index : 38320
+[2025-11-24 03:36:41,242.242] Epoch No: 1, Global Step: 004789, Train Loss: 1.228, Val Loss: 1.201
+
+[2025-11-24 03:36:41,243.243] Total Tokens seen till now: 313601440
+
+[2025-11-24 03:36:41,731.731] Once upon a time,: were happening together, but it had become too late. His mother had a new friends was a little kids and her and they were having fun while, and they needed him a helping to be useful friends who could help.The little one
+[2025-11-24 03:36:46,307.307] Gradient updated
+[2025-11-24 03:36:46,308.308] Current Learning Rate : 0.0006931311201405104
+[2025-11-24 03:36:46,308.308] Global Step : 4790
+[2025-11-24 03:36:46,308.308] Batch Index : 38328
+[2025-11-24 03:37:14,450.450] Epoch No: 1, Global Step: 004790, Train Loss: 1.248, Val Loss: 1.203
+
+[2025-11-24 03:37:14,451.451] Total Tokens seen till now: 313666976
+
+[2025-11-24 03:37:14,939.939] Once upon a time, them work in their backyard. One day, the mom took them for the day. They decided to take a bath together.When they got to the mom put the little birds, the baby, the mom was going to help. 
+[2025-11-24 03:37:19,508.508] Gradient updated
+[2025-11-24 03:37:19,510.510] Current Learning Rate : 0.0006930799977540111
+[2025-11-24 03:37:19,510.510] Global Step : 4791
+[2025-11-24 03:37:19,510.510] Batch Index : 38336
+[2025-11-24 03:37:47,545.545] Epoch No: 1, Global Step: 004791, Train Loss: 1.232, Val Loss: 1.201
+
+[2025-11-24 03:37:47,545.545] Total Tokens seen till now: 313732512
+
+[2025-11-24 03:37:48,062.062] Once upon a time, she queen was making the queen, so I brave knight.""Wow, that I'm going to get to be a prince before the kingdom gets home," she says to be careful."  When she stepped away, she began to
+[2025-11-24 03:37:52,630.630] Gradient updated
+[2025-11-24 03:37:52,631.631] Current Learning Rate : 0.0006930288652752228
+[2025-11-24 03:37:52,631.631] Global Step : 4792
+[2025-11-24 03:37:52,631.631] Batch Index : 38344
+[2025-11-24 03:38:20,691.691] Epoch No: 1, Global Step: 004792, Train Loss: 1.234, Val Loss: 1.200
+
+[2025-11-24 03:38:20,692.692] Total Tokens seen till now: 313798048
+
+[2025-11-24 03:38:21,284.284] Once upon a time, point" is that light out the sky, the sky!" the little girl exclaimed.The little girl's mom and the kitchen said "Mommy will come up." Her mom nodded and explained.The little girl nodded. One time, the
+[2025-11-24 03:38:25,861.861] Gradient updated
+[2025-11-24 03:38:25,862.862] Current Learning Rate : 0.0006929777227061841
+[2025-11-24 03:38:25,862.862] Global Step : 4793
+[2025-11-24 03:38:25,862.862] Batch Index : 38352
+[2025-11-24 03:38:53,954.954] Epoch No: 1, Global Step: 004793, Train Loss: 1.219, Val Loss: 1.200
+
+[2025-11-24 03:38:53,955.955] Total Tokens seen till now: 313863584
+
+[2025-11-24 03:38:54,511.511] Once upon a time,.They went to the playground, and found a cool statue to watch. The statue was big, tall with many colours.The children were so happy to play with the statue. The statue was so tall, they couldn't believe her
+[2025-11-24 03:38:59,085.085] Gradient updated
+[2025-11-24 03:38:59,086.086] Current Learning Rate : 0.0006929265700489347
+[2025-11-24 03:38:59,086.086] Global Step : 4794
+[2025-11-24 03:38:59,086.086] Batch Index : 38360
+[2025-11-24 03:39:27,098.098] Epoch No: 1, Global Step: 004794, Train Loss: 1.206, Val Loss: 1.200
+
+[2025-11-24 03:39:27,098.098] Total Tokens seen till now: 313929120
+
+[2025-11-24 03:39:28,456.456] BEST model SAVED on iteration 004794 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:39:29,010.010] Once upon a time, that she was making. The sky: are special creatures."What do?" said the child."She is going to fly. "I am brave little ones. She is going to fly. I am here!" she said
+[2025-11-24 03:39:33,587.587] Gradient updated
+[2025-11-24 03:39:33,588.588] Current Learning Rate : 0.0006928754073055143
+[2025-11-24 03:39:33,588.588] Global Step : 4795
+[2025-11-24 03:39:33,588.588] Batch Index : 38368
+[2025-11-24 03:40:01,706.706] Epoch No: 1, Global Step: 004795, Train Loss: 1.221, Val Loss: 1.200
+
+[2025-11-24 03:40:01,707.707] Total Tokens seen till now: 313994656
+
+[2025-11-24 03:40:02,192.192] Once upon a time,. But for her first, the sun is so dry before she could cook. So she put on hats and warmly, while cooking together and have lots of fun.She took a teaspoon together, but it was too, so, they
+[2025-11-24 03:40:06,760.760] Gradient updated
+[2025-11-24 03:40:06,760.760] Current Learning Rate : 0.0006928242344779634
+[2025-11-24 03:40:06,760.760] Global Step : 4796
+[2025-11-24 03:40:06,760.760] Batch Index : 38376
+[2025-11-24 03:40:34,844.844] Epoch No: 1, Global Step: 004796, Train Loss: 1.224, Val Loss: 1.200
+
+[2025-11-24 03:40:34,844.844] Total Tokens seen till now: 314060192
+
+[2025-11-24 03:40:35,333.333] Once upon a time, to, so he took a deep breath and went outside.She saw a butterfly and tried to fly away. But the butterfly was too. They started to dance and then decided that one by itself started to fly around as the butterfly got more.
+[2025-11-24 03:40:39,915.915] Gradient updated
+[2025-11-24 03:40:39,915.915] Current Learning Rate : 0.0006927730515683224
+[2025-11-24 03:40:39,916.916] Global Step : 4797
+[2025-11-24 03:40:39,916.916] Batch Index : 38384
+[2025-11-24 03:41:08,035.035] Epoch No: 1, Global Step: 004797, Train Loss: 1.223, Val Loss: 1.201
+
+[2025-11-24 03:41:08,035.035] Total Tokens seen till now: 314125728
+
+[2025-11-24 03:41:08,519.519] Once upon a time, go to the beach. He liked to explore the sand, the water, and the cold water. His favourite things to the beach, like surf, the beach.He was on one of his favourite things, so many things: surf.
+[2025-11-24 03:41:13,090.090] Gradient updated
+[2025-11-24 03:41:13,091.091] Current Learning Rate : 0.0006927218585786324
+[2025-11-24 03:41:13,091.091] Global Step : 4798
+[2025-11-24 03:41:13,091.091] Batch Index : 38392
+[2025-11-24 03:41:41,160.160] Epoch No: 1, Global Step: 004798, Train Loss: 1.217, Val Loss: 1.200
+
+[2025-11-24 03:41:41,160.160] Total Tokens seen till now: 314191264
+
+[2025-11-24 03:41:41,658.658] Once upon a time, fly! She wanted to catch something. She tried every way for something, it made something fun of rocks. One day she found a big bucket of red and the water. She tried to catch the biggest, red one, and a tiny bit of
+[2025-11-24 03:41:46,237.237] Gradient updated
+[2025-11-24 03:41:46,237.237] Current Learning Rate : 0.0006926706555109352
+[2025-11-24 03:41:46,237.237] Global Step : 4799
+[2025-11-24 03:41:46,237.237] Batch Index : 38400
+[2025-11-24 03:42:14,357.357] Epoch No: 1, Global Step: 004799, Train Loss: 1.229, Val Loss: 1.201
+
+[2025-11-24 03:42:14,359.359] Total Tokens seen till now: 314256800
+
+[2025-11-24 03:42:14,846.846] Once upon a time, but do the same, but the brave knight was feeling so he kept trying and thinking that he was always getting more careful. "Mum's best was in the best of the little girl didn't want to make him in the way the
+[2025-11-24 03:42:19,422.422] Gradient updated
+[2025-11-24 03:42:19,424.424] Current Learning Rate : 0.0006926194423672722
+[2025-11-24 03:42:19,425.425] Global Step : 4800
+[2025-11-24 03:42:19,425.425] Batch Index : 38408
+[2025-11-24 03:42:47,487.487] Epoch No: 1, Global Step: 004800, Train Loss: 1.225, Val Loss: 1.202
+
+[2025-11-24 03:42:47,488.488] Total Tokens seen till now: 314322336
+
+[2025-11-24 03:42:47,971.971] Once upon a time, set a point for everyone could see each. One day, a big wind came, and everyone started to panic.The cloud was so big, it was strong enough. All the people were scared and wanted to get rid of it to be
+[2025-11-24 03:42:52,558.558] Gradient updated
+[2025-11-24 03:42:52,559.559] Current Learning Rate : 0.0006925682191496859
+[2025-11-24 03:42:52,559.559] Global Step : 4801
+[2025-11-24 03:42:52,560.560] Batch Index : 38416
+[2025-11-24 03:43:20,610.610] Epoch No: 1, Global Step: 004801, Train Loss: 1.215, Val Loss: 1.202
+
+[2025-11-24 03:43:20,611.611] Total Tokens seen till now: 314387872
+
+[2025-11-24 03:43:21,230.230] Once upon a time, her game: legs were flying in the breeze."Let's have your turn!" mom said.The little one with his hands, but the second one, they laughed out loud. "I don't want it! I have to
+[2025-11-24 03:43:25,812.812] Gradient updated
+[2025-11-24 03:43:25,813.813] Current Learning Rate : 0.000692516985860219
+[2025-11-24 03:43:25,813.813] Global Step : 4802
+[2025-11-24 03:43:25,813.813] Batch Index : 38424
+[2025-11-24 03:43:53,908.908] Epoch No: 1, Global Step: 004802, Train Loss: 1.223, Val Loss: 1.200
+
+[2025-11-24 03:43:53,909.909] Total Tokens seen till now: 314453408
+
+[2025-11-24 03:43:54,392.392] Once upon a time, but I can't go fast. I feel that my mom put on!"One of my mom, and sure enough, you're ready to come to your window. It was very difficult to do so, like it was easy for her to go
+[2025-11-24 03:43:58,962.962] Gradient updated
+[2025-11-24 03:43:58,963.963] Current Learning Rate : 0.0006924657425009146
+[2025-11-24 03:43:58,963.963] Global Step : 4803
+[2025-11-24 03:43:58,963.963] Batch Index : 38432
+[2025-11-24 03:44:26,998.998] Epoch No: 1, Global Step: 004803, Train Loss: 1.228, Val Loss: 1.200
+
+[2025-11-24 03:44:26,999.999] Total Tokens seen till now: 314518944
+
+[2025-11-24 03:44:27,479.479] Once upon a time, her special sewing outfit. She asked her mom and dad to help."Come on, my love. I have some honey in case," said mom."Yum!" said apron, and said the mom.The
+[2025-11-24 03:44:32,049.049] Gradient updated
+[2025-11-24 03:44:32,050.050] Current Learning Rate : 0.000692414489073816
+[2025-11-24 03:44:32,050.050] Global Step : 4804
+[2025-11-24 03:44:32,050.050] Batch Index : 38440
+[2025-11-24 03:45:00,091.091] Epoch No: 1, Global Step: 004804, Train Loss: 1.208, Val Loss: 1.200
+
+[2025-11-24 03:45:00,091.091] Total Tokens seen till now: 314584480
+
+[2025-11-24 03:45:00,572.572] Once upon a time,!, she would show her line. One day, there was a special day. It was a beautiful sunrise. It was a rainbow! She watched it for a beautiful colours.The girl was so happy, she could
+[2025-11-24 03:45:05,153.153] Gradient updated
+[2025-11-24 03:45:05,154.154] Current Learning Rate : 0.0006923632255809672
+[2025-11-24 03:45:05,154.154] Global Step : 4805
+[2025-11-24 03:45:05,154.154] Batch Index : 38448
+[2025-11-24 03:45:33,162.162] Epoch No: 1, Global Step: 004805, Train Loss: 1.212, Val Loss: 1.200
+
+[2025-11-24 03:45:33,163.163] Total Tokens seen till now: 314650016
+
+[2025-11-24 03:45:34,471.471] BEST model SAVED on iteration 004805 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:45:34,965.965] Once upon a time, wild snack. She always listened and never had to touch the big fan. She liked how the big fan worked.One day, a magical surprise, as the fan began to be gentle. She told her brother and she decided it. She
+[2025-11-24 03:45:39,554.554] Gradient updated
+[2025-11-24 03:45:39,556.556] Current Learning Rate : 0.0006923119520244125
+[2025-11-24 03:45:39,556.556] Global Step : 4806
+[2025-11-24 03:45:39,556.556] Batch Index : 38456
+[2025-11-24 03:46:07,671.671] Epoch No: 1, Global Step: 004806, Train Loss: 1.219, Val Loss: 1.200
+
+[2025-11-24 03:46:07,672.672] Total Tokens seen till now: 314715552
+
+[2025-11-24 03:46:08,885.885] BEST model SAVED on iteration 004806 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:46:09,369.369] Once upon a time,!" of you, Sally," her mom.Tim smiled and clumshed a bowl. He liked how much water and soon, the floor were high cup. "Bitter," he said.Mom smiled and said, "That
+[2025-11-24 03:46:13,942.942] Gradient updated
+[2025-11-24 03:46:13,943.943] Current Learning Rate : 0.0006922606684061965
+[2025-11-24 03:46:13,943.943] Global Step : 4807
+[2025-11-24 03:46:13,943.943] Batch Index : 38464
+[2025-11-24 03:46:42,085.085] Epoch No: 1, Global Step: 004807, Train Loss: 1.228, Val Loss: 1.199
+
+[2025-11-24 03:46:42,086.086] Total Tokens seen till now: 314781088
+
+[2025-11-24 03:46:43,278.278] BEST model SAVED on iteration 004807 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:46:43,763.763] Once upon a time, over to help.The wise lady had a plan.The wise lady made the most colorful flowers. The colors were very long, with beautiful colors. She put them.The flowers had lots of different colors. The flowers
+[2025-11-24 03:46:48,337.337] Gradient updated
+[2025-11-24 03:46:48,337.337] Current Learning Rate : 0.0006922093747283643
+[2025-11-24 03:46:48,338.338] Global Step : 4808
+[2025-11-24 03:46:48,338.338] Batch Index : 38472
+[2025-11-24 03:47:16,421.421] Epoch No: 1, Global Step: 004808, Train Loss: 1.197, Val Loss: 1.200
+
+[2025-11-24 03:47:16,422.422] Total Tokens seen till now: 314846624
+
+[2025-11-24 03:47:16,906.906] Once upon a time, big. She is the most is in the world. She can see many different shapes. She will find her name on the names and her name, her mom, her dad, and her dad are very clever and sometimes they can count her love and
+[2025-11-24 03:47:21,482.482] Gradient updated
+[2025-11-24 03:47:21,483.483] Current Learning Rate : 0.0006921580709929615
+[2025-11-24 03:47:21,483.483] Global Step : 4809
+[2025-11-24 03:47:21,483.483] Batch Index : 38480
+[2025-11-24 03:47:49,640.640] Epoch No: 1, Global Step: 004809, Train Loss: 1.237, Val Loss: 1.200
+
+[2025-11-24 03:47:49,640.640] Total Tokens seen till now: 314912160
+
+[2025-11-24 03:47:50,128.128] Once upon a time, how big it is."Mom said, "We should measure you put in the kitchen, Lily, but I will be careful."Lily said, "Okay" pink!"The two of them went to the garden. Lily
+[2025-11-24 03:47:54,702.702] Gradient updated
+[2025-11-24 03:47:54,703.703] Current Learning Rate : 0.0006921067572020339
+[2025-11-24 03:47:54,704.704] Global Step : 4810
+[2025-11-24 03:47:54,704.704] Batch Index : 38488
+[2025-11-24 03:48:22,783.783] Epoch No: 1, Global Step: 004810, Train Loss: 1.230, Val Loss: 1.200
+
+[2025-11-24 03:48:22,784.784] Total Tokens seen till now: 314977696
+
+[2025-11-24 03:48:23,262.262] Once upon a time, so the end! The sun was hot and the sky was shining.The water was warm and sparkled. The water was cold and the trees were so soft and pretty.The water was so nice. But then the river was
+[2025-11-24 03:48:27,831.831] Gradient updated
+[2025-11-24 03:48:27,832.832] Current Learning Rate : 0.0006920554333576276
+[2025-11-24 03:48:27,832.832] Global Step : 4811
+[2025-11-24 03:48:27,832.832] Batch Index : 38496
+[2025-11-24 03:48:55,805.805] Epoch No: 1, Global Step: 004811, Train Loss: 1.223, Val Loss: 1.200
+
+[2025-11-24 03:48:55,805.805] Total Tokens seen till now: 315043232
+
+[2025-11-24 03:48:56,451.451] Once upon a time, being very play game. Their mom had given her a game of a film. The game was to start and she was getting ready to play. The player was very persistent to watch out to watch. The player started talking about it.
+[2025-11-24 03:49:01,030.030] Gradient updated
+[2025-11-24 03:49:01,030.030] Current Learning Rate : 0.0006920040994617897
+[2025-11-24 03:49:01,030.030] Global Step : 4812
+[2025-11-24 03:49:01,030.030] Batch Index : 38504
+[2025-11-24 03:49:29,124.124] Epoch No: 1, Global Step: 004812, Train Loss: 1.215, Val Loss: 1.200
+
+[2025-11-24 03:49:29,124.124] Total Tokens seen till now: 315108768
+
+[2025-11-24 03:49:29,606.606] Once upon a time, grass. Then, she put the bunny on her bed. She looked out the window and saw fluffy white stars and butterflies. She said goodnight to the bunny.The bunny liked the most of the world. She looked up so happy things
+[2025-11-24 03:49:33,025.025] BEST model SAVED on iteration 004812 to model/gpt2_ORG_preTrain_S_V4.pth..! 
+[2025-11-24 03:49:33,146.146] Training completed in 127.03 minutes.
+[2025-11-24 03:49:33,146.146] BEST Pre-trained custom model saved in model/gpt2_ORG_preTrain_S_V4.pth..!
+[2025-11-24 03:49:33,146.146] Saving the plots of the metrics tracked ..!
+[2025-11-24 03:49:36,288.288] Pipeline completed in 127.08 minutes.
