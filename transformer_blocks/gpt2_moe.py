@@ -25,8 +25,6 @@ class MoEGPT2(nn.Module):
         self.current_pos = 0
 
         self.rope_angles = RoPE(config=self.config)
-        self.register_buffer("cosine", self.rope_angles.cosine, persistent=False)
-        self.register_buffer("sine", self.rope_angles.sine, persistent=False)
 
     
     def forward(self, input_tensor, cache = None):
