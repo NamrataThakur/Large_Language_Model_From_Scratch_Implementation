@@ -5,116 +5,138 @@
 
 #Instruction Fine-Tune (IFT) params:
 
+# ignore_index=-100
+# num_epochs=2
+# trainable_layers=None
+# #top_k=5
+# temp=0.0
+# max_new_tokens=256
+# context_length=1024
+# val_split=0.05
+# train_split=0.85
+# batch_size=8
+# seed=123
+# pre_save_model="gpt2_355M_nonMaskedInstruct_FineTuned_v2.pth"
+# load_weights=True
+# peft_type="lora"
+# mask_instruction=True
+# dropout_rate=0.1
+# eos_id=50256
+# use_warmup=True
+# use_gradient_clip=True
+# warmup_steps=20
+# initial_lr=1e-5
+# min_lr=1e-5 #--> being calculated as 0.1 * of max LR
+# learning_rate=0.0008 #3e-4 --> Good LR (Karpathy)
+# weight_decay=0.1
+# beta1=0.9
+# beta2=0.95
+# lora_rank=8
+# lora_alpha=8
+# data_url='review_consolidated.csv'
+# python gpt_trainingPipeline.py \
+#   --experiment_name 'IFT_Exp_MaskedInst_v2_i3_LoRA_noGC' \
+#   --base_modelName 'gpt2_355M' \
+#   --data_path 'review_consolidated.csv' \
+#   --data_url $data_url \
+#   --training_type 'IFT' \
+#   --load_weights $load_weights \
+#   --model_name 'gpt2_355M_MaskedInstruct_FineTuned_v2_i3_LoRA_noGC' \
+#   --tokenizer 'tiktoken' \
+#   --seed $seed \
+#   --loss_type $loss_type \
+#   --batch_size $batch_size \
+#   --train_split $train_split \
+#   --val_split $val_split \
+#   --context_length $context_length \
+#   --max_new_tokens $max_new_tokens \
+#   --pre_save_model $pre_save_model \
+#   --temp $temp \
+#   --peft_type $peft_type \
+#   --dropout_rate $dropout_rate \
+#   --num_epochs $num_epochs \
+#   --max_training_length 'longest_training_example' \
+#   --eos_id $eos_id \
+#   --prompt_style 'alpaca' \
+#   --ignore_index $ignore_index \
+#   --mask_instruction $mask_instruction \
+#   --initial_lr $initial_lr \
+#   --warmup_steps $warmup_steps \
+#   --min_lr $min_lr \
+#   --lora_rank $lora_rank \
+#   --lora_alpha $lora_alpha \
+#   --use_gradient_clip $use_gradient_clip \
+#   --use_warmup $use_warmup \
+
+# Classification Supervised Fine-Tune (SFT) params:
+
 ignore_index=-100
-num_epochs=2
-trainable_layers=None
-#top_k=5
+num_epochs=5
+trainable_layers=last_block
+top_k=5
 temp=0.0
 max_new_tokens=256
 context_length=1024
-val_split=0.05
-train_split=0.85
+val_split=0.1
+train_split=0.7
 batch_size=8
 seed=123
-pre_save_model="gpt2_355M_nonMaskedInstruct_FineTuned_v2.pth"
+pre_save_model="gpt2_124M_SFT_Spam_v1.pth"
 load_weights=True
 peft_type="lora"
-mask_instruction=True
-dropout_rate=0.1
+mask_instruction=False
+dropout_rate=0.0
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
 warmup_steps=20
 initial_lr=1e-5
-min_lr=1e-5
-lora_rank=8
-lora_alpha=8
+min_lr=1e-5 #--> being calculated as 0.1 * of max LR
+learning_rate=0.0008 #3e-4 --> Good LR (Karpathy)
+weight_decay=0.1
+beta1=0.9
+beta2=0.95
+lora_rank=16
+lora_alpha=16
+loss_type='focal'
+gamma=0.0
+data_url='review_consolidated.csv'
+causal_mask=False #Need this to be True for IFT, PFT and (general) SFT scenario
 python gpt_trainingPipeline.py \
-  --experiment_name 'IFT_Exp_MaskedInst_v2_i3_LoRA_noGC' \
-  --base_modelName 'gpt2_355M' \
-  --data_path 'instruction-data-NT.json' \
-  --training_type 'IFT' \
+  --experiment_name 'SFT_Exp_SFT_v1_LoRA_noGC' \
+  --data_path 'review_consolidated.csv' \
+  --base_modelName 'gpt2_124M' \
+  --data_url $data_url \
+  --training_type 'SFT' \
   --load_weights $load_weights \
-  --model_name 'gpt2_355M_MaskedInstruct_FineTuned_v2_i3_LoRA_noGC' \
+  --model_name 'gpt2_124M_SFT_Spam_v1_LoRA_noGC' \
   --tokenizer 'tiktoken' \
+  --pre_save_model $pre_save_model \
+  --peft_type $peft_type \
   --seed $seed \
   --batch_size $batch_size \
   --train_split $train_split \
   --val_split $val_split \
   --context_length $context_length \
   --max_new_tokens $max_new_tokens \
-  --pre_save_model $pre_save_model \
   --temp $temp \
-  --peft_type $peft_type \
+  --trainable_layers $trainable_layers \
   --dropout_rate $dropout_rate \
   --num_epochs $num_epochs \
   --max_training_length 'longest_training_example' \
-  --eos_id $eos_id \
-  --prompt_style 'alpaca' \
-  --ignore_index $ignore_index \
-  --mask_instruction $mask_instruction \
-  --initial_lr $initial_lr \
+  --top_k $top_k \
+  --eos_id $eos_id  \
   --warmup_steps $warmup_steps \
+  --initial_lr $initial_lr \
   --min_lr $min_lr \
+  --learning_rate $learning_rate \
+  --weight_decay $weight_decay \
+  --beta1 $beta1 \
+  --beta2 $beta2 \
+  --loss_type $loss_type \
+  --gamma $gamma \
   --lora_rank $lora_rank \
   --lora_alpha $lora_alpha \
-  --use_gradient_clip $use_gradient_clip \
-  --use_warmup $use_warmup \
-
-# Classification Supervised Fine-Tune (SFT) params:
-
-# ignore_index=-100
-# num_epochs=5
-# trainable_layers=last_block
-# top_k=5
-# temp=0.0
-# max_new_tokens=256
-# context_length=1024
-# val_split=0.1
-# train_split=0.7
-# batch_size=8
-# seed=123
-# pre_save_model="gpt2_124M_SFT_Spam_v1.pth"
-# load_weights=True
-# peft_type="lora"
-# mask_instruction=False
-# dropout_rate=0.0
-# eos_id=50256
-# #use_warmup=True
-# #use_gradient_clip=True
-# warmup_steps=20
-# initial_lr=1e-5
-# min_lr=1e-5
-# lora_rank=16
-# lora_alpha=16
-# python gpt_trainingPipeline.py \
-#   --experiment_name 'SFT_Exp_SFT_v1_LoRA_noGC' \
-#   --data_path 'sms_spam_collection.zip' \
-#   --base_modelName 'gpt2_124M' \
-#   --training_type 'SFT' \
-#   --load_weights $load_weights \
-#   --model_name 'gpt2_124M_SFT_Spam_v1_LoRA_noGC' \
-#   --tokenizer 'tiktoken' \
-#   --pre_save_model $pre_save_model \
-#   --peft_type $peft_type \
-#   --seed $seed \
-#   --batch_size $batch_size \
-#   --train_split $train_split \
-#   --val_split $val_split \
-#   --context_length $context_length \
-#   --max_new_tokens $max_new_tokens \
-#   --temp $temp \
-#   --trainable_layers $trainable_layers \
-#   --dropout_rate $dropout_rate \
-#   --num_epochs $num_epochs \
-#   --max_training_length 'longest_training_example' \
-#   --top_k $top_k \
-#   --eos_id $eos_id  \
-#   --warmup_steps $warmup_steps \
-#   --initial_lr $initial_lr \
-#   --min_lr $min_lr \
-#   --lora_rank $lora_rank \
-#   --lora_alpha $lora_alpha \
 
 #Preference Fine-Tune (PFT) params:
 
@@ -140,7 +162,7 @@ python gpt_trainingPipeline.py \
 # warmup_steps=20
 # initial_lr=1e-5
 # min_lr=1e-5
-# beta=0.1
+# dpo_beta=0.1
 # python gpt_trainingPipeline.py \
 #   --experiment_name 'PFT_Exp_MaskedInst_v2' \
 #   --base_modelName 'gpt2_355M' \
@@ -167,4 +189,4 @@ python gpt_trainingPipeline.py \
 #   --warmup_steps $warmup_steps \
 #   --initial_lr $initial_lr \
 #   --min_lr $min_lr \
-#   --beta $beta
+#   --dpo_beta $dpo_beta
