@@ -97,11 +97,11 @@
 
 num_epochs=1
 top_k=20
-temp=0.01
+temp=1
 max_new_tokens=50
-context_length=512
+context_length=384
 vocab_size=50257
-embedding_dimension=512
+embedding_dimension=384
 num_heads=8
 num_layers=8
 qkv_bias=False
@@ -112,24 +112,27 @@ beta1=0.9
 beta2=0.95
 val_split=0.05
 train_split=0.85
-batch_size=32
-target_batch_size=256 #1024 
+batch_size=16
+target_batch_size=512 #1024 
 seed=123
-dropout_rate=0.3 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
+dropout_rate=0.2 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
+token_dropout_rate=0.01
+attention_dropout_rate=0.3
+ffn_dropout_rate=0.3
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
 warmup_steps=0.05
-initial_lr=0.00001 #3e-05
+initial_lr=0.00003 #3e-05
 #min_lr=0.000001 #--> being calculated as 0.1 * of max LR
-learning_rate=0.0008 #3e-4 --> Good LR (Karpathy)
+learning_rate=6e-4 #0.0008 #3e-4 --> Good LR (Karpathy) #6e-4
 rms_eps=1e-6
 rms_bias=True
 theta_base=10000.0
 num_experts=4
 num_active_experts=2
 num_kv_groups=2
-ff_hidden_dim=2048
+ff_hidden_dim=1024
 arch_type='MOE'
 kv_cache=True
 moe_noise=True
@@ -170,6 +173,9 @@ python gpt_pretrainingPipeline.py \
   --temp $temp \
   --top_k $top_k \
   --dropout_rate $dropout_rate \
+  --token_dropout_rate $token_dropout_rate \
+  --attention_dropout_rate $attention_dropout_rate \
+  --ffn_dropout_rate $ffn_dropout_rate \
   --num_epochs $num_epochs \
   --eos_id $eos_id \
   --initial_lr $initial_lr \

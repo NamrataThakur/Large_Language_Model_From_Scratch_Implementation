@@ -190,6 +190,28 @@ if __name__ == '__main__':
         default=0.0,
         help=('Dropout rate value.')
     )
+    
+    parser.add_argument(
+        '--token_dropout_rate',
+        type=float,
+        default=0.0,
+        help=('Dropout rate value to be used for input tokens')
+    )
+
+    parser.add_argument(
+        '--attention_dropout_rate',
+        type=float,
+        default=0.0,
+        help=('Dropout rate value to be used in attention block')
+    )
+
+    parser.add_argument(
+        '--ffn_dropout_rate',
+        type=float,
+        default=0.0,
+        help=('Dropout rate valueto be used for the feed forward block.')
+    )
+
 
     parser.add_argument(
         '--qkv_bias',
@@ -468,7 +490,9 @@ if __name__ == '__main__':
                     'embedding_dimension':args.embedding_dimension,
                     'num_heads':args.num_heads,
                     'context_length':args.context_length,
-                    'dropout':args.dropout_rate,
+                    'token_dropout':args.token_dropout_rate,   
+                    'attn_dropout':args.attention_dropout_rate,
+                    'ffn_dropout':args.ffn_dropout_rate,
                     'qkv_bias':args.qkv_bias,
                     'num_layers':args.num_layers,
                     'ff_hidden_dim':args.ff_hidden_dim,
