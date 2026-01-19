@@ -2,13 +2,21 @@ import torch
 import torch.nn.functional as F
 
 class Metrics:
-    def __init__(self, model, device, reference_model = None ):
+    def __init__(self, model, device, alpha = None, gamma = 0.0, pos_token=-1, avg_emb=False, reference_model = None ):
         
         self.model = model
         self.device = device
         self.reference_model = reference_model
+        
+        #Following parameters are used in Focal Loss computation in imbalanced supervised classification fine-tuning task:
+        self.alpha = alpha
+        self.gamma = gamma
 
-    def loss_loader(self, dataloader, num_batches=None, classify=False):
+        #NEW FEAT: Average Embedding and POS Token Inclusion: USED FOR CLASSIFICATION SFT
+        self.pos_token = pos_token
+        self.avg_emb = avg_emb
+
+    def loss_loader(self, dataloader, num_batches=None, classify=False, focal=False):
 
         batch_loss = 0.0
         if len(dataloader) == 0:
@@ -22,7 +30,11 @@ class Metrics:
 
             if i < num_batches:
                 if classify:
-                    ce_loss = self.classification_loss_batch(input_batch, target_batch)
+                    if focal:
+                        ce_loss = self.focal_loss_batch(input_batch=input_batch, target_batch=target_batch)
+                    else:
+                        ce_loss = self.classification_loss_batch(input_batch, target_batch)
+                    
                 else:
                     ce_loss = self.loss_batch(input_batch, target_batch)
                 batch_loss += ce_loss.item()
@@ -57,7 +69,15 @@ class Metrics:
                 with torch.no_grad():
                     output_logits = self.model(X_batch)
                 
-                last_idx_logits = output_logits[:, -1, :]
+                #last_idx_logits = output_logits[:, -1, :]
+
+                #Selecting the row corresponding to the token position or taking average of all tokens for all batch:
+                #NEW FEAT: Average Embedding and POS Token Inclusion:
+                if self.avg_emb:
+                    last_idx_logits = output_logits.mean(dim=1)
+                else:
+                    last_idx_logits = output_logits[:, self.pos_token, :]
+
                 predictions = torch.argmax(last_idx_logits, dim=-1)
 
                 num_samples += predictions.shape[0]
@@ -74,10 +94,57 @@ class Metrics:
 
         input_batch, target_batch = input_batch.to(self.device), target_batch.to(self.device)
         output_logits = self.model(input_batch)
-        last_idx_logits = output_logits[:, -1, :]
+
+        #NEW FEAT: Average Embedding and POS Token Inclusion:
+        if self.avg_emb:
+            last_idx_logits = output_logits.mean(dim=1)
+        else:
+            #last_idx_logits = output_logits[:, -1, :]
+            last_idx_logits = output_logits[:, self.pos_token, :]
+            
         classify_loss = torch.nn.functional.cross_entropy(last_idx_logits, target_batch)
         return classify_loss
     
+
+    #Function used in imbalanced classification supervised fine-tuning task:
+    def focal_loss_batch(self, input_batch, target_batch):
+
+        input_batch, target_batch = input_batch.to(self.device), target_batch.to(self.device)
+        output_logits = self.model(input_batch)
+
+        #Selecting the row corresponding to the last token for all batch:
+        #Shape: (B, num_tokens, logits) --> (B, logits)
+        #last_idx_logits = output_logits[:, -1, :]
+
+        #Selecting the row corresponding to the token position or taking average of all tokens for all batch:
+        #NEW FEAT:  Average Embedding and POS Token Inclusion:
+        if self.avg_emb:
+            last_idx_logits = output_logits.mean(dim=1)
+        else:
+            last_idx_logits = output_logits[:, self.pos_token, :]
+
+        #Computed the weighted cross entropy term: - alpha * log(pt)
+        ce_loss = torch.nn.functional.cross_entropy(input=last_idx_logits, target=target_batch, weight=self.alpha, reduction='none')
+
+        #Computing the focal part: (1 - p) ^ gamma
+        #Shape: (B, logits) --> (B, class_probs)
+        log_probs = F.log_softmax(last_idx_logits, dim=-1)
+
+        all_rows = torch.arange(last_idx_logits.size(0))
+
+        #Shape: (B, class_probs) --> (B)
+        log_probs_target = log_probs[all_rows, target_batch]
+
+        probs_target = log_probs_target.exp()
+        focal_term = (1 - probs_target) ** self.gamma
+
+        #Focal loss : - alpha * [(1 - pt) ^ gamma] * log(pt)
+        focal_loss =  focal_term * ce_loss
+
+        loss = focal_loss.mean()
+
+        return loss
+
 
     #Function used in preference fine-tuning task:
     def preference_loss_batch(self, batch, beta):
