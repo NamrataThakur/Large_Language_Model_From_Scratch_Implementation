@@ -22,6 +22,9 @@ import math
 #from tensorboardX import SummaryWriter
 import json
 import configparser
+import requests
+import time
+import pickle
 warnings.filterwarnings("ignore")
 
 
@@ -63,7 +66,7 @@ from dataloader.Instruction_finetuning.gpt2_instructDataloader import GPTCustomI
 from dataloader.Instruction_finetuning.gpt2_instructDataFormat import *
 from dataloader.Preference_finetuning.gpt2_preferenceDataloader import GPTCustomPreferenceDataloader
 from dataloader.Preference_finetuning.gpt2_preferenceDataFormat import analyse_preferenceTuning
-from gpt_ClassificationFT.data_preprocessing import csv_preproccessing
+from gpt_ClassificationFT.data_preprocessing import csv_preproccessing, get_focal_weights
 
 #LoRA classes and functions:
 from parameter_efficient_training.apply_lora import *
@@ -99,6 +102,15 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
+        '--data_url',
+        type=str,
+        default=None,
+        help=('If the dataset is present in external repo or link or to be downloaded from huggingface through a link, then mention the dataset name here with extension.' \
+                'In the pipeline, add a block in else condition to download the dataset from the link given and store in local data folder with the same name.' \
+                'If data_url value is present, then keep the same value for data_path')
+    )
+
+    parser.add_argument(
         '--training_type',
         type=str,
         default='SFT',
@@ -111,7 +123,7 @@ if __name__ == '__main__':
         '--peft_type',
         type=str,
         default=None,
-        help=("whether any parameter efficient techniques to be used for training. Options: None (full training), lora, qlora")
+        help=("whether any parameter efficient techniques to be used for training. Options: None (full training), lora, qlora, lora_merge (for class-wise Lora adapters)")
     )
 
     parser.add_argument(
@@ -157,6 +169,21 @@ if __name__ == '__main__':
         type=int,
         default=8,
         help=('batch_size per gpu')
+    )
+
+    parser.add_argument(
+        '--loss_type',
+        type=str,
+        default=None,
+        help=('Loss to be applied. Options: None (default) --> This will trigger the general CE Loss' \
+                                            'focal --> This will trigger focal loss. Recommended to use if the dataset is highly imbalanced')
+    )
+
+    parser.add_argument(
+        '--gamma',
+        type=float,
+        default=0.0,
+        help=("Gamma hyper-parameter to be added to the focal loss. To be set if loss_type = 'focal' ")
     )
 
     parser.add_argument(
@@ -295,7 +322,35 @@ if __name__ == '__main__':
     )
 
     parser.add_argument(
-        "--beta",
+        "--learning_rate",
+        type=float,
+        default=1e-6,
+        help=("Maximum LR to reach before cosine annealing will trigger.")
+    )
+
+    parser.add_argument(
+        '--weight_decay',
+        type=float,
+        default=1e-1,
+        help=('Weight decay param of optimizer.')
+    )
+
+    parser.add_argument(
+        '--beta1',
+        type=float,
+        default=0.9,
+        help=('Hyper-param if optimizer is AdamW')
+    )
+
+    parser.add_argument(
+        '--beta2',
+        type=float,
+        default=0.95,
+        help=('Hyper-param if optimizer is AdamW')
+    )
+
+    parser.add_argument(
+        "--dpo_beta",
         type=float,
         default=0.1,
         help=("Weightage parameter to be used in DPO loss for Preference fine-tune.")
@@ -313,6 +368,31 @@ if __name__ == '__main__':
         type=int,
         default=16,
         help=("LoRA hyper-parameter.")
+    )
+
+    parser.add_argument(
+        "--pos_token",
+        type=int,
+        default=-1,
+        help=("The token position to be considered for training. Mainly used in Classification SFT pipeline. "
+                            "Options: 0 (first position), -1 (last position) ")
+    )
+
+    parser.add_argument(
+        "--average_embedding",
+        type=bool,
+        default=False,
+        help=("Whether to use the average of embeddings of all positions or not. Mainly used in Classification SFT pipeline." \
+                            "Options: False, True ")
+    )
+
+    parser.add_argument(
+        "--causal_mask",
+        type=bool,
+        default=False,
+        help=("Whether to use causal mask while computing attention scores. "
+                            "Default value is mainly used in Classification SFT pipeline in the scenarios with 'average_embedding' as True." \
+                            "Options: False (Default), True (needed for IFT, PFT)")
     )
 
 
@@ -356,7 +436,7 @@ if __name__ == '__main__':
     try:
         m_config = GPT2_ModelConfig()
         gpt2_config = m_config.load_model_config(model_name=args.base_modelName, drop_rate=args.dropout_rate,
-                                                 context_length=args.context_length)
+                                                 context_length=args.context_length, causal_mask=args.causal_mask)
         gpt2_baseInst = GPT2(gpt2_config)
         gpt2_baseInst.eval()
         logger.info(f'Configuration of the {args.base_modelName} base model loaded..!')
@@ -367,10 +447,31 @@ if __name__ == '__main__':
 
     #Load the data and dataloader:
     try:
+        if args.data_url is not None:
+            url = "https://huggingface.co/datasets/NamrataThakur/Singapore-TripAdvisor-Sentiment-Dataset/resolve/main/review_consolidated.csv"
+            start_time = time.time()
+            logger.info('Downloading and Saving the dataset in the local ..!')
+            data_path = os.path.join(DATA_FOLDER,args.data_url)
+
+            if os.path.exists(data_path):
+                logger.info(f"{args.data_url} is already present in the data folder. Skipping download..!")
+            else:
+                logger.info(f"{args.data_url} is NOT present in the data folder. Downloading dataset from the url given..!")
+                with requests.get(url, stream=True) as r:
+                    r.raise_for_status()
+                    with open(data_path, 'wb') as f:
+                        for chunk in r.iter_content(chunk_size=100000000):
+                            print('Chunk Done..!')
+                            f.write(chunk)
+
+                end_time = time.time()
+                execution_time_minutes = (end_time - start_time) / 60
+                logger.info(f"Dataset downloaded and saved in the Data folder.")
 
         #Read the data:
         data_path = os.path.join(DATA_FOLDER,args.data_path)
         extension = data_path.split('.')[-1]
+        
         logger.info(f'Extention detected for the training file is "{extension}".')
 
         #Basic Data Preprocessing:
@@ -416,7 +517,9 @@ if __name__ == '__main__':
 
         
         elif extension == 'csv':
-            balanced_df = csv_preproccessing(data_path, logger)
+
+            #Change the dataset_name and add dataset specific custom logic inside csv_preprocessing:
+            balanced_df = csv_preproccessing(data_path, logger, dataset_name = "SG_reviews") 
 
             #Create the train.csv, val.csv, test.csv
             train_df, val_df, test_df = dataset_split(data=balanced_df, train_split=args.train_split, val_split=args.val_split, 
@@ -585,6 +688,30 @@ if __name__ == '__main__':
             logger.info('Dataloaders created successfully for classification fine-tuning task..!')
             logger.info('---------------------------------------------------------')
 
+            if args.peft_type == 'lora_merge':
+                logger.info('Creatig dataloaders for class-wise LoRA training..!')
+                class_names_train, train_class_ids = getClassNames(train_df, minority = True)
+                class_names_val, val_class_ids = getClassNames(val_df, minority = True)
+                list_train_df = []
+                list_val_df = []
+                
+                for id in train_class_ids:
+                    t_df_cid = train_df[train_df['Target'] == id]
+                    list_train_df.append(t_df_cid)
+
+                for id in val_class_ids:
+                    v_df_cid = val_df[val_df['Target'] == id]
+                    list_val_df.append(v_df_cid)
+
+                list_trainLoaders = []
+                for df in list_train_df:
+                    print()
+
+
+
+                logger.info('---------------------------------------------------------')
+    
+
 
         elif args.training_type == 'IFT':
             logger.info("Loading the dataset class for instruction fine-tuning task...")
@@ -740,6 +867,8 @@ if __name__ == '__main__':
 
         if args.pre_save_model is None:
 
+            checkpoint = None
+
             try:
                 logger.info(f'Loading the weights of the base model : {args.base_modelName}..!')
 
@@ -786,8 +915,8 @@ if __name__ == '__main__':
                     #Add the classification layer:
                     gpt2_baseInst.final_projection = torch.nn.Linear(in_features=in_features, out_features= out_features)
 
-                #Model and Optimizer are saved in the path. Loading only the model for fine-tuning:
-                checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=True)
+                #Model and Optimizer are saved in the path. Loading the model for fine-tuning:
+                checkpoint = torch.load(model_path, map_location=torch.device("cpu"), weights_only=False)
                 gpt2_baseInst.load_state_dict(checkpoint['model'] )
 
                 gpt2_baseInst.eval()
@@ -914,6 +1043,16 @@ if __name__ == '__main__':
 
             logger.info(f'Training Stage : LoRA Layers Added ..!')
 
+        elif args.peft_type == 'lora_merge':
+            logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
+
+            #Logic for using class-wise lora adapters:
+            params_orig = freeze_model(gpt2_baseInst)
+            logger.info(f'Total trainable paramters in the original model: {params_orig}.')
+
+            class_names = getClassNames(train_df)
+            classWise_lora_parameterizaton(model=gpt2_baseInst, rank = args.lora_rank, alpha = args.lora_alpha, class_names=class_names)
+
         else:
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
 
@@ -931,10 +1070,30 @@ if __name__ == '__main__':
 
             logger.info(f'Training Stage : Fine-tuning of the model started ..!')
 
-            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=5e-4, weight_decay=0.1)
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
+                                    betas = (args.beta1, args.beta2), eps=1e-8) #lr=5e-4
+            
+            if checkpoint is not None:
+                optimizer.load_state_dict(checkpoint['optimizer'])
 
             epochs = args.num_epochs
 
+            if args.loss_type == 'focal':
+                save_classWeight_path = os.path.join(MODEL_ROOT_FOLDER,"focal_loss_class_weights.pkl")
+
+                if not os.path.exists(path=save_classWeight_path):
+                    focal_weights = get_focal_weights(train_df, label= 'review_rating', logger=logger) #Change the label value according to the given dataset
+                    with open(save_classWeight_path, 'wb+') as fp:
+                        pickle.dump(focal_weights, fp)
+
+                else:
+                    with open(save_classWeight_path, 'rb') as fp:
+                        focal_weights = pickle.load(fp)
+                        logger.info(f'Focal Class Weight dictionary loaded ..!')
+
+            else:
+                focal_weights = None
+    
             #Save the SFT Model:
             save_model_name = args.model_name + '.pth'
             save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
@@ -952,7 +1111,12 @@ if __name__ == '__main__':
                                 initial_lr=args.initial_lr,
                                 min_lr=args.min_lr,
                                 use_warmup=args.use_warmup,
-                                use_gradient_clip=args.use_gradient_clip
+                                use_gradient_clip=args.use_gradient_clip,
+                                focal=args.focal,
+                                alpha=focal_weights,
+                                gamma=args.gamma,
+                                pos_token=args.pos_token,
+                                avg_emb=args.average_embedding
                                 ) 
 
             train_losses, test_losses, train_accuracy, val_accuracy, num_samples, track_lr = gpt2_trainer.train(save_model_path)
@@ -1063,7 +1227,11 @@ if __name__ == '__main__':
 
             logger.info(f'Training Stage : Fine-tuning of the model started ..!')
 
-            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=0.00005, weight_decay=0.1)
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
+                                    betas = (args.beta1, args.beta2), eps=1e-8) #lr=0.00005
+
+            if checkpoint is not None:
+                optimizer.load_state_dict(checkpoint['optimizer'])
 
             epochs = args.num_epochs
 
@@ -1177,7 +1345,12 @@ if __name__ == '__main__':
 
             logger.info(f'Training Stage : Fine-tuning of the model started ..!')
 
-            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=5e-6, weight_decay=0.01)
+            optimizer = torch.optim.AdamW(gpt2_baseInst.parameters(), lr=args.learning_rate, weight_decay=args.weight_decay,
+                                    betas = (args.beta1, args.beta2), eps=1e-8) #lr=5e-6
+            
+            if checkpoint is not None:
+                optimizer.load_state_dict(checkpoint['optimizer'])
+
             epochs = args.num_epochs
 
             #PFT Model Save Path:
@@ -1195,7 +1368,7 @@ if __name__ == '__main__':
                                                     device=device,
                                                     start_context=start_context,
                                                     max_new_tokens=args.max_new_tokens,
-                                                    beta = args.beta,
+                                                    beta = args.dpo_beta,
                                                     log_path=logger,                        #Pass the logger object instead of logging path
                                                     warmup_steps=args.warmup_steps,
                                                     initial_lr=args.initial_lr,
@@ -1269,24 +1442,3 @@ if __name__ == '__main__':
         except Exception as e:
             logger.error(f'Error in model evaluation stage : {e}')
             raise Exception(f'Error in model evaluation stage : {e}')
-
-
-        
-
-
-
-                
-
-
-
-
-                
-        
-
-
-
-
-
-        
-    
-    
