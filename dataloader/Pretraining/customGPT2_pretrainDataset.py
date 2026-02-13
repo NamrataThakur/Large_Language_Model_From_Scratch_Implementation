@@ -11,7 +11,7 @@ class GPTCustomPretrainDataset(Dataset):
 
         for row in input_data:
             raw_text = row['text']
-            encoded_text = tokenizer.encode(raw_text, allowed_special={"<|endoftext|>"})
+            encoded_text = tokenizer.encode(raw_text, allowed_special={'<|endoftext|>'})
 
             row_length = len(encoded_text)
             self.total_tokens = self.total_tokens + row_length
