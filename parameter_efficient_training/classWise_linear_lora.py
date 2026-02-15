@@ -3,7 +3,7 @@ from .lora import LORA
 import torch.nn as nn
 import os
 
-class ClassLinearWithLORA(torch.nn.module):
+class ClassLinearWithLORA(torch.nn.Module):
     def __init__(self, linear, classLoraAdapters):
         super().__init__()
 
