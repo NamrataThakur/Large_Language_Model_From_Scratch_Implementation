@@ -10,7 +10,6 @@ class GroupQueryAttention(nn.Module):
         self.dim_out = config['embedding_dimension']
         self.num_heads = config['num_heads']
         self.context_length = config['context_length']
-        self.dropout = config['dropout']
 
         self.kv_groups = self.num_heads if config['num_kv_groups'] == 0 else config['num_kv_groups'] #If the given KV group is 0, then GQA == MHA
         assert (self.num_heads % self.kv_groups == 0), 'Number of heads needs to be divisible by selected KV groups'
@@ -24,6 +23,8 @@ class GroupQueryAttention(nn.Module):
 
         self.W_key = nn.Linear(self.dim_in, self.kv_groups * self.dim_head, bias=config['qkv_bias'])
         self.W_value = nn.Linear(self.dim_in, self.kv_groups * self.dim_head, bias=config['qkv_bias'])
+
+        self.dropout = nn.Dropout(config['attn_dropout'])
 
         self.out_projection = nn.Linear(self.dim_out, self.dim_in, bias=config['qkv_bias'])
 
@@ -104,6 +105,9 @@ class GroupQueryAttention(nn.Module):
         #Compute normalized and scaled attention weights
         dim_k = Vec_key.shape[-1]
         attention_weight = torch.softmax(masked_attention_score / dim_k**0.5, dim=-1)
+
+        #Attention Dropout:
+        attention_weight = self.dropout(attention_weight)
 
         #Compute the context vectors using the sparse attention weights and value vector
         context_vector = attention_weight @ Vec_value
