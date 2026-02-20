@@ -10,6 +10,7 @@ class GQAGPT2(nn.Module):
 
         self.config = config
         self.token_embedding = nn.Embedding(self.config['vocab_size'],self.config['embedding_dimension'])
+        self.token_dropout = nn.Dropout(self.config['token_dropout'])
 
         #NEW FEATURE: KV_CACHE
         # Sequential takes only 1 Parameter (input tensor), we need to send cache flag too. So, changed to ModuleList
@@ -22,6 +23,7 @@ class GQAGPT2(nn.Module):
         self.current_pos = 0
         
         self.rope_angles = RoPE(self.config) 
+        self.final_projection.weight = self.token_embedding.weight
 
     
     #cache --> object of KVCache class:
@@ -58,6 +60,9 @@ class GQAGPT2(nn.Module):
         #Explicitely broadcast the mask:
         #Shape : (context_length, context_length) --> (batch, dim_head, context_length, context_length)
         mask = mask[None, None, :, :]
+
+        #Pass the input through the dropout layer:
+        input = self.token_dropout(input)
 
         #NEW FEATURE: KV_CACHE
         #Pass the input through the transformer blocks
