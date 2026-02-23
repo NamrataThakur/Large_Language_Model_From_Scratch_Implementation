@@ -53,7 +53,7 @@ class GQAGPT2(nn.Module):
 
             #KV_cache is not being used, so position embedding and mask needs to be created for the entire sequence:
             mask = torch.triu(
-                                torch.ones(context_length, context_length, device=input_tensor.device, dtype=bool),
+                                torch.ones(context_length, context_length, device=input_tensor.device, dtype=torch.bool),
                                 diagonal= 1
                             )
             
