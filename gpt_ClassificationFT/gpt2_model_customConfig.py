@@ -14,6 +14,7 @@ class GPT2_CustomConfig:
             'qkv_bias':arg_config['qkv_bias'],
             'num_layers':arg_config['num_layers'],
             'ff_hidden_dim':arg_config['ff_hidden_dim'],
+            'causal_mask':True,
 
             # RMS Configs:
             'rms_eps':arg_config['rms_eps'],
