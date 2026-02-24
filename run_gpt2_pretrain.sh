@@ -96,14 +96,14 @@
 #Pre-training params for Mixture of Experts based GPT2 model:
 
 num_epochs=1
-top_k=20
+top_k=30
 temp=1
 max_new_tokens=50
-context_length=384
+context_length=256
 vocab_size=50257
-embedding_dimension=384
+embedding_dimension=512
 num_heads=8
-num_layers=8
+num_layers=8 #12
 qkv_bias=False
 eval_batchSize=64
 eval_freq=64
@@ -113,37 +113,37 @@ beta2=0.95
 val_split=0.05
 train_split=0.85
 batch_size=16
-target_batch_size=512 #1024 
+target_batch_size=256 #1024 
 seed=123
 dropout_rate=0.2 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
-token_dropout_rate=0.01
-attention_dropout_rate=0.3
-ffn_dropout_rate=0.3
+token_dropout_rate=0.03
+attention_dropout_rate=0.2
+ffn_dropout_rate=0.2 #Used only in MoE Achitecture
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
 warmup_steps=0.05
 initial_lr=0.00003 #3e-05
 #min_lr=0.000001 #--> being calculated as 0.1 * of max LR
-learning_rate=6e-4 #0.0008 #3e-4 --> Good LR (Karpathy) #6e-4
+learning_rate=0.0003 #0.0008 #3e-4 --> Good LR (Karpathy) #6e-4
 rms_eps=1e-6
 rms_bias=True
 theta_base=10000.0
 num_experts=4
 num_active_experts=2
-num_kv_groups=2
+num_kv_groups=4
 ff_hidden_dim=1024
-arch_type='MOE'
+arch_type='GQA'
 kv_cache=True
 moe_noise=True
-train_type='scratch'
+train_type='resume'
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_MoEarch_S_V1' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_GQAarch_S_V1_resume' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
-  --model_name 'gpt2_MOE_preTrain_S_V1' \
-  --pre_save_model 'gpt2_MOE_preTrain_S_V1.pth' \
+  --model_name 'gpt2_GQA_preTrain_S_V1' \
+  --pre_save_model 'gpt2_GQA_preTrain_S_V1.pth' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \

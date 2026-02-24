@@ -47,7 +47,7 @@ class Metrics:
     def loss_batch(self,input_batch, target_batch ):
         input_batch, target_batch = input_batch.to(self.device), target_batch.to(self.device)
         output_logits = self.model(input_batch)
-        ce_loss = torch.nn.functional.cross_entropy(output_logits.flatten(0,1), target_batch.flatten())
+        ce_loss = torch.nn.functional.cross_entropy(output_logits.flatten(0,1), target_batch.flatten(), label_smoothing=0.05)
         return ce_loss
 
     @torch.no_grad()  # Disable gradient tracking for efficiency
