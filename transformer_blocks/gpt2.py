@@ -6,6 +6,7 @@ from huggingface_hub import PyTorchModelHubMixin
 import os
 import configparser
 from parameter_efficient_training.apply_lora import *
+from parameter_efficient_training.classWise_gated_lora import LoRAGateBlock
 from gpt_ClassificationFT.gpt2_model_config import GPT2_ModelConfig
 from gpt_ClassificationFT.gpt2_model_customConfig import GPT2_CustomConfig
 import requests
@@ -19,11 +20,12 @@ MODEL_ROOT_FOLDER = path_config['PATHS']['MODEL_ROOT_FOLDER']
 
 
 class GPT2(nn.Module, PyTorchModelHubMixin):
-    def __init__(self, config):
+    def __init__(self, config, adapter_names = None):
         super().__init__()
         self.token_embedding = nn.Embedding(config['vocab_size'],config['embedding_dimension'])
         self.pos_embedding = nn.Embedding(config['context_length'],config['embedding_dimension'])
         self.token_dropout = nn.Dropout(config['dropout'])
+        self.adapter_names = adapter_names
 
         # self.transformer_block = nn.Sequential(
         #     *[TransformerBlock(config) for _ in range(config['num_layers'])]
@@ -33,6 +35,10 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         self.transformer_block = nn.ModuleList(
             [TransformerBlock(config) for _ in range(config['num_layers'])]
         )
+
+        #NEW FEATURE: Class wise Lora merge feature:
+        if self.adapter_names is not None:
+            self.lora_gates = LoRAGateBlock(config=config, adapter_names=adapter_names)
 
         self.current_pos = 0
 
@@ -45,6 +51,7 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         batch_size, context_length = token_list.shape
 
         #Get the embeddings for the list of tokens:
+        #Shape: (b, context_length, emb_dim)
         token_embed = self.token_embedding(token_list)
 
         #NEW FEATURE: KV_CACHE
@@ -80,7 +87,17 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         pos_embed = self.pos_embedding(pos_id).unsqueeze(0)
 
         #Final Embeddings:
+        #Shape: (b, context_length, emb_dim)
         input = token_embed + pos_embed
+
+        #NEW FEAT: Getting the class probabililtes using Lora Gates Block
+        if self.adapter_names is not None:
+            #Mean pooling over the context length dimension:
+            #Shape: (b, emb_dim)
+            lora_inputs = input.mean(dim=1)
+            lora_gates = self.lora_gates(lora_inputs)
+        else:
+            lora_gates = None
 
         #Pass the input through the dropout layer:
         input = self.token_dropout(input)
@@ -89,13 +106,14 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
         #Pass the dropped out input through the transformer blocks:
         #input = self.transformer_block(input)
         for block in self.transformer_block:
-            input = block(input, mask=mask, cache = cache)
+            #NEW FEAT: Pass the lora gated class probabilities to each transformer blocks
+            input = block(input, mask=mask, cache = cache, lora_gates = lora_gates)
 
         #Pass the output through the final layer normalization block:
         input = self.final_layerNorm(input)
 
         #Pass the output through the final projection/linear layer:
-        logits = self.final_projection(input)
+        logits = self.final_projection(input, lora_gates = lora_gates)
 
         return logits
     
@@ -108,6 +126,7 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
 
         self.current_pos = 0
     
+    #Update to load pretrained model
     @classmethod
     def custom_from_pretrained(self, base_modelName, model_name, device_str='cuda', num_classes = None, classify = False, 
                                                                 lora = False, pretrain = False, config = 'original',
