@@ -3,8 +3,9 @@ import torch.nn as nn
 from .rmsnorm import RMSNormalization
 from .RoPE import RoPE
 from .transformer_gqa import GQATransformerBlock
+from huggingface_hub import PyTorchModelHubMixin
 
-class GQAGPT2(nn.Module):
+class GQAGPT2(nn.Module, PyTorchModelHubMixin):
     def __init__(self, config):
         super().__init__()
 
