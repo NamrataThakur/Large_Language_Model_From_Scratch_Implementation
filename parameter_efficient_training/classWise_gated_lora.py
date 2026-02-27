@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 
-class LoRAGateBlock(torch.nn.module):
+class LoRAGateBlock(torch.nn.Module):
     def __init__(self, config, adapter_names): 
         super().__init__()
 
