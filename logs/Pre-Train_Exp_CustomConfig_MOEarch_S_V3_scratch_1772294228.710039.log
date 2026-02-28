@@ -1,0 +1,1532 @@
+[2026-02-28 15:57:08,711.711] Namespace(experiment_name='Pre-Train_Exp_CustomConfig_MOEarch_S_V3_scratch', data_path='tinystories', model_type='custom', base_modelName='gpt2_124M', model_name='gpt2_MOE_preTrain_S_V3', pre_save_model='gpt2_MOE_preTrain_S_V3.pth', tokenizer='tiktoken', seed=123, batch_size=16, target_batch_size=256, train_split=0.85, val_split=0.05, optimizer='AdamW', context_length=256, vocab_size=50257, embedding_dimension=768, num_heads=12, num_layers=8, dropout_rate=0.2, token_dropout_rate=0.03, attention_dropout_rate=0.2, ffn_dropout_rate=0.2, qkv_bias=False, ff_hidden_dim=1024, eval_batchSize=64, eval_freq=64, kv_cache=True, weight_decay=0.1, beta1=0.9, beta2=0.95, rms_eps=1e-06, rms_bias=True, theta_base=10000.0, num_kv_groups=4, num_experts=4, num_active_experts=2, max_training_length='model_context_length', max_new_tokens=50, temp=1.0, top_k=30, num_epochs=1, max_steps=5000, eos_id=50256, arch_type='MOE', train_type='scratch', moe_noise=True, use_warmup=True, use_gradient_clip=True, warmup_steps=0.066, initial_lr=3e-05, min_lr=1e-06, learning_rate=0.0003)
+[2026-02-28 15:57:09,041.041] Model to be trained from scratch ..!
+[2026-02-28 15:57:09,041.041] Custom GPT2 configuration to be used for pre-training..!
+[2026-02-28 15:57:09,041.041] The custom config of the model to be trained : {'vocab_size': 50257, 'embedding_dimension': 768, 'num_heads': 12, 'context_length': 256, 'token_dropout': 0.03, 'attn_dropout': 0.2, 'ffn_dropout': 0.2, 'qkv_bias': False, 'num_layers': 8, 'ff_hidden_dim': 1024, 'causal_mask': True, 'rms_eps': 1e-06, 'rms_bias': True, 'theta_base': 10000.0, 'num_kv_groups': 4, 'num_experts': 4, 'num_active_experts': 2, 'moe_noise': True} 
+[2026-02-28 15:57:10,679.679] Architecture Type :MOE
+[2026-02-28 15:57:10,681.681] Configuration of the custom GPT2 model loaded..!
+[2026-02-28 15:57:11,900.900] Total records in Train Data: 2119719 , Validation Data : 21990
+[2026-02-28 15:57:11,904.904] Sample Text : One day, a little girl named Lily found a needle in her room. She knew it was difficult to play with
+[2026-02-28 15:57:11,904.904] ------------- Data Ingestion Completed. -------------
+[2026-02-28 15:57:11,905.905] Loading the dataset class for pre-training...
+[2026-02-28 15:57:11,955.955] Device Available: cuda .. ! 
+[2026-02-28 16:10:59,465.465] ************** TRAIN DATALOADER ****************************
+[2026-02-28 16:10:59,470.470] Length of Train Dataloader (number of batches): 264964
+[2026-02-28 16:10:59,471.471] Total Train Tokens : 471872517
+[2026-02-28 16:11:05,931.931] torch.Size([16, 256]), torch.Size([16, 256])
+[2026-02-28 16:11:06,006.006] ************** VAL DATALOADER ****************************
+[2026-02-28 16:11:06,006.006] Length of Val Dataloader (number of batches): 2748
+[2026-02-28 16:11:06,006.006] Total Validation Tokens : 4743928
+[2026-02-28 16:11:06,063.063] torch.Size([16, 256]), torch.Size([16, 256])
+[2026-02-28 16:11:06,067.067] Dataloaders created successfully for pre-training task..!
+[2026-02-28 16:11:06,067.067] ---------------------------------------------------------
+[2026-02-28 16:11:06,067.067] Model will be trained from scratch..!
+[2026-02-28 16:11:06,067.067] Loading the model with random weights for training..!
+[2026-02-28 16:11:08,484.484] Model loaded with random weights for training..!
+[2026-02-28 16:11:08,495.495] Model Size : 126.753024 millions (M)
+[2026-02-28 16:11:08,496.496] Device Available: cuda .. ! 
+[2026-02-28 16:11:13,610.610] Training Stage : Model sent to cuda for fine-tuning..!
+[2026-02-28 16:11:13,612.612] Training Stage : Training of the model started ..!
+[2026-02-28 16:11:16,520.520] Minimum LR : 2.9999999999999997e-05
+[2026-02-28 16:11:16,520.520] Gradient Accumulation Steps : 16
+[2026-02-28 16:11:16,521.521] Model Training From SCRATCH..
+[2026-02-28 16:11:16,522.522] Maximum Learning Rate : 0.0003.
+[2026-02-28 16:11:16,522.522] Default Minimum Loss: 10
+[2026-02-28 16:11:16,522.522] Value found for max_steps Steps : 5000. Using that..!
+[2026-02-28 16:11:16,522.522] Total steps to update optimizer : 5000.
+[2026-02-28 16:11:16,523.523] Total training steps acc. to train loader : 264964
+[2026-02-28 16:11:16,523.523] Warmup Steps : 330
+[2026-02-28 16:11:16,523.523] Learning Rate Increment By : 8.18181818181818e-07.
+[2026-02-28 16:11:34,934.934] Gradient updated
+[2026-02-28 16:11:34,935.935] Current Learning Rate : 3e-05
+[2026-02-28 16:11:34,935.935] Global Step : 0
+[2026-02-28 16:11:34,935.935] Batch Index : 16
+[2026-02-28 16:12:05,204.204] Epoch No: 1, Global Step: 000000, Train Loss: 10.054, Val Loss: 10.119
+
+[2026-02-28 16:12:05,208.208] Total Tokens seen till now: 65472
+
+[2026-02-28 16:12:06,933.933] Once upon a time, D deeper successor conduit conduit Catal Airportiator kickingHOME noticeably since Dolール cottage enterwarningtechn technologically playoffsCSS 108 farmshement« Franz playoffs hep CatalCSS=> stir scrap manpowerAttorney since conswarning020020 supplied Franz tenantabsolute scrap observes petroleum 1959 Know
+[2026-02-28 16:12:18,917.917] Gradient updated
+[2026-02-28 16:12:18,929.929] Current Learning Rate : 3.0818181818181816e-05
+[2026-02-28 16:12:18,929.929] Global Step : 1
+[2026-02-28 16:12:18,929.929] Batch Index : 32
+[2026-02-28 16:12:49,299.299] Epoch No: 1, Global Step: 000001, Train Loss: 9.453, Val Loss: 9.607
+
+[2026-02-28 16:12:49,300.300] Total Tokens seen till now: 131008
+
+[2026-02-28 16:12:53,711.711] BEST model SAVED on iteration 000001 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:12:53,869.869] Once upon a time, looksVo fish hol
+[2026-02-28 16:13:05,937.937] Gradient updated
+[2026-02-28 16:13:05,938.938] Current Learning Rate : 3.1636363636363635e-05
+[2026-02-28 16:13:05,939.939] Global Step : 2
+[2026-02-28 16:13:05,939.939] Batch Index : 48
+[2026-02-28 16:13:36,916.916] Epoch No: 1, Global Step: 000002, Train Loss: 9.097, Val Loss: 9.275
+
+[2026-02-28 16:13:36,917.917] Total Tokens seen till now: 196544
+
+[2026-02-28 16:13:41,124.124] BEST model SAVED on iteration 000002 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:13:41,205.205] Once upon a time, fish disson
+[2026-02-28 16:13:53,271.271] Gradient updated
+[2026-02-28 16:13:53,272.272] Current Learning Rate : 3.2454545454545454e-05
+[2026-02-28 16:13:53,272.272] Global Step : 3
+[2026-02-28 16:13:53,272.272] Batch Index : 64
+[2026-02-28 16:14:24,066.066] Epoch No: 1, Global Step: 000003, Train Loss: 8.690, Val Loss: 9.061
+
+[2026-02-28 16:14:24,066.066] Total Tokens seen till now: 262080
+
+[2026-02-28 16:14:28,834.834] BEST model SAVED on iteration 000003 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:14:28,954.954] Once upon a time, Pal enthusiasts
+[2026-02-28 16:14:41,079.079] Gradient updated
+[2026-02-28 16:14:41,080.080] Current Learning Rate : 3.327272727272727e-05
+[2026-02-28 16:14:41,080.080] Global Step : 4
+[2026-02-28 16:14:41,080.080] Batch Index : 80
+[2026-02-28 16:15:12,139.139] Epoch No: 1, Global Step: 000004, Train Loss: 8.632, Val Loss: 8.947
+
+[2026-02-28 16:15:12,139.139] Total Tokens seen till now: 327616
+
+[2026-02-28 16:15:15,746.746] BEST model SAVED on iteration 000004 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:15:15,806.806] Once upon a time,Red
+[2026-02-28 16:15:27,942.942] Gradient updated
+[2026-02-28 16:15:27,942.942] Current Learning Rate : 3.409090909090909e-05
+[2026-02-28 16:15:27,942.942] Global Step : 5
+[2026-02-28 16:15:27,942.942] Batch Index : 96
+[2026-02-28 16:15:58,969.969] Epoch No: 1, Global Step: 000005, Train Loss: 8.585, Val Loss: 8.860
+
+[2026-02-28 16:15:58,969.969] Total Tokens seen till now: 393152
+
+[2026-02-28 16:16:02,495.495] BEST model SAVED on iteration 000005 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:16:02,597.597] Once upon a time, Baseball
+[2026-02-28 16:16:14,736.736] Gradient updated
+[2026-02-28 16:16:14,737.737] Current Learning Rate : 3.490909090909091e-05
+[2026-02-28 16:16:14,737.737] Global Step : 6
+[2026-02-28 16:16:14,738.738] Batch Index : 112
+[2026-02-28 16:16:45,628.628] Epoch No: 1, Global Step: 000006, Train Loss: 8.380, Val Loss: 8.728
+
+[2026-02-28 16:16:45,628.628] Total Tokens seen till now: 458672
+
+[2026-02-28 16:16:49,389.389] BEST model SAVED on iteration 000006 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:16:49,470.470] Once upon a time, speaking
+[2026-02-28 16:17:01,517.517] Gradient updated
+[2026-02-28 16:17:01,518.518] Current Learning Rate : 3.5727272727272723e-05
+[2026-02-28 16:17:01,518.518] Global Step : 7
+[2026-02-28 16:17:01,518.518] Batch Index : 128
+[2026-02-28 16:17:32,624.624] Epoch No: 1, Global Step: 000007, Train Loss: 8.247, Val Loss: 8.584
+
+[2026-02-28 16:17:32,624.624] Total Tokens seen till now: 523856
+
+[2026-02-28 16:17:36,147.147] BEST model SAVED on iteration 000007 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:17:36,232.232] Once upon a time,rador.
+[2026-02-28 16:17:48,252.252] Gradient updated
+[2026-02-28 16:17:48,252.252] Current Learning Rate : 3.654545454545454e-05
+[2026-02-28 16:17:48,252.252] Global Step : 8
+[2026-02-28 16:17:48,253.253] Batch Index : 144
+[2026-02-28 16:18:19,105.105] Epoch No: 1, Global Step: 000008, Train Loss: 8.144, Val Loss: 8.478
+
+[2026-02-28 16:18:19,105.105] Total Tokens seen till now: 588912
+
+[2026-02-28 16:18:22,561.561] BEST model SAVED on iteration 000008 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:18:22,706.706] Once upon a time,.iosfriend. Conduct
+[2026-02-28 16:18:34,806.806] Gradient updated
+[2026-02-28 16:18:34,807.807] Current Learning Rate : 3.736363636363636e-05
+[2026-02-28 16:18:34,807.807] Global Step : 9
+[2026-02-28 16:18:34,807.807] Batch Index : 160
+[2026-02-28 16:19:05,766.766] Epoch No: 1, Global Step: 000009, Train Loss: 8.060, Val Loss: 8.402
+
+[2026-02-28 16:19:05,766.766] Total Tokens seen till now: 654448
+
+[2026-02-28 16:19:09,324.324] BEST model SAVED on iteration 000009 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:19:09,578.578] Once upon a time, aRush partitions inequalitiesinated.,
+[2026-02-28 16:19:21,666.666] Gradient updated
+[2026-02-28 16:19:21,667.667] Current Learning Rate : 3.818181818181818e-05
+[2026-02-28 16:19:21,667.667] Global Step : 10
+[2026-02-28 16:19:21,668.668] Batch Index : 176
+[2026-02-28 16:19:52,549.549] Epoch No: 1, Global Step: 000010, Train Loss: 8.069, Val Loss: 8.309
+
+[2026-02-28 16:19:52,549.549] Total Tokens seen till now: 719840
+
+[2026-02-28 16:19:56,227.227] BEST model SAVED on iteration 000010 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:19:56,326.326] Once upon a time,Che. Fernando
+[2026-02-28 16:20:08,479.479] Gradient updated
+[2026-02-28 16:20:08,479.479] Current Learning Rate : 3.9e-05
+[2026-02-28 16:20:08,479.479] Global Step : 11
+[2026-02-28 16:20:08,479.479] Batch Index : 192
+[2026-02-28 16:20:39,247.247] Epoch No: 1, Global Step: 000011, Train Loss: 7.906, Val Loss: 8.203
+
+[2026-02-28 16:20:39,248.248] Total Tokens seen till now: 785376
+
+[2026-02-28 16:20:42,673.673] BEST model SAVED on iteration 000011 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:20:43,105.105] Once upon a time,. Baseball. a Site727. dys. jihadistreetings.. jihadist... the
+[2026-02-28 16:20:55,280.280] Gradient updated
+[2026-02-28 16:20:55,281.281] Current Learning Rate : 3.981818181818182e-05
+[2026-02-28 16:20:55,281.281] Global Step : 12
+[2026-02-28 16:20:55,281.281] Batch Index : 208
+[2026-02-28 16:21:25,918.918] Epoch No: 1, Global Step: 000012, Train Loss: 7.759, Val Loss: 8.106
+
+[2026-02-28 16:21:25,918.918] Total Tokens seen till now: 850912
+
+[2026-02-28 16:21:29,326.326] BEST model SAVED on iteration 000012 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:21:29,546.546] Once upon a time,Leave. the...
+[2026-02-28 16:21:41,593.593] Gradient updated
+[2026-02-28 16:21:41,594.594] Current Learning Rate : 4.063636363636364e-05
+[2026-02-28 16:21:41,595.595] Global Step : 13
+[2026-02-28 16:21:41,595.595] Batch Index : 224
+[2026-02-28 16:22:12,334.334] Epoch No: 1, Global Step: 000013, Train Loss: 7.765, Val Loss: 8.026
+
+[2026-02-28 16:22:12,334.334] Total Tokens seen till now: 916032
+
+[2026-02-28 16:22:15,857.857] BEST model SAVED on iteration 000013 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:22:15,960.960] Once upon a time, the dens.
+[2026-02-28 16:22:28,062.062] Gradient updated
+[2026-02-28 16:22:28,063.063] Current Learning Rate : 4.145454545454545e-05
+[2026-02-28 16:22:28,063.063] Global Step : 14
+[2026-02-28 16:22:28,063.063] Batch Index : 240
+[2026-02-28 16:22:58,866.866] Epoch No: 1, Global Step: 000014, Train Loss: 7.666, Val Loss: 7.949
+
+[2026-02-28 16:22:58,867.867] Total Tokens seen till now: 981568
+
+[2026-02-28 16:23:02,699.699] BEST model SAVED on iteration 000014 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:23:03,153.153] Once upon a time,.... let.Leave,wiki... sign.,
+[2026-02-28 16:23:15,264.264] Gradient updated
+[2026-02-28 16:23:15,265.265] Current Learning Rate : 4.2272727272727275e-05
+[2026-02-28 16:23:15,265.265] Global Step : 15
+[2026-02-28 16:23:15,266.266] Batch Index : 256
+[2026-02-28 16:23:46,161.161] Epoch No: 1, Global Step: 000015, Train Loss: 7.603, Val Loss: 7.863
+
+[2026-02-28 16:23:46,161.161] Total Tokens seen till now: 1047104
+
+[2026-02-28 16:23:49,738.738] BEST model SAVED on iteration 000015 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:23:50,016.016] Once upon a time, a..,....
+[2026-02-28 16:24:02,212.212] Gradient updated
+[2026-02-28 16:24:02,212.212] Current Learning Rate : 4.309090909090909e-05
+[2026-02-28 16:24:02,213.213] Global Step : 16
+[2026-02-28 16:24:02,213.213] Batch Index : 272
+[2026-02-28 16:24:33,233.233] Epoch No: 1, Global Step: 000016, Train Loss: 7.520, Val Loss: 7.783
+
+[2026-02-28 16:24:33,234.234] Total Tokens seen till now: 1112640
+
+[2026-02-28 16:24:36,865.865] BEST model SAVED on iteration 000016 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:24:37,241.241] Once upon a time, was.......... a. to to
+[2026-02-28 16:24:49,358.358] Gradient updated
+[2026-02-28 16:24:49,360.360] Current Learning Rate : 4.3909090909090906e-05
+[2026-02-28 16:24:49,361.361] Global Step : 17
+[2026-02-28 16:24:49,361.361] Batch Index : 288
+[2026-02-28 16:25:20,271.271] Epoch No: 1, Global Step: 000017, Train Loss: 7.358, Val Loss: 7.714
+
+[2026-02-28 16:25:20,271.271] Total Tokens seen till now: 1178112
+
+[2026-02-28 16:25:24,055.055] BEST model SAVED on iteration 000017 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:25:24,623.623] Once upon a time, to.Ma........... until.
+[2026-02-28 16:25:36,716.716] Gradient updated
+[2026-02-28 16:25:36,717.717] Current Learning Rate : 4.4727272727272725e-05
+[2026-02-28 16:25:36,717.717] Global Step : 18
+[2026-02-28 16:25:36,717.717] Batch Index : 304
+[2026-02-28 16:26:07,630.630] Epoch No: 1, Global Step: 000018, Train Loss: 7.341, Val Loss: 7.644
+
+[2026-02-28 16:26:07,631.631] Total Tokens seen till now: 1243648
+
+[2026-02-28 16:26:11,481.481] BEST model SAVED on iteration 000018 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:26:11,980.980] Once upon a time,. root..... and..... spreading. and...
+[2026-02-28 16:26:24,081.081] Gradient updated
+[2026-02-28 16:26:24,082.082] Current Learning Rate : 4.5545454545454544e-05
+[2026-02-28 16:26:24,082.082] Global Step : 19
+[2026-02-28 16:26:24,082.082] Batch Index : 320
+[2026-02-28 16:26:54,983.983] Epoch No: 1, Global Step: 000019, Train Loss: 7.262, Val Loss: 7.570
+
+[2026-02-28 16:26:54,984.984] Total Tokens seen till now: 1309184
+
+[2026-02-28 16:26:58,546.546] BEST model SAVED on iteration 000019 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:26:59,302.302] Once upon a time,...Ma a. a to.... to to.... ground.. her and.
+[2026-02-28 16:27:11,398.398] Gradient updated
+[2026-02-28 16:27:11,399.399] Current Learning Rate : 4.636363636363636e-05
+[2026-02-28 16:27:11,399.399] Global Step : 20
+[2026-02-28 16:27:11,399.399] Batch Index : 336
+[2026-02-28 16:27:42,357.357] Epoch No: 1, Global Step: 000020, Train Loss: 7.149, Val Loss: 7.498
+
+[2026-02-28 16:27:42,358.358] Total Tokens seen till now: 1374720
+
+[2026-02-28 16:27:46,026.026] BEST model SAVED on iteration 000020 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:27:47,157.157] Once upon a time, toy......,. a. to.......... and...............wiki......Help and.
+[2026-02-28 16:27:59,242.242] Gradient updated
+[2026-02-28 16:27:59,243.243] Current Learning Rate : 4.7181818181818175e-05
+[2026-02-28 16:27:59,243.243] Global Step : 21
+[2026-02-28 16:27:59,243.243] Batch Index : 352
+[2026-02-28 16:28:30,078.078] Epoch No: 1, Global Step: 000021, Train Loss: 7.100, Val Loss: 7.434
+
+[2026-02-28 16:28:30,079.079] Total Tokens seen till now: 1440256
+
+[2026-02-28 16:28:33,659.659] BEST model SAVED on iteration 000021 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:28:34,998.998] Once upon a time, a... sign.......,... to never. the was.... and,..., the. experimental. and to her and....
+[2026-02-28 16:28:47,144.144] Gradient updated
+[2026-02-28 16:28:47,146.146] Current Learning Rate : 4.8e-05
+[2026-02-28 16:28:47,146.146] Global Step : 22
+[2026-02-28 16:28:47,147.147] Batch Index : 368
+[2026-02-28 16:29:17,949.949] Epoch No: 1, Global Step: 000022, Train Loss: 7.103, Val Loss: 7.377
+
+[2026-02-28 16:29:17,950.950] Total Tokens seen till now: 1505792
+
+[2026-02-28 16:29:21,558.558] BEST model SAVED on iteration 000022 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:29:22,694.694] Once upon a time, was. a. a. a.. a..,... a, the a....AMS sign and..... and.,,,.. a... the,.. and
+[2026-02-28 16:29:34,814.814] Gradient updated
+[2026-02-28 16:29:34,815.815] Current Learning Rate : 4.8818181818181813e-05
+[2026-02-28 16:29:34,815.815] Global Step : 23
+[2026-02-28 16:29:34,815.815] Batch Index : 384
+[2026-02-28 16:30:05,655.655] Epoch No: 1, Global Step: 000023, Train Loss: 7.101, Val Loss: 7.322
+
+[2026-02-28 16:30:05,656.656] Total Tokens seen till now: 1571328
+
+[2026-02-28 16:30:09,554.554] BEST model SAVED on iteration 000023 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:30:10,890.890] Once upon a time,.Ma..... to, aene....Maybe. was. arail,. the, and.....,...,..... to.,.. and let was
+[2026-02-28 16:30:22,995.995] Gradient updated
+[2026-02-28 16:30:22,996.996] Current Learning Rate : 4.963636363636363e-05
+[2026-02-28 16:30:22,996.996] Global Step : 24
+[2026-02-28 16:30:22,996.996] Batch Index : 400
+[2026-02-28 16:30:53,830.830] Epoch No: 1, Global Step: 000024, Train Loss: 6.960, Val Loss: 7.269
+
+[2026-02-28 16:30:53,830.830] Total Tokens seen till now: 1636864
+
+[2026-02-28 16:30:57,235.235] BEST model SAVED on iteration 000024 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:30:58,354.354] Once upon a time, and, a longer.,,..Help,,..., a.. to. to a. was, the...., and. to......... had Binary
+[2026-02-28 16:31:10,449.449] Gradient updated
+[2026-02-28 16:31:10,450.450] Current Learning Rate : 5.045454545454545e-05
+[2026-02-28 16:31:10,450.450] Global Step : 25
+[2026-02-28 16:31:10,450.450] Batch Index : 416
+[2026-02-28 16:31:41,390.390] Epoch No: 1, Global Step: 000025, Train Loss: 6.880, Val Loss: 7.218
+
+[2026-02-28 16:31:41,391.391] Total Tokens seen till now: 1702352
+
+[2026-02-28 16:31:44,825.825] BEST model SAVED on iteration 000025 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:31:46,100.100] Once upon a time,. a.,,. to... was.., to to...... to. the that. a..... to. a the.,.....,.
+[2026-02-28 16:31:58,188.188] Gradient updated
+[2026-02-28 16:31:58,189.189] Current Learning Rate : 5.127272727272727e-05
+[2026-02-28 16:31:58,190.190] Global Step : 26
+[2026-02-28 16:31:58,190.190] Batch Index : 432
+[2026-02-28 16:32:28,943.943] Epoch No: 1, Global Step: 000026, Train Loss: 6.868, Val Loss: 7.171
+
+[2026-02-28 16:32:28,944.944] Total Tokens seen till now: 1767776
+
+[2026-02-28 16:32:32,937.937] BEST model SAVED on iteration 000026 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:32:34,141.141] Once upon a time, there a was, a.,,... a..., a..,..., the. the,, remembered remembered... the was and a... ground herrail.,. and
+[2026-02-28 16:32:46,244.244] Gradient updated
+[2026-02-28 16:32:46,245.245] Current Learning Rate : 5.209090909090909e-05
+[2026-02-28 16:32:46,245.245] Global Step : 27
+[2026-02-28 16:32:46,245.245] Batch Index : 448
+[2026-02-28 16:33:17,049.049] Epoch No: 1, Global Step: 000027, Train Loss: 6.815, Val Loss: 7.125
+
+[2026-02-28 16:33:17,050.050] Total Tokens seen till now: 1833312
+
+[2026-02-28 16:33:20,498.498] BEST model SAVED on iteration 000027 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:33:21,630.630] Once upon a time,.. a a... and. a and.. to. a,. the,....... the the... the. the... and...,... the was
+[2026-02-28 16:33:33,742.742] Gradient updated
+[2026-02-28 16:33:33,743.743] Current Learning Rate : 5.29090909090909e-05
+[2026-02-28 16:33:33,743.743] Global Step : 28
+[2026-02-28 16:33:33,743.743] Batch Index : 464
+[2026-02-28 16:34:04,562.562] Epoch No: 1, Global Step: 000028, Train Loss: 6.712, Val Loss: 7.081
+
+[2026-02-28 16:34:04,563.563] Total Tokens seen till now: 1898848
+
+[2026-02-28 16:34:08,357.357] BEST model SAVED on iteration 000028 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:34:09,710.710] Once upon a time, a a. a a,. a.. the the.... a...,. and....,... a a.,,.. a... a.
+[2026-02-28 16:34:21,717.717] Gradient updated
+[2026-02-28 16:34:21,718.718] Current Learning Rate : 5.372727272727273e-05
+[2026-02-28 16:34:21,718.718] Global Step : 29
+[2026-02-28 16:34:21,718.718] Batch Index : 480
+[2026-02-28 16:34:52,594.594] Epoch No: 1, Global Step: 000029, Train Loss: 6.665, Val Loss: 7.036
+
+[2026-02-28 16:34:52,595.595] Total Tokens seen till now: 1963968
+
+[2026-02-28 16:34:56,010.010] BEST model SAVED on iteration 000029 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:34:57,122.122] Once upon a time, and. and a a.. joke. a to..,, woman a..,...,. a.. but and. and for. was..... to.....
+[2026-02-28 16:35:09,224.224] Gradient updated
+[2026-02-28 16:35:09,224.224] Current Learning Rate : 5.454545454545454e-05
+[2026-02-28 16:35:09,224.224] Global Step : 30
+[2026-02-28 16:35:09,224.224] Batch Index : 496
+[2026-02-28 16:35:40,053.053] Epoch No: 1, Global Step: 000030, Train Loss: 6.684, Val Loss: 6.992
+
+[2026-02-28 16:35:40,053.053] Total Tokens seen till now: 2029504
+
+[2026-02-28 16:35:43,766.766] BEST model SAVED on iteration 000030 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:35:45,309.309] Once upon a time,. a ground..... and her., and. for........ a...... the cream. and,.,,. a never.... ground the.
+[2026-02-28 16:35:57,482.482] Gradient updated
+[2026-02-28 16:35:57,483.483] Current Learning Rate : 5.536363636363636e-05
+[2026-02-28 16:35:57,483.483] Global Step : 31
+[2026-02-28 16:35:57,484.484] Batch Index : 512
+[2026-02-28 16:36:28,162.162] Epoch No: 1, Global Step: 000031, Train Loss: 6.661, Val Loss: 6.949
+
+[2026-02-28 16:36:28,162.162] Total Tokens seen till now: 2095040
+
+[2026-02-28 16:36:32,214.214] BEST model SAVED on iteration 000031 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:36:33,390.390] Once upon a time, to a the. toy that the,. a to.. a and the the. the......,. the exciting a.......... of., to....
+[2026-02-28 16:36:45,488.488] Gradient updated
+[2026-02-28 16:36:45,488.488] Current Learning Rate : 5.618181818181818e-05
+[2026-02-28 16:36:45,489.489] Global Step : 32
+[2026-02-28 16:36:45,489.489] Batch Index : 528
+[2026-02-28 16:37:16,278.278] Epoch No: 1, Global Step: 000032, Train Loss: 6.642, Val Loss: 6.905
+
+[2026-02-28 16:37:16,278.278] Total Tokens seen till now: 2160576
+
+[2026-02-28 16:37:19,907.907] BEST model SAVED on iteration 000032 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:37:21,228.228] Once upon a time, she a.,. a,, was and a it.. to. and,. it..,,..,... to and. a,. to. a a.. and,,
+[2026-02-28 16:37:33,329.329] Gradient updated
+[2026-02-28 16:37:33,329.329] Current Learning Rate : 5.6999999999999996e-05
+[2026-02-28 16:37:33,329.329] Global Step : 33
+[2026-02-28 16:37:33,329.329] Batch Index : 544
+[2026-02-28 16:38:04,157.157] Epoch No: 1, Global Step: 000033, Train Loss: 6.589, Val Loss: 6.861
+
+[2026-02-28 16:38:04,157.157] Total Tokens seen till now: 2226112
+
+[2026-02-28 16:38:07,783.783] BEST model SAVED on iteration 000033 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:38:08,969.969] Once upon a time, a,Oh. a.. a a to. that. to to...,....., it. the,. a the of. a the a.,.â....,
+[2026-02-28 16:38:21,080.080] Gradient updated
+[2026-02-28 16:38:21,081.081] Current Learning Rate : 5.7818181818181815e-05
+[2026-02-28 16:38:21,081.081] Global Step : 34
+[2026-02-28 16:38:21,082.082] Batch Index : 560
+[2026-02-28 16:38:51,992.992] Epoch No: 1, Global Step: 000034, Train Loss: 6.514, Val Loss: 6.817
+
+[2026-02-28 16:38:51,992.992] Total Tokens seen till now: 2291648
+
+[2026-02-28 16:38:55,494.494] BEST model SAVED on iteration 000034 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:38:56,604.604] Once upon a time, a a a a,.... remembered, the and.,.,,. to,,. The to, the a but. the....... the...... to..
+[2026-02-28 16:39:08,745.745] Gradient updated
+[2026-02-28 16:39:08,747.747] Current Learning Rate : 5.863636363636363e-05
+[2026-02-28 16:39:08,748.748] Global Step : 35
+[2026-02-28 16:39:08,748.748] Batch Index : 576
+[2026-02-28 16:39:39,535.535] Epoch No: 1, Global Step: 000035, Train Loss: 6.518, Val Loss: 6.772
+
+[2026-02-28 16:39:39,535.535] Total Tokens seen till now: 2357184
+
+[2026-02-28 16:39:43,384.384] BEST model SAVED on iteration 000035 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:39:44,758.758] Once upon a time,. a.....,,. and... to if for the for the and and... to..... The and.,..... the. to. and. you
+[2026-02-28 16:39:56,836.836] Gradient updated
+[2026-02-28 16:39:56,838.838] Current Learning Rate : 5.945454545454545e-05
+[2026-02-28 16:39:56,839.839] Global Step : 36
+[2026-02-28 16:39:56,839.839] Batch Index : 592
+[2026-02-28 16:40:27,630.630] Epoch No: 1, Global Step: 000036, Train Loss: 6.462, Val Loss: 6.726
+
+[2026-02-28 16:40:27,631.631] Total Tokens seen till now: 2422720
+
+[2026-02-28 16:40:31,226.226] BEST model SAVED on iteration 000036 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:40:32,350.350] Once upon a time, a. a a had a,. and a. let until, and to. to the,. the, her and, the and he was. to. and her,.,,... to.. a.
+[2026-02-28 16:40:44,440.440] Gradient updated
+[2026-02-28 16:40:44,441.441] Current Learning Rate : 6.0272727272727265e-05
+[2026-02-28 16:40:44,441.441] Global Step : 37
+[2026-02-28 16:40:44,441.441] Batch Index : 608
+[2026-02-28 16:41:15,283.283] Epoch No: 1, Global Step: 000037, Train Loss: 6.381, Val Loss: 6.679
+
+[2026-02-28 16:41:15,283.283] Total Tokens seen till now: 2488256
+
+[2026-02-28 16:41:19,048.048] BEST model SAVED on iteration 000037 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:41:20,494.494] Once upon a time, a a to to.. a to, to. a.. was,...., a a.. to.,.,. the ofâ...,. her the.., and. and..
+[2026-02-28 16:41:32,579.579] Gradient updated
+[2026-02-28 16:41:32,580.580] Current Learning Rate : 6.109090909090909e-05
+[2026-02-28 16:41:32,580.580] Global Step : 38
+[2026-02-28 16:41:32,580.580] Batch Index : 624
+[2026-02-28 16:42:03,180.180] Epoch No: 1, Global Step: 000038, Train Loss: 6.362, Val Loss: 6.632
+
+[2026-02-28 16:42:03,181.181] Total Tokens seen till now: 2553728
+
+[2026-02-28 16:42:06,608.608] BEST model SAVED on iteration 000038 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:42:07,727.727] Once upon a time, a a remembered.. a a and a a.... storyâ to, to.. the.....â,....,.... a. for.... to,,.
+[2026-02-28 16:42:19,807.807] Gradient updated
+[2026-02-28 16:42:19,808.808] Current Learning Rate : 6.19090909090909e-05
+[2026-02-28 16:42:19,808.808] Global Step : 39
+[2026-02-28 16:42:19,809.809] Batch Index : 640
+[2026-02-28 16:42:50,623.623] Epoch No: 1, Global Step: 000039, Train Loss: 6.335, Val Loss: 6.585
+
+[2026-02-28 16:42:50,623.623] Total Tokens seen till now: 2619264
+
+[2026-02-28 16:42:54,213.213] BEST model SAVED on iteration 000039 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:42:55,634.634] Once upon a time,. the remembered.. loved. and. to...,.. to and.. her, to the.,.,..... to that.., to. to and
+[2026-02-28 16:43:07,588.588] Gradient updated
+[2026-02-28 16:43:07,588.588] Current Learning Rate : 6.272727272727272e-05
+[2026-02-28 16:43:07,589.589] Global Step : 40
+[2026-02-28 16:43:07,589.589] Batch Index : 656
+[2026-02-28 16:43:38,258.258] Epoch No: 1, Global Step: 000040, Train Loss: 6.295, Val Loss: 6.538
+
+[2026-02-28 16:43:38,259.259] Total Tokens seen till now: 2684016
+
+[2026-02-28 16:43:42,034.034] BEST model SAVED on iteration 000040 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:43:43,181.181] Once upon a time, there a a and, to was, a..,. the.. the and to for, the.. a to,.. the.. to., to and.. of to the,, the, she..,
+[2026-02-28 16:43:55,222.222] Gradient updated
+[2026-02-28 16:43:55,223.223] Current Learning Rate : 6.354545454545454e-05
+[2026-02-28 16:43:55,224.224] Global Step : 41
+[2026-02-28 16:43:55,224.224] Batch Index : 672
+[2026-02-28 16:44:25,990.990] Epoch No: 1, Global Step: 000041, Train Loss: 6.243, Val Loss: 6.492
+
+[2026-02-28 16:44:25,991.991] Total Tokens seen till now: 2749552
+
+[2026-02-28 16:44:29,979.979] BEST model SAVED on iteration 000041 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:44:30,554.554] Once upon a time, a a a to a a. to. the....,.... to
+[2026-02-28 16:44:42,553.553] Gradient updated
+[2026-02-28 16:44:42,554.554] Current Learning Rate : 6.436363636363635e-05
+[2026-02-28 16:44:42,554.554] Global Step : 42
+[2026-02-28 16:44:42,554.554] Batch Index : 688
+[2026-02-28 16:45:13,388.388] Epoch No: 1, Global Step: 000042, Train Loss: 6.202, Val Loss: 6.445
+
+[2026-02-28 16:45:13,389.389] Total Tokens seen till now: 2814336
+
+[2026-02-28 16:45:17,147.147] BEST model SAVED on iteration 000042 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:45:17,973.973] Once upon a time, a a a a to a a aâ,.. a that... to loved had, that. the.. and a. a.,, the. and
+[2026-02-28 16:45:30,046.046] Gradient updated
+[2026-02-28 16:45:30,047.047] Current Learning Rate : 6.518181818181818e-05
+[2026-02-28 16:45:30,047.047] Global Step : 43
+[2026-02-28 16:45:30,047.047] Batch Index : 704
+[2026-02-28 16:46:00,874.874] Epoch No: 1, Global Step: 000043, Train Loss: 6.130, Val Loss: 6.399
+
+[2026-02-28 16:46:00,874.874] Total Tokens seen till now: 2879872
+
+[2026-02-28 16:46:04,605.605] BEST model SAVED on iteration 000043 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:46:05,902.902] Once upon a time, a a a a a a loved a.,.. a. day, and. a.. day,,...... the. the,., was and to, to and the. of. the
+[2026-02-28 16:46:18,032.032] Gradient updated
+[2026-02-28 16:46:18,035.035] Current Learning Rate : 6.599999999999999e-05
+[2026-02-28 16:46:18,036.036] Global Step : 44
+[2026-02-28 16:46:18,037.037] Batch Index : 720
+[2026-02-28 16:46:48,718.718] Epoch No: 1, Global Step: 000044, Train Loss: 6.073, Val Loss: 6.352
+
+[2026-02-28 16:46:48,719.719] Total Tokens seen till now: 2945376
+
+[2026-02-28 16:46:52,766.766] BEST model SAVED on iteration 000044 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:46:53,933.933] Once upon a time, time time a a was.,. a, a a a. to..,.. and., was,,... to.,. the, to.., to the, to,,
+[2026-02-28 16:47:06,071.071] Gradient updated
+[2026-02-28 16:47:06,072.072] Current Learning Rate : 6.681818181818182e-05
+[2026-02-28 16:47:06,072.072] Global Step : 45
+[2026-02-28 16:47:06,072.072] Batch Index : 736
+[2026-02-28 16:47:36,739.739] Epoch No: 1, Global Step: 000045, Train Loss: 6.039, Val Loss: 6.306
+
+[2026-02-28 16:47:36,740.740] Total Tokens seen till now: 3010912
+
+[2026-02-28 16:47:40,820.820] BEST model SAVED on iteration 000045 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:47:41,941.941] Once upon a time, a a,., there a to,., was, to. the. her.... for.... the up,,.. was a and. and. of the.. to,. and
+[2026-02-28 16:47:54,062.062] Gradient updated
+[2026-02-28 16:47:54,063.063] Current Learning Rate : 6.763636363636363e-05
+[2026-02-28 16:47:54,063.063] Global Step : 46
+[2026-02-28 16:47:54,063.063] Batch Index : 752
+[2026-02-28 16:48:24,817.817] Epoch No: 1, Global Step: 000046, Train Loss: 6.004, Val Loss: 6.260
+
+[2026-02-28 16:48:24,818.818] Total Tokens seen till now: 3076448
+
+[2026-02-28 16:48:28,476.476] BEST model SAVED on iteration 000046 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:48:29,848.848] Once upon a time, a a a a and.,,. day., a, the, it The... to. was... the a and.,...... she,.. and and.
+[2026-02-28 16:48:41,917.917] Gradient updated
+[2026-02-28 16:48:41,918.918] Current Learning Rate : 6.845454545454544e-05
+[2026-02-28 16:48:41,918.918] Global Step : 47
+[2026-02-28 16:48:41,918.918] Batch Index : 768
+[2026-02-28 16:49:12,676.676] Epoch No: 1, Global Step: 000047, Train Loss: 5.948, Val Loss: 6.215
+
+[2026-02-28 16:49:12,677.677] Total Tokens seen till now: 3141824
+
+[2026-02-28 16:49:16,246.246] BEST model SAVED on iteration 000047 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:49:17,397.397] Once upon a time, a smile a,. a. to. the,....., the...... the was.. the and the. the.. a.. her.,. the the
+[2026-02-28 16:49:29,355.355] Gradient updated
+[2026-02-28 16:49:29,355.355] Current Learning Rate : 6.927272727272727e-05
+[2026-02-28 16:49:29,355.355] Global Step : 48
+[2026-02-28 16:49:29,356.356] Batch Index : 784
+[2026-02-28 16:50:00,159.159] Epoch No: 1, Global Step: 000048, Train Loss: 5.922, Val Loss: 6.169
+
+[2026-02-28 16:50:00,159.159] Total Tokens seen till now: 3206688
+
+[2026-02-28 16:50:03,700.700] BEST model SAVED on iteration 000048 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:50:05,207.207] Once upon a time, a, a to a, her... ground. to,.... " to,..,. to and. a,.. was to and.. it a.. and to but. a the
+[2026-02-28 16:50:17,369.369] Gradient updated
+[2026-02-28 16:50:17,369.369] Current Learning Rate : 7.009090909090908e-05
+[2026-02-28 16:50:17,369.369] Global Step : 49
+[2026-02-28 16:50:17,370.370] Batch Index : 800
+[2026-02-28 16:50:48,107.107] Epoch No: 1, Global Step: 000049, Train Loss: 5.917, Val Loss: 6.125
+
+[2026-02-28 16:50:48,107.107] Total Tokens seen till now: 3272224
+
+[2026-02-28 16:50:52,048.048] BEST model SAVED on iteration 000049 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:50:52,423.423] Once upon a time, a to a..... a,.. to the the
+[2026-02-28 16:51:04,501.501] Gradient updated
+[2026-02-28 16:51:04,501.501] Current Learning Rate : 7.09090909090909e-05
+[2026-02-28 16:51:04,501.501] Global Step : 50
+[2026-02-28 16:51:04,501.501] Batch Index : 816
+[2026-02-28 16:51:35,257.257] Epoch No: 1, Global Step: 000050, Train Loss: 5.828, Val Loss: 6.080
+
+[2026-02-28 16:51:35,257.257] Total Tokens seen till now: 3337760
+
+[2026-02-28 16:51:39,382.382] BEST model SAVED on iteration 000050 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:51:40,343.343] Once upon a time, a a a a a a, She a a and. and... his., " the,..... for,,
+[2026-02-28 16:51:52,486.486] Gradient updated
+[2026-02-28 16:51:52,487.487] Current Learning Rate : 7.172727272727272e-05
+[2026-02-28 16:51:52,487.487] Global Step : 51
+[2026-02-28 16:51:52,488.488] Batch Index : 832
+[2026-02-28 16:52:23,123.123] Epoch No: 1, Global Step: 000051, Train Loss: 5.745, Val Loss: 6.035
+
+[2026-02-28 16:52:23,124.124] Total Tokens seen till now: 3403216
+
+[2026-02-28 16:52:27,028.028] BEST model SAVED on iteration 000051 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:52:28,125.125] Once upon a time, there to a, to.,.,. a,..,.,. the.. theâ to a..,. the, the for She and. the to, and of the.,
+[2026-02-28 16:52:40,235.235] Gradient updated
+[2026-02-28 16:52:40,235.235] Current Learning Rate : 7.254545454545454e-05
+[2026-02-28 16:52:40,235.235] Global Step : 52
+[2026-02-28 16:52:40,235.235] Batch Index : 848
+[2026-02-28 16:53:10,972.972] Epoch No: 1, Global Step: 000052, Train Loss: 5.733, Val Loss: 5.991
+
+[2026-02-28 16:53:10,972.972] Total Tokens seen till now: 3468752
+
+[2026-02-28 16:53:14,619.619] BEST model SAVED on iteration 000052 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:53:15,555.555] Once upon a time, there a a.,, was..,..,â....,...... the... a..
+[2026-02-28 16:53:27,593.593] Gradient updated
+[2026-02-28 16:53:27,594.594] Current Learning Rate : 7.336363636363636e-05
+[2026-02-28 16:53:27,595.595] Global Step : 53
+[2026-02-28 16:53:27,595.595] Batch Index : 864
+[2026-02-28 16:53:58,437.437] Epoch No: 1, Global Step: 000053, Train Loss: 5.724, Val Loss: 5.947
+
+[2026-02-28 16:53:58,438.438] Total Tokens seen till now: 3533664
+
+[2026-02-28 16:54:02,347.347] BEST model SAVED on iteration 000053 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:54:02,778.778] Once upon a time,, a a a,,,. a little. a, loved. a
+[2026-02-28 16:54:14,946.946] Gradient updated
+[2026-02-28 16:54:14,947.947] Current Learning Rate : 7.418181818181817e-05
+[2026-02-28 16:54:14,947.947] Global Step : 54
+[2026-02-28 16:54:14,948.948] Batch Index : 880
+[2026-02-28 16:54:45,780.780] Epoch No: 1, Global Step: 000054, Train Loss: 5.640, Val Loss: 5.903
+
+[2026-02-28 16:54:45,781.781] Total Tokens seen till now: 3599200
+
+[2026-02-28 16:54:49,690.690] BEST model SAVED on iteration 000054 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:54:51,024.024] Once upon a time, upon a was, a to a to was was was, a to her the,. the. but. the.. The. and. his was the, the,,. but.. the. the and. had,
+[2026-02-28 16:55:03,169.169] Gradient updated
+[2026-02-28 16:55:03,171.171] Current Learning Rate : 7.5e-05
+[2026-02-28 16:55:03,172.172] Global Step : 55
+[2026-02-28 16:55:03,173.173] Batch Index : 896
+[2026-02-28 16:55:34,090.090] Epoch No: 1, Global Step: 000055, Train Loss: 5.601, Val Loss: 5.860
+
+[2026-02-28 16:55:34,090.090] Total Tokens seen till now: 3664736
+
+[2026-02-28 16:55:37,715.715] BEST model SAVED on iteration 000055 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:55:38,167.167] Once upon a time, a a there. a a,,.. the.. was and...
+[2026-02-28 16:55:50,281.281] Gradient updated
+[2026-02-28 16:55:50,282.282] Current Learning Rate : 7.58181818181818e-05
+[2026-02-28 16:55:50,282.282] Global Step : 56
+[2026-02-28 16:55:50,282.282] Batch Index : 912
+[2026-02-28 16:56:21,083.083] Epoch No: 1, Global Step: 000056, Train Loss: 5.553, Val Loss: 5.817
+
+[2026-02-28 16:56:21,084.084] Total Tokens seen till now: 3730272
+
+[2026-02-28 16:56:24,776.776] BEST model SAVED on iteration 000056 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:56:25,639.639] Once upon a time, a. she.â.... the, for the the. to The. the and. and to
+[2026-02-28 16:56:37,745.745] Gradient updated
+[2026-02-28 16:56:37,746.746] Current Learning Rate : 7.663636363636363e-05
+[2026-02-28 16:56:37,748.748] Global Step : 57
+[2026-02-28 16:56:37,748.748] Batch Index : 928
+[2026-02-28 16:57:08,501.501] Epoch No: 1, Global Step: 000057, Train Loss: 5.603, Val Loss: 5.775
+
+[2026-02-28 16:57:08,501.501] Total Tokens seen till now: 3795648
+
+[2026-02-28 16:57:12,584.584] BEST model SAVED on iteration 000057 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:57:13,687.687] Once upon a time,. a, a the... a a. the.. loved. to she. saw. a and. a. but..â his. a the she a,... a. He.. to to She
+[2026-02-28 16:57:25,859.859] Gradient updated
+[2026-02-28 16:57:25,860.860] Current Learning Rate : 7.745454545454544e-05
+[2026-02-28 16:57:25,860.860] Global Step : 58
+[2026-02-28 16:57:25,860.860] Batch Index : 944
+[2026-02-28 16:57:56,572.572] Epoch No: 1, Global Step: 000058, Train Loss: 5.547, Val Loss: 5.733
+
+[2026-02-28 16:57:56,573.573] Total Tokens seen till now: 3861184
+
+[2026-02-28 16:58:00,154.154] BEST model SAVED on iteration 000058 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:58:01,319.319] Once upon a time,, how a was was was... loved the her The to the.. was. a his... to to. of.. to to the the. to to the, the
+[2026-02-28 16:58:13,429.429] Gradient updated
+[2026-02-28 16:58:13,430.430] Current Learning Rate : 7.827272727272727e-05
+[2026-02-28 16:58:13,430.430] Global Step : 59
+[2026-02-28 16:58:13,430.430] Batch Index : 960
+[2026-02-28 16:58:44,245.245] Epoch No: 1, Global Step: 000059, Train Loss: 5.505, Val Loss: 5.691
+
+[2026-02-28 16:58:44,245.245] Total Tokens seen till now: 3926656
+
+[2026-02-28 16:58:48,120.120] BEST model SAVED on iteration 000059 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:58:49,032.032] Once upon a time, was a a a.. a was and was was a..... and and up.,., the for her a to she the and a.
+[2026-02-28 16:59:01,154.154] Gradient updated
+[2026-02-28 16:59:01,155.155] Current Learning Rate : 7.909090909090908e-05
+[2026-02-28 16:59:01,156.156] Global Step : 60
+[2026-02-28 16:59:01,156.156] Batch Index : 976
+[2026-02-28 16:59:31,936.936] Epoch No: 1, Global Step: 000060, Train Loss: 5.450, Val Loss: 5.649
+
+[2026-02-28 16:59:31,937.937] Total Tokens seen till now: 3992128
+
+[2026-02-28 16:59:35,536.536] BEST model SAVED on iteration 000060 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 16:59:36,701.701] Once upon a time, a., found a.... and. a loved., the to was that.., and.. was the the the and that the to. to he.. to to ". day. up and.
+[2026-02-28 16:59:48,756.756] Gradient updated
+[2026-02-28 16:59:48,756.756] Current Learning Rate : 7.99090909090909e-05
+[2026-02-28 16:59:48,756.756] Global Step : 61
+[2026-02-28 16:59:48,756.756] Batch Index : 992
+[2026-02-28 17:00:19,606.606] Epoch No: 1, Global Step: 000061, Train Loss: 5.433, Val Loss: 5.608
+
+[2026-02-28 17:00:19,607.607] Total Tokens seen till now: 4057664
+
+[2026-02-28 17:00:23,211.211] BEST model SAVED on iteration 000061 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:00:24,038.038] Once upon a time, was, a a. a, and was. a and, a,..,... to the the. She. of.
+[2026-02-28 17:00:36,141.141] Gradient updated
+[2026-02-28 17:00:36,141.141] Current Learning Rate : 8.072727272727272e-05
+[2026-02-28 17:00:36,142.142] Global Step : 62
+[2026-02-28 17:00:36,142.142] Batch Index : 1008
+[2026-02-28 17:01:06,914.914] Epoch No: 1, Global Step: 000062, Train Loss: 5.263, Val Loss: 5.566
+
+[2026-02-28 17:01:06,915.915] Total Tokens seen till now: 4123200
+
+[2026-02-28 17:01:10,494.494] BEST model SAVED on iteration 000062 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:01:11,682.682] Once upon a time, a,, to., was a.. a,. up., a. had. The and and and. the and.,. the,, the and,.,., and
+[2026-02-28 17:01:23,773.773] Gradient updated
+[2026-02-28 17:01:23,774.774] Current Learning Rate : 8.154545454545453e-05
+[2026-02-28 17:01:23,774.774] Global Step : 63
+[2026-02-28 17:01:23,774.774] Batch Index : 1024
+[2026-02-28 17:01:54,367.367] Epoch No: 1, Global Step: 000063, Train Loss: 5.325, Val Loss: 5.524
+
+[2026-02-28 17:01:54,367.367] Total Tokens seen till now: 4188736
+
+[2026-02-28 17:01:57,977.977] BEST model SAVED on iteration 000063 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:01:59,356.356] Once upon a time, a there and a was the the.... was and, was the the the to... and. of. the the... He the.
+[2026-02-28 17:02:11,410.410] Gradient updated
+[2026-02-28 17:02:11,410.410] Current Learning Rate : 8.236363636363636e-05
+[2026-02-28 17:02:11,410.410] Global Step : 64
+[2026-02-28 17:02:11,410.410] Batch Index : 1040
+[2026-02-28 17:02:42,188.188] Epoch No: 1, Global Step: 000064, Train Loss: 5.228, Val Loss: 5.481
+
+[2026-02-28 17:02:42,188.188] Total Tokens seen till now: 4254080
+
+[2026-02-28 17:02:45,945.945] BEST model SAVED on iteration 000064 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:02:47,104.104] Once upon a time, a a a,. to was but, to the..â a.. the toâ.... so the She, and the the and a had had't, and for.,. the
+[2026-02-28 17:02:59,143.143] Gradient updated
+[2026-02-28 17:02:59,144.144] Current Learning Rate : 8.318181818181817e-05
+[2026-02-28 17:02:59,144.144] Global Step : 65
+[2026-02-28 17:02:59,144.144] Batch Index : 1056
+[2026-02-28 17:03:30,032.032] Epoch No: 1, Global Step: 000065, Train Loss: 5.273, Val Loss: 5.437
+
+[2026-02-28 17:03:30,033.033] Total Tokens seen till now: 4319616
+
+[2026-02-28 17:03:33,625.625] BEST model SAVED on iteration 000065 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:03:35,226.226] Once upon a time, there a a was a little a was,,, for, was.. in, was the and.. she the to to to the... was the.â the, she.
+[2026-02-28 17:03:47,344.344] Gradient updated
+[2026-02-28 17:03:47,344.344] Current Learning Rate : 8.4e-05
+[2026-02-28 17:03:47,345.345] Global Step : 66
+[2026-02-28 17:03:47,345.345] Batch Index : 1072
+[2026-02-28 17:04:18,160.160] Epoch No: 1, Global Step: 000066, Train Loss: 5.217, Val Loss: 5.395
+
+[2026-02-28 17:04:18,161.161] Total Tokens seen till now: 4385152
+
+[2026-02-28 17:04:21,902.902] BEST model SAVED on iteration 000066 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:04:23,102.102] Once upon a time, a was, a there. a it.. to, it of with a was and. her and day " the a the her The. to,,, to to.
+[2026-02-28 17:04:35,198.198] Gradient updated
+[2026-02-28 17:04:35,199.199] Current Learning Rate : 8.481818181818181e-05
+[2026-02-28 17:04:35,199.199] Global Step : 67
+[2026-02-28 17:04:35,199.199] Batch Index : 1088
+[2026-02-28 17:05:05,974.974] Epoch No: 1, Global Step: 000067, Train Loss: 5.202, Val Loss: 5.356
+
+[2026-02-28 17:05:05,974.974] Total Tokens seen till now: 4450688
+
+[2026-02-28 17:05:09,582.582] BEST model SAVED on iteration 000067 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:05:10,572.572] Once upon a time, there was was a day a had. the. little the a her.. for her to to to.
+[2026-02-28 17:05:22,670.670] Gradient updated
+[2026-02-28 17:05:22,671.671] Current Learning Rate : 8.563636363636362e-05
+[2026-02-28 17:05:22,671.671] Global Step : 68
+[2026-02-28 17:05:22,671.671] Batch Index : 1104
+[2026-02-28 17:05:53,600.600] Epoch No: 1, Global Step: 000068, Train Loss: 5.222, Val Loss: 5.323
+
+[2026-02-28 17:05:53,600.600] Total Tokens seen till now: 4516224
+
+[2026-02-28 17:05:57,720.720] BEST model SAVED on iteration 000068 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:05:59,015.015] Once upon a time, there was was a day a shemy, day a. was was to the the it. and the was that she. and a, for was,, was and the. a and.
+[2026-02-28 17:06:11,086.086] Gradient updated
+[2026-02-28 17:06:11,088.088] Current Learning Rate : 8.645454545454545e-05
+[2026-02-28 17:06:11,088.088] Global Step : 69
+[2026-02-28 17:06:11,088.088] Batch Index : 1120
+[2026-02-28 17:06:41,935.935] Epoch No: 1, Global Step: 000069, Train Loss: 5.141, Val Loss: 5.291
+
+[2026-02-28 17:06:41,936.936] Total Tokens seen till now: 4581760
+
+[2026-02-28 17:06:45,599.599] BEST model SAVED on iteration 000069 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:06:46,789.789] Once upon a time, there was was a,. She was very day she the and she and. He and for. She the it was a
+[2026-02-28 17:06:58,934.934] Gradient updated
+[2026-02-28 17:06:58,936.936] Current Learning Rate : 8.727272727272726e-05
+[2026-02-28 17:06:58,936.936] Global Step : 70
+[2026-02-28 17:06:58,936.936] Batch Index : 1136
+[2026-02-28 17:07:29,816.816] Epoch No: 1, Global Step: 000070, Train Loss: 5.077, Val Loss: 5.258
+
+[2026-02-28 17:07:29,816.816] Total Tokens seen till now: 4647296
+
+[2026-02-28 17:07:33,787.787] BEST model SAVED on iteration 000070 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:07:35,349.349] Once upon a time, there a was park. a, and loved the the, to loved was.. She to,â was. she the., was a.
+[2026-02-28 17:07:47,330.330] Gradient updated
+[2026-02-28 17:07:47,330.330] Current Learning Rate : 8.809090909090908e-05
+[2026-02-28 17:07:47,331.331] Global Step : 71
+[2026-02-28 17:07:47,332.332] Batch Index : 1152
+[2026-02-28 17:08:18,309.309] Epoch No: 1, Global Step: 000071, Train Loss: 5.032, Val Loss: 5.225
+
+[2026-02-28 17:08:18,310.310] Total Tokens seen till now: 4712224
+
+[2026-02-28 17:08:22,360.360] BEST model SAVED on iteration 000071 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:08:23,383.383] Once upon a time, there was a little little was and a was had the She. her. a to and. He. he for She andmy. she, up a he it in.
+[2026-02-28 17:08:35,495.495] Gradient updated
+[2026-02-28 17:08:35,496.496] Current Learning Rate : 8.89090909090909e-05
+[2026-02-28 17:08:35,497.497] Global Step : 72
+[2026-02-28 17:08:35,497.497] Batch Index : 1168
+[2026-02-28 17:09:06,306.306] Epoch No: 1, Global Step: 000072, Train Loss: 5.021, Val Loss: 5.194
+
+[2026-02-28 17:09:06,307.307] Total Tokens seen till now: 4777760
+
+[2026-02-28 17:09:09,897.897] BEST model SAVED on iteration 000072 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:09:11,215.215] Once upon a time, there was a was a day, was to.., and. for was up for his to his it had.. She a and her,. She to and to.
+[2026-02-28 17:09:23,307.307] Gradient updated
+[2026-02-28 17:09:23,309.309] Current Learning Rate : 8.972727272727272e-05
+[2026-02-28 17:09:23,309.309] Global Step : 73
+[2026-02-28 17:09:23,309.309] Batch Index : 1184
+[2026-02-28 17:09:54,216.216] Epoch No: 1, Global Step: 000073, Train Loss: 5.060, Val Loss: 5.164
+
+[2026-02-28 17:09:54,217.217] Total Tokens seen till now: 4843056
+
+[2026-02-28 17:09:58,073.073] BEST model SAVED on iteration 000073 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:09:59,359.359] Once upon a time, there was a. a and named was a was. She. She to it. it. She.. She
+[2026-02-28 17:10:11,455.455] Gradient updated
+[2026-02-28 17:10:11,456.456] Current Learning Rate : 9.054545454545453e-05
+[2026-02-28 17:10:11,457.457] Global Step : 74
+[2026-02-28 17:10:11,457.457] Batch Index : 1200
+[2026-02-28 17:10:42,289.289] Epoch No: 1, Global Step: 000074, Train Loss: 5.025, Val Loss: 5.136
+
+[2026-02-28 17:10:42,289.289] Total Tokens seen till now: 4908560
+
+[2026-02-28 17:10:45,866.866] BEST model SAVED on iteration 000074 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:10:46,915.915] Once upon a time, there was a boy. a a the to and a and that. that had a so and she the the. He was. He said.
+[2026-02-28 17:10:58,962.962] Gradient updated
+[2026-02-28 17:10:58,963.963] Current Learning Rate : 9.136363636363635e-05
+[2026-02-28 17:10:58,964.964] Global Step : 75
+[2026-02-28 17:10:58,965.965] Batch Index : 1216
+[2026-02-28 17:11:29,823.823] Epoch No: 1, Global Step: 000075, Train Loss: 4.947, Val Loss: 5.110
+
+[2026-02-28 17:11:29,824.824] Total Tokens seen till now: 4974064
+
+[2026-02-28 17:11:33,396.396] BEST model SAVED on iteration 000075 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:11:34,789.789] Once upon a time, there was a girl to little One she a,. but was and the. She tomy to to a,.  She he saw. to and
+[2026-02-28 17:11:46,913.913] Gradient updated
+[2026-02-28 17:11:46,914.914] Current Learning Rate : 9.218181818181817e-05
+[2026-02-28 17:11:46,914.914] Global Step : 76
+[2026-02-28 17:11:46,914.914] Batch Index : 1232
+[2026-02-28 17:12:17,796.796] Epoch No: 1, Global Step: 000076, Train Loss: 4.930, Val Loss: 5.086
+
+[2026-02-28 17:12:17,797.797] Total Tokens seen till now: 5039504
+
+[2026-02-28 17:12:21,410.410] BEST model SAVED on iteration 000076 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:12:22,534.534] Once upon a time, there was a was a little a. Lily the was was. He. They. She. She. He with and her the. She. It his to was and,. She she the
+[2026-02-28 17:12:34,580.580] Gradient updated
+[2026-02-28 17:12:34,581.581] Current Learning Rate : 9.299999999999998e-05
+[2026-02-28 17:12:34,582.582] Global Step : 77
+[2026-02-28 17:12:34,582.582] Batch Index : 1248
+[2026-02-28 17:13:05,461.461] Epoch No: 1, Global Step: 000077, Train Loss: 4.920, Val Loss: 5.062
+
+[2026-02-28 17:13:05,462.462] Total Tokens seen till now: 5104912
+
+[2026-02-28 17:13:09,369.369] BEST model SAVED on iteration 000077 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:13:10,728.728] Once upon a time, there was a little little was She a itmy it little day she was and to. She the the a she to very. He to the little to, the,. He had. He He
+[2026-02-28 17:13:22,768.768] Gradient updated
+[2026-02-28 17:13:22,770.770] Current Learning Rate : 9.381818181818181e-05
+[2026-02-28 17:13:22,770.770] Global Step : 78
+[2026-02-28 17:13:22,770.770] Batch Index : 1264
+[2026-02-28 17:13:53,759.759] Epoch No: 1, Global Step: 000078, Train Loss: 4.913, Val Loss: 5.040
+
+[2026-02-28 17:13:53,760.760] Total Tokens seen till now: 5170176
+
+[2026-02-28 17:13:57,452.452] BEST model SAVED on iteration 000078 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:13:58,589.589] Once upon a time, there was a little little little. and loved the to very, it the to had her and said was but.  He. He a " theymy the was
+[2026-02-28 17:14:10,660.660] Gradient updated
+[2026-02-28 17:14:10,661.661] Current Learning Rate : 9.463636363636362e-05
+[2026-02-28 17:14:10,661.661] Global Step : 79
+[2026-02-28 17:14:10,662.662] Batch Index : 1280
+[2026-02-28 17:14:41,512.512] Epoch No: 1, Global Step: 000079, Train Loss: 4.913, Val Loss: 5.019
+
+[2026-02-28 17:14:41,512.512] Total Tokens seen till now: 5235712
+
+[2026-02-28 17:14:45,200.200] BEST model SAVED on iteration 000079 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:14:46,380.380] Once upon a time, there was aâ. She was a. was to boy to It his. He,. She she a. She so the was day with, day it a..The a to the the to, you.
+[2026-02-28 17:14:58,498.498] Gradient updated
+[2026-02-28 17:14:58,500.500] Current Learning Rate : 9.545454545454543e-05
+[2026-02-28 17:14:58,500.500] Global Step : 80
+[2026-02-28 17:14:58,500.500] Batch Index : 1296
+[2026-02-28 17:15:29,486.486] Epoch No: 1, Global Step: 000080, Train Loss: 4.876, Val Loss: 4.997
+
+[2026-02-28 17:15:29,486.486] Total Tokens seen till now: 5301248
+
+[2026-02-28 17:15:33,339.339] BEST model SAVED on iteration 000080 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:15:34,798.798] Once upon a time, there was a little little. loved. He,,my to the was. They. a for. He was. He. But that the was. She. He her but,
+[2026-02-28 17:15:46,883.883] Gradient updated
+[2026-02-28 17:15:46,883.883] Current Learning Rate : 9.627272727272726e-05
+[2026-02-28 17:15:46,884.884] Global Step : 81
+[2026-02-28 17:15:46,884.884] Batch Index : 1312
+[2026-02-28 17:16:17,832.832] Epoch No: 1, Global Step: 000081, Train Loss: 4.874, Val Loss: 4.976
+
+[2026-02-28 17:16:17,833.833] Total Tokens seen till now: 5366784
+
+[2026-02-28 17:16:21,728.728] BEST model SAVED on iteration 000081 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:16:22,883.883] Once upon a time, there was a little little girl. girl. was was he a. They to and the in saw. She and it it said and the her to with to to "The to and it. She day and was for it
+[2026-02-28 17:16:34,911.911] Gradient updated
+[2026-02-28 17:16:34,911.911] Current Learning Rate : 9.709090909090907e-05
+[2026-02-28 17:16:34,912.912] Global Step : 82
+[2026-02-28 17:16:34,912.912] Batch Index : 1328
+[2026-02-28 17:17:05,853.853] Epoch No: 1, Global Step: 000082, Train Loss: 4.827, Val Loss: 4.956
+
+[2026-02-28 17:17:05,854.854] Total Tokens seen till now: 5431840
+
+[2026-02-28 17:17:09,506.506] BEST model SAVED on iteration 000082 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:17:10,859.859] Once upon a time, there was a little little amy. He and and was a to. The the the was She and it for. They his. He to day the, on,. He the mom
+[2026-02-28 17:17:22,885.885] Gradient updated
+[2026-02-28 17:17:22,886.886] Current Learning Rate : 9.79090909090909e-05
+[2026-02-28 17:17:22,886.886] Global Step : 83
+[2026-02-28 17:17:22,886.886] Batch Index : 1344
+[2026-02-28 17:17:53,628.628] Epoch No: 1, Global Step: 000083, Train Loss: 4.816, Val Loss: 4.934
+
+[2026-02-28 17:17:53,629.629] Total Tokens seen till now: 5496768
+
+[2026-02-28 17:17:57,527.527] BEST model SAVED on iteration 000083 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:17:58,687.687] Once upon a time, there was a in the day. One little. They wasmy loved. She the.  He and a day. The He of, She, he and, she she she, hismy and it day day, to,, and
+[2026-02-28 17:18:10,785.785] Gradient updated
+[2026-02-28 17:18:10,785.785] Current Learning Rate : 9.872727272727271e-05
+[2026-02-28 17:18:10,786.786] Global Step : 84
+[2026-02-28 17:18:10,786.786] Batch Index : 1360
+[2026-02-28 17:18:41,818.818] Epoch No: 1, Global Step: 000084, Train Loss: 4.768, Val Loss: 4.912
+
+[2026-02-28 17:18:41,818.818] Total Tokens seen till now: 5562304
+
+[2026-02-28 17:18:45,483.483] BEST model SAVED on iteration 000084 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:18:46,586.586] Once upon a time, there was a little named. to to girl loved to a little and day, was day and it. She they that, saw a to to the the the her, so., so to, and, the it he the
+[2026-02-28 17:18:58,756.756] Gradient updated
+[2026-02-28 17:18:58,757.757] Current Learning Rate : 9.954545454545454e-05
+[2026-02-28 17:18:58,757.757] Global Step : 85
+[2026-02-28 17:18:58,758.758] Batch Index : 1376
+[2026-02-28 17:19:29,643.643] Epoch No: 1, Global Step: 000085, Train Loss: 4.860, Val Loss: 4.892
+
+[2026-02-28 17:19:29,643.643] Total Tokens seen till now: 5627712
+
+[2026-02-28 17:19:33,295.295] BEST model SAVED on iteration 000085 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:19:34,688.688] Once upon a time, there was a named her little. little to day named. in to mom to his,. He that day he that and she. but with a She to to to in the, the
+[2026-02-28 17:19:46,800.800] Gradient updated
+[2026-02-28 17:19:46,801.801] Current Learning Rate : 0.00010036363636363635
+[2026-02-28 17:19:46,801.801] Global Step : 86
+[2026-02-28 17:19:46,801.801] Batch Index : 1392
+[2026-02-28 17:20:17,784.784] Epoch No: 1, Global Step: 000086, Train Loss: 4.787, Val Loss: 4.870
+
+[2026-02-28 17:20:17,785.785] Total Tokens seen till now: 5693216
+
+[2026-02-28 17:20:21,484.484] BEST model SAVED on iteration 000086 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:20:22,592.592] Once upon a time, there was a little. Lily named. was a had it she. The Lily her her a to.The to the she. She very the a it they. He the. One, aOne the. She
+[2026-02-28 17:20:34,711.711] Gradient updated
+[2026-02-28 17:20:34,713.713] Current Learning Rate : 0.00010118181818181816
+[2026-02-28 17:20:34,713.713] Global Step : 87
+[2026-02-28 17:20:34,714.714] Batch Index : 1408
+[2026-02-28 17:21:05,683.683] Epoch No: 1, Global Step: 000087, Train Loss: 4.748, Val Loss: 4.846
+
+[2026-02-28 17:21:05,683.683] Total Tokens seen till now: 5758752
+
+[2026-02-28 17:21:09,337.337] BEST model SAVED on iteration 000087 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:21:10,744.744] Once upon a time, there was a little named named for. . Tim, a named the. She to was a in the and, they with. It it.The her and,. One it,.L
+[2026-02-28 17:21:22,751.751] Gradient updated
+[2026-02-28 17:21:22,752.752] Current Learning Rate : 0.00010199999999999999
+[2026-02-28 17:21:22,752.752] Global Step : 88
+[2026-02-28 17:21:22,752.752] Batch Index : 1424
+[2026-02-28 17:21:53,566.566] Epoch No: 1, Global Step: 000088, Train Loss: 4.771, Val Loss: 4.827
+
+[2026-02-28 17:21:53,567.567] Total Tokens seen till now: 5823728
+
+[2026-02-28 17:21:57,372.372] BEST model SAVED on iteration 000088 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:21:58,522.522] Once upon a time, there was a little little little named. One a for She to. but, he to the. She she, so had to it.The. She the, to and aThe and she the, very
+[2026-02-28 17:22:10,537.537] Gradient updated
+[2026-02-28 17:22:10,538.538] Current Learning Rate : 0.0001028181818181818
+[2026-02-28 17:22:10,538.538] Global Step : 89
+[2026-02-28 17:22:10,539.539] Batch Index : 1440
+[2026-02-28 17:22:41,474.474] Epoch No: 1, Global Step: 000089, Train Loss: 4.694, Val Loss: 4.805
+
+[2026-02-28 17:22:41,475.475] Total Tokens seen till now: 5888624
+
+[2026-02-28 17:22:45,078.078] BEST model SAVED on iteration 000089 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:22:46,385.385] Once upon a time, there was a, was a. She. One girl so " a little had, a She. He. One very, so she to he was a The to with in.Mom and to " He and and
+[2026-02-28 17:22:58,530.530] Gradient updated
+[2026-02-28 17:22:58,531.531] Current Learning Rate : 0.00010363636363636362
+[2026-02-28 17:22:58,531.531] Global Step : 90
+[2026-02-28 17:22:58,531.531] Batch Index : 1456
+[2026-02-28 17:23:29,350.350] Epoch No: 1, Global Step: 000090, Train Loss: 4.679, Val Loss: 4.785
+
+[2026-02-28 17:23:29,351.351] Total Tokens seen till now: 5954160
+
+[2026-02-28 17:23:32,981.981] BEST model SAVED on iteration 000090 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:23:34,235.235] Once upon a time, there was a little girl little to little Lily. One a in a little and and she loved. She for loved, the it the the he. She and mom, said to with. He the a she and so her
+[2026-02-28 17:23:46,368.368] Gradient updated
+[2026-02-28 17:23:46,369.369] Current Learning Rate : 0.00010445454545454544
+[2026-02-28 17:23:46,369.369] Global Step : 91
+[2026-02-28 17:23:46,369.369] Batch Index : 1472
+[2026-02-28 17:24:17,403.403] Epoch No: 1, Global Step: 000091, Train Loss: 4.612, Val Loss: 4.758
+
+[2026-02-28 17:24:17,404.404] Total Tokens seen till now: 6019696
+
+[2026-02-28 17:24:21,145.145] BEST model SAVED on iteration 000091 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:24:22,293.293] Once upon a time, there was a little named named. The so she was a, the the a little. He was very big to. One and She. It to day to a, he, she. He the. It, the. but the she, her
+[2026-02-28 17:24:34,404.404] Gradient updated
+[2026-02-28 17:24:34,405.405] Current Learning Rate : 0.00010527272727272726
+[2026-02-28 17:24:34,405.405] Global Step : 92
+[2026-02-28 17:24:34,405.405] Batch Index : 1488
+[2026-02-28 17:25:05,337.337] Epoch No: 1, Global Step: 000092, Train Loss: 4.617, Val Loss: 4.732
+
+[2026-02-28 17:25:05,337.337] Total Tokens seen till now: 6085232
+
+[2026-02-28 17:25:09,061.061] BEST model SAVED on iteration 000092 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:25:10,561.561] Once upon a time, there was a boy girl girl. named a little. The she, She to she saw he it day was a she and in. She it saw, big,, to she was a it a " saw the.One to
+[2026-02-28 17:25:22,681.681] Gradient updated
+[2026-02-28 17:25:22,682.682] Current Learning Rate : 0.00010609090909090907
+[2026-02-28 17:25:22,683.683] Global Step : 93
+[2026-02-28 17:25:22,683.683] Batch Index : 1504
+[2026-02-28 17:25:53,557.557] Epoch No: 1, Global Step: 000093, Train Loss: 4.631, Val Loss: 4.710
+
+[2026-02-28 17:25:53,558.558] Total Tokens seen till now: 6150768
+
+[2026-02-28 17:25:57,656.656] BEST model SAVED on iteration 000093 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:25:58,862.862] Once upon a time, there was a little girl named named day. She she very but her and very playmy that, big. They was day her her and and mom's was a day her a she to to had to for inmy. " The
+[2026-02-28 17:26:10,999.999] Gradient updated
+[2026-02-28 17:26:11,001.001] Current Learning Rate : 0.00010690909090909089
+[2026-02-28 17:26:11,001.001] Global Step : 94
+[2026-02-28 17:26:11,001.001] Batch Index : 1520
+[2026-02-28 17:26:41,947.947] Epoch No: 1, Global Step: 000094, Train Loss: 4.625, Val Loss: 4.693
+
+[2026-02-28 17:26:41,947.947] Total Tokens seen till now: 6216304
+
+[2026-02-28 17:26:45,865.865] BEST model SAVED on iteration 000094 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:26:46,990.990] Once upon a time, there was a little girl boy. She Lily." She wanted. He had was a little, he mom the day. She a mom. One, big and bigmy to she a in was very very she a it.
+[2026-02-28 17:26:59,155.155] Gradient updated
+[2026-02-28 17:26:59,157.157] Current Learning Rate : 0.00010772727272727271
+[2026-02-28 17:26:59,157.157] Global Step : 95
+[2026-02-28 17:26:59,157.157] Batch Index : 1536
+[2026-02-28 17:27:30,116.116] Epoch No: 1, Global Step: 000095, Train Loss: 4.593, Val Loss: 4.668
+
+[2026-02-28 17:27:30,117.117] Total Tokens seen till now: 6281840
+
+[2026-02-28 17:27:33,755.755] BEST model SAVED on iteration 000095 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:27:35,437.437] Once upon a time, there was a little girl named she.Mom the was bigmy a big, loved her her. He was a a she in to he she she that a big little to. One! One with to the themy, he and't
+[2026-02-28 17:27:47,483.483] Gradient updated
+[2026-02-28 17:27:47,483.483] Current Learning Rate : 0.00010854545454545452
+[2026-02-28 17:27:47,484.484] Global Step : 96
+[2026-02-28 17:27:47,484.484] Batch Index : 1552
+[2026-02-28 17:28:18,386.386] Epoch No: 1, Global Step: 000096, Train Loss: 4.559, Val Loss: 4.638
+
+[2026-02-28 17:28:18,387.387] Total Tokens seen till now: 6347056
+
+[2026-02-28 17:28:22,189.189] BEST model SAVED on iteration 000096 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:28:23,403.403] Once upon a time, there was a little girl girl. They play Lily. Lily, it a in for the were her to Lily to. and Lily, was a big. She. She the and Lily her day to to very the happy. They, to the
+[2026-02-28 17:28:35,533.533] Gradient updated
+[2026-02-28 17:28:35,534.534] Current Learning Rate : 0.00010936363636363635
+[2026-02-28 17:28:35,534.534] Global Step : 97
+[2026-02-28 17:28:35,534.534] Batch Index : 1568
+[2026-02-28 17:29:06,513.513] Epoch No: 1, Global Step: 000097, Train Loss: 4.527, Val Loss: 4.616
+
+[2026-02-28 17:29:06,513.513] Total Tokens seen till now: 6412592
+
+[2026-02-28 17:29:10,109.109] BEST model SAVED on iteration 000097 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:29:11,419.419] Once upon a time, there was a little girl girl named named. The mom was saw was loved of and was a little mom. They very and was to a girl, her the her. The the, and and on the and. She on the big a a big
+[2026-02-28 17:29:23,584.584] Gradient updated
+[2026-02-28 17:29:23,586.586] Current Learning Rate : 0.00011018181818181816
+[2026-02-28 17:29:23,586.586] Global Step : 98
+[2026-02-28 17:29:23,586.586] Batch Index : 1584
+[2026-02-28 17:29:54,623.623] Epoch No: 1, Global Step: 000098, Train Loss: 4.520, Val Loss: 4.594
+
+[2026-02-28 17:29:54,624.624] Total Tokens seen till now: 6478128
+
+[2026-02-28 17:29:58,609.609] BEST model SAVED on iteration 000098 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:30:00,144.144] Once upon a time, there was a boy named Lily park. " so it to day, but with to. One the play was friends his not not, that it was was a little a he to a small to of to the a It
+[2026-02-28 17:30:12,321.321] Gradient updated
+[2026-02-28 17:30:12,322.322] Current Learning Rate : 0.00011099999999999999
+[2026-02-28 17:30:12,323.323] Global Step : 99
+[2026-02-28 17:30:12,323.323] Batch Index : 1600
+[2026-02-28 17:30:43,401.401] Epoch No: 1, Global Step: 000099, Train Loss: 4.501, Val Loss: 4.575
+
+[2026-02-28 17:30:43,402.402] Total Tokens seen till now: 6543664
+
+[2026-02-28 17:30:46,945.945] BEST model SAVED on iteration 000099 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:30:48,100.100] Once upon a time, there was a big little a little girl. She and had a named to girlmy to the in her. Mom day, a big, " a" of the was a big it. It to saw the a big.
+[2026-02-28 17:31:00,231.231] Gradient updated
+[2026-02-28 17:31:00,232.232] Current Learning Rate : 0.0001118181818181818
+[2026-02-28 17:31:00,233.233] Global Step : 100
+[2026-02-28 17:31:00,233.233] Batch Index : 1616
+[2026-02-28 17:31:31,103.103] Epoch No: 1, Global Step: 000100, Train Loss: 4.453, Val Loss: 4.546
+
+[2026-02-28 17:31:31,104.104] Total Tokens seen till now: 6609200
+
+[2026-02-28 17:31:34,782.782] BEST model SAVED on iteration 000100 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:31:36,124.124] Once upon a time, there was a little girl named Lily. a little boy she a big. He loved to mommy for play day of the her to mom had day. Onemy and saw he was for was she to the the so was a little the Lily was
+[2026-02-28 17:31:48,190.190] Gradient updated
+[2026-02-28 17:31:48,191.191] Current Learning Rate : 0.00011263636363636361
+[2026-02-28 17:31:48,191.191] Global Step : 101
+[2026-02-28 17:31:48,192.192] Batch Index : 1632
+[2026-02-28 17:32:19,095.095] Epoch No: 1, Global Step: 000101, Train Loss: 4.481, Val Loss: 4.527
+
+[2026-02-28 17:32:19,096.096] Total Tokens seen till now: 6674208
+
+[2026-02-28 17:32:22,693.693] BEST model SAVED on iteration 000101 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:32:23,906.906] Once upon a time, there was a little and day. He was a big to boy in to the loved. One and a big, day, " but her it for the and it." He was very he to said.  The was a big,
+[2026-02-28 17:32:36,063.063] Gradient updated
+[2026-02-28 17:32:36,064.064] Current Learning Rate : 0.00011345454545454544
+[2026-02-28 17:32:36,064.064] Global Step : 102
+[2026-02-28 17:32:36,064.064] Batch Index : 1648
+[2026-02-28 17:33:07,176.176] Epoch No: 1, Global Step: 000102, Train Loss: 4.471, Val Loss: 4.501
+
+[2026-02-28 17:33:07,177.177] Total Tokens seen till now: 6739744
+
+[2026-02-28 17:33:10,870.870] BEST model SAVED on iteration 000102 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:33:12,023.023] Once upon a time, there was a little girl named Lily. One to his play to the day, but her. The was a big, and a big of the the so happy, but a day, but a little play. Her playmy was she in and she
+[2026-02-28 17:33:24,136.136] Gradient updated
+[2026-02-28 17:33:24,138.138] Current Learning Rate : 0.00011427272727272725
+[2026-02-28 17:33:24,138.138] Global Step : 103
+[2026-02-28 17:33:24,138.138] Batch Index : 1664
+[2026-02-28 17:33:55,194.194] Epoch No: 1, Global Step: 000103, Train Loss: 4.442, Val Loss: 4.481
+
+[2026-02-28 17:33:55,195.195] Total Tokens seen till now: 6805280
+
+[2026-02-28 17:33:58,825.825] BEST model SAVED on iteration 000103 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:34:00,373.373] Once upon a time, there was a little girl named loved. She was she She loved to She her to had a to to big on the it was the she the boy all up. " saw day, the big to big on the
+[2026-02-28 17:34:12,502.502] Gradient updated
+[2026-02-28 17:34:12,502.502] Current Learning Rate : 0.00011509090909090908
+[2026-02-28 17:34:12,503.503] Global Step : 104
+[2026-02-28 17:34:12,503.503] Batch Index : 1680
+[2026-02-28 17:34:43,456.456] Epoch No: 1, Global Step: 000104, Train Loss: 4.394, Val Loss: 4.460
+
+[2026-02-28 17:34:43,456.456] Total Tokens seen till now: 6870720
+
+[2026-02-28 17:34:47,186.186] BEST model SAVED on iteration 000104 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:34:48,337.337] Once upon a time, there was a little boy called named a park the. They the special loved. She had to, the boy to day, but she it was very a day, the big." you the play with a little to to the little.
+[2026-02-28 17:35:00,469.469] Gradient updated
+[2026-02-28 17:35:00,469.469] Current Learning Rate : 0.00011590909090909089
+[2026-02-28 17:35:00,469.469] Global Step : 105
+[2026-02-28 17:35:00,469.469] Batch Index : 1696
+[2026-02-28 17:35:31,520.520] Epoch No: 1, Global Step: 000105, Train Loss: 4.373, Val Loss: 4.436
+
+[2026-02-28 17:35:31,520.520] Total Tokens seen till now: 6936256
+
+[2026-02-28 17:35:35,429.429] BEST model SAVED on iteration 000105 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:35:36,599.599] Once upon a time, there was a little girl named Lily. She was to so her so had play. They was very the big. He was a very saw had it and that and. she with and saw and happy and said. She were the day said, "
+[2026-02-28 17:35:48,644.644] Gradient updated
+[2026-02-28 17:35:48,645.645] Current Learning Rate : 0.00011672727272727271
+[2026-02-28 17:35:48,645.645] Global Step : 106
+[2026-02-28 17:35:48,645.645] Batch Index : 1712
+[2026-02-28 17:36:19,680.680] Epoch No: 1, Global Step: 000106, Train Loss: 4.367, Val Loss: 4.414
+
+[2026-02-28 17:36:19,680.680] Total Tokens seen till now: 7001088
+
+[2026-02-28 17:36:23,439.439] BEST model SAVED on iteration 000106 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:36:24,899.899] Once upon a time, there was a. One little boy went to play and a had went. He was and to the he had and. She was very big and he it to the. One day, but saw the the friends. The happy to mom's happy of
+[2026-02-28 17:36:36,930.930] Gradient updated
+[2026-02-28 17:36:36,931.931] Current Learning Rate : 0.00011754545454545453
+[2026-02-28 17:36:36,931.931] Global Step : 107
+[2026-02-28 17:36:36,931.931] Batch Index : 1728
+[2026-02-28 17:37:07,935.935] Epoch No: 1, Global Step: 000107, Train Loss: 4.362, Val Loss: 4.390
+
+[2026-02-28 17:37:07,935.935] Total Tokens seen till now: 7065984
+
+[2026-02-28 17:37:11,623.623] BEST model SAVED on iteration 000107 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:37:12,802.802] Once upon a time, there was a little girl named They loved. She was loved and to play his park, he was Lily. It was a big day, " a boy together, " Lily on a big of the happy and the little a boy and he were.
+[2026-02-28 17:37:24,925.925] Gradient updated
+[2026-02-28 17:37:24,926.926] Current Learning Rate : 0.00011836363636363634
+[2026-02-28 17:37:24,926.926] Global Step : 108
+[2026-02-28 17:37:24,926.926] Batch Index : 1744
+[2026-02-28 17:37:55,809.809] Epoch No: 1, Global Step: 000108, Train Loss: 4.285, Val Loss: 4.368
+
+[2026-02-28 17:37:55,809.809] Total Tokens seen till now: 7131520
+
+[2026-02-28 17:37:59,548.548] BEST model SAVED on iteration 000108 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:38:00,951.951] Once upon a time, there was a little girl named One, liked. She was very girl play to a day, " The play. It was and a little boy loved to mom and a big.The it to day,mymy,
+[2026-02-28 17:38:13,091.091] Gradient updated
+[2026-02-28 17:38:13,092.092] Current Learning Rate : 0.00011918181818181816
+[2026-02-28 17:38:13,092.092] Global Step : 109
+[2026-02-28 17:38:13,092.092] Batch Index : 1760
+[2026-02-28 17:38:43,939.939] Epoch No: 1, Global Step: 000109, Train Loss: 4.306, Val Loss: 4.348
+
+[2026-02-28 17:38:43,939.939] Total Tokens seen till now: 7197056
+
+[2026-02-28 17:38:48,012.012] BEST model SAVED on iteration 000109 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:38:49,288.288] Once upon a time, there was a little girl girl named Tim of lovedmy. One day, loved's her mommy.One day, the the big her a little was a little girl and.One day, they's a
+[2026-02-28 17:39:01,476.476] Gradient updated
+[2026-02-28 17:39:01,477.477] Current Learning Rate : 0.00011999999999999998
+[2026-02-28 17:39:01,477.477] Global Step : 110
+[2026-02-28 17:39:01,477.477] Batch Index : 1776
+[2026-02-28 17:39:32,525.525] Epoch No: 1, Global Step: 000110, Train Loss: 4.268, Val Loss: 4.322
+
+[2026-02-28 17:39:32,526.526] Total Tokens seen till now: 7262592
+
+[2026-02-28 17:39:36,278.278] BEST model SAVED on iteration 000110 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:39:37,436.436] Once upon a time, there was a little girl Lily in a the bigmy loved in the who the in was Lily. He was and a to boy the new the day. you saw the boy, play in the little toThe bird, "I saw
+[2026-02-28 17:39:49,583.583] Gradient updated
+[2026-02-28 17:39:49,583.583] Current Learning Rate : 0.0001208181818181818
+[2026-02-28 17:39:49,583.583] Global Step : 111
+[2026-02-28 17:39:49,583.583] Batch Index : 1792
+[2026-02-28 17:40:20,569.569] Epoch No: 1, Global Step: 000111, Train Loss: 4.292, Val Loss: 4.298
+
+[2026-02-28 17:40:20,570.570] Total Tokens seen till now: 7328128
+
+[2026-02-28 17:40:24,194.194] BEST model SAVED on iteration 000111 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:40:25,680.680] Once upon a time, there was a little boy namedmy who. The loved to play of the day and't saw a. He would he to a, but a garden. He day and the little boy with and said, he was a dog a big. 
+[2026-02-28 17:40:37,858.858] Gradient updated
+[2026-02-28 17:40:37,859.859] Current Learning Rate : 0.00012163636363636361
+[2026-02-28 17:40:37,859.859] Global Step : 112
+[2026-02-28 17:40:37,859.859] Batch Index : 1808
+[2026-02-28 17:41:08,833.833] Epoch No: 1, Global Step: 000112, Train Loss: 4.255, Val Loss: 4.276
+
+[2026-02-28 17:41:08,833.833] Total Tokens seen till now: 7393664
+
+[2026-02-28 17:41:12,726.726] BEST model SAVED on iteration 000112 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:41:13,992.992] Once upon a time, there was a little boy named Lily. He to to his They liked saw the new he to he his his he in the, " mommy to the. He was a big and his the little, but the dog. He saw a big on
+[2026-02-28 17:41:26,120.120] Gradient updated
+[2026-02-28 17:41:26,121.121] Current Learning Rate : 0.00012245454545454544
+[2026-02-28 17:41:26,121.121] Global Step : 113
+[2026-02-28 17:41:26,121.121] Batch Index : 1824
+[2026-02-28 17:41:57,156.156] Epoch No: 1, Global Step: 000113, Train Loss: 4.239, Val Loss: 4.254
+
+[2026-02-28 17:41:57,156.156] Total Tokens seen till now: 7459008
+
+[2026-02-28 17:42:00,756.756] BEST model SAVED on iteration 000113 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:42:01,966.966] Once upon a time, there was. One to little girl named,. One day, she, but and a do girl.The boy and saw a dog was very happy.  but she wanted to a. He was so's mom with
+[2026-02-28 17:42:14,070.070] Gradient updated
+[2026-02-28 17:42:14,071.071] Current Learning Rate : 0.00012327272727272727
+[2026-02-28 17:42:14,071.071] Global Step : 114
+[2026-02-28 17:42:14,071.071] Batch Index : 1840
+[2026-02-28 17:42:45,061.061] Epoch No: 1, Global Step: 000114, Train Loss: 4.195, Val Loss: 4.233
+
+[2026-02-28 17:42:45,061.061] Total Tokens seen till now: 7524544
+
+[2026-02-28 17:42:48,643.643] BEST model SAVED on iteration 000114 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:42:50,259.259] Once upon a time, there was a girl named and. She went loved for the boy said, she. One day, Lily and saw a big play and. He was very Lily, the new the her a day. The asked her mom of very sad.
+[2026-02-28 17:43:02,391.391] Gradient updated
+[2026-02-28 17:43:02,392.392] Current Learning Rate : 0.00012409090909090906
+[2026-02-28 17:43:02,392.392] Global Step : 115
+[2026-02-28 17:43:02,392.392] Batch Index : 1856
+[2026-02-28 17:43:33,450.450] Epoch No: 1, Global Step: 000115, Train Loss: 4.194, Val Loss: 4.208
+
+[2026-02-28 17:43:33,450.450] Total Tokens seen till now: 7589856
+
+[2026-02-28 17:43:37,017.017] BEST model SAVED on iteration 000115 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:43:38,143.143] Once upon a time, there was a little boy Lily. One was a big boy and wanted to loved. It was very play girl was so find the,. It was happy and him, the little little girl was and was. Suddenly, "The boy went
+[2026-02-28 17:43:50,269.269] Gradient updated
+[2026-02-28 17:43:50,269.269] Current Learning Rate : 0.0001249090909090909
+[2026-02-28 17:43:50,270.270] Global Step : 116
+[2026-02-28 17:43:50,270.270] Batch Index : 1872
+[2026-02-28 17:44:21,236.236] Epoch No: 1, Global Step: 000116, Train Loss: 4.129, Val Loss: 4.185
+
+[2026-02-28 17:44:21,236.236] Total Tokens seen till now: 7655376
+
+[2026-02-28 17:44:25,055.055] BEST model SAVED on iteration 000116 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:44:26,328.328] Once upon a time, there was a little girl named Lily. She loved to play her happy it and she.  One day, " One day, that Lily's a big special up to a while, he she was happy and said. He wanted to you't
+[2026-02-28 17:44:38,507.507] Gradient updated
+[2026-02-28 17:44:38,507.507] Current Learning Rate : 0.00012572727272727272
+[2026-02-28 17:44:38,507.507] Global Step : 117
+[2026-02-28 17:44:38,508.508] Batch Index : 1888
+[2026-02-28 17:45:09,485.485] Epoch No: 1, Global Step: 000117, Train Loss: 4.125, Val Loss: 4.166
+
+[2026-02-28 17:45:09,485.485] Total Tokens seen till now: 7720912
+
+[2026-02-28 17:45:13,425.425] BEST model SAVED on iteration 000117 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:45:14,899.899] Once upon a time, there was a little little girl named Lily. She was a big and he loved. She was to play the boy her loved. She€ you had, Tim to to play and he took.L happy was very't said, and saw
+[2026-02-28 17:45:27,056.056] Gradient updated
+[2026-02-28 17:45:27,057.057] Current Learning Rate : 0.00012654545454545454
+[2026-02-28 17:45:27,058.058] Global Step : 118
+[2026-02-28 17:45:27,058.058] Batch Index : 1904
+[2026-02-28 17:45:58,231.231] Epoch No: 1, Global Step: 000118, Train Loss: 4.142, Val Loss: 4.144
+
+[2026-02-28 17:45:58,231.231] Total Tokens seen till now: 7786448
+
+[2026-02-28 17:46:02,107.107] BEST model SAVED on iteration 000118 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:46:03,261.261] Once upon a time, there was a little girl named Lily. She loved to play, she, he was always she she. One day, the boy to the day in a big of the Lily she't it. "He went to be little girl, "Yes
+[2026-02-28 17:46:15,335.335] Gradient updated
+[2026-02-28 17:46:15,336.336] Current Learning Rate : 0.00012736363636363634
+[2026-02-28 17:46:15,336.336] Global Step : 119
+[2026-02-28 17:46:15,336.336] Batch Index : 1920
+[2026-02-28 17:46:46,413.413] Epoch No: 1, Global Step: 000119, Train Loss: 4.144, Val Loss: 4.125
+
+[2026-02-28 17:46:46,414.414] Total Tokens seen till now: 7851376
+
+[2026-02-28 17:46:50,053.053] BEST model SAVED on iteration 000119 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:46:51,300.300] Once upon a time, there was a big, a. She loved loved to the little girl in the little girl. One day, One day, she saw a the day, she was very excited. One day, Lily was soI's a big,. 
+[2026-02-28 17:47:03,420.420] Gradient updated
+[2026-02-28 17:47:03,420.420] Current Learning Rate : 0.00012818181818181817
+[2026-02-28 17:47:03,421.421] Global Step : 120
+[2026-02-28 17:47:03,421.421] Batch Index : 1936
+[2026-02-28 17:47:34,690.690] Epoch No: 1, Global Step: 000120, Train Loss: 4.087, Val Loss: 4.104
+
+[2026-02-28 17:47:34,690.690] Total Tokens seen till now: 7916176
+
+[2026-02-28 17:47:38,721.721] BEST model SAVED on iteration 000120 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:47:40,283.283] Once upon a time, there was a little little girl named. She loved would go to big her to make her mom her. She didn she said, that and her always her a she could her mom. She felt't, she went to her mom and a hermy
+[2026-02-28 17:47:52,461.461] Gradient updated
+[2026-02-28 17:47:52,462.462] Current Learning Rate : 0.000129
+[2026-02-28 17:47:52,462.462] Global Step : 121
+[2026-02-28 17:47:52,462.462] Batch Index : 1952
+[2026-02-28 17:48:23,620.620] Epoch No: 1, Global Step: 000121, Train Loss: 4.041, Val Loss: 4.081
+
+[2026-02-28 17:48:23,621.621] Total Tokens seen till now: 7981712
+
+[2026-02-28 17:48:27,269.269] BEST model SAVED on iteration 000121 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:48:28,383.383] Once upon a time, there was a little girl named Lily and. She was very happy it. One day, Lily was so One day. One day, Lily wanted to play in her mom her her so Lily.But wanted toily that he wanted to take it
+[2026-02-28 17:48:40,539.539] Gradient updated
+[2026-02-28 17:48:40,540.540] Current Learning Rate : 0.0001298181818181818
+[2026-02-28 17:48:40,540.540] Global Step : 122
+[2026-02-28 17:48:40,541.541] Batch Index : 1968
+[2026-02-28 17:49:11,752.752] Epoch No: 1, Global Step: 000122, Train Loss: 4.025, Val Loss: 4.062
+
+[2026-02-28 17:49:11,753.753] Total Tokens seen till now: 8046992
+
+[2026-02-28 17:49:15,371.371] BEST model SAVED on iteration 000122 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:49:16,521.521] Once upon a time, there was a little girl and Lily. She liked to make to play with him and she asked was, Lily. Lily would go to go to help the mom and went to her mom." she said, but she's have a big
+[2026-02-28 17:49:28,709.709] Gradient updated
+[2026-02-28 17:49:28,709.709] Current Learning Rate : 0.00013063636363636362
+[2026-02-28 17:49:28,709.709] Global Step : 123
+[2026-02-28 17:49:28,710.710] Batch Index : 1984
+[2026-02-28 17:49:59,713.713] Epoch No: 1, Global Step: 000123, Train Loss: 4.052, Val Loss: 4.043
+
+[2026-02-28 17:49:59,713.713] Total Tokens seen till now: 8112368
+
+[2026-02-28 17:50:03,731.731] BEST model SAVED on iteration 000123 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:50:05,383.383] Once upon a time, there was a little girl named Lily. She had a big big, loved to her mom. One day, she loved to play up. She saw a big big little the park and said. Lily was on it's mom and said and so happy
+[2026-02-28 17:50:17,519.519] Gradient updated
+[2026-02-28 17:50:17,520.520] Current Learning Rate : 0.00013145454545454544
+[2026-02-28 17:50:17,520.520] Global Step : 124
+[2026-02-28 17:50:17,520.520] Batch Index : 2000
+[2026-02-28 17:50:48,509.509] Epoch No: 1, Global Step: 000124, Train Loss: 4.046, Val Loss: 4.027
+
+[2026-02-28 17:50:48,509.509] Total Tokens seen till now: 8177680
+
+[2026-02-28 17:50:52,222.222] BEST model SAVED on iteration 000124 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:50:53,347.347] Once upon a time, there was a little girl named Lily. She loved loved to play the new all her said. One day, she saw a happy, the old little park. His mom was time. She is not play, � soNo,. Her so Lily
+[2026-02-28 17:51:05,500.500] Gradient updated
+[2026-02-28 17:51:05,501.501] Current Learning Rate : 0.00013227272727272727
+[2026-02-28 17:51:05,501.501] Global Step : 125
+[2026-02-28 17:51:05,501.501] Batch Index : 2016
+[2026-02-28 17:51:36,509.509] Epoch No: 1, Global Step: 000125, Train Loss: 3.963, Val Loss: 4.008
+
+[2026-02-28 17:51:36,509.509] Total Tokens seen till now: 8243216
+
+[2026-02-28 17:51:40,107.107] BEST model SAVED on iteration 000125 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:51:41,384.384] Once upon a time, there was a little girl named Lily. She was very little girl had very a little girl who, Lily was Lily of her excited to go named. She had playing, her friends to play and she wanted she was it wanted to the garden. She
+[2026-02-28 17:51:53,609.609] Gradient updated
+[2026-02-28 17:51:53,610.610] Current Learning Rate : 0.00013309090909090907
+[2026-02-28 17:51:53,610.610] Global Step : 126
+[2026-02-28 17:51:53,610.610] Batch Index : 2032
+[2026-02-28 17:52:24,530.530] Epoch No: 1, Global Step: 000126, Train Loss: 4.003, Val Loss: 3.988
+
+[2026-02-28 17:52:24,531.531] Total Tokens seen till now: 8308752
+
+[2026-02-28 17:52:28,413.413] BEST model SAVED on iteration 000126 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:52:29,803.803] Once upon a time, there was a little girl named Lily. She loved to play, she would play.L mom said, she would mommy, "I we I with. It was happymy of all day, and help."One
+[2026-02-28 17:52:41,965.965] Gradient updated
+[2026-02-28 17:52:41,966.966] Current Learning Rate : 0.0001339090909090909
+[2026-02-28 17:52:41,966.966] Global Step : 127
+[2026-02-28 17:52:41,966.966] Batch Index : 2048
+[2026-02-28 17:53:13,011.011] Epoch No: 1, Global Step: 000127, Train Loss: 3.954, Val Loss: 3.969
+
+[2026-02-28 17:53:13,012.012] Total Tokens seen till now: 8374288
+
+[2026-02-28 17:53:16,861.861] BEST model SAVED on iteration 000127 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:53:17,985.985] Once upon a time, there was a little girl named Lily. She loved to eat the boy and go to a boy. But but he was and so happy and the friends. So she had on the end, she loved to see it is so make a small happy.
+[2026-02-28 17:53:30,204.204] Gradient updated
+[2026-02-28 17:53:30,205.205] Current Learning Rate : 0.00013472727272727272
+[2026-02-28 17:53:30,205.205] Global Step : 128
+[2026-02-28 17:53:30,205.205] Batch Index : 2064
+[2026-02-28 17:54:01,275.275] Epoch No: 1, Global Step: 000128, Train Loss: 3.964, Val Loss: 3.956
+
+[2026-02-28 17:54:01,275.275] Total Tokens seen till now: 8439824
+
+[2026-02-28 17:54:05,283.283] BEST model SAVED on iteration 000128 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:54:06,442.442] Once upon a time, there was a little girl named Lily. She loved to her her toys to the little boy. One day, she saw a big. But the bird was very not the little girl. One day, and Lily was a walk to a big little girl
+[2026-02-28 17:54:18,491.491] Gradient updated
+[2026-02-28 17:54:18,492.492] Current Learning Rate : 0.00013554545454545452
+[2026-02-28 17:54:18,492.492] Global Step : 129
+[2026-02-28 17:54:18,492.492] Batch Index : 2080
+[2026-02-28 17:54:49,443.443] Epoch No: 1, Global Step: 000129, Train Loss: 3.943, Val Loss: 3.936
+
+[2026-02-28 17:54:49,443.443] Total Tokens seen till now: 8504672
+
+[2026-02-28 17:54:53,463.463] BEST model SAVED on iteration 000129 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:54:54,932.932] Once upon a time, a small girl named Lily who went. It was a old. She wanted to see the ball and saw the small in the day. She had a big, she saw a old of a big park. It was so her mom, a big the
+[2026-02-28 17:55:07,108.108] Gradient updated
+[2026-02-28 17:55:07,109.109] Current Learning Rate : 0.00013636363636363634
+[2026-02-28 17:55:07,109.109] Global Step : 130
+[2026-02-28 17:55:07,109.109] Batch Index : 2096
+[2026-02-28 17:55:38,214.214] Epoch No: 1, Global Step: 000130, Train Loss: 3.900, Val Loss: 3.917
+
+[2026-02-28 17:55:38,214.214] Total Tokens seen till now: 8570208
+
+[2026-02-28 17:55:42,265.265] BEST model SAVED on iteration 000130 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:55:43,467.467] Once upon a time, there was a little boy. She had to help her went to go to. One day, the day, she were have in her mom. The boy smiled and put the little girl and could a big sun. She felt a little girl
+[2026-02-28 17:55:55,625.625] Gradient updated
+[2026-02-28 17:55:55,626.626] Current Learning Rate : 0.00013718181818181817
+[2026-02-28 17:55:55,626.626] Global Step : 131
+[2026-02-28 17:55:55,626.626] Batch Index : 2112
+[2026-02-28 17:56:26,700.700] Epoch No: 1, Global Step: 000131, Train Loss: 3.932, Val Loss: 3.902
+
+[2026-02-28 17:56:26,700.700] Total Tokens seen till now: 8635744
+
+[2026-02-28 17:56:30,303.303] BEST model SAVED on iteration 000131 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:56:31,485.485] Once upon a time, there was a little boy named Timmy. He his to the park. He had to play and his the ball. It saw a big little girl in the day, they was a big. We had he's mom and found his and saw mom
+[2026-02-28 17:56:43,663.663] Gradient updated
+[2026-02-28 17:56:43,664.664] Current Learning Rate : 0.000138
+[2026-02-28 17:56:43,664.664] Global Step : 132
+[2026-02-28 17:56:43,664.664] Batch Index : 2128
+[2026-02-28 17:57:14,497.497] Epoch No: 1, Global Step: 000132, Train Loss: 3.838, Val Loss: 3.890
+
+[2026-02-28 17:57:14,498.498] Total Tokens seen till now: 8701008
+
+[2026-02-28 17:57:18,586.586] BEST model SAVED on iteration 000132 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:57:20,051.051] Once upon a time, there was a little girl named Lily. She loved to play and were going to play. One day, she saw a big little girl, she saw a big big bird. When she went to the tree and she had her. One day
+[2026-02-28 17:57:32,246.246] Gradient updated
+[2026-02-28 17:57:32,246.246] Current Learning Rate : 0.0001388181818181818
+[2026-02-28 17:57:32,246.246] Global Step : 133
+[2026-02-28 17:57:32,246.246] Batch Index : 2144
+[2026-02-28 17:58:03,275.275] Epoch No: 1, Global Step: 000133, Train Loss: 3.884, Val Loss: 3.876
+
+[2026-02-28 17:58:03,275.275] Total Tokens seen till now: 8766544
+
+[2026-02-28 17:58:07,253.253] BEST model SAVED on iteration 000133 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:58:08,350.350] Once upon a time, there was a little girl named Lily. She had to a big little boy. She was so she loved to play the garden. She wanted to play with her mom.As play day, they saw a little girl. Her mom would like
+[2026-02-28 17:58:20,515.515] Gradient updated
+[2026-02-28 17:58:20,516.516] Current Learning Rate : 0.00013963636363636362
+[2026-02-28 17:58:20,516.516] Global Step : 134
+[2026-02-28 17:58:20,516.516] Batch Index : 2160
+[2026-02-28 17:58:51,603.603] Epoch No: 1, Global Step: 000134, Train Loss: 3.824, Val Loss: 3.854
+
+[2026-02-28 17:58:51,603.603] Total Tokens seen till now: 8832080
+
+[2026-02-28 17:58:55,324.324] BEST model SAVED on iteration 000134 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:58:56,545.545] Once upon a time, there was a little girl named Lily. She loved to play and her go. One day, Anna were a man with her mommy. She was a the day, "I can Lily, "Lily. They were not be a
+[2026-02-28 17:59:08,764.764] Gradient updated
+[2026-02-28 17:59:08,765.765] Current Learning Rate : 0.00014045454545454544
+[2026-02-28 17:59:08,765.765] Global Step : 135
+[2026-02-28 17:59:08,766.766] Batch Index : 2176
+[2026-02-28 17:59:39,781.781] Epoch No: 1, Global Step: 000135, Train Loss: 3.826, Val Loss: 3.839
+
+[2026-02-28 17:59:39,781.781] Total Tokens seen till now: 8897616
+
+[2026-02-28 17:59:43,763.763] BEST model SAVED on iteration 000135 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 17:59:45,272.272] Once upon a time, there was a little girl named Lily. She loved to play with in the toy. One day, she saw a big, they was very very help. He saw a big, it had to be it of. It looked it, and went to
+[2026-02-28 17:59:57,363.363] Gradient updated
+[2026-02-28 17:59:57,364.364] Current Learning Rate : 0.00014127272727272724
+[2026-02-28 17:59:57,364.364] Global Step : 136
+[2026-02-28 17:59:57,364.364] Batch Index : 2192
+[2026-02-28 18:00:28,257.257] Epoch No: 1, Global Step: 000136, Train Loss: 3.803, Val Loss: 3.826
+
+[2026-02-28 18:00:28,257.257] Total Tokens seen till now: 8962704
+
+[2026-02-28 18:00:32,353.353] BEST model SAVED on iteration 000136 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:00:33,451.451] Once upon a time, there was a little boy named Timmy. Tim loved to play with his friends. One day, he did play, so a little little girl. One day, "I want to play with his mom.One day, a big,
+[2026-02-28 18:00:45,609.609] Gradient updated
+[2026-02-28 18:00:45,610.610] Current Learning Rate : 0.00014209090909090907
+[2026-02-28 18:00:45,610.610] Global Step : 137
+[2026-02-28 18:00:45,611.611] Batch Index : 2208
+[2026-02-28 18:01:16,745.745] Epoch No: 1, Global Step: 000137, Train Loss: 3.784, Val Loss: 3.811
+
+[2026-02-28 18:01:16,745.745] Total Tokens seen till now: 9028240
+
+[2026-02-28 18:01:20,467.467] BEST model SAVED on iteration 000137 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:01:21,669.669] Once upon a time, there was a boy named Lily. Tim loved to play with her toys and Tim, but she had a big, but they had a big. One day, and loved in the ground a big went to go and make a small ball
+[2026-02-28 18:01:33,766.766] Gradient updated
+[2026-02-28 18:01:33,766.766] Current Learning Rate : 0.0001429090909090909
+[2026-02-28 18:01:33,767.767] Global Step : 138
+[2026-02-28 18:01:33,767.767] Batch Index : 2224
+[2026-02-28 18:02:04,901.901] Epoch No: 1, Global Step: 000138, Train Loss: 3.793, Val Loss: 3.794
+
+[2026-02-28 18:02:04,902.902] Total Tokens seen till now: 9093344
+
+[2026-02-28 18:02:08,911.911] BEST model SAVED on iteration 000138 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:02:10,398.398] Once upon a time, there was a beautiful bird. He had a small boy named they was very best. He were a big man. They had a new it were a house. He would his house and she would be special! The little girl was very
+[2026-02-28 18:02:22,620.620] Gradient updated
+[2026-02-28 18:02:22,621.621] Current Learning Rate : 0.00014372727272727272
+[2026-02-28 18:02:22,621.621] Global Step : 139
+[2026-02-28 18:02:22,621.621] Batch Index : 2240
+[2026-02-28 18:02:53,678.678] Epoch No: 1, Global Step: 000139, Train Loss: 3.786, Val Loss: 3.783
+
+[2026-02-28 18:02:53,679.679] Total Tokens seen till now: 9158880
+
+[2026-02-28 18:02:57,380.380] BEST model SAVED on iteration 000139 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:02:58,485.485] Once upon a time, there was a little girl named Lily. She loved to play with her mommy and have to play.  One day, he was very happy, "Look, "It is so't play't do?" But the boy said
+[2026-02-28 18:03:10,639.639] Gradient updated
+[2026-02-28 18:03:10,639.639] Current Learning Rate : 0.00014454545454545452
+[2026-02-28 18:03:10,639.639] Global Step : 140
+[2026-02-28 18:03:10,639.639] Batch Index : 2256
+[2026-02-28 18:03:41,696.696] Epoch No: 1, Global Step: 000140, Train Loss: 3.771, Val Loss: 3.766
+
+[2026-02-28 18:03:41,696.696] Total Tokens seen till now: 9224416
+
+[2026-02-28 18:03:45,406.406] BEST model SAVED on iteration 000140 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:03:46,538.538] Once upon a time, there was a little girl named Lucy. She loved to play in the toys. She was so loved to do her toys.She's mommy, she started to her room and the sky her mommy with her to be go with him
+[2026-02-28 18:03:58,705.705] Gradient updated
+[2026-02-28 18:03:58,708.708] Current Learning Rate : 0.00014536363636363634
+[2026-02-28 18:03:58,711.711] Global Step : 141
+[2026-02-28 18:03:58,712.712] Batch Index : 2272
+[2026-02-28 18:04:29,832.832] Epoch No: 1, Global Step: 000141, Train Loss: 3.724, Val Loss: 3.754
+
+[2026-02-28 18:04:29,832.832] Total Tokens seen till now: 9289504
+
+[2026-02-28 18:04:33,500.500] BEST model SAVED on iteration 000141 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:04:35,024.024] Once upon a time, there was a, a little girl. It was very go to play. Then she was the sky and asked her. One day, she went to get her a new new with fun. One day when she started to the sky.
+[2026-02-28 18:04:47,183.183] Gradient updated
+[2026-02-28 18:04:47,183.183] Current Learning Rate : 0.00014618181818181817
+[2026-02-28 18:04:47,184.184] Global Step : 142
+[2026-02-28 18:04:47,184.184] Batch Index : 2288
+[2026-02-28 18:05:18,146.146] Epoch No: 1, Global Step: 000142, Train Loss: 3.754, Val Loss: 3.739
+
+[2026-02-28 18:05:18,146.146] Total Tokens seen till now: 9354624
+
+[2026-02-28 18:05:21,835.835] BEST model SAVED on iteration 000142 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:05:23,020.020] Once upon a time, there was a long named Timmy. Timmy loved to play with the park, "You's mom, Lily!" Tim said, Timmy said to be a big in the day. I want to eat. Timmy thought the park. They
+[2026-02-28 18:05:35,069.069] Gradient updated
+[2026-02-28 18:05:35,070.070] Current Learning Rate : 0.00014699999999999997
+[2026-02-28 18:05:35,070.070] Global Step : 143
+[2026-02-28 18:05:35,070.070] Batch Index : 2304
+[2026-02-28 18:06:06,090.090] Epoch No: 1, Global Step: 000143, Train Loss: 3.758, Val Loss: 3.732
+
+[2026-02-28 18:06:06,090.090] Total Tokens seen till now: 9419584
+
+[2026-02-28 18:06:09,686.686] BEST model SAVED on iteration 000143 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:06:11,067.067] Once upon a time, there was a little girl named Lily. She loved to play with her mom. One day, she saw a small little boy. Every day, her mommy were a new toys with her mom. He asked it, she wanted her mom. 
+[2026-02-28 18:06:23,274.274] Gradient updated
+[2026-02-28 18:06:23,275.275] Current Learning Rate : 0.0001478181818181818
+[2026-02-28 18:06:23,275.275] Global Step : 144
+[2026-02-28 18:06:23,275.275] Batch Index : 2320
+[2026-02-28 18:06:54,137.137] Epoch No: 1, Global Step: 000144, Train Loss: 3.703, Val Loss: 3.715
+
+[2026-02-28 18:06:54,138.138] Total Tokens seen till now: 9485120
+
+[2026-02-28 18:06:57,936.936] BEST model SAVED on iteration 000144 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:06:59,204.204] Once upon a time, there was a little girl named The Lily. She was very special with his mommy loved the big and liked in a lot. One day, the bird, mom saw a big and he asked her mommy. One day, "It's mom
+[2026-02-28 18:07:11,362.362] Gradient updated
+[2026-02-28 18:07:11,362.362] Current Learning Rate : 0.00014863636363636362
+[2026-02-28 18:07:11,362.362] Global Step : 145
+[2026-02-28 18:07:11,362.362] Batch Index : 2336
+[2026-02-28 18:07:42,365.365] Epoch No: 1, Global Step: 000145, Train Loss: 3.684, Val Loss: 3.697
+
+[2026-02-28 18:07:42,366.366] Total Tokens seen till now: 9550656
+
+[2026-02-28 18:07:46,134.134] BEST model SAVED on iteration 000145 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:07:47,272.272] Once upon a time, there was a little girl named Lily. She had a girl who loved the toy around. One day, she was very very happy. She could make her mom, her mom. Lily decided Lily made her mom's a loud! From she was very
+[2026-02-28 18:07:59,406.406] Gradient updated
+[2026-02-28 18:07:59,407.407] Current Learning Rate : 0.00014945454545454545
+[2026-02-28 18:07:59,407.407] Global Step : 146
+[2026-02-28 18:07:59,407.407] Batch Index : 2352
+[2026-02-28 18:08:30,484.484] Epoch No: 1, Global Step: 000146, Train Loss: 3.681, Val Loss: 3.688
+
+[2026-02-28 18:08:30,485.485] Total Tokens seen till now: 9616192
+
+[2026-02-28 18:08:34,378.378] BEST model SAVED on iteration 000146 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:08:35,770.770] Once upon a time, there lived a little girl named Lily. She loved to the park. She was so very proud and saw a little girl. She did she got to play with her to her mom. "That is happy to see the sky. Lily
+[2026-02-28 18:08:47,913.913] Gradient updated
+[2026-02-28 18:08:47,914.914] Current Learning Rate : 0.00015027272727272724
+[2026-02-28 18:08:47,914.914] Global Step : 147
+[2026-02-28 18:08:47,914.914] Batch Index : 2368
+[2026-02-28 18:09:18,850.850] Epoch No: 1, Global Step: 000147, Train Loss: 3.711, Val Loss: 3.670
+
+[2026-02-28 18:09:18,851.851] Total Tokens seen till now: 9681728
+
+[2026-02-28 18:09:22,866.866] BEST model SAVED on iteration 000147 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:09:24,126.126] Once upon a time, there were a little girl named Lily. It was a big outside in the park and he had up.One day, the kitchen was very special, and they felt the park. She thought it was very kind of the tree and it was
+[2026-02-28 18:09:36,246.246] Gradient updated
+[2026-02-28 18:09:36,247.247] Current Learning Rate : 0.00015109090909090907
+[2026-02-28 18:09:36,247.247] Global Step : 148
+[2026-02-28 18:09:36,247.247] Batch Index : 2384
+[2026-02-28 18:10:07,302.302] Epoch No: 1, Global Step: 000148, Train Loss: 3.657, Val Loss: 3.658
+
+[2026-02-28 18:10:07,302.302] Total Tokens seen till now: 9747264
+
+[2026-02-28 18:10:10,950.950] BEST model SAVED on iteration 000148 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:10:12,064.064] Once upon a time, there was a little boy named Timmy. Timmy was very happy with the sky. One day, Timmy was a loud. He had a big big long. So he was a big, but he saw a ball. The man was very
+[2026-02-28 18:10:18,097.097] BEST model SAVED on iteration 000148 to model/gpt2_MOE_preTrain_S_V3.pth..! 
+[2026-02-28 18:10:18,171.171] Training completed in 133.15 minutes.
+[2026-02-28 18:10:18,171.171] BEST Pre-trained custom model saved in model/gpt2_MOE_preTrain_S_V3.pth..!
+[2026-02-28 18:10:18,171.171] Saving the plots of the metrics tracked ..!
+[2026-02-28 18:10:19,622.622] Pipeline completed in 133.18 minutes.

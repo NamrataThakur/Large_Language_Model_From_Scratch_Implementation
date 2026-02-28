@@ -1,7 +1,7 @@
 #If you have to use any variable with None value, then skip that variable in the script below. 
 #The Default value will be used in that case. Else None will go as 'None' and error will rise in the code.
 
-#Pre-Training params for custom GPT2 model:
+#Pre-Training params for custom SLM model with Multi Head Attention:
 
 # num_epochs=1
 # top_k=20
@@ -93,7 +93,104 @@
 
 
 
-#Pre-training params for Mixture of Experts based GPT2 model:
+#Pre-training params for Group Query Attention based SLM model:
+
+# num_epochs=1
+# top_k=30
+# temp=1
+# max_new_tokens=50
+# context_length=256
+# vocab_size=50257
+# embedding_dimension=512
+# num_heads=8
+# num_layers=8 #12
+# qkv_bias=False
+# eval_batchSize=64
+# eval_freq=64
+# weight_decay=0.1
+# beta1=0.9
+# beta2=0.95
+# val_split=0.05
+# train_split=0.85
+# batch_size=16
+# target_batch_size=256 #1024 
+# seed=123
+# dropout_rate=0.2 #Pre-training = 0.0, FT = 0.1+ (Karpathy)
+# token_dropout_rate=0.03
+# attention_dropout_rate=0.2
+# ffn_dropout_rate=0.2 #Used only in MoE Achitecture
+# eos_id=50256
+# use_warmup=True
+# use_gradient_clip=True
+# warmup_steps=0.05
+# initial_lr=0.00003 #3e-05
+# #min_lr=0.000001 #--> being calculated as 0.1 * of max LR
+# learning_rate=0.0003 #0.0008 #3e-4 --> Good LR (Karpathy) #6e-4
+# rms_eps=1e-6
+# rms_bias=True
+# theta_base=10000.0
+# num_experts=4
+# num_active_experts=2
+# num_kv_groups=4
+# ff_hidden_dim=1024
+# arch_type='GQA'
+# kv_cache=True
+# moe_noise=True
+# train_type='resume'
+# python gpt_pretrainingPipeline.py \
+#   --experiment_name 'Pre-Train_Exp_CustomConfig_GQAarch_S_V1_resume_8' \
+#   --data_path 'tinystories' \
+#   --model_type 'custom' \
+#   --arch_type $arch_type \
+#   --model_name 'gpt2_GQA_preTrain_S_V1' \
+#   --pre_save_model 'gpt2_GQA_preTrain_S_V1.pth' \
+#   --tokenizer 'tiktoken' \
+#   --seed $seed \
+#   --batch_size $batch_size \
+#   --eval_batchSize $eval_batchSize \
+#   --eval_freq $eval_freq \
+#   --target_batch_size $target_batch_size \
+#   --train_split $train_split \
+#   --val_split $val_split \
+#   --optimizer 'AdamW' \
+#   --context_length $context_length \
+#   --vocab_size $vocab_size \
+#   --embedding_dimension $embedding_dimension \
+#   --max_training_length 'model_context_length' \
+#   --num_heads $num_heads \
+#   --num_layers $num_layers \
+#   --weight_decay $weight_decay \
+#   --beta1 $beta1 \
+#   --beta2 $beta2 \
+#   --rms_eps $rms_eps \
+#   --rms_bias $rms_bias \
+#   --theta_base $theta_base \
+#   --num_experts $num_experts \
+#   --num_active_experts $num_active_experts \
+#   --num_kv_groups $num_kv_groups \
+#   --ff_hidden_dim $ff_hidden_dim \
+#   --max_new_tokens $max_new_tokens \
+#   --temp $temp \
+#   --top_k $top_k \
+#   --dropout_rate $dropout_rate \
+#   --token_dropout_rate $token_dropout_rate \
+#   --attention_dropout_rate $attention_dropout_rate \
+#   --ffn_dropout_rate $ffn_dropout_rate \
+#   --num_epochs $num_epochs \
+#   --eos_id $eos_id \
+#   --initial_lr $initial_lr \
+#   --warmup_steps $warmup_steps \
+#   --learning_rate $learning_rate \
+#   --use_gradient_clip $use_gradient_clip \
+#   --use_warmup $use_warmup \
+#   --moe_noise $moe_noise \
+#   --train_type $train_type \
+#   --kv_cache $kv_cache \
+  
+# --qkv_bias $qkv_bias \
+
+
+#Pre-training params for Mixture-Of-Experts based SLM model:
 
 num_epochs=1
 top_k=30
@@ -101,8 +198,8 @@ temp=1
 max_new_tokens=50
 context_length=256
 vocab_size=50257
-embedding_dimension=512
-num_heads=8
+embedding_dimension=768
+num_heads=12
 num_layers=8 #12
 qkv_bias=False
 eval_batchSize=64
@@ -122,7 +219,7 @@ ffn_dropout_rate=0.2 #Used only in MoE Achitecture
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
-warmup_steps=0.05
+warmup_steps=0.066 #0.05 --> Started with 
 initial_lr=0.00003 #3e-05
 #min_lr=0.000001 #--> being calculated as 0.1 * of max LR
 learning_rate=0.0003 #0.0008 #3e-4 --> Good LR (Karpathy) #6e-4
@@ -133,17 +230,18 @@ num_experts=4
 num_active_experts=2
 num_kv_groups=4
 ff_hidden_dim=1024
-arch_type='GQA'
+arch_type='MOE'
 kv_cache=True
 moe_noise=True
-train_type='resume'
+train_type='scratch'
+max_steps=5000
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_GQAarch_S_V1_resume' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_MOEarch_S_V3_scratch' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
-  --model_name 'gpt2_GQA_preTrain_S_V1' \
-  --pre_save_model 'gpt2_GQA_preTrain_S_V1.pth' \
+  --model_name 'gpt2_MOE_preTrain_S_V3' \
+  --pre_save_model 'gpt2_MOE_preTrain_S_V3.pth' \
   --tokenizer 'tiktoken' \
   --seed $seed \
   --batch_size $batch_size \
@@ -185,6 +283,7 @@ python gpt_pretrainingPipeline.py \
   --use_warmup $use_warmup \
   --moe_noise $moe_noise \
   --train_type $train_type \
+  --max_steps $max_steps \
   --kv_cache $kv_cache \
   
 # --qkv_bias $qkv_bias \
