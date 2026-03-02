@@ -347,6 +347,15 @@ if __name__ == '__main__':
         help=("Number of training epochs.")
     )
 
+    parser.add_argument(    
+        "--max_steps",
+        type=int,
+        default=0,
+        help=("Maximum Steps allowed to update the optimizer. If nothing is given, this value is calculated using length of train-loader and gradient accumulation steps" \
+               "Options: 0 (Default), any integer (Recommended)"
+            )
+    )
+
     parser.add_argument(
         "--eos_id",
         type=int,
@@ -467,6 +476,7 @@ if __name__ == '__main__':
 
     #Load the model config:
     try:
+        #Code block for the initial training phase:
         if args.train_type == 'scratch':
             logger.info(f"Model to be trained from scratch ..!")
             checkpoint = None
@@ -525,7 +535,7 @@ if __name__ == '__main__':
                 logger.info(f'Configuration of the custom GPT2 model loaded..!')
         
         else:
-
+            #Code block for the resuming the training phase:
             model_path = os.path.join(MODEL_ROOT_FOLDER,args.pre_save_model)
             print(model_path)
             logger.info(f'Model to be resumed for training from checkpoint present in the path: {model_path}')
@@ -638,7 +648,8 @@ if __name__ == '__main__':
         logger.error(f'Error in loading file and creating dataloader:: {e}')
         raise Exception(f'Error in loading file and creating dataloader:: {e}')
     
-
+    
+    #Code block for the initial training phase:
     if args.pre_save_model is  None or args.train_type == 'scratch':
         
         logger.info(f'Model will be trained from scratch..!')
@@ -650,7 +661,7 @@ if __name__ == '__main__':
         logger.info(f'Model loaded with random weights for training..!')
 
     else:
-
+        #Code block for the resuming the training phase:
         try:
             logger.info(f'Loading the weights of the model : {args.pre_save_model}..!')
 
@@ -725,7 +736,8 @@ if __name__ == '__main__':
                             checkpoint=checkpoint,
                             kv_cache=args.kv_cache,
                             arch_type=args.arch_type,
-                            config=gpt2_config
+                            config=gpt2_config,
+                            max_steps=args.max_steps
                             ) 
 
         train_losses, test_losses, track_tokens_seen, track_lr, total_steps = gpt2_trainer.train(model_save_path=save_model_path, temp=args.temp, top_k=args.top_k,  
