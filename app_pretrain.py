@@ -22,8 +22,8 @@ from transformer_blocks.gpt2_moe import MoEGPT2
 #Load the text generation class
 from gpt_Pretraining.text_generation import Text_Generation
 
-#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cpu")
 
 def load_model_tokenizer():
 
@@ -73,6 +73,8 @@ try:
         logger = logging.getLogger()
 
         customGPT_pretrain_gqa, customGPT_pretrain_mha, tokenizer = load_model_tokenizer()
+        customGPT_pretrain_mha.to(device)
+        customGPT_pretrain_gqa.to(device)
        
         logger.info('*********************** ALL MODELS LOADED SUCCESSFULL ***********************')
 
@@ -89,11 +91,11 @@ async def chat_profiles():
     """Chat profile setter."""
 
     return [
-        cl.ChatProfile(name="stories-SLM", 
+        cl.ChatProfile(name="Stories-SLM", 
                        markdown_description="This is LLM can generate short stories",
                        icon="https://picsum.photos/200"),
 
-        cl.ChatProfile(name="stories-SLM Advanced",
+        cl.ChatProfile(name="Stories-SLM 2",
                        markdown_description="This advanced LLM can generate better short stories",
                        icon="https://picsum.photos/250"),
     ]
@@ -105,11 +107,11 @@ async def on_chat_start():
 
     chat_prof = cl.user_session.get("chat_profile")
     #await cl.Message(content=f"Starting the session with {chat_prof}.").send()
-    if chat_prof == 'stories-SLM':
-        cl.user_session.set("llm", pretrain_mha)
+    if chat_prof == 'Stories-SLM':
+        cl.user_session.set("llm", customGPT_pretrain_mha)
         cl.user_session.set("m_type",chat_prof)
     else:
-        cl.user_session.set("llm", pretrain_gqa)
+        cl.user_session.set("llm", customGPT_pretrain_gqa)
         cl.user_session.set("m_type",chat_prof)
 
     
@@ -131,12 +133,12 @@ async def update_settings(settings):
     cl.user_session.set("top_k", settings["top_k"])
     
 
-    if chat_prof == "stories-SLM":
-        cl.user_session.set("llm", pretrain_mha)
+    if chat_prof == "Stories-SLM":
+        cl.user_session.set("llm", customGPT_pretrain_mha)
         cl.user_session.set("m_type",chat_prof)
         
     else:
-        cl.user_session.set("llm", pretrain_gqa)
+        cl.user_session.set("llm", customGPT_pretrain_gqa)
         cl.user_session.set("m_type",chat_prof)
         
 
@@ -166,10 +168,10 @@ async def main(message : cl.Message):
 
     print(message.content)
 
-    if m_type == "stories-SLM":
+    if m_type == "Stories-SLM":
 
         output_text = pretrain_mha.text_generation(input_text = message.content, max_new_tokens=max_new_tokens, 
-                                                            temp=temp, top_k= top_k, eos_id=50256, kv_cache=True)
+                                                            temp=temp, top_k= top_k, eos_id=50256, kv_cache=False)
 
     else:
         print('Model : ', m_type)
