@@ -7,7 +7,7 @@ from math import ceil
 class GPT2_PreTrain:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,num_epochs, gradient_accumulation_steps, global_batch_size, eval_batchSize, eval_freq, 
                  start_context,max_new_tokens, log_path, warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip, checkpoint, config, kv_cache = False,
-                 arch_type='original'):
+                 arch_type='original', max_steps = 0):
 
         self.model = model
         self.optimizer = optimizer
@@ -31,6 +31,7 @@ class GPT2_PreTrain:
         self.arch_type = arch_type
         self.checkpoint = checkpoint
         self.config = config
+        self.max_steps = max_steps
 
         self.generation = Text_Generation(model=self.model, device=self.device, tokenizer_model='gpt2', 
                                           arch_type=self.arch_type)
@@ -63,6 +64,7 @@ class GPT2_PreTrain:
             last_lr = self.optimizer.param_groups[0]['lr']
             start_epoch = self.checkpoint.get('epoch', 0)
             start_batch = self.checkpoint.get('batch', 0)
+            max_steps = self.checkpoint.get('max_steps', 0)
             torch.set_rng_state(self.checkpoint.get('rng_state', torch.get_rng_state()))
             tokens_seen = self.checkpoint.get('track_tokens_seen', [0])[-1]
 
@@ -89,9 +91,14 @@ class GPT2_PreTrain:
 
         #Calculate the total training steps, that will be used for cosine annealing: 
         #New Feat: Factor in the gradient accumulation steps
-        num_batches_per_epoch = len(self.train_loader)
-        updates_per_epoch = math.ceil(num_batches_per_epoch / self.gradient_accumulation_steps)
-        total_training_steps = updates_per_epoch * self.num_epochs
+        if self.max_steps == 0:
+            self.logger.info("No value given for Max Steps Counter. Calculating using the train-loader and gradient accumulation steps..!")
+            num_batches_per_epoch = len(self.train_loader)
+            updates_per_epoch = math.ceil(num_batches_per_epoch / self.gradient_accumulation_steps)
+            total_training_steps = updates_per_epoch * self.num_epochs
+        else:
+            self.logger.info(f"Value found for max_steps Steps : {self.max_steps}. Using that..!")
+            total_training_steps = self.max_steps
         
         #total_training_steps = ceil((len(self.train_loader) * self.num_epochs) / self.gradient_accumulation_steps)
         print('Total steps to update optimizer : ', total_training_steps)
@@ -258,7 +265,8 @@ class GPT2_PreTrain:
                                         'track_lr':track_lr,
                                         'max_lr':max_lr,
                                         'epoch': ep,
-                                        'batch': batch_index + 1,  # resume from next batch
+                                        'batch': batch_index + 1,  # resume from next batch,
+                                        'max_steps': self.max_steps,
                                         'rng_state': torch.get_rng_state(),
                                         }, 
                                         model_save_path)
