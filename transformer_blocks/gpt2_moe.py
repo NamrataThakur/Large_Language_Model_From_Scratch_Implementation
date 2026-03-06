@@ -4,23 +4,28 @@ import torch.nn as nn
 from .RoPE import RoPE
 from .rmsnorm import RMSNormalization
 from .transformer_moe import MoETransformerBlock
+from huggingface_hub import PyTorchModelHubMixin
 
-class MoEGPT2(nn.Module):
-    def __init__(self, config):
+class MoEGPT2(nn.Module, PyTorchModelHubMixin):
+    def __init__(self, config ):
         super().__init__()
 
         self.config = config
         self.token_embedding = nn.Embedding(num_embeddings=self.config['vocab_size'], embedding_dim=self.config['embedding_dimension'])
+        self.token_dropout = nn.Dropout(self.config['token_dropout'])
 
         self.transformer_block = nn.ModuleList(
                                     [MoETransformerBlock(config=self.config) for _ in range(self.config['num_layers'])]
                                 )
         
         self.final_rmsNorm = RMSNormalization(config=config)
+
+        #NEW FEAT: Adding the weight typing here to efficiently use parameters for training:
         self.final_projection = nn.Linear(in_features=self.config['embedding_dimension'], 
                                           out_features=self.config['vocab_size'], 
                                           bias=False)
         
+        self.final_projection.weight = self.token_embedding.weight
 
         self.current_pos = 0
 
@@ -53,13 +58,16 @@ class MoEGPT2(nn.Module):
 
             #KV_cache is not being used, so position embedding and mask needs to be created for the entire sequence:
             mask = torch.triu(
-                                torch.ones(seq_len, seq_len, device=input_tensor.device, dtype=bool),
+                                torch.ones(seq_len, seq_len, device=input_tensor.device, dtype=torch.bool),
                                 diagonal= 1
                             )
 
         #Explicitely broadcast the mask:
         #Shape : (seq_len, seq_len) --> (batch, dim_head, seq_len, seq_len)
         mask = mask[None, None, :, :]
+
+        #Pass the input through the dropout layer:
+        input = self.token_dropout(input)
 
 
         #New FEAT: KV Cache Implemented
