@@ -34,7 +34,9 @@ class MoETransformerBlock(nn.Module):
         #FeedForward / MoE Block:
         residual_conn = input_tensor
         input_tensor = self.rms_norm_moe(input_tensor)
-        input_tensor = self.moe_block(input_tensor)
+        input_tensor, expert_usage = self.moe_block(input_tensor)
+
+        #print("Expert Usage In Transformer Block : ", expert_usage)
 
         # Shape: (batch, seq_length, embedding_dim) + (batch, seq_length, embedding_dim) --> (batch, seq_length, embedding_dim)
         input_tensor = residual_conn + input_tensor

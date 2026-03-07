@@ -25,6 +25,13 @@ class MixtureofExperts(nn.Module):
         #Shape: (b, num_tokens, num_experts)
         moe_weights, topK_indices = self.router(input)
 
+        counts = torch.bincount(
+            topK_indices.reshape(-1),
+            minlength=self.num_experts
+        )
+
+        expert_usage = counts / counts.sum()
+
         #Flatten out input: Flattening all dimension except the last
         #Shape: (b, num_tokens, dim_in) --> (b * num_tokens, dim_in)
         input_flatten = input.view(-1, input.size(-1))
@@ -70,7 +77,7 @@ class MixtureofExperts(nn.Module):
                 final_moe_output[moe_mask] += moe_weighted_output.squeeze(1)
 
 
-        return final_moe_output
+        return final_moe_output, expert_usage
 
 
 #Note : 
