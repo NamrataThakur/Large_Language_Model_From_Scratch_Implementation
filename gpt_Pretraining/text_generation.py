@@ -41,7 +41,8 @@ class Text_Generation:
         text = self.tokenizer.decode(token_list.tolist())
         return text
     
-    def text_generation(self, input_text, max_new_tokens, temp=1.0, top_k= None, eos_id = None, kv_cache = False):
+    def text_generation(self, input_text, max_new_tokens, temp=1.0, top_k= None, repetition_penalty=1.1, 
+                        eos_id = 50256, kv_cache = False):
 
         idx = self.text_to_tokenID(input_text).to(self.device)
 
@@ -76,6 +77,13 @@ class Text_Generation:
                 # (batch, n_token, vocab_size) becomes (batch, vocab_size)
                 logits = logits[:, -1, :]
 
+                # -----------------------------
+                # Repetition penalty
+                # -----------------------------
+                if repetition_penalty is not None and repetition_penalty > 1.0:
+                    for token in set(idx[0].tolist()):
+                        logits[0, token] /= repetition_penalty
+
                 #Get the top_k tokens:
                 if top_k is not None and top_k > 0:
 
@@ -83,9 +91,15 @@ class Text_Generation:
                     top_logits, _ = torch.topk(logits, top_k)
                     
                     # Mask out values of all other location (apart from those of top k) with -infinity value so that softmax is not applied on them later.
-                    logits = torch.where(condition= logits < top_logits[:, -1],
-                                        input= torch.tensor(float("-inf")).to(logits.device),
-                                        other= logits)
+                    # logits = torch.where(condition= logits < top_logits[:, -1],
+                    #                     input= torch.tensor(float("-inf")).to(logits.device),
+                    #                     other= logits)
+                    min_topk = top_logits[:, -1].unsqueeze(-1)
+                    logits = torch.where(
+                                         condition= logits < min_topk,
+                                         input=torch.full_like(logits, float("-inf")),
+                                         other=logits,
+                                        )
                     
                 #Get the temperature scaled logits:
                 if temp > 0.0:

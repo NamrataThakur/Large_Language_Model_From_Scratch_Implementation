@@ -29,6 +29,12 @@ def load_model_tokenizer():
 
     try:
         tokenizer = tiktoken.get_encoding("gpt2")
+
+        customGPT_pretrain_mha =GPT2.from_pretrained("NamrataThakur/Small_Language_Model_MHA_53M_Pretrained")
+        print('Text Generation Model is loaded..!')
+        customGPT_pretrain_mha.eval()
+        customGPT_pretrain_mha.to(device)
+        print(f'Text Generation - Model is sent to {device} and ready to use..!')
         
         customGPT_pretrain_gqa =GQAGPT2.from_pretrained("NamrataThakur/Small_Language_Model_GQA_48M_Pretrained")
         print('Text Generation - Advanced Model is loaded..!')
@@ -36,13 +42,24 @@ def load_model_tokenizer():
         customGPT_pretrain_gqa.to(device)
         print(f'Text Generation - Advanced Model is sent to {device} and ready to use..!')
 
-        customGPT_pretrain_mha =GPT2.from_pretrained("NamrataThakur/Small_Language_Model_MHA_53M_Pretrained")
-        print('Text Generation Model is loaded..!')
-        customGPT_pretrain_gqa.eval()
-        customGPT_pretrain_gqa.to(device)
-        print(f'Text Generation - Model is sent to {device} and ready to use..!')
+        customGPT_pretrain_moe =MoEGPT2.from_pretrained("NamrataThakur/Small_Language_Model_MOE_127M_Pretrained")
+        print('Text Generation - Advanced MoE Model is loaded..!')
+        customGPT_pretrain_moe.eval()
+        customGPT_pretrain_moe.to(device)
 
-        return customGPT_pretrain_gqa, customGPT_pretrain_mha, tokenizer
+        for module in customGPT_pretrain_moe.modules():
+            if module.__class__.__name__ == "Router":
+                module.noise = False
+
+        
+        for module in customGPT_pretrain_moe.modules():
+            if hasattr(module, "noise"):
+                print("Router noise:", module.noise)
+
+        print(f'Text Generation - Advanced MoE Model is sent to {device} and ready to use..!')
+        
+
+        return customGPT_pretrain_gqa, customGPT_pretrain_mha, customGPT_pretrain_moe, tokenizer
 
     except Exception as e:
          print("Exception while loading the model weights : ", str(e))
@@ -72,13 +89,16 @@ try:
 
         logger = logging.getLogger()
 
-        customGPT_pretrain_gqa, customGPT_pretrain_mha, tokenizer = load_model_tokenizer()
+        customGPT_pretrain_gqa, customGPT_pretrain_mha, customGPT_pretrain_moe, tokenizer = load_model_tokenizer()
         customGPT_pretrain_mha.to(device)
         customGPT_pretrain_gqa.to(device)
+        customGPT_pretrain_moe.to(device)
        
         logger.info('*********************** ALL MODELS LOADED SUCCESSFULL ***********************')
 
         pretrain_gqa = Text_Generation(model=customGPT_pretrain_gqa, device=device, tokenizer_model='gpt2', arch_type='GQA')
+
+        pretrain_moe = Text_Generation(model=customGPT_pretrain_moe, device=device, tokenizer_model='gpt2', arch_type='MOE')
 
         pretrain_mha = Text_Generation(model=customGPT_pretrain_mha, device=device, tokenizer_model='gpt2', arch_type='original')
     
@@ -98,6 +118,10 @@ async def chat_profiles():
         cl.ChatProfile(name="Stories-SLM 2",
                        markdown_description="This advanced LLM can generate better short stories",
                        icon="https://picsum.photos/250"),
+
+        cl.ChatProfile(name="Stories-SLM 2-MoE",
+                       markdown_description="This advanced Mixture-Of-Experts LLM can generate complex short stories covering different themes",
+                       icon="https://picsum.photos/250"),
     ]
 
 
@@ -110,8 +134,11 @@ async def on_chat_start():
     if chat_prof == 'Stories-SLM':
         cl.user_session.set("llm", customGPT_pretrain_mha)
         cl.user_session.set("m_type",chat_prof)
-    else:
+    elif chat_prof == 'Stories-SLM 2':
         cl.user_session.set("llm", customGPT_pretrain_gqa)
+        cl.user_session.set("m_type",chat_prof)
+    else:
+        cl.user_session.set("llm", customGPT_pretrain_moe)
         cl.user_session.set("m_type",chat_prof)
 
     
@@ -137,8 +164,12 @@ async def update_settings(settings):
         cl.user_session.set("llm", customGPT_pretrain_mha)
         cl.user_session.set("m_type",chat_prof)
         
-    else:
+    elif chat_prof == "Stories-SLM 2":
         cl.user_session.set("llm", customGPT_pretrain_gqa)
+        cl.user_session.set("m_type",chat_prof)
+
+    else:
+        cl.user_session.set("llm", customGPT_pretrain_moe)
         cl.user_session.set("m_type",chat_prof)
         
 
@@ -173,9 +204,14 @@ async def main(message : cl.Message):
         output_text = pretrain_mha.text_generation(input_text = message.content, max_new_tokens=max_new_tokens, 
                                                             temp=temp, top_k= top_k, eos_id=50256, kv_cache=False)
 
-    else:
+    elif m_type == "Stories-SLM 2":
         print('Model : ', m_type)
         output_text = pretrain_gqa.text_generation(input_text = message.content, max_new_tokens=max_new_tokens, 
+                                                            temp=temp, top_k= top_k, eos_id=50256, kv_cache=True)
+        
+    else:
+        print('Model : ', m_type)
+        output_text = pretrain_moe.text_generation(input_text = message.content, max_new_tokens=max_new_tokens, 
                                                             temp=temp, top_k= top_k, eos_id=50256, kv_cache=True)
         
     print(output_text)
