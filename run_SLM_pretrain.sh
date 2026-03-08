@@ -233,10 +233,10 @@ ff_hidden_dim=1024
 arch_type='MOE'
 kv_cache=True
 moe_noise=True
-train_type='scratch'
+train_type='resume'
 max_steps=5000
 python gpt_pretrainingPipeline.py \
-  --experiment_name 'Pre-Train_Exp_CustomConfig_MOEarch_S_V3_scratch' \
+  --experiment_name 'Pre-Train_Exp_CustomConfig_MOEarch_S_V3_resume_11' \
   --data_path 'tinystories' \
   --model_type 'custom' \
   --arch_type $arch_type \
