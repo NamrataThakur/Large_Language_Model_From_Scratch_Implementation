@@ -111,9 +111,13 @@ class GPT2(nn.Module, PyTorchModelHubMixin):
 
         #Pass the output through the final layer normalization block:
         input = self.final_layerNorm(input)
-
+        
         #Pass the output through the final projection/linear layer:
-        logits = self.final_projection(input, lora_gates = lora_gates)
+        #NEW FEAT: Pass the lora gated class probabilities to the last linear layer as well
+        if self.adapter_names is not None:
+            logits = self.final_projection(input , lora_gates = lora_gates)
+        else:
+            logits = self.final_projection(input) 
 
         return logits
     

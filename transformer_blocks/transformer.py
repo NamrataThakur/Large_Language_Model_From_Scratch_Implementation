@@ -21,8 +21,8 @@ class TransformerBlock(nn.Module):
             context_length = config['context_length'],
             heads = config['num_heads'],
             dropout = config['dropout'],
-            qkv_bias = config['qkv_bias']
-            #causal_mask = config['causal_mask']
+            qkv_bias = config['qkv_bias'],
+            causal_mask = config.get('causal_mask', True)
         )
         self.layer_norm_attention = LayerNormalization(config)
         self.layer_norm_feedforward = LayerNormalization(config)
