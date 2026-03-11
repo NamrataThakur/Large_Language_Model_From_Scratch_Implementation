@@ -11,7 +11,7 @@ class FeedForwardBlock(nn.Module):
             nn.Linear( 4*config['embedding_dimension'], config['embedding_dimension'])
         )
     
-    def forward(self,input):
-        return self.block(input)
+    def forward(self,input, lora_gates = None):
+        return self.block(input, gates = lora_gates) if lora_gates is not None else self.block(input) 
     
 

@@ -3,7 +3,7 @@ import torch
 
 class MultiHead_Attention(nn.Module):
     def __init__(self, dim_in, dim_out, context_length,heads,
-                  dropout, qkv_bias=False):
+                  dropout, causal_mask, qkv_bias=False):
         super().__init__()
 
         assert (dim_out % heads) == 0, \
@@ -12,6 +12,7 @@ class MultiHead_Attention(nn.Module):
         self.dim_head = dim_out // heads
         self.dim_out = dim_out
         self.heads = heads
+        self.causal_mask = causal_mask
 
         self.W_query = nn.Linear(dim_in,dim_out,bias=qkv_bias) #Shape : 3x4
         self.W_key = nn.Linear(dim_in,dim_out,bias=qkv_bias)
@@ -28,16 +29,23 @@ class MultiHead_Attention(nn.Module):
         self.register_buffer("v_cache", None, persistent=False)
 
     
-    def forward(self,input_tensor, mask, cache = False): # Flag to use KV cache during inference or not
+    def forward(self,input_tensor, mask, cache = False, lora_gates = None): # Flag to use KV cache during inference or not
 
         batch, num_tokens, dim_in = input_tensor.shape
 
         #Pass the mask in the forward prop layer:
         self.mask = mask
 
-        Vec_query = self.W_query(input_tensor) # Shape: (b, context_length, dim_in)
-        Vec_key = self.W_key(input_tensor)
-        Vec_value = self.W_value(input_tensor)
+        #NEW FEAT: Class wise LoRA gated probabilities:
+        if lora_gates is not None:
+            Vec_query = self.W_query(input_tensor, gates = lora_gates) # Shape: (b, context_length, dim_in)
+            Vec_key = self.W_key(input_tensor, gates = lora_gates)
+            Vec_value = self.W_value(input_tensor, gates = lora_gates)
+
+        else:
+            Vec_query = self.W_query(input_tensor) # Shape: (b, context_length, dim_in)
+            Vec_key = self.W_key(input_tensor)
+            Vec_value = self.W_value(input_tensor)
 
         #Divide the original Q,K,V projections into smaller projections (each projection for each head). Attention will be computed on each of these smaller projections.
         Vec_query = Vec_query.view(batch,num_tokens, self.heads, self.dim_head) #Shape: b,6,2,2
@@ -75,10 +83,16 @@ class MultiHead_Attention(nn.Module):
                                                         # and then repeated for the individual heads ]
         attention_score = Vec_query @ Vec_key.transpose(2,3)
 
-        # `:num_tokens` to account for cases where the number of tokens in the batch is smaller than the supported context_size
-        boolean_mask = self.mask.bool()[:num_tokens, :num_tokens]
-        # masked_scores = attention_score.masked_fill_(boolean_mask, -torch.inf)
-        masked_attention_score = attention_score.masked_fill_(boolean_mask, -torch.inf)
+        if self.causal_mask:
+            # `:num_tokens` to account for cases where the number of tokens in the batch is smaller than the supported context_size
+            boolean_mask = self.mask.bool()[:num_tokens, :num_tokens]
+            # masked_scores = attention_score.masked_fill_(boolean_mask, -torch.inf)
+            masked_attention_score = attention_score.masked_fill_(boolean_mask, -torch.inf)
+        
+        else:
+            #NEW UPDATE: In Classification SFT, option to disable causal mask so as to allow attention for all tokens in the sequence:
+            #MASKED DISABLE OPTION TO BE USED ONLY FOR SFT:
+            masked_attention_score = attention_score.copy()
 
         #Compute normalized and scaled attention weights
         dim_k = Vec_key.shape[-1]
@@ -97,7 +111,11 @@ class MultiHead_Attention(nn.Module):
         #context_vector = context_vector.reshape(batch, num_tokens, self.dim_out)
 
         #Perform the final projection to get the FINAL Context Vector
-        context_vector = self.out_projection(context_vector)
+        #NEW FEAT: Class wise LoRA gating is being applied to each Linear layer
+        if lora_gates is not None:
+            context_vector = self.out_projection(context_vector, gates = lora_gates)
+        else:
+            context_vector = self.out_projection(context_vector)
 
         assert context_vector.shape[-1] == self.heads * self.dim_head
         
