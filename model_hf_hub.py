@@ -64,6 +64,7 @@ def prep_model_folder(model_name, base_modelName,drop_rate, context_length, clas
     
     
     hf_path = os.path.join(MODEL_ROOT_FOLDER,'customGPT_Pretrain')
+    os.makedirs(hf_path, exist_ok=True)
 
     # 2. Save the weights in the standard PyTorch format
     torch.save(gpt2_baseInst.state_dict(), os.path.join(hf_path, "pytorch_model.bin"))
@@ -114,12 +115,12 @@ def push_model_hf_hub(model_name, base_modelName,drop_rate, context_length, hf_m
 
 if __name__ == '__main__':
 
-    push_model_hf_hub(model_name="gpt2_GQA_preTrain_S_V1.pth",
+    push_model_hf_hub(model_name="gpt2_MOE_preTrain_S_V3.pth",
                       base_modelName="gpt2_124M",
                       drop_rate=0.0,
                       context_length=1024,
-                      hf_model_name="Small_Language_Model_GQA_48M_Pretrained",
+                      hf_model_name="Small_Language_Model_MOE_127M_Pretrained",
                       classify=False,
                       num_classes=None,
                       pretrain=True,
-                      arch_type='GQA')
+                      arch_type='MOE')
