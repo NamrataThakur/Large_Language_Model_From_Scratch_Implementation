@@ -105,9 +105,7 @@ if __name__ == '__main__':
         '--data_url',
         type=str,
         default=None,
-        help=('If the dataset is present in external repo or link or to be downloaded from huggingface through a link, then mention the dataset name here with extension.' \
-                'In the pipeline, add a block in else condition to download the dataset from the link given and store in local data folder with the same name.' \
-                'If data_url value is present, then keep the same value for data_path')
+        help=('If the dataset is present in external repo or link or to be downloaded from huggingface through a link, then mention the link here.')
     )
 
     parser.add_argument(
@@ -184,6 +182,13 @@ if __name__ == '__main__':
         type=float,
         default=0.0,
         help=("Gamma hyper-parameter to be added to the focal loss. To be set if loss_type = 'focal' ")
+    )
+
+    parser.add_argument(
+        '--target_batch_size',
+        type=int,
+        default=16,
+        help=('To be used for gradient accumulation step. Effective batch_size per gpu. Preferrably double of the batch_size value.')
     )
 
     parser.add_argument(
@@ -302,9 +307,9 @@ if __name__ == '__main__':
     
     parser.add_argument(
         "--warmup_steps",
-        type=int,
-        default=20,
-        help=("Number of iterations (step) for LR to warmup.")
+        type=float,
+        default=0.01,
+        help=("Prcentage of total steps to be taken for warmup. Generally 0.01")
     )
 
     parser.add_argument(
@@ -434,6 +439,8 @@ if __name__ == '__main__':
 
     #Load the model config:
     try:
+        checkpoint = None
+
         m_config = GPT2_ModelConfig()
         gpt2_config = m_config.load_model_config(model_name=args.base_modelName, drop_rate=args.dropout_rate,
                                                  context_length=args.context_length, causal_mask=args.causal_mask)
@@ -448,16 +455,16 @@ if __name__ == '__main__':
     #Load the data and dataloader:
     try:
         if args.data_url is not None:
-            url = "https://huggingface.co/datasets/NamrataThakur/Singapore-TripAdvisor-Sentiment-Dataset/resolve/main/review_consolidated.csv"
+            #url = "https://huggingface.co/datasets/NamrataThakur/Singapore-TripAdvisor-Sentiment-Dataset/resolve/main/review_consolidated.csv"
             start_time = time.time()
             logger.info('Downloading and Saving the dataset in the local ..!')
-            data_path = os.path.join(DATA_FOLDER,args.data_url)
+            data_path = os.path.join(DATA_FOLDER,args.data_path)
 
             if os.path.exists(data_path):
-                logger.info(f"{args.data_url} is already present in the data folder. Skipping download..!")
+                logger.info(f"{args.data_path} is already present in the data folder. Skipping download..!")
             else:
-                logger.info(f"{args.data_url} is NOT present in the data folder. Downloading dataset from the url given..!")
-                with requests.get(url, stream=True) as r:
+                logger.info(f"{args.data_path} is NOT present in the data folder. Downloading dataset from the url given..!")
+                with requests.get(args.data_url, stream=True) as r:
                     r.raise_for_status()
                     with open(data_path, 'wb') as f:
                         for chunk in r.iter_content(chunk_size=100000000):
@@ -688,28 +695,29 @@ if __name__ == '__main__':
             logger.info('Dataloaders created successfully for classification fine-tuning task..!')
             logger.info('---------------------------------------------------------')
 
-            if args.peft_type == 'lora_merge':
-                logger.info('Creatig dataloaders for class-wise LoRA training..!')
-                class_names_train, train_class_ids = getClassNames(train_df, minority = True)
-                class_names_val, val_class_ids = getClassNames(val_df, minority = True)
-                list_train_df = []
-                list_val_df = []
+            #TO DO LATER:
+            # if args.peft_type == 'lora_merge':
+            #     logger.info('Creatig dataloaders for class-wise LoRA training..!')
+            #     class_names_train, train_class_ids = getClassNames(train_df, minority = True)
+            #     class_names_val, val_class_ids = getClassNames(val_df, minority = True)
+            #     list_train_df = []
+            #     list_val_df = []
                 
-                for id in train_class_ids:
-                    t_df_cid = train_df[train_df['Target'] == id]
-                    list_train_df.append(t_df_cid)
+            #     for id in train_class_ids:
+            #         t_df_cid = train_df[train_df['Target'] == id]
+            #         list_train_df.append(t_df_cid)
 
-                for id in val_class_ids:
-                    v_df_cid = val_df[val_df['Target'] == id]
-                    list_val_df.append(v_df_cid)
+            #     for id in val_class_ids:
+            #         v_df_cid = val_df[val_df['Target'] == id]
+            #         list_val_df.append(v_df_cid)
 
-                list_trainLoaders = []
-                for df in list_train_df:
-                    print()
+            #     list_trainLoaders = []
+            #     for df in list_train_df:
+            #         print()
 
 
 
-                logger.info('---------------------------------------------------------')
+            #     logger.info('---------------------------------------------------------')
     
 
 
@@ -890,9 +898,9 @@ if __name__ == '__main__':
 
                 #Generate a text to check if loading is successful:
                 logger.info('Generate a text to check if loading is successful..!')
-                generate = Text_Generation(model=gpt2_baseInst, device='cpu', tokenizer_model='gpt2')
+                generate = Text_Generation(model=gpt2_baseInst, device='cpu', tokenizer_model='gpt2',arch_type="original")
                 output_text = generate.text_generation(input_text = "Once upon a time,", max_new_tokens=args.max_new_tokens, 
-                                                        temp=args.temp, top_k= args.top_k, eos_id = args.eos_id)
+                                                        temp=args.temp, top_k= args.top_k, eos_id = args.eos_id, kv_cache=False)
                 logger.info(f'Generating a text :: \n{output_text}')
             
             except Exception as e:
@@ -1079,10 +1087,11 @@ if __name__ == '__main__':
             epochs = args.num_epochs
 
             if args.loss_type == 'focal':
+                focal = True
                 save_classWeight_path = os.path.join(MODEL_ROOT_FOLDER,"focal_loss_class_weights.pkl")
 
                 if not os.path.exists(path=save_classWeight_path):
-                    focal_weights = get_focal_weights(train_df, label= 'review_rating', logger=logger) #Change the label value according to the given dataset
+                    focal_weights = get_focal_weights(train_df, label= 'Label', logger=logger) #Change the label value according to the given dataset
                     with open(save_classWeight_path, 'wb+') as fp:
                         pickle.dump(focal_weights, fp)
 
@@ -1092,8 +1101,17 @@ if __name__ == '__main__':
                         logger.info(f'Focal Class Weight dictionary loaded ..!')
 
             else:
+                focal = False
                 focal_weights = None
-    
+
+            min_lr = args.learning_rate * 0.1
+            #min_lr = args.min_lr
+            logger.info(f"Minimum LR : {min_lr}")
+
+            #Note: If gradient accumulation has to happen at every step, then target_batch_size == batch_size
+            gradient_accumulation_steps = int(args.target_batch_size // args.batch_size)
+            logger.info(f'Gradient Accumulation Steps : {gradient_accumulation_steps}')
+
             #Save the SFT Model:
             save_model_name = args.model_name + '.pth'
             save_model_path = os.path.join(MODEL_ROOT_FOLDER,save_model_name)
@@ -1104,15 +1122,18 @@ if __name__ == '__main__':
                                 test_dataLoader=val_dataLoader,
                                 num_epochs=epochs,
                                 eval_batchSize=5, 
+                                gradient_accumulation_steps=gradient_accumulation_steps,
+                                global_batch_size=args.target_batch_size,
                                 eval_freq=50,
                                 device=device,
                                 log_path=logger,     #Pass the logger object instead of logging path
                                 warmup_steps=args.warmup_steps,
                                 initial_lr=args.initial_lr,
-                                min_lr=args.min_lr,
+                                min_lr=min_lr,
                                 use_warmup=args.use_warmup,
                                 use_gradient_clip=args.use_gradient_clip,
-                                focal=args.focal,
+                                checkpoint=checkpoint,
+                                focal=focal,
                                 alpha=focal_weights,
                                 gamma=args.gamma,
                                 pos_token=args.pos_token,
@@ -1147,7 +1168,9 @@ if __name__ == '__main__':
             if args.use_warmup:
                 plt.plot_lrs(track_lr, label='Learning Rate', type=args.experiment_name)
 
-            metrics = Metrics(gpt2_baseInst, device)
+            metrics = Metrics(gpt2_baseInst, device, 
+                              alpha=focal_weights, gamma=args.gamma, pos_token=args.pos_token, 
+                              avg_emb=args.average_embedding)
 
             torch.manual_seed(args.seed)
             train_accuracy = metrics.accuracy_loader(train_dataLoader, num_batches=10)
@@ -1167,7 +1190,7 @@ if __name__ == '__main__':
             logger.info(f'Saving the model response for the test dataset ..!')
             response_save_path = os.path.join(DATA_FOLDER, args.model_name+'_testdata_response.csv')
             pred_label_list = []
-            generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2')
+            generate = Text_Generation(model=gpt2_baseInst, device=device, tokenizer_model='gpt2', arch_type="original")
             for text in test_df['Text'].values:
                 pred_label = generate.classify_text(text, max_length=train_max_length)
                 pred_label_list.append(pred_label)
