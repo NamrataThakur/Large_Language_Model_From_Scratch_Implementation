@@ -36,7 +36,7 @@ from functools import partial
 from transformer_blocks.gpt2 import GPT2
 
 #Load the text generation class
-from gpt_Pretraining.text_generation import Text_Generation
+from gpt_Pretraining.text_generation_v2 import Text_Generation
 
 #Load the class for plotting the graphs
 from gpt_Pretraining.plot_metrics import Plots
@@ -444,6 +444,7 @@ if __name__ == '__main__':
         m_config = GPT2_ModelConfig()
         gpt2_config = m_config.load_model_config(model_name=args.base_modelName, drop_rate=args.dropout_rate,
                                                  context_length=args.context_length, causal_mask=args.causal_mask)
+        logger.info(f"Config : {gpt2_config}")
         gpt2_baseInst = GPT2(gpt2_config)
         gpt2_baseInst.eval()
         logger.info(f'Configuration of the {args.base_modelName} base model loaded..!')
