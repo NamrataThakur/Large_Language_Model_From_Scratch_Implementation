@@ -61,7 +61,7 @@ class MultiHead_Attention(nn.Module):
 
             else:
                 self.k_cache = Vec_key_new
-                self.v_cache = Vec_key_new
+                self.v_cache = Vec_value_new
 
             Vec_key = self.k_cache
             Vec_value = self.v_cache
@@ -85,18 +85,20 @@ class MultiHead_Attention(nn.Module):
 
         if self.causal_mask:
             # `:num_tokens` to account for cases where the number of tokens in the batch is smaller than the supported context_size
-            boolean_mask = self.mask.bool()[:num_tokens, :num_tokens]
-            # masked_scores = attention_score.masked_fill_(boolean_mask, -torch.inf)
-            masked_attention_score = attention_score.masked_fill_(boolean_mask, -torch.inf)
+            boolean_mask = self.mask.bool()[:, :, :num_tokens, :num_tokens]
+
+            #Incase, if we ever need the original attention score before masking:
+            #masked_attention_score = attention_score.masked_fill(boolean_mask, -torch.inf)
+            attention_score.masked_fill_(boolean_mask, -torch.inf)
         
         else:
             #NEW UPDATE: In Classification SFT, option to disable causal mask so as to allow attention for all tokens in the sequence:
             #MASKED DISABLE OPTION TO BE USED ONLY FOR SFT:
-            masked_attention_score = attention_score.copy()
+            attention_score = attention_score.copy()
 
         #Compute normalized and scaled attention weights
         dim_k = Vec_key.shape[-1]
-        attention_weight = torch.softmax(masked_attention_score / dim_k**0.5, dim=-1)
+        attention_weight = torch.softmax(attention_score / dim_k**0.5, dim=-1)
 
         attention_weight = self.dropout(attention_weight)
 
