@@ -1041,6 +1041,30 @@ if __name__ == '__main__':
             logger.info(f'Paramater efficient mechanisms given is {args.peft_type}..!')
 
             params_orig = freeze_model(gpt2_baseInst)
+
+            in_features = gpt2_config['embedding_dimension']
+            out_features = len(train_df['Label'].value_counts().index.tolist())
+
+            #Add the classification layer:
+            gpt2_baseInst.final_projection = torch.nn.Linear(in_features=in_features, out_features= out_features)
+
+            logger.info(f'Training Stage : Added the NEW classification head..!')
+
+            logger.info('************* Verifying the NEW output head of the model *************')
+            input_text = "Once upon a time"
+            input_encoded = tokenizer.encode(input_text,allowed_special='all')
+            input_encoded = torch.tensor(input_encoded).unsqueeze(0)
+            with torch.no_grad():
+                output_tensor = gpt2_baseInst(input_encoded) #Need to convert the encoded token list to torch tensor and add the batch dimension through unsqueeze
+            
+            logger.info(f'Output Dimension:: {output_tensor.shape} .')
+            print('Output Dimension:: ', output_tensor.shape)
+            assert output_tensor.shape[2] == out_features, (
+                            f"Output Dimension is not matching with the number of classes in the data. Please verify...!" 
+                            )
+
+            logger.info('************* Verifying the NEW output head of the model : Successfull *************')
+            
             logger.info(f'Total trainable paramters in the original model: {params_orig}.')
             lora_parameterization(model=gpt2_baseInst, rank = args.lora_rank, alpha = args.lora_alpha)
 
