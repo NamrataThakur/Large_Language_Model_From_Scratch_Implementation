@@ -26,9 +26,19 @@ def csv_preproccessing(data_file_path, logger, dataset_name = "spam_ham"):
 
     else:
         logger.info(f"Preprocessing for dataset : {dataset_name}")
-        logger.info(f"")
+        data = pd.read_csv(data_file_path)
+        logger.info(f'Total records present in the training file: {data.shape}')
 
-        #Make the Label class renamed as "Target"
+        #Make the target class renamed as "'Label', and reviews as 'Text'"
+        balanced_df = data.copy()
+        balanced_df['Text'] = balanced_df['review_title'] + ". " + balanced_df['review_text']
+        balanced_df.rename(columns={'review_rating':'Label'}, inplace=True)
+        balanced_df.dropna(inplace=True)
+        balanced_df['Label'] = balanced_df['Label'].astype(float).astype(int)
+        balanced_df['Label'] = balanced_df['Label'].apply(lambda x: x-1)
+        logger.info(f"Class Distribution : \n {balanced_df['Label'].value_counts()}")
+        logger.info(f'No Class Balancing Applied..!')
+
 
     return balanced_df
 
@@ -36,9 +46,9 @@ def csv_preproccessing(data_file_path, logger, dataset_name = "spam_ham"):
 
 def get_focal_weights(train_dataset, label, logger):
 
-    weight_dict = {}
+    weights_dict = {}
     n_samples = train_dataset.shape[0]
-    n_classes = len(train_dataset.label.unique())
+    n_classes = len(train_dataset[label].unique())
 
     for i in list(range(n_classes)):
         weights_dict[i] = round((n_samples / (n_classes * train_dataset[label].value_counts()[i])),3)
@@ -47,7 +57,7 @@ def get_focal_weights(train_dataset, label, logger):
 
     logger.info(f"Normalized Focal Weights : {weights_dict}")
 
-    return weight_dict
+    return weights_dict
 
 
 
