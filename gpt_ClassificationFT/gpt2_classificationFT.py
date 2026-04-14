@@ -10,7 +10,7 @@ from gpt_Pretraining.metrics import Metrics
 class GPT2_ClassificationFineTune:
     def __init__(self, model, optimizer, device, train_dataLoader, test_dataLoader,
                  num_epochs, eval_batchSize, eval_freq, log_path, gradient_accumulation_steps, global_batch_size,
-                 warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip , checkpoint, config, pos_token = -1, avg_emb = False, focal= False, alpha = None, gamma = 0.0):
+                 warmup_steps, initial_lr, min_lr, use_warmup, use_gradient_clip , checkpoint, pos_token = -1, avg_emb = False, focal= False, alpha = None, gamma = 0.0):
 
         self.model = model
         self.optimizer = optimizer
@@ -21,7 +21,7 @@ class GPT2_ClassificationFineTune:
         self.eval_batchSize = eval_batchSize
         self.eval_freq = eval_freq
         self.logger = log_path
-        self.warmup_steps = warmup_steps
+        self.warmup_ratio = warmup_steps
         self.initial_lr = initial_lr
         self.min_lr = min_lr
         self.use_warmup = use_warmup
@@ -32,7 +32,6 @@ class GPT2_ClassificationFineTune:
         self.gradient_accumulation_steps = gradient_accumulation_steps
         self.global_batch_size = global_batch_size
         self.checkpoint = checkpoint
-        self.config = config
 
         self.metrics = Metrics(self.model, self.device, alpha=alpha, gamma=gamma, pos_token=pos_token, avg_emb=avg_emb)
 
@@ -77,6 +76,7 @@ class GPT2_ClassificationFineTune:
             self.logger.info(f"Model Fine-Tuning From SCRATCH..")
 
             train_losses, test_losses, train_accuracy, val_accuracy, track_tokens_seen, track_lr = [], [], [], [], [], []
+            total_steps = []
             num_samples, global_step = 0, -1
             start_epoch, start_batch =0, 0
 
@@ -99,6 +99,8 @@ class GPT2_ClassificationFineTune:
         self.logger.info(f'Total steps to update optimizer : {total_training_steps}.')
         self.logger.info(f"Total training steps acc. to train loader : {len(self.train_loader)}")
 
+        self.logger.info(f"Focal Loss True/False : {self.focal}")
+        
         if self.use_warmup:
 
             #Get the warmup steps as a ratio of the total steps:
@@ -243,8 +245,8 @@ class GPT2_ClassificationFineTune:
                         print(f'Total Samples seen till now: {num_samples}')
 
                         #Calculate avergae accuracy after each evaluation step:
-                        train_accu = self.metrics.accuracy_loader(self.train_loader)
-                        val_accu = self.metrics.accuracy_loader(self.val_loader)
+                        train_accu = self.metrics.accuracy_loader(self.train_loader, num_batches=10)
+                        val_accu = self.metrics.accuracy_loader(self.val_loader, num_batches=10)
                         train_accuracy.append(train_accu)
                         val_accuracy.append(val_accu)
                         
@@ -259,7 +261,6 @@ class GPT2_ClassificationFineTune:
                             min_loss = test_loss
                             torch.save({'model' : self.model.state_dict(),
                                         'optimizer': self.optimizer.state_dict(),
-                                        'config' : self.config,
                                         'validation_loss' : test_loss,
                                         'global_step' : global_step,
                                         'learning_rate' : lr,
@@ -286,8 +287,8 @@ class GPT2_ClassificationFineTune:
                         
 
                 #Calculate avergae accuracy after each epoch:
-                train_accu = self.metrics.accuracy_loader(self.train_loader)
-                val_accu = self.metrics.accuracy_loader(self.val_loader)
+                train_accu = self.metrics.accuracy_loader(self.train_loader, num_batches=10)
+                val_accu = self.metrics.accuracy_loader(self.val_loader, num_batches=10)
                 print(f"EP: {ep+1}, Training accuracy : {train_accu*100:.2f}%")
                 print(f"EP: {ep+1}, Validation accuracy: {val_accu*100:.2f}%")
 
@@ -301,7 +302,6 @@ class GPT2_ClassificationFineTune:
             #Save the model in case of an exception
             torch.save({'model' : self.model.state_dict(),
                         'optimizer': self.optimizer.state_dict(),
-                        'config' : self.config,
                         'validation_loss' : test_losses[-1] if len(test_losses) > 0 else 10,
                         'global_step' : global_step,
                         'learning_rate' : lr,
