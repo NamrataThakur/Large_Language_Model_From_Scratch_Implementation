@@ -9,8 +9,12 @@ class Metrics:
         self.reference_model = reference_model
         
         #Following parameters are used in Focal Loss computation in imbalanced supervised classification fine-tuning task:
-        self.alpha = alpha
         self.gamma = gamma
+
+        if alpha is not None:
+            #Convert the focal weights to a list with the index corresponding to class number
+            weights_list = [alpha[i] for i in range(len(alpha))]
+            self.alpha = torch.tensor(weights_list,dtype=torch.float).to(self.device)
 
         #NEW FEAT: Average Embedding and POS Token Inclusion: USED FOR CLASSIFICATION SFT
         self.pos_token = pos_token
@@ -71,7 +75,7 @@ class Metrics:
                 
                 #last_idx_logits = output_logits[:, -1, :]
 
-                #Selecting the row corresponding to the token position or taking average of all tokens for all batch:
+                #Selecting the row corresponding to the token position or taking average of all tokens (sequence dimension or dim 1) for all batch:
                 #NEW FEAT: Average Embedding and POS Token Inclusion:
                 if self.avg_emb:
                     last_idx_logits = output_logits.mean(dim=1)
