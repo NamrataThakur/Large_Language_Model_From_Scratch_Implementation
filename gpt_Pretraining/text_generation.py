@@ -64,6 +64,7 @@ class Text_Generation:
 
         idx_cond = idx[:, -self.context_size:]
 
+        print(f"Cache : {cache}")
         # Get the predictions
         with torch.no_grad():
             logits = self.model(idx_cond , cache = cache)
@@ -89,6 +90,7 @@ class Text_Generation:
 
                     # Get the top k tokens from the logits vector
                     top_logits, _ = torch.topk(logits, top_k)
+                    #print(f"Top Logits : {top_logits}")
                     
                     # Mask out values of all other location (apart from those of top k) with -infinity value so that softmax is not applied on them later.
                     # logits = torch.where(condition= logits < top_logits[:, -1],
@@ -129,6 +131,7 @@ class Text_Generation:
 
                 if kv_cache:
 
+                    print('Inside KV Cache : ', kv_cache)
                     # Get the predictions
                     with torch.no_grad():
                         logits = self.model(idx_next, cache = cache) #cache is object of KVCache class or True
