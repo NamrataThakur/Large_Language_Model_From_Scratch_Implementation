@@ -97,7 +97,8 @@ def gpt2_loadedWeights(gpt2, params):
 
     #----------------- Loading the FINAL LayerNormalization Block SCALE and SHIFT values  ---------------------------------------------------------------------
     gpt2.final_layerNorm.scale = assign_weights(gpt2.final_layerNorm.scale, params['g'])
-    gpt2.final_layerNorm.shift = assign_weights(gpt2.final_layerNorm.scale, params['b'])
+    gpt2.final_layerNorm.shift = assign_weights(gpt2.final_layerNorm.shift, params['b'])
 
     #----------------- Loading the FINAL Projection Block weights  ---------------------------------------------------------------------
     gpt2.final_projection.weight = assign_weights(gpt2.final_projection.weight, params['wte'])
+    gpt2.final_projection.weight = gpt2.token_embedding.weight
