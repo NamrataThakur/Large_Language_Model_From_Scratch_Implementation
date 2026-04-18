@@ -69,52 +69,54 @@
 #   --use_warmup $use_warmup \
 
 # Classification Supervised Fine-Tune (SFT) params:
+#pre_save_model=None
 
 ignore_index=-100
-num_epochs=5
+num_epochs=1
 trainable_layers=last_block
 top_k=5
-temp=0.0
-max_new_tokens=256
+temp=0.7
+max_new_tokens=15
 context_length=1024
 val_split=0.1
-train_split=0.7
-batch_size=8
+train_split=0.8
+batch_size=4
+target_batch_size=4  #80 #128 #1024 
 seed=123
-pre_save_model="gpt2_124M_SFT_Spam_v1.pth"
 load_weights=True
 peft_type="lora"
 mask_instruction=False
-dropout_rate=0.0
+dropout_rate=0.1
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
-warmup_steps=20
+warmup_steps=0.01
 initial_lr=1e-5
 min_lr=1e-5 #--> being calculated as 0.1 * of max LR
-learning_rate=0.0008 #3e-4 --> Good LR (Karpathy)
+learning_rate=0.0008 #3e-4 --> Good LR (Karpathy) (max lr)
 weight_decay=0.1
 beta1=0.9
 beta2=0.95
 lora_rank=16
 lora_alpha=16
 loss_type='focal'
+pos_token=-1
+average_embedding=False
 gamma=0.0
-data_url='review_consolidated.csv'
-causal_mask=False #Need this to be True for IFT, PFT and (general) SFT scenario
+data_url="https://huggingface.co/datasets/NamrataThakur/Singapore-TripAdvisor-Sentiment-Dataset/resolve/main/review_consolidated.csv"
+causal_mask=True #Need this to be True for IFT, PFT and (general) SFT scenario
 python gpt_trainingPipeline.py \
-  --experiment_name 'SFT_Exp_SFT_v1_LoRA_noGC' \
+  --experiment_name 'SFT_SgReviews_v1_exp1' \
   --data_path 'review_consolidated.csv' \
   --base_modelName 'gpt2_124M' \
   --data_url $data_url \
   --training_type 'SFT' \
   --load_weights $load_weights \
-  --model_name 'gpt2_124M_SFT_Spam_v1_LoRA_noGC' \
+  --model_name 'gpt2_124M_SFT_SgReviews_v1_exp1' \
   --tokenizer 'tiktoken' \
-  --pre_save_model $pre_save_model \
-  --peft_type $peft_type \
   --seed $seed \
   --batch_size $batch_size \
+  --target_batch_size $target_batch_size \
   --train_split $train_split \
   --val_split $val_split \
   --context_length $context_length \
@@ -123,9 +125,10 @@ python gpt_trainingPipeline.py \
   --trainable_layers $trainable_layers \
   --dropout_rate $dropout_rate \
   --num_epochs $num_epochs \
-  --max_training_length 'longest_training_example' \
+  --max_training_length 'model_context_length' \
   --top_k $top_k \
   --eos_id $eos_id  \
+  --use_warmup $use_warmup \
   --warmup_steps $warmup_steps \
   --initial_lr $initial_lr \
   --min_lr $min_lr \
@@ -133,10 +136,19 @@ python gpt_trainingPipeline.py \
   --weight_decay $weight_decay \
   --beta1 $beta1 \
   --beta2 $beta2 \
-  --loss_type $loss_type \
+  --peft_type $peft_type \
   --gamma $gamma \
+  --pos_token $pos_token \
+  --causal_mask $causal_mask \
   --lora_rank $lora_rank \
   --lora_alpha $lora_alpha \
+
+# --pre_save_model $pre_save_model \
+# --peft_type $peft_type \
+# --average_embedding $average_embedding \
+# --loss_type $loss_type \
+
+
 
 #Preference Fine-Tune (PFT) params:
 
