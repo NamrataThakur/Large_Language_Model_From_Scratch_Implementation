@@ -98,13 +98,15 @@ class GroupQueryAttention(nn.Module):
         attention_score = Vec_query @ Vec_key.transpose(2,3)
 
         # `:seq_length` to account for cases where the number of tokens in the batch is smaller than the supported context_size
-        boolean_mask = self.mask.bool()[:seq_length, :seq_length]
-        # masked_scores = attention_score.masked_fill_(boolean_mask, -torch.inf)
-        masked_attention_score = attention_score.masked_fill_(boolean_mask, -torch.inf)
+        boolean_mask = self.mask.bool()[:, :, :seq_length, :seq_length]
+
+        #Incase, if we ever need the original attention score before masking:
+        #masked_attention_score = attention_score.masked_fill(boolean_mask, -torch.inf)
+        attention_score.masked_fill_(boolean_mask, -torch.inf)
 
         #Compute normalized and scaled attention weights
         dim_k = Vec_key.shape[-1]
-        attention_weight = torch.softmax(masked_attention_score / dim_k**0.5, dim=-1)
+        attention_weight = torch.softmax(attention_score / dim_k**0.5, dim=-1)
 
         #Attention Dropout:
         attention_weight = self.dropout(attention_weight)
