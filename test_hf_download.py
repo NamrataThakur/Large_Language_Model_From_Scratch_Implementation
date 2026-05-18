@@ -4,6 +4,9 @@ from transformer_blocks.gpt2 import GPT2
 from transformer_blocks.gpt2_gqa import GQAGPT2
 from transformer_blocks.gpt2_moe import MoEGPT2
 from gpt_Pretraining.text_generation import Text_Generation
+import os
+# from huggingface_hub import login
+# login(token=os.getenv("HF_TOKEN"))
 
 #------------------------------ TEST 1 ---------------------------------
 # This triggers a "Download" event in the stats
@@ -26,7 +29,7 @@ generation = Text_Generation(model=model, device='cpu', tokenizer_model='gpt2',
 print('----------------------- EXAMPLE 1 --------------------------------')
 start_context = "Bob and Billy went to the "
 print('PROMPT : ', start_context)
-response = generation.text_generation(input_text=start_context, max_new_tokens = 560, temp = 0.5, top_k=10, kv_cache=False)
+response = generation.text_generation(input_text=start_context, max_new_tokens = 160, temp = 0.5, top_k=10, kv_cache=False)
 print(response)
 
 print('----------------------- EXAMPLE 2 --------------------------------')
