@@ -2,3 +2,4 @@ env/
 model/
 data/sms_spam_collection/
 .env
+logs/

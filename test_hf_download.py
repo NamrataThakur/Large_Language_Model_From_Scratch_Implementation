@@ -4,6 +4,9 @@ from transformer_blocks.gpt2 import GPT2
 from transformer_blocks.gpt2_gqa import GQAGPT2
 from transformer_blocks.gpt2_moe import MoEGPT2
 from gpt_Pretraining.text_generation import Text_Generation
+import os
+# from huggingface_hub import login
+# login(token=os.getenv("HF_TOKEN"))
 
 #------------------------------ TEST 1 ---------------------------------
 # This triggers a "Download" event in the stats
