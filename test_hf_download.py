@@ -26,7 +26,7 @@ generation = Text_Generation(model=model, device='cpu', tokenizer_model='gpt2',
 print('----------------------- EXAMPLE 1 --------------------------------')
 start_context = "Bob and Billy went to the "
 print('PROMPT : ', start_context)
-response = generation.text_generation(input_text=start_context, max_new_tokens = 560, temp = 0.5, top_k=10, kv_cache=False)
+response = generation.text_generation(input_text=start_context, max_new_tokens = 160, temp = 0.5, top_k=10, kv_cache=False)
 print(response)
 
 print('----------------------- EXAMPLE 2 --------------------------------')
