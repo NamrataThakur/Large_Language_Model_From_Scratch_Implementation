@@ -1012,6 +1012,10 @@ if __name__ == '__main__':
                     torch.manual_seed(args.seed)
 
                     #Unfreeze the final layer normalization block parameters for fine-tuning:
+                    for params in gpt2_baseInst.final_projection.parameters():
+                        params.requires_grad = True
+
+                    #Unfreeze the final layer normalization block parameters for fine-tuning:
                     for params in gpt2_baseInst.final_layerNorm.parameters():
                         params.requires_grad = True
 

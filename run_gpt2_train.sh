@@ -80,8 +80,8 @@ max_new_tokens=15
 context_length=1024
 val_split=0.1
 train_split=0.8
-batch_size=4
-target_batch_size=4  #80 #128 #1024 
+batch_size=8
+target_batch_size=128  #80 #128 #1024 
 seed=123
 load_weights=True
 peft_type="lora"
@@ -90,26 +90,25 @@ dropout_rate=0.1
 eos_id=50256
 use_warmup=True
 use_gradient_clip=True
-warmup_steps=0.01
+warmup_steps=0.03
 initial_lr=1e-5
-min_lr=1e-5 #--> being calculated as 0.1 * of max LR
-learning_rate=0.0008 #3e-4 --> Good LR (Karpathy) (max lr)
-weight_decay=0.1
+min_lr=1e-5 #--> being calculated as 0.1 * of max LR (not used)
+learning_rate=0.0008 #1e-4 #0.0008 #3e-4 --> Good LR (Karpathy) (max lr)
+weight_decay=0.01
 beta1=0.9
 beta2=0.95
 lora_rank=16
 lora_alpha=16
 loss_type='focal'
 pos_token=-1
-average_embedding=False
+average_embedding=True
 gamma=0.0
 data_url="https://huggingface.co/datasets/NamrataThakur/Singapore-TripAdvisor-Sentiment-Dataset/resolve/main/review_consolidated.csv"
 causal_mask=True #Need this to be True for IFT, PFT and (general) SFT scenario
 python gpt_trainingPipeline.py \
   --experiment_name 'SFT_SgReviews_v1_exp1' \
-  --data_path 'review_consolidated.csv' \
+  --data_path 'sms_spam_collection.zip' \
   --base_modelName 'gpt2_124M' \
-  --data_url $data_url \
   --training_type 'SFT' \
   --load_weights $load_weights \
   --model_name 'gpt2_124M_SFT_SgReviews_v1_exp1' \
@@ -136,7 +135,6 @@ python gpt_trainingPipeline.py \
   --weight_decay $weight_decay \
   --beta1 $beta1 \
   --beta2 $beta2 \
-  --peft_type $peft_type \
   --gamma $gamma \
   --pos_token $pos_token \
   --causal_mask $causal_mask \
@@ -145,8 +143,12 @@ python gpt_trainingPipeline.py \
 
 # --pre_save_model $pre_save_model \
 # --peft_type $peft_type \
-# --average_embedding $average_embedding \
 # --loss_type $loss_type \
+# --average_embedding $average_embedding \
+# 'review_consolidated.csv' \
+# --data_url $data_url \
+
+
 
 
 

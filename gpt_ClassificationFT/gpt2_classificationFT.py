@@ -245,8 +245,8 @@ class GPT2_ClassificationFineTune:
                         print(f'Total Samples seen till now: {num_samples}')
 
                         #Calculate avergae accuracy after each evaluation step:
-                        train_accu = self.metrics.accuracy_loader(self.train_loader, num_batches=10)
-                        val_accu = self.metrics.accuracy_loader(self.val_loader, num_batches=10)
+                        train_accu = self.metrics.accuracy_loader(self.train_loader, num_batches=100)
+                        val_accu = self.metrics.accuracy_loader(self.val_loader, num_batches=100)
                         train_accuracy.append(train_accu)
                         val_accuracy.append(val_accu)
                         
@@ -287,8 +287,8 @@ class GPT2_ClassificationFineTune:
                         
 
                 #Calculate avergae accuracy after each epoch:
-                train_accu = self.metrics.accuracy_loader(self.train_loader, num_batches=10)
-                val_accu = self.metrics.accuracy_loader(self.val_loader, num_batches=10)
+                train_accu = self.metrics.accuracy_loader(self.train_loader, num_batches=100)
+                val_accu = self.metrics.accuracy_loader(self.val_loader, num_batches=100)
                 print(f"EP: {ep+1}, Training accuracy : {train_accu*100:.2f}%")
                 print(f"EP: {ep+1}, Validation accuracy: {val_accu*100:.2f}%")
 
